@@ -1,0 +1,33 @@
+.partner-banks {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.partner-banks__selector {
+    padding: 1.5rem;
+    border-radius: 16px;
+    background-image: linear-gradient(135deg, rgba(25, 118, 210, 0.08), rgba(25, 118, 210, 0.02));
+}
+
+.partner-banks__selector-content {
+    min-width: 240px;
+    flex: 1;
+}
+
+.partner-banks__grid {
+    margin-top: 0.5rem;
+}
+
+.partner-banks__card {
+    padding: 1.5rem;
+    border-radius: 18px;
+    min-height: 320px;
+}
+
+.partner-banks__avatar {
+    background-color: rgba(25, 118, 210, 0.12);
+}
+
+.partner-banks__list {
+    margin: 0 -0.5rem;
+}

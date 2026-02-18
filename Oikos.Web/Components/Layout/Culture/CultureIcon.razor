@@ -1,0 +1,97 @@
+@using Oikos.Common.Resources
+@using Oikos.Web.States
+@using System.Globalization
+
+@rendermode InteractiveServer
+
+@if (IsText)
+{
+    <MudMenu Color="Color.Inherit" Dense="true"
+             AnchorOrigin="Origin.BottomCenter" TransformOrigin="Origin.TopCenter"
+             PopoverClass="language-menu-popover">
+        <ActivatorContent>
+            <MudIcon Icon="@Icons.Material.Filled.Language" Size="Size.Small" Color="Color.Inherit" />
+            <MudText Typo="Typo.caption" Color="Color.Surface">@Loc["CultureLanguage"]</MudText>
+        </ActivatorContent>
+        <ChildContent>
+            <MudMenuItem OnClick="@(() => CultureChanged("de-DE"))" Class='@GetCultureMenuItemClass("de-DE")'>
+                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="culture-menu-stack">
+                    <MudText Typo="Typo.body2">@Loc["AuthorizedLayout_Language_dede"]</MudText>
+                    @if (IsCurrentCulture("de-DE"))
+                    {
+                        <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Class="culture-menu-check" />
+                    }
+                </MudStack>
+            </MudMenuItem>
+            <MudMenuItem OnClick="@(() => CultureChanged("en-US"))" Class='@GetCultureMenuItemClass("en-US")'>
+                <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="culture-menu-stack">
+                    <MudText Typo="Typo.body2">@Loc["AuthorizedLayout_Language_enus"]</MudText>
+                    @if (IsCurrentCulture("en-US"))
+                    {
+                        <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Class="culture-menu-check" />
+                    }
+                </MudStack>
+            </MudMenuItem>
+        </ChildContent>
+    </MudMenu>
+}
+else
+{
+    <MudMenu Icon="@Icons.Material.Filled.Language" Color="Color.Inherit" Dense="true" Style="margin-right:12px;"
+             AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight"
+             PopoverClass="language-menu-popover">
+        <MudMenuItem OnClick="@(() => CultureChanged("de-DE"))" Class='@GetCultureMenuItemClass("de-DE")'>
+            <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="culture-menu-stack">
+                <MudText Typo="Typo.body2">@Loc["AuthorizedLayout_Language_dede"]</MudText>
+                @if (IsCurrentCulture("de-DE"))
+                {
+                    <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Class="culture-menu-check" />
+                }
+            </MudStack>
+        </MudMenuItem>
+        <MudMenuItem OnClick="@(() => CultureChanged("en-US"))" Class='@GetCultureMenuItemClass("en-US")'>
+            <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="culture-menu-stack">
+                <MudText Typo="Typo.body2">@Loc["AuthorizedLayout_Language_enus"]</MudText>
+                @if (IsCurrentCulture("en-US"))
+                {
+                    <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Class="culture-menu-check" />
+                }
+            </MudStack>
+        </MudMenuItem>
+    </MudMenu>
+}
+
+@code {
+    [Parameter] public bool IsText { get; set; } = false;
+
+    private readonly string _currentCulture = CultureInfo.CurrentUICulture.Name;
+
+    private void CultureChanged(string culture)
+    {
+        if (!string.IsNullOrEmpty(culture))
+        {
+            var uri = new Uri(_navManager.Uri)
+                    .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+            var cultureEscaped = Uri.EscapeDataString(culture);
+
+            _navManager.NavigateTo(
+                $"api/Culture/Set?culture={cultureEscaped}&redirectUri={uri}",
+                forceLoad: true);
+        }
+    }
+
+    private bool IsCurrentCulture(string culture)
+        => string.Equals(_currentCulture, culture, StringComparison.OrdinalIgnoreCase);
+
+    private string GetCultureMenuItemClass(string culture)
+    {
+        var classes = "culture-menu-item";
+
+        if (IsCurrentCulture(culture))
+        {
+            classes += " culture-menu-item--active";
+        }
+
+        return classes;
+    }
+}

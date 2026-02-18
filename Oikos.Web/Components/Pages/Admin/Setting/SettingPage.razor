@@ -1,0 +1,32 @@
+@page "/admin/settings"
+@using Microsoft.Extensions.Localization
+@namespace Oikos.Web.Components.Pages.Admin.Setting
+@attribute [Authorize(Roles = "Admin")]
+@rendermode InteractiveServer
+
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="my-4">
+    <MudGrid>
+        <MudItem xs="12" md="3">
+            <MudPaper Height="100%" Elevation="0" Class="py-4">
+                <MudList T="SettingModel" @bind-SelectedValue="SelectedValue" SelectionMode="SelectionMode.SingleSelection" Color="Color.Primary">
+                    @foreach (var group in SettingGroups)
+                    {
+                        <MudListItem Value="@group">
+                            <MudStack Row="true" AlignItems="AlignItems.Center">
+                                <MudIcon Icon="@group.Icon" Size="Size.Small" />
+                                <MudText>@group.Name</MudText>
+                            </MudStack>
+                        </MudListItem>
+                    }
+                </MudList>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" md="9">
+            @if (SelectedValue != null && SettingComDic.TryGetValue(SelectedValue.Name, out var componentType))
+            {
+                <DynamicComponent Type="@componentType" />
+            }
+        </MudItem>
+    </MudGrid>
+</MudContainer>

@@ -1,0 +1,29 @@
+@using Oikos.Application.Common
+@using Oikos.Common.Resources
+
+<MudDialog>
+    <DialogContent>
+        <div style="width:300px;">
+            @if (_loading)
+            {
+                <MudProgressCircular Indeterminate="true" Class="mx-auto" />
+            }
+            else
+            {
+                <div class="d-flex flex-column" style="max-height:300px;overflow:auto;">
+                    @foreach (var role in _roleList)
+                    {
+                        @if (_checkedRoles.ContainsKey(role.Id)) {
+                             <MudCheckBox T="bool" @bind-Value="_checkedRoles[role.Id]" Color="Color.Primary">@role.Name</MudCheckBox>
+                        }
+                    }
+                </div>
+                <div class="mt-4 d-flex align-center">
+                    <MudSpacer />
+                    <MudButton Class="mt-2" StartIcon="@Icons.Material.Filled.Upload" FullWidth="false"
+                               Variant="Variant.Text" Color="Color.Primary" OnClick="Submit">@Loc["UserPage_SubmitText"]</MudButton>
+                </div>
+            }
+        </div>
+    </DialogContent>
+</MudDialog>

@@ -1,0 +1,42 @@
+.company-check-detail-dialog .mud-dialog-content {
+    padding-top: 0;
+}
+
+.company-check-detail__header {
+    background: linear-gradient(135deg, rgba(255, 124, 67, 0.15), rgba(255, 187, 92, 0.15));
+    border-radius: 12px;
+}
+
+.company-check-detail__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px 24px;
+}
+
+.company-check-detail__grid-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.company-check-detail__label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.company-check-detail__value {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.company-check-json {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    padding: 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: ui-monospace, SFMono-Regular, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.85rem;
+}

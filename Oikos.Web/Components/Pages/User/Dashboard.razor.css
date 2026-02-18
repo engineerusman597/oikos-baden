@@ -1,0 +1,161 @@
+.oikos-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.oikos-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.oikos-header-content .fw-bold {
+    font-weight: 800;
+}
+
+.oikos-news-banner {
+    background-color: #f0f7ff;
+    border: 1px solid #e0efff;
+    transition: transform 0.2s ease;
+}
+
+.oikos-news-icon {
+    width: 48px;
+    height: 48px;
+    background-color: #fff;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 120, 255, 0.08);
+}
+
+.oikos-info-chip.mud-chip {
+    background-color: #e2e8f0;
+    color: #475569;
+    font-weight: 600;
+    font-size: 0.7rem;
+    height: 20px;
+    width: fit-content;
+}
+
+.oikos-news-title {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.oikos-plan-banner {
+    background-color: #ecf2ff;
+    border: 1px solid #d9e6ff;
+}
+
+.oikos-plan-usage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.oikos-usage-circle {
+    width: 64px;
+    height: 64px;
+    border: 3px solid #2e5bc0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.usage-text {
+    font-weight: 800;
+    color: #2e5bc0;
+    font-size: 0.9rem;
+}
+
+.plan-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.oikos-upgrade-btn.mud-button-root {
+    color: #64748b;
+    font-weight: 600;
+    text-transform: none;
+}
+
+.oikos-status-card {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #f1f5f9;
+    background-color: #fff;
+}
+
+.oikos-status-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+}
+
+.oikos-card-icon-nested {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(var(--status-color-rgb), 0.1);
+    color: var(--status-color);
+}
+
+.oikos-status-card.status-card--neu {
+    background-color: #f8faff;
+    border-color: #e2e8f0;
+}
+
+.oikos-status-card.status-card--in-prüfung {
+    background-color: #fffbeb;
+    border-color: #fef3c7;
+}
+
+.oikos-status-card.status-card--rückfragen {
+    background-color: #fef2f2;
+    border-color: #fee2e2;
+}
+
+.oikos-status-card.status-card--akzeptiert {
+    background-color: #f0fdf4;
+    border-color: #dcfce7;
+}
+
+.oikos-status-card.status-card--gericht {
+    background-color: #f8fafc;
+    border-color: #f1f5f9;
+}
+
+.oikos-status-card.status-card--fristen {
+    background-color: #f8fafc;
+    border-color: #f1f5f9;
+}
+
+.oikos-status-card.status-card--completed {
+    background-color: #f0fdf4;
+    border-color: #dcfce7;
+}
+
+@media (max-width: 600px) {
+    .oikos-dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .oikos-header-actions {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+}

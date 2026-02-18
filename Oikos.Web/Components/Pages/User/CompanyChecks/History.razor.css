@@ -1,0 +1,17 @@
+.company-check-history-table .actions-column {
+    text-align: right;
+}
+
+.company-check-history-table .actions-cell {
+    white-space: nowrap;
+    text-align: right;
+}
+
+.company-check-history-table .actions-stack {
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.company-check-history-table .actions-stack .mud-button-root {
+    min-width: auto;
+}

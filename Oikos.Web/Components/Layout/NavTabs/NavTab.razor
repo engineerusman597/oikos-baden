@@ -1,0 +1,16 @@
+@using Oikos.Common.Resources
+@using Oikos.Web.States
+@inject IAuthenticationService _authenticationService
+
+@rendermode InteractiveServer
+
+<MudDynamicTabs MinimumTabWidth="120px" AddIconStyle="display:none;"
+                @bind-ActivePanelIndex="_selectedTabIndex" CloseIconStyle="padding:0;"
+                Class="mud-elevation-1 rounded-t" Style="overflow:hidden;"
+                CloseTab="OnTabClose">
+    @foreach (var tab in _userTabs)
+    {
+        <MudTabPanel ID="@tab.Id" Text="@Loc[tab.Label]" ShowCloseIcon="_userTabs.Count > 1"
+                     OnClick="()=>TabClick(tab)" Style="border-right:1px solid var(--mud-palette-lines-default)" />
+    }
+</MudDynamicTabs>

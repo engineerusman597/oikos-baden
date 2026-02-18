@@ -1,0 +1,142 @@
+@using Oikos.Web.Components.Layout.Culture
+@using Oikos.Web.Components.Layout
+
+@rendermode InteractiveServer
+@attribute [AllowAnonymous]
+
+@page "/login"
+
+<div class="full-screen">
+    @if (ShowContent)
+    {
+        <div class="login-shell">
+            <div class="login-panel">
+                <div class="login-panel__top">
+                    <div class="login-panel__logo">
+                        <img src="images/rechtfix-logo.svg" alt="Rechtfix Logo" />
+                    </div>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary" Class="login-panel__register"
+                               OnClick="OpenRegisterDialog">
+                        @Loc["Login_RegisterButton"]
+                    </MudButton>
+                </div>
+                <MudText Typo="Typo.h4" Class="login-panel__title">@Loc["Login_Title"]</MudText>
+                <MudText Typo="Typo.body2" Class="login-panel__subtitle">
+                    @Loc["Login_Subtitle"]
+                </MudText>
+                <EditForm Model="_loginModel" OnValidSubmit="LoginSubmit" class="login-panel__form">
+                    <DataAnnotationsValidator />
+                    <MudTextField @bind-Value="_loginModel.UserName" Variant="Variant.Filled" Margin="Margin.Dense"
+                                  Label="@Loc["Login_EmailLabel"]" Placeholder="@Loc["Login_UserNameHelpText"]" For="@(() => _loginModel.UserName)"
+                                  UserAttributes="InputAttributes"></MudTextField>
+                    <MudTextField @bind-Value="_loginModel.Password" Variant="Variant.Filled" Margin="Margin.Dense"
+                                  Label="@Loc["Login_PasswordLabel"]" Placeholder="@Loc["Login_PasswordHelpText"]" For="@(() => _loginModel.Password)"
+                                  InputType="InputType.Password" UserAttributes="InputAttributes"></MudTextField>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="login-panel__submit"
+                               ButtonType="ButtonType.Submit" Disabled="IsLoading">
+                        @if (IsLoading)
+                        {
+                            <MudProgressCircular Color="Color.Inherit" Indeterminate="true" Size="Size.Small" />
+                        }
+                        else
+                        {
+                            <MudText>@Loc["Login_SubmitButton"]</MudText>
+                        }
+                    </MudButton>
+                </EditForm>
+                <MudLink Class="login-panel__support" Href="/forgot-password">@Loc["Login_ForgotPassword"]</MudLink>
+                <div class="login-panel__membership">
+                    <MudText Typo="Typo.body2">@Loc["Login_MembershipPrompt"]</MudText>
+                    <MudLink Class="login-panel__membership-link"
+                             Href="https://www.online-mahnantraege.de/#pricing"
+                             Target="_blank" Rel="noopener noreferrer">
+                        @Loc["Login_MembershipLink"]
+                    </MudLink>
+                </div>
+                <div class="login-panel__culture">
+                    <CultureIcon IsText />
+                </div>
+            </div>
+            @if (ShowNewsletterCard)
+            {
+                <div class="promo-panel">
+                    <div class="promo-panel__header">
+                        <MudText Typo="Typo.h5" Class="promo-panel__title">@Loc["Login_NewsletterTitle"]</MudText>
+                        <MudIconButton Icon="@Icons.Material.Filled.Close" Color="Color.Inherit" Size="Size.Small"
+                                       ButtonType="ButtonType.Button"
+                                       Class="promo-panel__close" OnClick="CloseNewsletterCard" />
+                    </div>
+                    <MudText Typo="Typo.subtitle2" Class="promo-panel__highlight">@Loc["Login_NewsletterHighlight"]</MudText>
+                    <ul class="promo-panel__list">
+                        <li>@Loc["Login_NewsletterBenefit2"]</li>
+                        <li>@Loc["Login_NewsletterBenefit3"]</li>
+                    </ul>
+                    <EditForm Model="_newsletterModel" OnValidSubmit="SubscribeToNewsletter" class="promo-panel__form">
+                        <DataAnnotationsValidator />
+                        <div class="newsletter-input">
+                            <MudTextField @bind-Value="_newsletterModel.Email" Variant="Variant.Filled" Margin="Margin.Dense"
+                                          Label="@Loc["Login_NewsletterEmailLabel"]" For="@(() => _newsletterModel.Email)" Placeholder="@Loc["Login_NewsletterEmailPlaceholder"]" Class="newsletter-input__field"></MudTextField>
+                        </div>
+                        <ValidationMessage For="@(() => _newsletterModel.Email)" />
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="promo-panel__cta"
+                                   ButtonType="ButtonType.Submit">
+                            @Loc["Login_NewsletterSubscribe"]
+                        </MudButton>
+                    </EditForm>
+                    <MudText Typo="Typo.caption" Class="promo-panel__hint">
+                        @Loc["Login_NewsletterHint"]
+                    </MudText>
+                </div>
+            }
+        </div>
+        @if (!ShowNewsletterCard)
+        {
+            <div class="newsletter-wrap">
+                <MudButton Variant="Variant.Filled" Class="newsletter-tab"
+                           OnClick="ReopenNewsletterCard">
+                    <span class="newsletter-tab__content">
+                        <span class="newsletter-tab__text">@Loc["Login_NewsletterTabLabel"]</span>
+                    </span>
+                </MudButton>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="login-shell">
+            <div class="login-panel login-panel--loading">
+                <div class="login-panel__top">
+                    <MudSkeleton Class="login-panel__logo-skeleton" Variant="SkeletonVariant.Rect" Height="52" Width="160" Animation="Animation.Wave" />
+                    <MudSkeleton Class="login-panel__register-skeleton" Variant="SkeletonVariant.Rect" Height="36" Width="140" Animation="Animation.Wave" />
+                </div>
+                <MudSkeleton Class="login-panel__title-skeleton" Variant="SkeletonVariant.Rect" Height="32" Width="220" Animation="Animation.Wave" />
+                <MudSkeleton Class="login-panel__subtitle-skeleton" Variant="SkeletonVariant.Rect" Height="20" Width="320" Animation="Animation.Wave" />
+                <div class="login-panel__form">
+                    <MudSkeleton Variant="SkeletonVariant.Rect" Height="64" Animation="Animation.Wave" />
+                    <MudSkeleton Variant="SkeletonVariant.Rect" Height="64" Animation="Animation.Wave" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="login-panel__submit" Disabled>
+                        <MudProgressCircular Color="Color.Inherit" Indeterminate="true" Size="Size.Small" />
+                    </MudButton>
+                </div>
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="18" Width="200" Animation="Animation.Wave" />
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="18" Width="260" Animation="Animation.Wave" />
+                <div class="login-panel__culture login-panel__culture--loading">
+                    <MudSkeleton Variant="SkeletonVariant.Circular" Height="32" Width="32" Animation="Animation.Wave" />
+                </div>
+            </div>
+            <div class="promo-panel promo-panel--loading">
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="18" Width="120" Animation="Animation.Wave" />
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="28" Width="240" Animation="Animation.Wave" />
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="20" Width="260" Animation="Animation.Wave" />
+                <div class="promo-panel__list">
+                    <MudSkeleton Variant="SkeletonVariant.Rect" Height="16" Width="220" Animation="Animation.Wave" />
+                    <MudSkeleton Variant="SkeletonVariant.Rect" Height="16" Width="210" Animation="Animation.Wave" />
+                    <MudSkeleton Variant="SkeletonVariant.Rect" Height="16" Width="200" Animation="Animation.Wave" />
+                </div>
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="44" Width="260" Animation="Animation.Wave" />
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="14" Width="200" Animation="Animation.Wave" />
+            </div>
+        </div>
+    }
+
+</div>

@@ -1,0 +1,51 @@
+@page "/admin/subscriptions"
+@using Oikos.Web.Components.Layout.PageLayout
+@namespace Oikos.Web.Components.Pages.Admin.Subscription
+@using Oikos.Application.Services.Subscription.Models
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@rendermode InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["SubscriptionPlansTitle"]">
+            <ChildContent>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="@CreatePlanAsync">
+                    @Loc["SubscriptionPlansNew"]
+                </MudButton>
+            </ChildContent>
+        </StandardPageHeader>
+    </HeaderContent>
+    <ChildContent>
+        <MudTable Items="_plans" Hover="true" Dense="true" Loading="_isBusy">
+            <HeaderContent>
+                <MudTh>@Loc["SubscriptionPlansColumnName"]</MudTh>
+                <MudTh>@Loc["SubscriptionPlansColumnMonthly"]</MudTh>
+                <MudTh>@Loc["SubscriptionPlansColumnYearly"]</MudTh>
+                <MudTh>@Loc["SubscriptionPlansColumnMonthlyClaims"]</MudTh>
+                <MudTh>@Loc["SubscriptionPlansColumnMonthlyChecks"]</MudTh>
+                <MudTh>@Loc["SubscriptionPlansColumnTeamSeats"]</MudTh>
+                <MudTh>@Loc["SubscriptionPlansColumnDisplayOrder"]</MudTh>
+                <MudTh>@Loc["SubscriptionPlansColumnStatus"]</MudTh>
+                <MudTh class="text-right">@Loc["SubscriptionPlansColumnActions"]</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel='@Loc["SubscriptionPlansColumnName"]'>@context.Name</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPlansColumnMonthly"]'>@($"€{context.MonthlyPrice}")</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPlansColumnYearly"]'>@($"€{context.YearlyPrice}")</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPlansColumnMonthlyClaims"]'>@context.MonthlyClaimLimit</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPlansColumnMonthlyChecks"]'>@context.MonthlyBionicCheckLimit</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPlansColumnTeamSeats"]'>@context.TeamSeatLimit</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPlansColumnDisplayOrder"]'>@context.DisplayOrder</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPlansColumnStatus"]'>
+                    <MudChip T="string" Color="@(context.IsActive ? Color.Success : Color.Default)" Variant="Variant.Filled" Dense="true">
+                        @(context.IsActive ? Loc["SubscriptionPlansStatusActive"] : Loc["SubscriptionPlansStatusInactive"])
+                    </MudChip>
+                </MudTd>
+                <MudTd Class="text-right">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditPlanAsync(context.Id))" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeletePlanAsync(context.Id))" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </ChildContent>
+</PageLayout>

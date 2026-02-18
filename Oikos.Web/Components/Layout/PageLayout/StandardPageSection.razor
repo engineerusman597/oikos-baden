@@ -1,0 +1,19 @@
+@namespace Oikos.Web.Components.Layout.PageLayout
+
+<MudPaper Class="pa-4 rounded-lg" Elevation="0" Outlined="true">
+    @if (!string.IsNullOrWhiteSpace(Title) || HeaderContent is not null)
+    {
+        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Spacing="2">
+            <MudText Typo="Typo.h6">@Title</MudText>
+            @HeaderContent
+        </MudStack>
+        <MudDivider Class="my-2" />
+    }
+    @ChildContent
+</MudPaper>
+
+@code {
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public RenderFragment? HeaderContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

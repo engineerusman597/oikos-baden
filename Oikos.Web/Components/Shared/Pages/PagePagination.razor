@@ -1,0 +1,73 @@
+@using System.Net.Http
+@using Oikos
+@using Oikos.Web.Auth;
+@using Oikos.Infrastructure.Data;
+@using Oikos.Infrastructure.Security
+@using Oikos.Common.Resources;
+@using Oikos.Application.Services
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.EntityFrameworkCore;
+@using Microsoft.Extensions.Localization;
+@using Microsoft.JSInterop
+@using MudBlazor
+
+@inject IJSRuntime _jsRuntime;
+@inject IDbContextFactory<OikosDbContext> _dbFactory;
+@inject IDialogService _dialogService;
+@inject ISnackbar _snackbarService;
+@inject IStringLocalizer<SharedResource> Loc;
+
+
+@inject JwtHelper _jwtHelper;
+@inject AuthenticationStateProvider _stateProvider;
+@inject ExternalAuthService _authService;
+@inject ProtectedLocalStorage _localStorage;
+@inject NavigationManager _navManager;
+
+
+<div class="d-flex justify-between align-center px-4 py-2">
+    <MudSpacer />
+    <div style="width:100px;" class="mr-1">
+        <MudSelect T="int" Value="PageInfo.Size" ValueChanged="PageSizeChanged" Variant="Variant.Outlined" Label='@Loc["Pagination_ItemsPerPage"]'
+                   Margin="Margin.Dense" Class="search-com">
+            <MudSelectItem Value="10">10</MudSelectItem>
+            <MudSelectItem Value="20">20</MudSelectItem>
+            <MudSelectItem Value="50">50</MudSelectItem>
+            <MudSelectItem Value="100">100</MudSelectItem>
+        </MudSelect>
+    </div>
+
+    <MudPagination Color="Color.Primary" Count="@((PageInfo.Total - 1)/PageInfo.Size + 1)" Selected="@PageInfo.Page"
+                   SelectedChanged="PageChangedClick" Variant="Variant.Filled" Rectangular="true" />
+</div>
+
+
+
+@code {
+    [Parameter] public PaginationModel PageInfo { get; set; } = null!;
+
+    [Parameter] public EventCallback<int> PageChangedClick { get; set; }
+
+    private void PageSizeChanged(int size)
+    {
+        PageInfo.Size = size;
+        PageInfo.Page = 1;
+        PageChangedClick.InvokeAsync(PageInfo.Page);
+    }
+
+
+    public record PaginationModel
+    {
+        public int Page { get; set; } = 1;
+
+        public int Size { get; set; } = 10;
+
+        public int Total { get; set; } = 0;
+    }
+}

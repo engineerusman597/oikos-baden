@@ -1,0 +1,129 @@
+@page "/user-bonix/dashboard"
+@using Oikos.Common.Resources
+@using Microsoft.AspNetCore.Authorization
+@using Oikos.Common.Helpers
+@using Oikos.Application.Services.Authentication
+@inject IAuthenticationService AuthenticationService
+@attribute [Authorize]
+@rendermode InteractiveServer
+
+<div class="oikos-dashboard pb-10">
+    <div class="oikos-dashboard-header mb-8">
+        <div class="oikos-header-content">
+            <MudText Typo="Typo.h4" Class="fw-bold">@Loc["Dashboard_Title"]</MudText>
+            <MudText Typo="Typo.body1" Class="mud-text-secondary">@_greetingText</MudText>
+        </div>
+    </div>
+
+    <MudGrid Spacing="4">
+        <MudItem xs="12" sm="12" md="8" lg="6" xl="6">
+            <MudPaper Elevation="0" 
+                      Outlined="true" 
+                      Class="dashboard-card dashboard-card-primary cursor-pointer" 
+                      @onclick="@(() => NavigateTo("/user-bonix/company-checks"))">
+                <MudStack AlignItems="AlignItems.Center" Spacing="3" Class="pa-8">
+                    <div class="icon-wrapper icon-wrapper-primary">
+                        <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Large" />
+                    </div>
+                    <MudText Typo="Typo.h5" Align="Align.Center" Class="fw-bold mt-2">@Loc["NavMenu_CreditCheck"]</MudText>
+                    <MudText Typo="Typo.body2" Align="Align.Center" Class="mud-text-secondary px-2">
+                        Suchen Sie nach einer Firma und erhalten Sie sofort den Bonitätsbericht.
+                    </MudText>
+                </MudStack>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" sm="12" md="8" lg="6" xl="6">
+            <MudPaper Elevation="0" 
+                      Outlined="true" 
+                      Class="dashboard-card dashboard-card-secondary cursor-pointer" 
+                      @onclick="@(() => NavigateTo("/user-bonix/company-checks/history"))">
+                <MudStack AlignItems="AlignItems.Center" Spacing="3" Class="pa-8">
+                    <div class="icon-wrapper icon-wrapper-secondary">
+                        <MudIcon Icon="@Icons.Material.Filled.History" Size="Size.Large" />
+                    </div>
+                    <MudText Typo="Typo.h5" Align="Align.Center" Class="fw-bold mt-2">@Loc["NavMenu_History"]</MudText>
+                    <MudText Typo="Typo.body2" Align="Align.Center" Class="mud-text-secondary px-2">
+                        @Loc["Dashboard_History_Description"]
+                    </MudText>
+                </MudStack>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</div>
+
+@code {
+    [Inject] NavigationManager NavigationManager { get; set; } = null!;
+    
+    private string _greetingText = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userInfo = await AuthenticationService.GetUserInfoAsync();
+        _greetingText = GreetingHelper.BuildGreeting(userInfo?.RealName, Loc);
+    }
+
+    private void NavigateTo(string uri)
+    {
+        NavigationManager.NavigateTo(uri);
+    }
+}
+
+<style>
+    .dashboard-card {
+        border-radius: 16px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+    }
+
+    .dashboard-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        border-color: transparent;
+    }
+
+    .dashboard-card-primary:hover {
+        background: linear-gradient(135deg, rgba(var(--mud-palette-primary-rgb), 0.02) 0%, rgba(var(--mud-palette-primary-rgb), 0.05) 100%);
+        border-color: rgba(var(--mud-palette-primary-rgb), 0.2);
+    }
+
+    .dashboard-card-secondary:hover {
+        background: linear-gradient(135deg, rgba(var(--mud-palette-secondary-rgb), 0.02) 0%, rgba(var(--mud-palette-secondary-rgb), 0.05) 100%);
+        border-color: rgba(var(--mud-palette-secondary-rgb), 0.2);
+    }
+
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .icon-wrapper-primary {
+        background: linear-gradient(135deg, rgba(var(--mud-palette-primary-rgb), 0.1) 0%, rgba(var(--mud-palette-primary-rgb), 0.15) 100%);
+        color: var(--mud-palette-primary);
+    }
+
+    .icon-wrapper-secondary {
+        background: linear-gradient(135deg, rgba(var(--mud-palette-secondary-rgb), 0.1) 0%, rgba(var(--mud-palette-secondary-rgb), 0.15) 100%);
+        color: var(--mud-palette-secondary);
+    }
+
+    .dashboard-card:hover .icon-wrapper {
+        transform: scale(1.1);
+    }
+
+    .dashboard-card:hover .icon-wrapper-primary {
+        background: linear-gradient(135deg, rgba(var(--mud-palette-primary-rgb), 0.2) 0%, rgba(var(--mud-palette-primary-rgb), 0.25) 100%);
+        box-shadow: 0 8px 16px rgba(var(--mud-palette-primary-rgb), 0.2);
+    }
+
+    .dashboard-card:hover .icon-wrapper-secondary {
+        background: linear-gradient(135deg, rgba(var(--mud-palette-secondary-rgb), 0.2) 0%, rgba(var(--mud-palette-secondary-rgb), 0.25) 100%);
+        box-shadow: 0 8px 16px rgba(var(--mud-palette-secondary-rgb), 0.2);
+    }
+</style>

@@ -1,0 +1,96 @@
+@using Oikos.Application.Constants
+@using Microsoft.AspNetCore.WebUtilities
+@using Oikos.Common.Constants
+
+@inject ISnackbar _snackbarService
+@inject NavigationManager NavigationManager
+
+<MudDialog Class="register-dialog" Gutters="false">
+    <DialogContent>
+        <div class="register-dialog__container">
+            <MudText Typo="Typo.body2" Class="register-dialog__subtitle">
+                @Loc["Register_Subtitle"] <MudLink OnClick="SwitchToLogin" Class="register-dialog__login-link">@Loc["Register_SubtitleLink"]</MudLink>
+            </MudText>
+            <EditForm Model="_model" OnValidSubmit="Register" FormName="bonixRegister" class="register-dialog__form">
+                <DataAnnotationsValidator />
+                <div class="register-dialog__grid">
+                    <div class="register-dialog__field">
+                        <MudTextField @bind-Value="_model.Company" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["Register_CompanyLabel"]" For="@(() => _model.Company)" AdornmentIcon="@Icons.Material.Filled.Business" />
+                    </div>
+                    <div class="register-dialog__field">
+                        <MudSelect T="string" @bind-Value="_model.Gender" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                   Label="@Loc["Register_GenderLabel"]" For="@(() => _model.Gender)" Placeholder="@Loc["Register_GenderPlaceholder"]">
+                            <MudSelectItem Value="@NameConstants.Genders.Female">@Loc["Register_GenderOptionFemale"]</MudSelectItem>
+                            <MudSelectItem Value="@NameConstants.Genders.Male">@Loc["Register_GenderOptionMale"]</MudSelectItem>
+                            <MudSelectItem Value="@NameConstants.Genders.Diverse">@Loc["Register_GenderOptionDiverse"]</MudSelectItem>
+                        </MudSelect>
+                    </div>
+                    <div class="register-dialog__field">
+                        <MudSelect T="string" @bind-Value="_model.Title" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                   Label="@Loc["Register_TitleLabel"]" Clearable="true" Placeholder="@Loc["Register_TitlePlaceholder"]">
+                            <MudSelectItem Value="@NameConstants.Titles.Dr">@Loc["Register_TitleOptionDr"]</MudSelectItem>
+                            <MudSelectItem Value="@NameConstants.Titles.Prof">@Loc["Register_TitleOptionProf"]</MudSelectItem>
+                            <MudSelectItem Value="@NameConstants.Titles.ProfDr">@Loc["Register_TitleOptionProfDr"]</MudSelectItem>
+                        </MudSelect>
+                    </div>
+                    <div class="register-dialog__field">
+                        <MudTextField @bind-Value="_model.FirstName" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["Register_FirstNameLabel"]" For="@(() => _model.FirstName)" AdornmentIcon="@Icons.Material.Filled.Badge" />
+                    </div>
+                    <div class="register-dialog__field">
+                        <MudTextField @bind-Value="_model.LastName" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["Register_LastNameLabel"]" For="@(() => _model.LastName)" AdornmentIcon="@Icons.Material.Filled.Badge" />
+                    </div>
+                    <div class="register-dialog__field">
+                        <MudTextField @bind-Value="_model.Email" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["Register_EmailLabel"]" For="@(() => _model.Email)" InputType="InputType.Email" />
+                    </div>
+                    <div class="register-dialog__field">
+                        <MudTextField @bind-Value="_model.PartnerCode" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["Register_PartnerCodeLabel"]" For="@(() => _model.PartnerCode)"
+                                      HelperText="@Loc["Register_PartnerCodeHelper"]" ReadOnly="@(!string.IsNullOrWhiteSpace(_partnerCode))" />
+                    </div>
+                    <div class="register-dialog__field">
+                        <MudTextField @bind-Value="_model.Password" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["Register_PasswordLabel"]" For="@(() => _model.Password)" InputType="InputType.Password"
+                                      AdornmentIcon="@Icons.Material.Filled.Lock" />
+                    </div>
+                    <div class="register-dialog__field">
+                        <MudTextField @bind-Value="_model.ConfirmPassword" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["Register_ConfirmPasswordLabel"]" For="@(() => _model.ConfirmPassword)" InputType="InputType.Password"
+                                      AdornmentIcon="@Icons.Material.Filled.Lock" />
+                    </div>
+                </div>
+                <MudText Typo="Typo.caption" Class="register-dialog__verification-hint">
+                    @Loc["Register_SubscriptionHint"]
+                </MudText>
+                <div class="register-dialog__privacy">
+                    <MudCheckBox T="bool" @bind-Value="_model.AcceptedPrivacy" For="@(() => _model.AcceptedPrivacy)" />
+                    <div>
+                        <MudText Typo="Typo.caption" Class="register-dialog__privacy-label">
+                            @Loc["Register_PrivacyPrefix"] <MudLink Href="https://www.online-mahnantraege.de/privacy-policy#hero" Target="_blank" Rel="noopener noreferrer">
+                                @Loc["Register_PrivacyLinkText"]
+                            </MudLink>@Loc["Register_PrivacySuffix"]
+                        </MudText>
+                    </div>
+                </div>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="register-dialog__submit"
+                           ButtonType="ButtonType.Submit" Disabled="_isLoading">
+                    @if (_isLoading)
+                    {
+                        <MudProgressCircular Color="Color.Inherit" Indeterminate="true" Size="Size.Small" />
+                    }
+                    else
+                    {
+                        <MudIcon Icon="@Icons.Material.Filled.Check" Class="mr-2" />
+                        @Loc["Register_SubmitButton"]
+                    }
+                </MudButton>
+                <div class="register-dialog__actions">
+                    <!-- Removed NotMemberButton -->
+                </div>
+            </EditForm>
+        </div>
+    </DialogContent>
+</MudDialog>

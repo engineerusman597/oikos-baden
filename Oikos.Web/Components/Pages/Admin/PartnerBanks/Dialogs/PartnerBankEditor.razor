@@ -1,0 +1,83 @@
+@using Oikos.Application.Services.Partner.Models
+<MudDialog MaxWidth="MaxWidth.Medium" FullWidth="true">
+    <DialogContent>
+        <MudForm @ref="_form">
+            <MudText Typo="Typo.h5" Class="mb-2">@(_isEdit ? Loc["BankEditor_EditTitle"] : Loc["BankEditor_CreateTitle"])</MudText>
+            <MudTextField T="string" Label="@Loc["BankEditor_NameLabel"]" @bind-Value="Bank.Name" Required="true" For="() => Bank.Name" />
+            <MudSelect T="string" Label="@Loc["BankEditor_RegionsLabel"]" MultiSelection="true" Required="true" Class="mt-3"
+                       SelectedValues="_selectedRegions" SelectedValuesChanged="OnSelectedRegionsChanged">
+                @foreach (var region in GermanRegionCatalog.Regions)
+                {
+                    <MudSelectItem Value="@region.Code">@region.Name</MudSelectItem>
+                }
+            </MudSelect>
+            <MudTextField T="string" Label="@Loc["BankEditor_DescriptionLabel"]" @bind-Value="Bank.Description" Lines="3" Class="mt-3" />
+            <MudTextField T="string" Label="@Loc["BankEditor_DetailsLabel"]" @bind-Value="Bank.Details" Lines="4" Class="mt-3"
+                          HelperText="@Loc["BankEditor_DetailsHelper"]" />
+            <MudTextField T="string" Label="@Loc["BankEditor_ContactLabel"]" @bind-Value="Bank.ContactInfo" Lines="2" Class="mt-3" />
+            <MudTextField T="string" Label="@Loc["BankEditor_WebsiteLabel"]" @bind-Value="Bank.WebsiteUrl" Class="mt-3" />
+            <MudTextField T="string" Label="@Loc["BankEditor_LogoLabel"]" @bind-Value="Bank.LogoUrl" Class="mt-3" />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="Cancel">@Loc["Common_Cancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync">@Loc["Common_Save"]</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter] public PartnerBank Bank { get; set; } = new();
+
+    private HashSet<string> _selectedRegions { get; set; } = new();
+    private MudForm? _form;
+    private bool _isEdit;
+
+    protected override void OnInitialized()
+    {
+        _isEdit = Bank.Id != Guid.Empty;
+        if (_selectedRegions.Count == 0 && Bank.Regions.Count > 0)
+        {
+            foreach (var region in Bank.Regions)
+            {
+                _selectedRegions.Add(region);
+            }
+        }
+        if (Bank.Id == Guid.Empty)
+        {
+            Bank.Id = Guid.NewGuid();
+        }
+    }
+
+    private async Task SaveAsync()
+    {
+        if (_form is not null)
+        {
+            await _form.Validate();
+            if (!_form.IsValid)
+            {
+                return;
+            }
+        }
+
+        if (_selectedRegions.Count == 0)
+        {
+            return;
+        }
+
+        Bank.Regions = _selectedRegions.ToList();
+        MudDialog.Close(DialogResult.Ok(Bank));
+    }
+
+    private void Cancel()
+    {
+        MudDialog.Cancel();
+    }
+
+    private Task OnSelectedRegionsChanged(IEnumerable<string> values)
+    {
+        _selectedRegions = values?.ToHashSet() ?? new HashSet<string>();
+        return Task.CompletedTask;
+    }
+}

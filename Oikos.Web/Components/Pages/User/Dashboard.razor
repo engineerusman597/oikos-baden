@@ -1,0 +1,101 @@
+@page "/dashboard"
+@rendermode InteractiveServer
+@using Oikos.Common.Resources
+
+<div class="oikos-dashboard pb-10">
+    <div class="oikos-dashboard-header mb-6">
+        <div class="oikos-header-content">
+            <MudText Typo="Typo.h4" Class="fw-bold">Dashboard</MudText>
+            <MudText Typo="Typo.body1" Class="mud-text-secondary">@_greetingText</MudText>
+        </div>
+        <div class="oikos-header-actions">
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.Add"
+                       OnClick="@NavigateToNewClaim"
+                       Class="rounded-lg px-6 py-2">
+                @Loc["HomePage_NewClaimTitle"]
+            </MudButton>
+            <MudIconButton Icon="@Icons.Material.Filled.Refresh" 
+                           Variant="Variant.Outlined" 
+                           Class="rounded-lg ml-2"
+                           OnClick="@(() => OnInitializedAsync())" />
+        </div>
+    </div>
+
+    @if (_news is not null)
+    {
+        <MudPaper Elevation="0" Outlined="true" Class="oikos-news-banner rounded-xl pa-4 mb-4">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="4">
+                <div class="oikos-news-icon">
+                    <MudIcon Icon="@Icons.Material.Filled.NotificationsNone" Color="Color.Primary" />
+                </div>
+                <MudStack Spacing="0">
+                    <MudLink Typo="Typo.h6" Href="@_news.Link" Underline="Underline.None" Class="oikos-news-title" Target="_blank">@_news.Title</MudLink>
+                    <MudText Typo="Typo.body2" Class="mud-text-secondary">@_news.Summary</MudText>
+                </MudStack>
+            </MudStack>
+        </MudPaper>
+    }
+
+    <MudPaper Elevation="0" Outlined="true" Class="oikos-plan-banner rounded-xl pa-4 mb-8">
+        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="4">
+                <div class="oikos-plan-usage">
+                    <div class="oikos-usage-circle">
+                        @if (_totalClaims > 0)
+                        {
+                            <span class="usage-text">@_remainingClaims/@_totalClaims</span>
+                        }
+                        else
+                        {
+                             <span class="usage-text">∞</span>
+                        }
+                    </div>
+                    <span class="plan-label">@_planName</span>
+                </div>
+                <MudStack Spacing="0">
+                    <MudText Typo="Typo.h6">@_planName</MudText>
+                    @if (_totalClaims > 0)
+                    {
+                        <MudText Typo="Typo.body2" Class="mud-text-secondary">@string.Format("{0} von {1} Fällen verfügbar", _remainingClaims, _totalClaims)</MudText>
+                    }
+                    else
+                    {
+                        <MudText Typo="Typo.body2" Class="mud-text-secondary">Unbegrenzte Fälle verfügbar</MudText>
+                    }
+                </MudStack>
+            </MudStack>
+            <MudButton Variant="Variant.Text" 
+                       EndIcon="@Icons.Material.Filled.TrendingUp" 
+                       Color="Color.Inherit" 
+                       Href="@PricingUrl"
+                       Class="oikos-upgrade-btn">
+                Upgrade
+            </MudButton>
+        </MudStack>
+    </MudPaper>
+
+    <MudGrid Spacing="4">
+        @foreach (var summary in _statusSummaries)
+        {
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="0" 
+                          Outlined="true" 
+                          Class="@($"oikos-status-card rounded-xl pa-5 {summary.CssClass}")"
+                          Style="@summary.Style"
+                          @onclick="@(() => NavigateTo(summary.TargetUri))">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@summary.Name</MudText>
+                            <MudText Typo="Typo.h4" Class="fw-bold">@summary.Count</MudText>
+                        </MudStack>
+                        <div class="oikos-card-icon-nested">
+                            <MudIcon Icon="@summary.Icon" />
+                        </div>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+</div>

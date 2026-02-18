@@ -1,0 +1,79 @@
+@page "/insurance-partners"
+@namespace Oikos.Web.Components.Pages.User.InsurancePartners
+@using Oikos.Web.Components.Layout.PageLayout
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["InsurancePartners_Title"]" />
+    </HeaderContent>
+    <ChildContent>
+        <MudStack Spacing="3">
+            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary">
+                @Loc["InsurancePartners_Subtitle"]
+            </MudText>
+
+            @if (_isLoading)
+            {
+                <MudPaper Elevation="0" Class="d-flex justify-center pa-6">
+                    <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Large" />
+                </MudPaper>
+            }
+            else if (_partners.Count == 0)
+            {
+                <MudEmptyState Icon="@Icons.Material.Filled.Lightbulb" Title="@Loc["InsurancePartners_EmptyTitle"]"
+                               Description="@Loc["InsurancePartners_EmptyDescription"]" />
+            }
+            else
+            {
+                <MudGrid Gutter="Size.Small">
+                    @foreach (var partner in _partners.OrderBy(p => p.Name))
+                    {
+                        <MudItem xs="12" sm="6">
+                            <MudPaper Class="insurance-partners__card" Elevation="2">
+                                <MudStack Spacing="2">
+                                    <MudStack Direction="Row" AlignItems="AlignItems.Center" Spacing="2">
+                                        <MudAvatar Icon="@Icons.Material.Filled.Security" Size="Size.Medium" Color="Color.Primary"
+                                                   Class="insurance-partners__avatar" />
+                                        <MudStack Spacing="0">
+                                            <MudText Typo="Typo.h6">@partner.Name</MudText>
+                                            @if (!string.IsNullOrWhiteSpace(partner.ContactInfo))
+                                            {
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@partner.ContactInfo</MudText>
+                                            }
+                                        </MudStack>
+                                    </MudStack>
+                                    @if (!string.IsNullOrWhiteSpace(partner.Description))
+                                    {
+                                        <MudText Typo="Typo.body2">@partner.Description</MudText>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(partner.CoverageDetails))
+                                    {
+                                        <MudList T="string" Dense="true" Class="insurance-partners__list">
+                                            @foreach (var detail in SplitLines(partner.CoverageDetails))
+                                            {
+                                                <MudListItem T="string">
+                                                    <MudListItemIcon>
+                                                        <MudIcon Icon="@Icons.Material.Filled.Verified" Color="Color.Success" />
+                                                    </MudListItemIcon>
+                                                    <MudListItemText>@detail</MudListItemText>
+                                                </MudListItem>
+                                            }
+                                        </MudList>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(partner.WebsiteUrl))
+                                    {
+                                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" Href="@partner.WebsiteUrl" Target="_blank" Rel="noopener"
+                                                   StartIcon="@Icons.Material.Filled.OpenInNew">
+                                            @Loc["InsurancePartners_ButtonLabel"]
+                                        </MudButton>
+                                    }
+                                </MudStack>
+                            </MudPaper>
+                        </MudItem>
+                    }
+                </MudGrid>
+            }
+        </MudStack>
+    </ChildContent>
+</PageLayout>

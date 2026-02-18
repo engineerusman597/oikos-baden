@@ -1,0 +1,19 @@
+@using Oikos.Common.Resources
+@using Oikos.Web.States
+
+
+@foreach (var m in NavMenuItems)
+{
+    if (m.Childs.Count == 0)
+    {
+        <MudNavLink Href="@m.Route" Icon="@m.MenuIcon" Match="NavLinkMatch.All" IconColor="Color.Primary"
+                    @onmouseup="()=>NavClick(m)">@Loc[m.MenuName]</MudNavLink>
+    }
+    else
+    {
+        <MudNavGroup Title="@Loc[m.MenuName]" Expanded="@m.Childs.Any(c=>_navManager.Uri.EndsWith(c.Route ?? ""))"
+                     Icon="@m.MenuIcon" IconColor="Color.Primary">
+            <NavItemMenu NavMenuItems="@m.Childs" NavTo="NavTo" />
+        </MudNavGroup>
+    }
+}

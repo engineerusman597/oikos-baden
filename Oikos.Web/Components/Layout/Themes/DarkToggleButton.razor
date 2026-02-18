@@ -1,0 +1,9 @@
+@using Oikos.Common.Resources
+@using Oikos.Web.States
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Loc
+@rendermode InteractiveServer
+
+<MudToggleIconButton @bind-Toggled="_themeState.IsDark" Style="margin-right:12px;"
+                     Icon="@Icons.Material.Filled.DarkMode" Color="@Color.Inherit" Title='@Loc["Theme_LightMode"]'
+                     ToggledIcon="@Icons.Material.Filled.LightMode" ToggledColor="@Color.Inherit" ToggledTitle='@Loc["Theme_DarkMode"]' />

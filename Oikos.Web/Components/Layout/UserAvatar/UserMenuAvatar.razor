@@ -1,0 +1,79 @@
+@using Oikos.Web.Components.Layout.UserAvatar
+
+@rendermode InteractiveServer
+
+<MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Dense="true"
+         AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight"
+         PopoverClass="user-menu-popover">
+    <ActivatorContent>
+        @if (string.IsNullOrEmpty(_avatar))
+        {
+            <MudAvatar Size="Size.Small" Color="Color.Primary">
+                @_userName.First()
+            </MudAvatar>
+        }
+        else
+        {
+            <MudAvatar Size="Size.Small">
+                <MudImage Src="@("Avatars/" + _avatar)"></MudImage>
+            </MudAvatar>
+        }
+    </ActivatorContent>
+    <ChildContent>
+        <MudPaper Class="user-menu-panel" Elevation="0">
+            <div class="user-menu-header">
+                @if (string.IsNullOrEmpty(_avatar))
+                {
+                    <MudAvatar Size="Size.Medium" Color="Color.Primary" Class="user-menu-avatar">
+                        @_userName.First()
+                    </MudAvatar>
+                }
+                else
+                {
+                    <MudAvatar Size="Size.Medium" Class="user-menu-avatar">
+                        <MudImage Src="@($"Avatars/{_avatar}")"></MudImage>
+                    </MudAvatar>
+                }
+                <div class="user-menu-header-text">
+                    <MudStack Spacing="1">
+                        <MudText Typo="Typo.subtitle1" Class="user-menu-name">
+                            @_userName
+                        </MudText>
+                        @if (!string.IsNullOrWhiteSpace(_customerNumber))
+                        {
+                            <MudText Typo="Typo.caption" Class="user-menu-customer mud-text-secondary">
+                                @Loc["AuthorizedLayout_CustomerNumberLabel"]: @_customerNumber
+                            </MudText>
+                        }
+                        <MudText Typo="Typo.caption" Class="user-menu-role">
+                            @Loc["AuthorizedLayout_Setting"]
+                        </MudText>
+                    </MudStack>
+                </div>
+            </div>
+
+            <MudDivider Class="user-menu-divider" />
+
+            <MudMenuItem Icon="@Icons.Material.Filled.Settings" OnClick="ShowUserSettings" Class="user-menu-item">
+                @Loc["AuthorizedLayout_Setting"]
+            </MudMenuItem>
+            @if (_isBonixUser)
+            {
+                <MudMenuItem Icon="@Icons.Material.Filled.ArrowBack" OnClick="NavigateToBackToBonix" Class="user-menu-item">
+                    @Loc["AuthorizedLayout_BackToBonix"]
+                </MudMenuItem>
+            }
+            else
+            {
+                <MudMenuItem Icon="@Icons.Material.Filled.AutoAwesome" OnClick="NavigateToUpgrade" Class="user-menu-item">
+                    @Loc["AuthorizedLayout_UpgradeAccount"]
+                </MudMenuItem>
+            }
+            <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="LogoutClick" Class="user-menu-item user-menu-item--danger">
+                @Loc["AuthorizedLayout_Logout"]
+            </MudMenuItem>
+        </MudPaper>
+    </ChildContent>
+</MudMenu>
+
+

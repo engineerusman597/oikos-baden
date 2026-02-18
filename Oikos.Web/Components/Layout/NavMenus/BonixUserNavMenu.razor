@@ -1,0 +1,49 @@
+@using Oikos.Web.States
+@using Oikos.Web.Components.Layout.States
+@using MudBlazor
+@using Oikos.Common.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Loc
+@rendermode InteractiveServer
+
+<MudDrawer @bind-Open="LayoutState.NavIsOpen" ClipMode="DrawerClipMode.Never" Elevation="0" Style="z-index:1350; background-color: #fafbfc; border-right: 1px solid #e0e0e0;" Width="280px" Class="navmenu__drawer">
+
+	<div class="d-flex flex-column" style="height: 100vh;">
+
+		@* --- HEADER: Logo --- *@
+		<div class="navmenu__logo pa-4 pb-3">
+			<MudLink Href="/user-bonix/dashboard" Match="NavLinkMatch.All" Class="navmenu__logo-link">
+				<img src="images/Bonix.png" alt="Bonix Logo" class="navmenu__logo-image" style="max-height: 30px; width: auto;" />
+			</MudLink>
+		</div>
+
+		@* --- HEADER: Mandant Info --- *@
+		@if (!string.IsNullOrEmpty(_customerNumber))
+		{
+			<div class="px-4 pb-4 pt-0">
+				<MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["NavMenu_Client"]</MudText>
+				<div>
+					<MudText Typo="Typo.caption" Class="mud-text-secondary" Style="letter-spacing: 0.5px;">@_customerNumber</MudText>
+				</div>
+			</div>
+		}
+
+		<div class="navmenu__scrollable flex-grow-1 px-3">
+
+			@* --- SECTION: ÜBERSICHT --- *@
+			<MudText Typo="Typo.caption" Class="mud-text-secondary px-3 py-2 d-block">@Loc["NavMenu_Overview"]</MudText>
+			<MudNavMenu Margin="Margin.None" Color="Color.Primary" Rounded="true" Class="navmenu__list">
+				<MudNavLink Href="/user-bonix/dashboard" Icon="@Icons.Material.Filled.Dashboard" Match="NavLinkMatch.All" IconColor="Color.Default">@Loc["NavMenu_Dashboard"]</MudNavLink>
+			</MudNavMenu>
+			<MudNavMenu Margin="Margin.None" Color="Color.Primary" Rounded="true" Class="navmenu__list mb-6">
+				<MudNavLink Href="/user-bonix/company-checks" Icon="@Icons.Material.Filled.Search" Match="NavLinkMatch.All" IconColor="Color.Error">@Loc["NavMenu_CreditCheck"]</MudNavLink>
+				<MudNavLink Href="/user-bonix/company-checks/history" Icon="@Icons.Material.Filled.History" Match="NavLinkMatch.All" IconColor="Color.Error">@Loc["NavMenu_History"]</MudNavLink>
+			</MudNavMenu>
+
+		</div>
+	</div>
+</MudDrawer>
+
+@implements IDisposable
+
+

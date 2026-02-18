@@ -1,0 +1,48 @@
+.status-legend-wrapper {
+    width: 100%;
+}
+
+.status-legend {
+    padding: 1.75rem;
+    margin: 1.5rem 0;
+    background: radial-gradient(circle at 20% 20%, rgba(108, 118, 255, 0.06), transparent 38%),
+        radial-gradient(circle at 80% 0%, rgba(34, 197, 255, 0.06), transparent 35%);
+}
+
+.status-legend::deep .mud-table {
+    width: 100%;
+}
+
+.status-legend::deep .status-legend-table {
+    border: 1px solid var(--mud-palette-lines-default);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    background-color: var(--mud-palette-surface);
+}
+
+.status-legend::deep .mud-table-header {
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.08);
+    backdrop-filter: blur(4px);
+}
+
+.status-legend::deep .mud-table-cell {
+    vertical-align: top;
+    padding: 14px 16px;
+}
+
+.status-legend::deep .mud-table-row:hover {
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.06);
+    transition: background-color 120ms ease;
+}
+
+.status-legend::deep .status-legend-name {
+    font-weight: 700;
+    color: var(--mud-palette-primary);
+    letter-spacing: 0.1px;
+}
+
+.status-legend::deep .status-legend-description {
+    color: var(--mud-palette-text-secondary);
+    line-height: 1.55;
+}

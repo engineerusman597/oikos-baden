@@ -1,0 +1,93 @@
+@page "/admin/partner-banks"
+@namespace Oikos.Web.Components.Pages.Admin.PartnerBanks
+@using Oikos.Web.Components.Layout.PageLayout
+@using Oikos.Application.Services.Partner.Models
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["Admin_BanksTitle"]">
+            <ChildContent>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="@(() => OpenBankDialogAsync(null))">
+                    @Loc["Admin_BanksAdd"]
+                </MudButton>
+            </ChildContent>
+        </StandardPageHeader>
+    </HeaderContent>
+    <ChildContent>
+        <MudStack Spacing="3">
+            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary">
+                @Loc["Admin_BanksSubtitle"]
+            </MudText>
+
+            @if (_isLoading)
+            {
+                <MudStack Spacing="2">
+                    <MudSkeleton Variant="Variant.Text" Width="40%" Height="24px" />
+                    <MudSkeleton Variant="Variant.Rectangular" Height="220px" />
+                </MudStack>
+            }
+            else if (_banks.Count == 0)
+            {
+                <MudEmptyState Icon="@Icons.Material.Filled.AccountBalance" Title="@Loc["Admin_BanksEmptyTitle"]"
+                               Description="@Loc["Admin_BanksEmptyDescription"]" />
+            }
+            else
+            {
+                <MudTable Items="_pagedBanks" Hover="true" Dense="true">
+                    <HeaderContent>
+                        <MudTh>#</MudTh>
+                        <MudTh>@Loc["BankEditor_NameLabel"]</MudTh>
+                        <MudTh>@Loc["BankEditor_RegionsLabel"]</MudTh>
+                        <MudTh>@Loc["BankEditor_DescriptionLabel"]</MudTh>
+                        <MudTh class="text-right">@Loc["Admin_TableActions"]</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="#">@context.Number</MudTd>
+                        <MudTd DataLabel="@Loc["BankEditor_NameLabel"]">
+                            <MudText Typo="Typo.subtitle2">@context.Bank.Name</MudText>
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["BankEditor_RegionsLabel"]">
+                            <MudStack Direction="Row" Spacing="1" Class="flex-wrap">
+                                @foreach (var regionCode in context.Bank.Regions)
+                                {
+                                    var region = GermanRegionCatalog.Regions.FirstOrDefault(r => r.Code == regionCode);
+                                    <MudChip T="string" Color="Color.Primary" Variant="Variant.Text" Dense="true">
+                                        @((region?.Name) ?? regionCode)
+                                    </MudChip>
+                                }
+                            </MudStack>
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["BankEditor_DescriptionLabel"]">
+                            @if (!string.IsNullOrWhiteSpace(context.Bank.Description))
+                            {
+                                <MudText Typo="Typo.body2" Class="mud-text-secondary">@context.Bank.Description</MudText>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(context.Bank.Details))
+                            {
+                                <MudList T="string" Dense="true">
+                                    @foreach (var detail in SplitLines(context.Bank.Details))
+                                    {
+                                        <MudListItem T="string">
+                                            <MudListItemIcon>
+                                                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" />
+                                            </MudListItemIcon>
+                                            <MudListItemText>@detail</MudListItemText>
+                                        </MudListItem>
+                                    }
+                                </MudList>
+                            }
+                        </MudTd>
+                        <MudTd Class="text-right" DataLabel="@Loc["Admin_TableActions"]">
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => OpenBankDialogAsync(context.Bank))" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteBankAsync(context.Bank))" />
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+        </MudStack>
+    </ChildContent>
+    <FooterContent>
+        <PagePagination PageInfo="_searchObject" PageChangedClick="@OnPageChanged"></PagePagination>
+    </FooterContent>
+</PageLayout>

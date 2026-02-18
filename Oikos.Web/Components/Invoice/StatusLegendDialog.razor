@@ -1,0 +1,20 @@
+@using MudBlazor
+@using Oikos.Common.Resources
+
+
+<MudDialog>
+    <DialogContent>
+        <ClaimStatusLegend />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" OnClick="@CloseDialog">
+            @Loc["CommonClose"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance? Dialog { get; set; }
+
+    private void CloseDialog() => Dialog?.Close();
+}

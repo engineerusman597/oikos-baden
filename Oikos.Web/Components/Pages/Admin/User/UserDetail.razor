@@ -1,0 +1,141 @@
+@page "/admin/users/{UserId:int}"
+@using Oikos.Web.Components.Layout.PageLayout
+@using Oikos.Common.Resources
+
+
+@rendermode RenderMode.InteractiveServer
+@attribute [StreamRendering]
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["UserPage_Title"]">
+            <StartContent>
+                <MudButton Variant="Variant.Text" StartIcon="@Icons.Material.Filled.ArrowBack" OnClick="GoBack">
+                    @Loc["UserPage_Back"]
+                </MudButton>
+            </StartContent>
+        </StandardPageHeader>
+    </HeaderContent>
+    <ChildContent>
+        @if (_isLoading)
+        {
+            <MudGrid Spacing="3">
+                <MudItem xs="12">
+                    <MudSkeleton Variant="Variant.Rectangular" Height="160px" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudSkeleton Variant="Variant.Rectangular" Height="140px" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudSkeleton Variant="Variant.Rectangular" Height="140px" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudSkeleton Variant="Variant.Rectangular" Height="140px" />
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <MudSkeleton Variant="Variant.Rectangular" Height="140px" />
+                </MudItem>
+            </MudGrid>
+        }
+        else if (_user is null)
+        {
+            <MudAlert Severity="Severity.Warning">@Loc["UserPage_UserNotFound"]</MudAlert>
+        }
+        else
+        {
+            <MudPaper Class="pa-4 rounded-lg" Elevation="0" Outlined="true">
+                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3">
+                    @if (!string.IsNullOrWhiteSpace(_user.Avatar))
+                    {
+                        <MudAvatar Size="Size.Large">
+                            <MudImage Src="@($"Avatars/{_user.Avatar}")" />
+                        </MudAvatar>
+                    }
+                    else
+                    {
+                        <MudAvatar Size="Size.Large" Color="Color.Primary">
+                            @((_user.RealName ?? _user.UserName ?? "U").FirstOrDefault())
+                        </MudAvatar>
+                    }
+                    <MudStack Spacing="0">
+                        <MudText Typo="Typo.h5">@_user.RealName</MudText>
+                        <MudText Typo="Typo.body2" Class="mud-text-secondary">@_user.Email</MudText>
+                        <MudStack Row="true" Spacing="1" Class="mt-2">
+                            <MudChip T="string" Color="@(_user.IsEnabled ? Color.Success : Color.Error)" Variant="Variant.Filled">
+                                @(_user.IsEnabled ? Loc["UserPage_Active"] : Loc["UserPage_Inactive"])
+                            </MudChip>
+                            @if (!string.IsNullOrWhiteSpace(_user.Company))
+                            {
+                                <MudChip T="string" Variant="Variant.Outlined">@_user.Company</MudChip>
+                            }
+                            @foreach (var role in _user.Roles)
+                            {
+                                <MudChip T="string" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small">@role</MudChip>
+                            }
+                        </MudStack>
+                    </MudStack>
+                </MudStack>
+            </MudPaper>
+            <MudGrid Spacing="3" Class="mt-3">
+                <MudItem xs="12" md="6">
+                    <StandardPageSection Title="@Loc["UserPage_Section_Account"]">
+                        <MudGrid Spacing="2">
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_Username"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.UserName ?? "-")</MudText>
+                            </MudItem>
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_FullName"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.RealName ?? "-")</MudText>
+                            </MudItem>
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_Details_Title"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.Title ?? "-")</MudText>
+                            </MudItem>
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_Details_Gender"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.Gender ?? "-")</MudText>
+                            </MudItem>
+                        </MudGrid>
+                    </StandardPageSection>
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <StandardPageSection Title="@Loc["UserPage_Section_Contact"]">
+                        <MudGrid Spacing="2">
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_Email"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.Email ?? "-")</MudText>
+                            </MudItem>
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_Phone"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.PhoneNumber ?? "-")</MudText>
+                            </MudItem>
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_CustomerNumber"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.CustomerNumber ?? "-")</MudText>
+                            </MudItem>
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_Company"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.Company ?? "-")</MudText>
+                            </MudItem>
+                        </MudGrid>
+                    </StandardPageSection>
+                </MudItem>
+                <MudItem xs="12" md="6">
+                    <StandardPageSection Title="@Loc["UserPage_Section_Partner"]">
+                        <MudGrid Spacing="2">
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_Section_Partner"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.PartnerName ?? "-")</MudText>
+                            </MudItem>
+                            <MudItem xs="6">
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_PartnerCode"]</MudText>
+                                <MudText Typo="Typo.body1">@(_user.PartnerCode ?? "-")</MudText>
+                            </MudItem>
+                        </MudGrid>
+                    </StandardPageSection>
+                </MudItem>
+            </MudGrid>
+        }
+    </ChildContent>
+</PageLayout>

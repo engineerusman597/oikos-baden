@@ -1,0 +1,224 @@
+@using System.Text
+@using Oikos.Application.Services.Invoice
+@using Oikos.Application.Services.Invoice.Models
+@using MudBlazor
+@using Oikos.Common.Resources
+@using Microsoft.Extensions.Localization
+@using Oikos.Web.Components.Shared
+@using Oikos.Domain.Enums
+
+@inject IInvoiceManagementService InvoiceService
+@inject ISnackbar _snackbarService
+
+
+<MudDialog MaxWidth="MaxWidth.Medium" FullWidth="true">
+    <TitleContent>
+        @(_isEdit? Loc["StageManagerEditDialogTitle"] : Loc["StageManagerAddDialogTitle"])
+    </TitleContent>
+    <DialogContent>
+        <MudForm @ref="_form">
+            <MudStack Spacing="2">
+                <MudText Typo="Typo.subtitle2">@($"{Loc["StageManagerNameLabel"]} (EN)")</MudText>
+                <MudTextField T="string" @bind-Value="Model.Name" Label="@Loc["StageManagerNameLabel"]" Required="true" For="() => Model.Name" Immediate="true" OnBlur="_ => EnsureSlugFromName()" />
+                <MudTextField T="string" @bind-Value="Model.Slug" Label="@Loc["StageManagerSlugLabel"]" Required="true" For="() => Model.Slug" Immediate="true" />
+                <MudTextField T="string" @bind-Value="Model.Summary" Label="@Loc["StageManagerSummaryLabel"]" />
+                <MudTextField T="string" @bind-Value="Model.Description" Label="@Loc["StageManagerDescriptionLabel"]" Lines="3" Textarea="true" />
+                <MudTextField T="string" @bind-Value="Model.NextSteps" Label="@Loc["StageManagerNextStepsLabel"]" Lines="3" Textarea="true" />
+
+                <MudDivider />
+
+                <MudText Typo="Typo.subtitle2">@($"{Loc["StageManagerNameLabel"]} (DE)")</MudText>
+                <MudTextField T="string" @bind-Value="Model.NameDe" Label="@Loc["StageManagerNameLabel"]" Required="true" For="() => Model.NameDe" Immediate="true" />
+                <MudTextField T="string" @bind-Value="Model.SummaryDe" Label="@Loc["StageManagerSummaryLabel"]" />
+                <MudTextField T="string" @bind-Value="Model.DescriptionDe" Label="@Loc["StageManagerDescriptionLabel"]" Lines="3" Textarea="true" />
+                <MudTextField T="string" @bind-Value="Model.NextStepsDe" Label="@Loc["StageManagerNextStepsLabel"]" Lines="3" Textarea="true" />
+
+                <MudDivider />
+
+                <MudField Class="w-100" Variant="Variant.Outlined" Margin="Margin.Dense" Label="@Loc["StageManagerIconLabel"]">
+                    <IconSelect @bind-SelectedIcon="Model.Icon" />
+                </MudField>
+                <MudSelect T="string?" @bind-Value="Model.Color" Label="@Loc["StageManagerColorLabel"]" Clearable="true">
+                    @foreach (var color in _colorOptions)
+                    {
+                        <MudSelectItem Value="@color">@color</MudSelectItem>
+                    }
+                </MudSelect>
+                <MudSelect T="InvoicePrimaryStatus" @bind-Value="Model.PrimaryStatus" Label="@Loc["InvoicePrimaryStatusLabel"]" Required="true">
+                    @foreach (var status in Enum.GetValues<InvoicePrimaryStatus>())
+                    {
+                        <MudSelectItem Value="@status">@status.ToString()</MudSelectItem>
+                    }
+                </MudSelect>
+            </MudStack>
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Default" OnClick="Cancel">@Loc["CommonCancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@_isSaving" OnClick="SaveAsync">
+            @Loc["CommonSave"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
+    [Parameter] public int? StageId { get; set; }
+
+    private readonly IReadOnlyList<string> _colorOptions = Enum.GetNames<Color>();
+
+    private StageEditModel Model { get; } = new();
+    private MudForm? _form;
+    private bool _isSaving;
+    private bool _isEdit => StageId.HasValue;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        if (StageId.HasValue)
+        {
+            var stage = await InvoiceService.GetStageForEditAsync(StageId.Value);
+            if (stage == null)
+            {
+                _snackbarService.Add(Loc["StageManagerNotFound"], Severity.Error);
+                MudDialog.Close(DialogResult.Cancel());
+                return;
+            }
+
+            Model.Name = stage.Name;
+            Model.NameDe = string.IsNullOrWhiteSpace(stage.NameDe) ? stage.Name : stage.NameDe;
+            Model.Slug = stage.Slug;
+            Model.Summary = stage.Summary;
+            Model.SummaryDe = string.IsNullOrWhiteSpace(stage.SummaryDe) ? stage.Summary : stage.SummaryDe;
+            Model.Description = stage.Description;
+            Model.DescriptionDe = string.IsNullOrWhiteSpace(stage.DescriptionDe) ? stage.Description : stage.DescriptionDe;
+            Model.NextSteps = stage.NextSteps;
+            Model.NextStepsDe = string.IsNullOrWhiteSpace(stage.NextStepsDe) ? stage.NextSteps : stage.NextStepsDe;
+            Model.Icon = stage.Icon;
+            Model.Color = stage.Color;
+            Model.PrimaryStatus = stage.PrimaryStatus;
+        }
+    }
+
+    private async Task SaveAsync()
+    {
+        if (_form is null)
+        {
+            return;
+        }
+
+        await _form.Validate();
+        if (!_form.IsValid)
+        {
+            return;
+        }
+
+        var slug = NormalizeSlug(Model.Slug);
+        if (string.IsNullOrWhiteSpace(slug))
+        {
+            _snackbarService.Add(Loc["StageManagerSlugValidation"].Value, Severity.Error);
+            return;
+        }
+
+        _isSaving = true;
+
+        try
+        {
+            var dto = new InvoiceStageEditDto(
+                Id: StageId,
+                Name: Model.Name!,
+                NameDe: Model.NameDe,
+                Slug: slug,
+                Summary: Model.Summary,
+                SummaryDe: Model.SummaryDe,
+                Description: Model.Description,
+                DescriptionDe: Model.DescriptionDe,
+                NextSteps: Model.NextSteps,
+                NextStepsDe: Model.NextStepsDe,
+                Icon: Model.Icon,
+                Color: Model.Color,
+                PrimaryStatus: Model.PrimaryStatus);
+
+            var result = await InvoiceService.SaveStageAsync(dto);
+            
+            if (!result.Success)
+            {
+                _snackbarService.Add(Loc[result.ErrorMessage ?? "StageManagerSaveError"].Value, Severity.Error);
+                return;
+            }
+
+            _snackbarService.Add(Loc["StageManagerSaveSuccess"].Value, Severity.Success);
+            MudDialog.Close(DialogResult.Ok(true));
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private void EnsureSlugFromName()
+    {
+        if (!string.IsNullOrWhiteSpace(Model.Slug))
+        {
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(Model.Name))
+        {
+            return;
+        }
+
+        Model.Slug = NormalizeSlug(Model.Name);
+    }
+
+    private static string NormalizeSlug(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return string.Empty;
+        }
+
+        var normalized = value.Trim().ToLowerInvariant();
+        var builder = new StringBuilder(normalized.Length);
+        var lastDash = false;
+
+        foreach (var c in normalized)
+        {
+            if (char.IsLetterOrDigit(c))
+            {
+                builder.Append(c);
+                lastDash = false;
+            }
+            else if (c is ' ' or '-' or '_')
+            {
+                if (!lastDash && builder.Length > 0)
+                {
+                    builder.Append('-');
+                    lastDash = true;
+                }
+            }
+        }
+
+        var slug = builder.ToString().Trim('-');
+        return slug;
+    }
+
+    private sealed class StageEditModel
+    {
+        public string? Name { get; set; }
+        public string? NameDe { get; set; }
+        public string? Slug { get; set; }
+        public string? Summary { get; set; }
+        public string? SummaryDe { get; set; }
+        public string? Description { get; set; }
+        public string? DescriptionDe { get; set; }
+        public string? NextSteps { get; set; }
+        public string? NextStepsDe { get; set; }
+        public string? Icon { get; set; }
+        public string? Color { get; set; }
+        public InvoicePrimaryStatus PrimaryStatus { get; set; } = InvoicePrimaryStatus.InReview;
+    }
+}

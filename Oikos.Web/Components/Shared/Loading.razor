@@ -1,0 +1,40 @@
+@using MudBlazor
+@using Oikos.Web.States
+@rendermode InteractiveServer
+
+<div class="full-screen">
+    <div class="login-shell">
+        <div class="login-panel login-panel--loading">
+            <div class="login-panel__top">
+                <MudSkeleton Class="login-panel__logo-skeleton" Variant="SkeletonVariant.Rect" Height="52" Width="160" Animation="Animation.Wave" />
+                <MudSkeleton Class="login-panel__register-skeleton" Variant="SkeletonVariant.Rect" Height="36" Width="140" Animation="Animation.Wave" />
+            </div>
+            <MudSkeleton Class="login-panel__title-skeleton" Variant="SkeletonVariant.Rect" Height="32" Width="220" Animation="Animation.Wave" />
+            <MudSkeleton Class="login-panel__subtitle-skeleton" Variant="SkeletonVariant.Rect" Height="20" Width="320" Animation="Animation.Wave" />
+            <div class="login-panel__form">
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="64" Animation="Animation.Wave" />
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="64" Animation="Animation.Wave" />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="login-panel__submit" Disabled>
+                    <MudProgressCircular Color="Color.Inherit" Indeterminate="true" Size="Size.Small" />
+                </MudButton>
+            </div>
+            <MudSkeleton Variant="SkeletonVariant.Rect" Height="18" Width="200" Animation="Animation.Wave" />
+            <MudSkeleton Variant="SkeletonVariant.Rect" Height="18" Width="260" Animation="Animation.Wave" />
+            <div class="login-panel__culture login-panel__culture--loading">
+                <MudSkeleton Variant="SkeletonVariant.Circular" Height="32" Width="32" Animation="Animation.Wave" />
+            </div>
+        </div>
+        <div class="promo-panel promo-panel--loading">
+            <MudSkeleton Variant="SkeletonVariant.Rect" Height="18" Width="120" Animation="Animation.Wave" />
+            <MudSkeleton Variant="SkeletonVariant.Rect" Height="28" Width="240" Animation="Animation.Wave" />
+            <MudSkeleton Variant="SkeletonVariant.Rect" Height="20" Width="260" Animation="Animation.Wave" />
+            <div class="promo-panel__list">
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="16" Width="220" Animation="Animation.Wave" />
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="16" Width="210" Animation="Animation.Wave" />
+                <MudSkeleton Variant="SkeletonVariant.Rect" Height="16" Width="200" Animation="Animation.Wave" />
+            </div>
+            <MudSkeleton Variant="SkeletonVariant.Rect" Height="44" Width="260" Animation="Animation.Wave" />
+            <MudSkeleton Variant="SkeletonVariant.Rect" Height="14" Width="200" Animation="Animation.Wave" />
+        </div>
+    </div>
+</div>

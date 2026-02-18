@@ -1,0 +1,54 @@
+@page "/admin/dashboard"
+@rendermode InteractiveServer
+@using Oikos.Common.Resources
+
+<div class="pa-4 pa-sm-10" style="max-width: 1400px; margin: 0 auto;">
+    <div class="mb-10">
+        <MudText Typo="Typo.h4" GutterBottom="true" Style="font-weight: 300; opacity: 0.7;">@_greetingText</MudText>
+    </div>
+
+    <div class="d-flex align-end justify-space-between mb-8">
+        <div>
+            <MudText Typo="Typo.h3" Style="font-family: 'Times New Roman', serif; font-weight: 700; color: #1a1a1a;">@Loc["AdminDashboard_CaseManagementTitle"]</MudText>
+            <MudText Typo="Typo.h6" Class="mud-text-secondary" Style="font-weight: 400; font-size: 1.1rem;">@Loc["AdminDashboard_CaseManagementSubtitle"]</MudText>
+        </div>
+        <MudButton Variant="Variant.Outlined" 
+                   StartIcon="@Icons.Material.Filled.People" 
+                   Href="/admin/clients"
+                   Class="rounded-lg px-6 py-2"
+                   Style="border-color: #e0e0e0; text-transform: none; font-weight: 500;">
+            @Loc["AdminDashboard_MandantenButton"]
+        </MudButton>
+    </div>
+
+    <MudGrid Spacing="3">
+        @foreach (var summary in _statusSummaries)
+        {
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="0" 
+                          Class="pa-8 rounded-xl hover-paper d-flex flex-column align-center justify-center cursor-pointer border" 
+                          Style="min-height: 200px; border-color: #f0f0f0; background-color: #ffffff;"
+                          @onclick="@(() => NavigateTo(summary.TargetUri))">
+                    
+                    <MudIcon Icon="@summary.Icon" Color="Color.Default" Size="Size.Medium" Class="mud-text-secondary mb-4" Style="opacity: 0.5;" />
+                    
+                    <MudText Typo="Typo.h3" Class="mb-2" Style="font-weight: 800; color: #2d2d2d;">@summary.Count</MudText>
+                    
+                    <MudText Typo="Typo.body1" Style="font-weight: 500; color: #757575;">@summary.Name</MudText>
+                </MudPaper>
+            </MudItem>
+        }
+    </MudGrid>
+</div>
+
+<style>
+    .hover-paper {
+        transition: all 0.3s ease;
+        background-color: #fcfcfc;
+    }
+    .hover-paper:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        background-color: #ffffff;
+    }
+</style>

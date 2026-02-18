@@ -1,0 +1,75 @@
+@using Oikos.Web.States
+@using MudBlazor
+@using Oikos.Common.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Loc
+@rendermode InteractiveServer
+
+<MudDrawer @bind-Open="LayoutState.NavIsOpen" ClipMode="DrawerClipMode.Never" Elevation="0" Style="z-index:1350; background-color: #fafbfc; border-right: 1px solid #e0e0e0;" Width="280px" Class="navmenu__drawer">
+
+	<div class="d-flex flex-column" style="height: 100vh;">
+
+		@* --- HEADER: Logo --- *@
+		<div class="navmenu__logo">
+			<MudLink Href="/dashboard" Match="NavLinkMatch.All" Class="navmenu__logo-link">
+				<img src="images/rechtfix-logo.svg" alt="Rechtfix Logo" class="navmenu__logo-image" />
+			</MudLink>
+		</div>
+
+		@* --- HEADER: Mandant Info --- *@
+		<div class="pa-4 pt-2">
+			<MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["NavMenu_Client"]</MudText>
+
+			@if (!string.IsNullOrEmpty(_customerNumber))
+			{
+				<div>
+					<MudText Typo="Typo.caption" Class="mud-text-secondary" Style="letter-spacing: 0.5px;">@_customerNumber</MudText>
+				</div>
+			}
+		</div>
+
+		<div class="navmenu__scrollable flex-grow-1 px-3">
+
+			@* --- SECTION: ÜBERSICHT --- *@
+			<MudText Typo="Typo.caption" Class="mud-text-secondary px-3 py-2 d-block">@Loc["NavMenu_Overview"]</MudText>
+			<MudNavMenu Margin="Margin.None" Color="Color.Primary" Rounded="true" Class="navmenu__list">
+				<MudNavLink Href="/dashboard" Icon="@Icons.Material.Filled.Dashboard" Match="NavLinkMatch.All" IconColor="Color.Default">@Loc["NavMenu_Dashboard"]</MudNavLink>
+				<MudNavLink Href="/invoices" Icon="@Icons.Material.Filled.FolderOpen" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["NavMenu_ClaimsCenter"]</MudNavLink>
+				<MudNavLink Href="/cases/new" Icon="@Icons.Material.Filled.Add" Match="NavLinkMatch.All" IconColor="Color.Default">@Loc["NavMenu_NewCase"]</MudNavLink>
+			</MudNavMenu>
+
+			@* --- CREDITSAFE BADGE --- *@
+			<div class="mt-6 mx-2">
+				<MudPaper Class="d-flex align-center pa-2" Style="background-color: #f1f5f9; border-radius: 4px;" Elevation="0">
+					<img src="images/Bonix.jpg" class="mr-2" style="height: 20px; border-radius: 4px;" alt="Bonix" />
+					<MudText Typo="Typo.caption" Style="font-size: 0.7rem; color: #666;">@Loc["NavMenu_PoweredBy"] <b style="color: #d32f2f;">CreditSafe</b></MudText>
+				</MudPaper>
+			</div>
+
+			<MudNavMenu Margin="Margin.None" Color="Color.Primary" Rounded="true" Class="navmenu__list mb-6">
+				<MudNavLink Href="/company-checks" Icon="@Icons.Material.Filled.Search" Match="NavLinkMatch.All" IconColor="Color.Error">@Loc["NavMenu_CreditCheck"]</MudNavLink>
+				<MudNavLink Href="/company-checks/history" Icon="@Icons.Material.Filled.History" Match="NavLinkMatch.All" IconColor="Color.Error">@Loc["NavMenu_History"]</MudNavLink>
+			</MudNavMenu>
+
+			@* --- SECTION: ENTDECKEN SIE --- *@
+			<div class="mt-6 mx-2" style="background-color: #e0f2f1; border-radius: 4px;">
+				<MudText Typo="Typo.button" Class="px-3 py-2 d-block text-center" Style="color: #00897b; font-weight:bold; font-size: 0.75rem; letter-spacing: 0.5px;">@Loc["NavMenu_Discover"]</MudText>
+			</div>
+
+			<MudNavMenu Margin="Margin.None" Color="Color.Primary" Rounded="true" Class="navmenu__list mt-2">
+				<MudNavLink Href="#" Icon="@Icons.Material.Filled.Business" Disabled="true" IconColor="Color.Default">
+					<div class="d-flex justify-space-between align-center" style="width:100%">
+						<span>@Loc["NavMenu_PartnerNetwork"]</span>
+						<MudIcon Icon="@Icons.Material.Filled.Lock" Size="Size.Small" Style="font-size: 1rem; color: #bdbdbd;" />
+					</div>
+				</MudNavLink>
+				<MudNavLink Href="#" Icon="@Icons.Material.Filled.Apps" Disabled="true" IconColor="Color.Default">
+					<div class="d-flex justify-space-between align-center" style="width:100%">
+						<span>@Loc["NavMenu_Applications"]</span>
+						<MudIcon Icon="@Icons.Material.Filled.Lock" Size="Size.Small" Style="font-size: 1rem; color: #bdbdbd;" />
+					</div>
+				</MudNavLink>
+			</MudNavMenu>
+		</div>
+	</div>
+</MudDrawer>

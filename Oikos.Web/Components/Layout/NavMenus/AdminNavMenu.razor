@@ -1,0 +1,74 @@
+@using Oikos.Web.States
+@using MudBlazor
+@using Oikos.Common.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Loc
+@inject ILayoutState _layoutState
+@rendermode InteractiveServer
+@implements IDisposable
+
+<MudDrawer @bind-Open="_layoutState.NavIsOpen" ClipMode="DrawerClipMode.Never" Elevation="0" Style="z-index:1350; background-color: #fafbfc; border-right: 1px solid #e0e0e0;" Width="280px" Class="navmenu__drawer">
+    <div class="d-flex flex-column" style="height: 100vh;">
+        
+        @* --- HEADER: Logo --- *@
+        <div class="navmenu__logo">
+            <MudLink Href="/admin/dashboard" Match="NavLinkMatch.All" Class="navmenu__logo-link">
+                <img src="images/rechtfix-logo.svg" alt="Rechtfix Logo" class="navmenu__logo-image" />
+            </MudLink>
+        </div>
+
+        <div class="navmenu__wrapper flex-grow-1 px-3">
+            <MudNavMenu Margin="Margin.None" Color="Color.Primary" Rounded="true" Class="navmenu__container">
+                
+                @* --- SECTION: HOME --- *@
+                <MudNavLink Href="/admin/dashboard" Icon="@Icons.Material.Filled.Home" Match="NavLinkMatch.All" IconColor="Color.Default">@Loc["AdminNavMenu_Home"]</MudNavLink>
+
+                @* --- SECTION: CLAIMS --- *@
+                <MudText Typo="Typo.caption" Class="mud-text-secondary px-3 py-2 d-block mt-4">@Loc["AdminNavMenu_Claims"]</MudText>
+                <MudNavLink Href="/admin/invoices" Icon="@Icons.Material.Filled.Receipt" IconColor="Color.Default">@Loc["AdminNavMenu_Invoices"]</MudNavLink>
+
+                @* --- SECTION: USERS & PAYMENTS --- *@
+                <MudText Typo="Typo.caption" Class="mud-text-secondary px-3 py-2 d-block mt-4">@Loc["AdminNavMenu_UsersAndPayments"]</MudText>
+                <MudNavLink Href="/admin/users" Icon="@Icons.Material.Filled.SupervisorAccount" IconColor="Color.Default">@Loc["AdminNavMenu_User"]</MudNavLink>
+                <MudNavLink Href="/admin/clients" Icon="@Icons.Material.Filled.Person" IconColor="Color.Default">@Loc["AdminNavMenu_Clients"]</MudNavLink>
+                <MudNavLink Href="/admin/subscription-payments" Icon="@Icons.Material.Filled.Payments" IconColor="Color.Default">@Loc["AdminNavMenu_SubscriptionPayments"]</MudNavLink>
+
+                @* --- CREDITSAFE BADGE --- *@
+                <div class="mt-6 mx-2">
+                    <MudPaper Class="d-flex align-center pa-2" Style="background-color: #f1f5f9; border-radius: 4px;" Elevation="0">
+                        <img src="images/Bonix.jpg" class="mr-2" style="height: 20px; border-radius: 4px;" alt="Bonix" />
+                        <MudText Typo="Typo.caption" Style="font-size: 0.7rem; color: #666;">@Loc["NavMenu_PoweredBy"] <b style="color: #d32f2f;">CreditSafe</b></MudText>
+                    </MudPaper>
+                </div>
+
+                <MudNavMenu Margin="Margin.None" Color="Color.Primary" Rounded="true" Class="navmenu__list mb-6">
+                    <MudNavLink Href="/admin/company-checks" Icon="@Icons.Material.Filled.Search" Match="NavLinkMatch.All" IconColor="Color.Error">@Loc["NavMenu_CreditCheck"]</MudNavLink>
+                    <MudNavLink Href="/admin/company-checks/history" Icon="@Icons.Material.Filled.History" Match="NavLinkMatch.All" IconColor="Color.Error">@Loc["NavMenu_History"]</MudNavLink>
+                </MudNavMenu>
+
+                @* --- SECTION: SYSTEM --- *@
+                <MudText Typo="Typo.caption" Class="mud-text-secondary px-3 py-2 d-block mt-4">@Loc["AdminNavMenu_System"]</MudText>
+                <MudNavLink Href="/admin/subscriptions" Icon="@Icons.Material.Filled.Subscriptions" IconColor="Color.Default">@Loc["AdminNavMenu_Subscriptions"]</MudNavLink>
+                <MudNavLink Href="/admin/invoice/stages" Icon="@Icons.Material.Filled.Timeline" IconColor="Color.Default">@Loc["AdminNavMenu_InvoiceStages"]</MudNavLink>
+                <MudNavLink Href="/admin/settings" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Default">@Loc["AdminNavMenu_Settings"]</MudNavLink>
+                <MudNavLink Href="/admin/partners" Icon="@Icons.Material.Filled.Handshake" IconColor="Color.Default">@Loc["AdminNavMenu_Partners"]</MudNavLink>
+                <MudNavLink Href="/admin/insurance-partners" Icon="@Icons.Material.Filled.Security" IconColor="Color.Default">@Loc["AdminNavMenu_InsurancePartners"]</MudNavLink>
+                <MudNavLink Href="/admin/partner-banks" Icon="@Icons.Material.Filled.AccountBalance" IconColor="Color.Default">@Loc["AdminNavMenu_PartnerBanks"]</MudNavLink>
+
+            </MudNavMenu>
+        </div>
+    </div>
+</MudDrawer>
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _layoutState.NavIsOpenEvent += StateHasChanged;
+    }
+    
+    public void Dispose()
+    {
+         _layoutState.NavIsOpenEvent -= StateHasChanged;
+    }
+}

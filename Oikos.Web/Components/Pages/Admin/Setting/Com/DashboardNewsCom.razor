@@ -1,0 +1,44 @@
+@using MudBlazor
+@using Microsoft.Extensions.Localization
+@using Oikos.Application.Services.Setting.Models
+@inject Oikos.Application.Services.Setting.ISettingService _settingService
+@inject ISnackbar _snackbarService
+
+
+<MudPaper Class="pa-4" Elevation="0">
+    <MudStack Spacing="3">
+        <MudText Typo="Typo.h6">@Loc["DashboardNewsComTitle"]</MudText>
+        <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["DashboardNewsComDescription"]</MudText>
+
+        <MudForm @ref="_form">
+            <MudGrid Spacing="2">
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="_model.Title"
+                                   Label="@Loc["DashboardNewsTitleLabel"]"
+                                   For="@(() => _model.Title)"
+                                   Variant="Variant.Outlined"
+                                   Immediate="true" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="_model.Summary"
+                                   Label="@Loc["DashboardNewsSummaryLabel"]"
+                                   For="@(() => _model.Summary)"
+                                   Variant="Variant.Outlined"
+                                   Immediate="true"
+                                   Lines="3" />
+                </MudItem>
+                <MudItem xs="12">
+                    <MudTextField @bind-Value="_model.Link"
+                                   Label="@Loc["DashboardNewsLinkLabel"]"
+                                   For="@(() => _model.Link)"
+                                   Variant="Variant.Outlined"
+                                   Immediate="true" />
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+
+        <MudStack Row="true" Spacing="2">
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveAsync">@Loc["DashboardNewsSaveLabel"]</MudButton>
+        </MudStack>
+    </MudStack>
+</MudPaper>

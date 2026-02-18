@@ -1,0 +1,76 @@
+@using Oikos.Application.Common
+@using Oikos.Application.Constants
+@using Oikos.Application.Services.User.Models
+@using Oikos.Common.Constants
+@using Oikos.Application.Services.Partner.Models
+@using Oikos.Common.Resources
+
+
+<MudDialog>
+        <DialogContent>
+            <div style="width:300px;">
+                @if (_loading)
+                {
+                    <MudProgressCircular Indeterminate="true" Class="mx-auto" />
+                }
+                else
+                {
+                    <EditForm Model="_model" OnValidSubmit="Submit" style="width:100%;">
+                        <DataAnnotationsValidator />
+                        <MudTextField T="string" @bind-Value="_model.Company" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["UserPage_Company"]" For="@(() => _model.Company)"></MudTextField>
+                                      
+                        <MudSelect T="string" Class="mt-4" @bind-Value="_model.Gender" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                  Label="@Loc["UserPage_GenderLabel"]" For="@(() => _model.Gender)" Placeholder="@Loc["UserPage_GenderPlaceholder"]">
+                            <MudSelectItem Value="@NameConstants.Genders.Female">@Loc["UserPage_GenderOptionFemale"]</MudSelectItem>
+                            <MudSelectItem Value="@NameConstants.Genders.Male">@Loc["UserPage_GenderOptionMale"]</MudSelectItem>
+                            <MudSelectItem Value="@NameConstants.Genders.Diverse">@Loc["UserPage_GenderOptionDiverse"]</MudSelectItem>
+                        </MudSelect>
+                        
+                        <MudSelect T="string" Class="mt-4" @bind-Value="_model.AcademicTitle" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                  Label="@Loc["UserPage_TitleLabel"]" Clearable="true" Placeholder="@Loc["UserPage_TitlePlaceholder"]">
+                            <MudSelectItem Value="@NameConstants.Titles.Dr">@Loc["UserPage_TitleOptionDr"]</MudSelectItem>
+                            <MudSelectItem Value="@NameConstants.Titles.Prof">@Loc["UserPage_TitleOptionProf"]</MudSelectItem>
+                            <MudSelectItem Value="@NameConstants.Titles.ProfDr">@Loc["UserPage_TitleOptionProfDr"]</MudSelectItem>
+                        </MudSelect>
+                        
+                        <MudTextField T="string" Class="mt-4" @bind-Value="_model.RealName" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["UserPage_FullName"]" For="@(() => _model.RealName)"></MudTextField>
+                                          
+                        <MudTextField T="string" Class="mt-4" @bind-Value="_model.Email" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["UserPage_Email"]" For="@(() => _model.Email)"></MudTextField>
+                                      
+                        <MudSelect T="int?" Class="mt-4" @bind-Value="_model.PartnerId" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                  Label="@Loc["UserPage_PartnerLabel"]" Placeholder="@Loc["UserPage_PartnerPlaceholder"]" Clearable="true">
+                            <MudSelectItem Value="@((int?)null)">@Loc["UserPage_NoPartnerOption"]</MudSelectItem>
+                            @foreach (var partner in _partners)
+                            {
+                                <MudSelectItem Value="@((int?)partner.Id)">@($"{partner.Name} ({partner.Code})")</MudSelectItem>
+                            }
+                        </MudSelect>
+                        
+                        <MudSelect T="int?" Class="mt-4" @bind-Value="_model.RoleId" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                  Label="@Loc["UserPage_RoleLabel"]" Placeholder="@Loc["UserPage_RolePlaceholder"]">
+                            @foreach (var role in _roles)
+                            {
+                                <MudSelectItem Value="@((int?)role.Id)">@role.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                        
+                        <MudTextField T="string" Class="mt-4" @bind-Value="_model.CustomerNumber" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["UserPage_CustomerNumberLabel"]" For="@(() => _model.CustomerNumber)" HelperText="@Loc["UserPage_CustomerNumberHelper"]"></MudTextField>
+                                      
+                        <MudTextField T="string" Class="mt-4" @bind-Value="_model.PhoneNumber" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["UserPage_Phone"]" For="@(() => _model.PhoneNumber)"></MudTextField>
+
+                        <div class="mt-4 d-flex">
+                            <MudSpacer />
+                            <MudButton Variant="Variant.Text" FullWidth="false" Color="Color.Primary" Size="Size.Medium"
+                                       ButtonType="ButtonType.Submit" StartIcon="@Icons.Material.Filled.Upload">@Loc["UserPage_SubmitText"]</MudButton>
+                        </div>
+                    </EditForm>
+                }
+            </div>
+        </DialogContent>
+</MudDialog>
+

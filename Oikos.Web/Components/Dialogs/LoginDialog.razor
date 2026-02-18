@@ -1,0 +1,64 @@
+@using System.ComponentModel.DataAnnotations
+@using Microsoft.AspNetCore.Components.Authorization
+@using MudBlazor
+@using Oikos.Application.Services.Authentication
+@using Oikos.Application.Services.Authentication.Models
+@using Oikos.Domain.Constants
+@using Oikos.Web.Auth
+@using Oikos.Common.Resources
+@using Microsoft.AspNetCore.Http
+
+<MudDialog>
+    <DialogContent>
+        <EditForm Model="@_loginModel" OnValidSubmit="LoginSubmit">
+            <DataAnnotationsValidator />
+            <MudStack Spacing="2">
+                <MudTextField @bind-Value="_loginModel.UserName"
+                              Label="@Loc["Login_UserName"]"
+                              Variant="Variant.Outlined"
+                              Adornment="Adornment.End"
+                              AdornmentIcon="@Icons.Material.Filled.Person"
+                              HelperText="@Loc["Login_UserNameHelpText"]"
+                              Immediate="true"
+                              For="@(() => _loginModel.UserName)"
+                              InputAttributes="@(new Dictionary<string, object> { { "autocomplete", "username" } })" />
+                
+                <MudTextField @bind-Value="_loginModel.Password"
+                              Label="@Loc["Login_Password"]"
+                              Variant="Variant.Outlined"
+                              InputType="@_passwordInputType"
+                              Adornment="Adornment.End"
+                              AdornmentIcon="@_passwordInputIcon"
+                              OnAdornmentClick="TogglePasswordVisibility"
+                              Immediate="true"
+                              For="@(() => _loginModel.Password)"
+                              InputAttributes="@(new Dictionary<string, object> { { "autocomplete", "current-password" } })" />
+
+                <MudButton ButtonType="ButtonType.Submit" 
+                           Variant="Variant.Filled" 
+                           Color="Color.Primary" 
+                           Size="Size.Large" 
+                           FullWidth="true"
+                           Class="mt-4"
+                           Disabled="@_isProcessing">
+                    @if (_isProcessing)
+                    {
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                        <MudText Class="ms-2">@Loc["Login_Processing"]</MudText>
+                    }
+                    else
+                    {
+                        <MudText>@Loc["Login_SubmitButton"]</MudText>
+                    }
+                </MudButton>
+                
+                <MudLink Href="@GetForgotPasswordLink()" Class="mt-2" Style="text-align: center; display: block;">
+                    @Loc["Login_ForgotPassword"]
+                </MudLink>
+            </MudStack>
+        </EditForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@Loc["Common_Cancel"]</MudButton>
+    </DialogActions>
+</MudDialog>

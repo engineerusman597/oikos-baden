@@ -1,0 +1,413 @@
+.full-screen {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 2.5rem;
+    background: linear-gradient(130deg, #f4edff 0%, #ffe9f3 100%);
+}
+
+.login-shell {
+    display: flex;
+    width: min(1100px, 100%);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 38px 80px rgba(86, 47, 153, 0.25);
+    background: linear-gradient(140deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.2) 100%);
+    backdrop-filter: blur(16px);
+    position: relative;
+}
+
+.login-panel {
+    flex: 1 1 60%;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 3.25rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login-panel__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-panel__logo {
+    display: flex;
+    align-items: center;
+}
+
+    .login-panel__logo img {
+        height: 52px;
+        width: auto;
+        display: block;
+    }
+
+.login-panel__register:global(.mud-button-root) {
+    text-transform: none;
+    font-weight: 600;
+    color: #6f39f4;
+    border-radius: 999px;
+    padding: 0.5rem 1.2rem;
+}
+
+    .login-panel__register:global(.mud-button-root):hover {
+        background-color: rgba(111, 57, 244, 0.08);
+    }
+
+.login-panel__title {
+    font-weight: 700;
+}
+
+.login-panel__subtitle {
+    color: var(--mud-palette-text-secondary);
+    max-width: 340px;
+}
+
+.login-panel__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+    .login-panel__form ::deep .mud-input-root {
+        border-radius: 14px;
+        background-color: rgba(243, 238, 255, 0.6);
+    }
+
+        .login-panel__form ::deep .mud-input-root:hover {
+            background-color: rgba(243, 238, 255, 0.8);
+        }
+
+        .login-panel__form ::deep .mud-input-root input {
+            color: #2b2541;
+        }
+
+    .login-panel__form ::deep .mud-input-underline::before,
+    .login-panel__form ::deep .mud-input-underline::after {
+        display: none;
+    }
+
+    .login-panel__form ::deep .mud-input-label {
+        font-weight: 500;
+    }
+
+.login-panel__submit:global(.mud-button-root) {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+    text-transform: none;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.9rem 2.4rem;
+    background: linear-gradient(90deg, #5a2bd4 0%, #8734e8 100%);
+    box-shadow: 0 14px 28px rgba(90, 43, 212, 0.25);
+}
+
+    .login-panel__submit:global(.mud-button-root):hover {
+        background: linear-gradient(90deg, #4d23b7 0%, #762ed0 100%);
+    }
+
+.login-panel__support {
+    color: #6f39f4;
+    font-weight: 600;
+    text-decoration: none;
+    width: fit-content;
+}
+
+    .login-panel__support:hover {
+        text-decoration: underline;
+    }
+
+.login-panel__membership {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+}
+
+.login-panel__membership-link {
+    color: #f26f21;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+    .login-panel__membership-link:hover {
+        text-decoration: underline;
+    }
+
+.login-panel__culture {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.login-panel--loading {
+    gap: 1.75rem;
+    pointer-events: none;
+}
+
+.login-panel__logo-skeleton,
+.login-panel__register-skeleton,
+.login-panel__title-skeleton,
+.login-panel__subtitle-skeleton {
+    border-radius: 12px;
+}
+
+.login-panel__culture--loading {
+    justify-content: flex-start;
+}
+
+.promo-panel {
+    position: relative;
+    flex: 1 1 40%;
+    background: linear-gradient(200deg, #4c1c88 0%, #862dd7 100%);
+    color: #fff;
+    padding: 3.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+
+.promo-panel__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.25rem;
+}
+
+.promo-panel--loading {
+    gap: 1.25rem;
+    pointer-events: none;
+}
+
+.promo-panel__close {
+    align-self: flex-start;
+    margin-top: -0.75rem;
+    flex-shrink: 0;
+    color: rgba(255, 255, 255, 0.7) !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    width: 36px !important;
+    height: 36px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+    .promo-panel__close:hover {
+        background-color: rgba(255, 255, 255, 0.12) !important;
+        color: #fff !important;
+    }
+
+.promo-panel__status {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.promo-panel__title {
+    flex: 1 1 auto;
+    font-weight: 700;
+}
+
+.promo-panel__highlight {
+    font-weight: 600;
+    opacity: 0.9;
+}
+
+.promo-panel__list {
+    padding-left: 1.1rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    font-size: 0.95rem;
+}
+
+.promo-panel__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.newsletter-input {
+    width: 100%;
+}
+
+.newsletter-input ::deep .mud-input-root {
+    color: #fff;
+}
+
+.newsletter-input ::deep .mud-input-root input,
+.newsletter-input ::deep .mud-input-root .mud-input-slot {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff;
+}
+
+.newsletter-input ::deep .mud-input-root input::placeholder {
+    color: rgba(255, 255, 255, 0.96);
+}
+
+.newsletter-input ::deep .mud-input-label {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff;
+}
+
+    .promo-panel__form ::deep .mud-input-root {
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.3);
+        color: #fff;
+    }
+
+    .promo-panel__form ::deep .mud-input-label {
+        color: rgba(255, 255, 255, 0.85);
+    }
+
+    .promo-panel__form ::deep .mud-input-root:hover,
+    .promo-panel__form ::deep .mud-input-root.mud-focused {
+        background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .promo-panel__form ::deep .mud-input-underline::before,
+    .promo-panel__form ::deep .mud-input-underline::after {
+        display: none;
+    }
+
+    .promo-panel__form ::deep .mud-input-helper-text {
+        color: rgba(255, 213, 251, 0.9);
+    }
+
+.promo-panel__cta:global(.mud-button-root) {
+    text-transform: none;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.85rem 2.2rem;
+    align-self: flex-start;
+    background: #fff;
+    color: #5a2bd4;
+}
+
+    .promo-panel__cta:global(.mud-button-root):hover {
+        background: rgba(255, 255, 255, 0.85);
+    }
+
+.promo-panel__hint {
+    opacity: 0.75;
+    font-size: 0.85rem;
+}
+
+.newsletter-wrap {
+    position: relative;
+}
+
+    .newsletter-wrap ::deep .mud-button-root.newsletter-tab {
+        position: absolute;
+        top: 80%;
+        right: -2.1rem;
+        transform: translateY(90%);
+        text-transform: none;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 1.35rem 0.6rem;
+        color: #fff;
+        z-index: 2;
+        min-height: 8.25rem;
+        background: linear-gradient(200deg, #4c1c88 0%, #862dd7 100%);
+        box-shadow: 0 18px 36px rgba(88, 34, 180, 0.35);
+        border: 1px solid rgba(255, 255, 255, .35);
+        min-width: 50px;
+    }
+
+
+    .newsletter-wrap .newsletter-tab__content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem;
+    }
+
+    .newsletter-wrap .newsletter-tab__text {
+        font-size: 0.9rem;
+        writing-mode: vertical-rl;
+        letter-spacing: 0.12em;
+    }
+
+    .newsletter-wrap .newsletter-tab__icon {
+        font-size: 1.4rem;
+    }
+
+    .newsletter-wrap ::deep .mud-button-label {
+        padding: 0;
+    }
+
+
+@media (max-width: 1024px) {
+    .login-shell {
+        flex-direction: column;
+    }
+
+    .promo-panel {
+        flex: 1 1 auto;
+        border-radius: 0;
+    }
+
+    .newsletter-tab:global(.mud-button-root) {
+        right: 1rem;
+    }
+}
+
+@media (max-width: 720px) {
+    .full-screen {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .login-panel,
+    .promo-panel {
+        padding: 2.5rem 2rem;
+    }
+
+    .login-panel__top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .newsletter-tab:global(.mud-button-root) {
+        position: fixed;
+        top: auto;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        transform: none;
+        border-radius: 999px;
+        padding: 0.75rem 1.5rem;
+        box-shadow: 0 14px 28px rgba(88, 34, 180, 0.3);
+        min-height: auto;
+    }
+
+    .newsletter-tab__text {
+        writing-mode: initial;
+        letter-spacing: normal;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-panel,
+    .promo-panel {
+        padding: 2rem 1.5rem;
+    }
+
+    .promo-panel__cta:global(.mud-button-root) {
+        width: 100%;
+        text-align: center;
+    }
+
+    .newsletter-tab:global(.mud-button-root) {
+        left: 1.5rem;
+        right: 1.5rem;
+        text-align: center;
+    }
+}

@@ -1,0 +1,97 @@
+@using System.Globalization
+@using MudBlazor
+@using Oikos.Application.Services.CompanyCheck
+@using Oikos.Application.Services.CompanyCheck.Models
+
+@rendermode RenderMode.InteractiveServer
+
+<MudDialog MaxWidth="MaxWidth.Large" FullWidth="true" Class="company-check-detail-dialog">
+    <TitleContent>
+        @if (Item is null)
+        {
+            @Loc["DetailsDialogTitle"]
+        }
+        else
+        {
+            @Item.CompanyName
+        }
+    </TitleContent>
+    <DialogContent>
+        @if (Item is null)
+        {
+            <MudAlert Severity="Severity.Error" Dense="true">@Loc["ErrorTitle"]</MudAlert>
+        }
+        else
+        {
+            <MudStack Spacing="3">
+                <MudPaper Elevation="0" Class="pa-4 company-check-detail__header">
+                    <MudStack Spacing="1">
+                        <MudText Typo="Typo.subtitle1">@FormatDetailValue(ResolveDetailValue(Item, r => r.Name, s => s.Name, Item.CompanyName))</MudText>
+                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["SearchResultsDetailsHeading"]</MudText>
+                    </MudStack>
+                </MudPaper>
+
+
+                @if (ShowPurchaseSummary)
+                {
+                    <MudPaper Elevation="0" Class="pa-4">
+                        <MudStack Spacing="2">
+                            <MudText Typo="Typo.subtitle2">@Loc["HistoryPurchaseSummaryTitle"]</MudText>
+                            <MudGrid>
+                                <MudItem xs="12" sm="6">
+                                    <MudStack Spacing="1">
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["ReportMetaCountry"]</MudText>
+                                        <MudText Typo="Typo.body1">@FormatDetailValue(Item.CountryCode)</MudText>
+                                    </MudStack>
+                                </MudItem>
+                                <MudItem xs="12" sm="6">
+                                    <MudStack Spacing="1">
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["HistoryTablePaidAt"]</MudText>
+                                        <MudText Typo="Typo.body1">@FormatPaidAt(Item.PaidAt)</MudText>
+                                    </MudStack>
+                                </MudItem>
+                                <MudItem xs="12" sm="6">
+                                    <MudStack Spacing="1">
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["HistoryTableAmount"]</MudText>
+                                        <MudText Typo="Typo.body1">@FormatAmount(Item.Amount, Item.Currency)</MudText>
+                                    </MudStack>
+                                </MudItem>
+                            </MudGrid>
+                        </MudStack>
+                    </MudPaper>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Item.ReportJson))
+                {
+                    <MudExpansionPanels>
+                        <MudExpansionPanel Text="JSON">
+                            <pre class="company-check-json">@Item.ReportJson</pre>
+                        </MudExpansionPanel>
+                    </MudExpansionPanels>
+                }
+            </MudStack>
+        }
+    </DialogContent>
+    <DialogActions>
+        @if (AllowSelection)
+        {
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Disabled="Item is null"
+                       OnClick="ConfirmSelection">@GetSelectButtonLabel()</MudButton>
+        }
+        @if (Item is not null && !string.IsNullOrWhiteSpace(Item.DownloadUrl))
+        {
+            <MudButton Variant="Variant.Outlined"
+                       Color="Color.Primary"
+                       Href="@Item.DownloadUrl"
+                       Target="_blank"
+                       StartIcon="@Icons.Material.Filled.Download">
+                @Loc["ReportDownloadButton"]
+            </MudButton>
+        }
+        <MudButton Variant="Variant.Text" Color="@GetCloseButtonColor()" OnClick="CloseDialog">@Loc["DetailsCloseButton"]</MudButton>
+    </DialogActions>
+</MudDialog>
+
+

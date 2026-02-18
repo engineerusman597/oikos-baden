@@ -1,0 +1,23 @@
+@using MudBlazor
+@using Oikos.Common.Resources
+
+<MudDialog>
+    <DialogContent>
+        <MudForm @ref="_form">
+            <MudTextField T="string" Label='@Loc["SubscriptionPlansFieldName"]' @bind-Value="_model.Name" Required="true" For="() => _model.Name" />
+            <MudTextField T="string" Label='@Loc["SubscriptionPlansFieldSlug"]' @bind-Value="_model.Slug" Required="true" For="() => _model.Slug" />
+            <MudTextField T="string" Label='@Loc["SubscriptionPlansFieldDescription"]' @bind-Value="_model.Description" />
+            <MudNumericField T="decimal" Label='@Loc["SubscriptionPlansFieldMonthlyPrice"]' @bind-Value="_model.MonthlyPrice" Required="true" />
+            <MudNumericField T="decimal" Label='@Loc["SubscriptionPlansFieldYearlyPrice"]' @bind-Value="_model.YearlyPrice" Required="true" />
+            <MudNumericField T="int?" Label='@Loc["SubscriptionPlansFieldMonthlyClaims"]' @bind-Value="_model.MonthlyClaimLimit" />
+            <MudNumericField T="int?" Label='@Loc["SubscriptionPlansFieldMonthlyChecks"]' @bind-Value="_model.MonthlyBionicCheckLimit" />
+            <MudNumericField T="int?" Label='@Loc["SubscriptionPlansFieldTeamSeats"]' @bind-Value="_model.TeamSeatLimit" />
+            <MudNumericField T="int" Label='@Loc["SubscriptionPlansFieldDisplayOrder"]' @bind-Value="_model.DisplayOrder" Required="true" />
+            <MudCheckBox T="bool" @bind-Checked="_model.IsActive" Color="Color.Primary" Label='@Loc["SubscriptionPlansFieldIsActive"]' />
+        </MudForm>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Default" OnClick="@Cancel">@Loc["SubscriptionPlansCancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@SaveAsync" Disabled="_isBusy">@Loc["SubscriptionPlansSave"]</MudButton>
+    </DialogActions>
+</MudDialog>

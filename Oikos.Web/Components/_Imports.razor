@@ -1,0 +1,52 @@
+@using System.Net.Http
+@using System.Net.Http.Json
+@using Oikos.Web.Components.Layout.States
+@using Oikos.Web.Auth
+@using Oikos.Infrastructure.Security
+@using Oikos.Application.Services.Security
+@using Oikos.Common.Resources
+@using Oikos.Application.Services.Authentication
+@using Oikos.Web.States
+@using Oikos.Web.Components.Shared.Pages
+@using Oikos.Web
+@using Oikos.Web.Components
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Components.Routing
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.Extensions.Localization
+@using Microsoft.JSInterop
+@using MudBlazor
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+
+@inject IJSRuntime _jsRuntime;
+@inject IDialogService _dialogService;
+@inject ISnackbar _snackbarService;
+
+@inject IHttpContextAccessor _httpAccessor;
+
+@inject ProtectedLocalStorage _localStorage;
+@inject NavigationManager _navManager;
+@inject AuthenticationStateProvider _stateProvider;
+
+@inject IStringLocalizer<SharedResource> Loc
+
+@inject IJwtTokenGenerator _jwtTokenGenerator;
+@inject ExternalAuthService _authService;
+@inject PasswordResetService _passwordResetService;
+@inject ThemeState _themeState;
+@inject Oikos.Application.Services.Email.IEmailSender _emailSender;
+@inject Oikos.Application.Services.Authentication.IAuthenticationService _authenticationService;
+@inject Oikos.Application.Services.Newsletter.INewsletterService _newsletterService;
+
+@using Oikos.Application.Services.CompanyCheck
+@using Oikos.Application.Services.CompanyCheck.Models
+
+@inject ICompanyCheckWizardService _wizardService
+@inject ICompanyCheckManager _companyCheckManager
+
+@attribute [Authorize]

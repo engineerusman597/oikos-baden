@@ -1,0 +1,83 @@
+@page "/admin/insurance-partners"
+@namespace Oikos.Web.Components.Pages.Admin.InsurancePartners
+@using Oikos.Web.Components.Layout.PageLayout
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["Admin_InsuranceTitle"]">
+            <ChildContent>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="@(() => OpenInsuranceDialogAsync(null))">
+                    @Loc["Admin_InsuranceAdd"]
+                </MudButton>
+            </ChildContent>
+        </StandardPageHeader>
+    </HeaderContent>
+    <ChildContent>
+        <MudStack Spacing="3">
+            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary">
+                @Loc["Admin_InsuranceSubtitle"]
+            </MudText>
+
+            @if (_isLoading)
+            {
+                <MudStack Spacing="2">
+                    <MudSkeleton Variant="Variant.Text" Width="40%" Height="24px" />
+                    <MudSkeleton Variant="Variant.Rectangular" Height="220px" />
+                </MudStack>
+            }
+            else if (_partners.Count == 0)
+            {
+                <MudEmptyState Icon="@Icons.Material.Filled.Security" Title="@Loc["Admin_InsuranceEmptyTitle"]"
+                               Description="@Loc["Admin_InsuranceEmptyDescription"]" />
+            }
+            else
+            {
+                <MudTable Items="_pagedPartners" Hover="true" Dense="true">
+                    <HeaderContent>
+                        <MudTh>#</MudTh>
+                        <MudTh>@Loc["InsuranceEditor_NameLabel"]</MudTh>
+                        <MudTh>@Loc["InsuranceEditor_DescriptionLabel"]</MudTh>
+                        <MudTh>@Loc["InsuranceEditor_CoverageLabel"]</MudTh>
+                        <MudTh class="text-right">@Loc["Admin_TableActions"]</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="#">@context.Number</MudTd>
+                        <MudTd DataLabel="@Loc["InsuranceEditor_NameLabel"]">
+                            <MudText Typo="Typo.subtitle2">@context.Partner.Name</MudText>
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["InsuranceEditor_DescriptionLabel"]">
+                            @if (!string.IsNullOrWhiteSpace(context.Partner.Description))
+                            {
+                                <MudText Typo="Typo.body2" Class="mud-text-secondary">@context.Partner.Description</MudText>
+                            }
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["InsuranceEditor_CoverageLabel"]">
+                            @if (!string.IsNullOrWhiteSpace(context.Partner.CoverageDetails))
+                            {
+                                <MudList T="string" Dense="true">
+                                    @foreach (var detail in SplitLines(context.Partner.CoverageDetails))
+                                    {
+                                        <MudListItem T="string">
+                                            <MudListItemIcon>
+                                                <MudIcon Icon="@Icons.Material.Filled.Star" Color="Color.Info" />
+                                            </MudListItemIcon>
+                                            <MudListItemText>@detail</MudListItemText>
+                                        </MudListItem>
+                                    }
+                                </MudList>
+                            }
+                        </MudTd>
+                        <MudTd Class="text-right" DataLabel="@Loc["Admin_TableActions"]">
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => OpenInsuranceDialogAsync(context.Partner))" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteInsurancePartnerAsync(context.Partner))" />
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+        </MudStack>
+    </ChildContent>
+    <FooterContent>
+        <PagePagination PageInfo="_searchObject" PageChangedClick="@OnPageChanged"></PagePagination>
+    </FooterContent>
+</PageLayout>

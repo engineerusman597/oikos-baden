@@ -1,0 +1,390 @@
+@page "/admin/company-checks"
+
+@using Microsoft.AspNetCore.Components.Forms
+@using Oikos.Application.Services.CompanyCheck.Models
+
+@rendermode RenderMode.InteractiveServer
+
+<div class="wizard-background company-check-wizard-background">
+    <MudContainer MaxWidth="MaxWidth.False" Class="wizard-container">
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="12" lg="10">
+                <MudPaper Class="company-check-wizard-card" Elevation="0">
+                    <div class="wizard-content">
+                        <MudStack Spacing="4" Class="wizard-shell">
+                            <MudStack Spacing="1" AlignItems="AlignItems.Center" Class="wizard-header">
+                                <MudText Typo="Typo.h4" Class="wizard-text-center">@Loc["ModuleTitle"]</MudText>
+                            </MudStack>
+
+                            <div class="wizard-progress-card">
+                                <div class="wizard-progress">
+                                    @for (var index = 0; index < _steps.Length; index++)
+                                    {
+                                        var step = _steps[index];
+                                        var stepNumber = index + 1;
+                                        var isLastStep = index == _steps.Length - 1;
+                                        var isActive = index == _currentStep;
+                                        var isCompleted = index < _currentStep || (isLastStep && isActive);
+                                        var isDisabled = index > GetMaxAvailableStep();
+
+                                        <MudButton Class="@($"wizard-progress-item {(isCompleted ? "completed" : string.Empty)} {(isActive ? "active" : string.Empty)}")"
+                                                   Variant="Variant.Text"
+                                                   DisableElevation="true"
+                                                   DisableRipple="true"
+                                                   ButtonType="ButtonType.Button"
+                                                   Disabled="isDisabled"
+                                                   OnClick="@(() => NavigateToStep(index))">
+                                            <div class="wizard-progress-content">
+                                                <div class="wizard-progress-circle">
+                                                    <MudIcon Icon="@(isCompleted ? Icons.Material.Filled.CheckCircle : step.Icon)" />
+                                                    <span class="wizard-progress-index">@stepNumber</span>
+                                                </div>
+                                                <div class="wizard-progress-text">
+                                                    <MudText Typo="Typo.subtitle2">@Loc[step.TitleKey]</MudText>
+                                                </div>
+                                            </div>
+                                        </MudButton>
+
+                                        @if (index < _steps.Length - 1)
+                                        {
+                                            <div class="wizard-progress-connector"></div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="wizard-step-body">
+                                @switch (_currentStep)
+                                {
+                                    case 0:
+                                        <MudStack Spacing="4">
+                                            <MudPaper Class="pa-6 wizard-hero" Elevation="0">
+                                                <MudStack Spacing="2" AlignItems="AlignItems.Center">
+                                                    <MudIcon Icon="@Icons.Material.Filled.TravelExplore" Class="wizard-hero-icon" Color="Color.Primary" />
+                                                    <MudText Typo="Typo.h4" Class="wizard-text-center">@Loc["ModuleTitle"]</MudText>
+                                                    <MudText Typo=Typo.body1" Class="mud-text-secondary wizard-text-center">@Loc["SearchIntro"]</MudText>
+                                                </MudStack>
+                                            </MudPaper>
+
+                                            <MudPaper Class="pa-5 wizard-section" Elevation="0">
+                                                <MudStack Spacing="3">
+                                                    @if (!_creditsafeConfigured)
+                                                    {
+                                                        <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" Elevation="0" Class="wizard-alert">
+                                                            <MudText Typo="Typo.body2">@Loc["CreditSafeMissingConfiguration"]</MudText>
+                                                        </MudAlert>
+                                                    }
+
+                                                    <EditForm Model="_searchModel" OnValidSubmit="OnSearchFormSubmittedAsync">
+                                                        <DataAnnotationsValidator />
+                                                        <MudStack Spacing="2">
+                                                            <MudTextField @bind-Value="_searchModel.CompanyName"
+                                                                         Placeholder="@Loc["SearchPlaceholder"]"
+                                                                         Label="@Loc["SearchPlaceholder"]"
+                                                                         For="() => _searchModel.CompanyName"
+                                                                         Disabled="_isSearching || !_creditsafeConfigured"
+                                                                         Immediate="true" />
+
+                                                            <MudStack Direction="Row" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                                                <MudButton Variant="Variant.Text"
+                                                                           Color="Color.Primary"
+                                                                           StartIcon="@(_showAdvancedFilters ? Icons.Material.Filled.ExpandLess : Icons.Material.Filled.ExpandMore)"
+                                                                           DisableElevation="true"
+                                                                           Disabled="_isSearching || !_creditsafeConfigured"
+                                                                           OnClick="@(() => _showAdvancedFilters = !_showAdvancedFilters)">
+                                                                    @Loc[_showAdvancedFilters ? "SearchHideAdvanced" : "SearchShowAdvanced"]
+                                                                </MudButton>
+                                                            </MudStack>
+
+                                                            <MudCollapse Expanded="_showAdvancedFilters">
+                                                                <MudGrid Spacing="2">
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudTextField @bind-Value="_searchModel.Country"
+                                                                                      Label="@Loc["SearchCountryLabel"]"
+                                                                                      Disabled="_isSearching || !_creditsafeConfigured"
+                                                                                      MaxLength="2"
+                                                                                      Immediate="true" />
+                                                                    </MudItem>
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudTextField @bind-Value="_searchModel.RegistrationNumber"
+                                                                                      Label="@Loc["SearchRegistrationNumberLabel"]"
+                                                                                      Disabled="_isSearching || !_creditsafeConfigured"
+                                                                                      Immediate="true" />
+                                                                    </MudItem>
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudTextField @bind-Value="_searchModel.VatNumber"
+                                                                                      Label="@Loc["SearchVatLabel"]"
+                                                                                      Disabled="_isSearching || !_creditsafeConfigured"
+                                                                                      Immediate="true" />
+                                                                    </MudItem>
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudTextField @bind-Value="_searchModel.PhoneNumber"
+                                                                                      Label="@Loc["SearchPhoneLabel"]"
+                                                                                      Disabled="_isSearching || !_creditsafeConfigured"
+                                                                                      Immediate="true" />
+                                                                    </MudItem>
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudTextField @bind-Value="_searchModel.Street"
+                                                                                      Label="@Loc["SearchStreetLabel"]"
+                                                                                      Disabled="_isSearching || !_creditsafeConfigured"
+                                                                                      Immediate="true" />
+                                                                    </MudItem>
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudTextField @bind-Value="_searchModel.City"
+                                                                                      Label="@Loc["SearchCityLabel"]"
+                                                                                      Disabled="_isSearching || !_creditsafeConfigured"
+                                                                                      Immediate="true" />
+                                                                    </MudItem>
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudTextField @bind-Value="_searchModel.PostCode"
+                                                                                      Label="@Loc["SearchPostCodeLabel"]"
+                                                                                      Disabled="_isSearching || !_creditsafeConfigured"
+                                                                                      Immediate="true" />
+                                                                    </MudItem>
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudSelect T="string" @bind-Value="_searchModel.Status"
+                                                                                  Label="@Loc["SearchStatusLabel"]"
+                                                                                  Disabled="_isSearching || !_creditsafeConfigured">
+                                                                            <MudSelectItem Value="@((string)null)">@Loc["SearchStatusAny"]</MudSelectItem>
+                                                                            @foreach (var status in _companyStatuses)
+                                                                            {
+                                                                                <MudSelectItem Value="@status">@Loc[$"SearchStatus{status}"]</MudSelectItem>
+                                                                            }
+                                                                        </MudSelect>
+                                                                    </MudItem>
+                                                                    <MudItem xs="12" sm="6">
+                                                                        <MudSelect T="string" @bind-Value="_searchModel.CompanyType"
+                                                                                  Label="@Loc["SearchCompanyTypeLabel"]"
+                                                                                  Disabled="_isSearching || !_creditsafeConfigured">
+                                                                            <MudSelectItem Value="@((string)null)">@Loc["SearchCompanyTypeAny"]</MudSelectItem>
+                                                                            @foreach (var type in _companyTypes)
+                                                                            {
+                                                                                <MudSelectItem Value="@type">@Loc[$"SearchCompanyType{type}"]</MudSelectItem>
+                                                                            }
+                                                                        </MudSelect>
+                                                                    </MudItem>
+                                                                </MudGrid>
+                                                            </MudCollapse>
+
+                                                            <MudButton Variant="Variant.Filled"
+                                                                       Color="Color.Primary"
+                                                                       Class="wizard-primary-action"
+                                                                       Disabled="_isSearching || !_creditsafeConfigured"
+                                                                       ButtonType="ButtonType.Submit"
+                                                                       Loading="_isSearching">
+                                                                @Loc["SearchButton"]
+                                                            </MudButton>
+                                                        </MudStack>
+                                                    </EditForm>
+
+                                                    @if (!string.IsNullOrWhiteSpace(_errorMessage))
+                                                    {
+                                                        <MudAlert Severity="Severity.Error" Elevation="0" Class="wizard-alert">@_errorMessage</MudAlert>
+                                                    }
+                                                </MudStack>
+                                            </MudPaper>
+                                        </MudStack>
+                                        break;
+
+                                    case 1:
+                                        <MudStack Spacing="4">
+                                            <MudButton Variant="Variant.Text"
+                                                       Color="Color.Primary"
+                                                       StartIcon="@Icons.Material.Filled.ArrowBack"
+                                                       DisableElevation="true"
+                                                       OnClick="@(() => NavigateToStep(0))">
+                                                @Loc["SearchResultsBackToSearch"]
+                                            </MudButton>
+
+                                            <MudPaper Class="pa-5 wizard-section" Elevation="0">
+                                                @if (!_searchExecuted)
+                                                {
+                                                    <MudText Typo="Typo.body1" Class="mud-text-secondary wizard-text-center">@Loc["SelectCompanyPrompt"]</MudText>
+                                                }
+                                                else if (_searchResults.Count == 0)
+                                                {
+                                                    <MudEmptyState Icon="@Icons.Material.Filled.TravelExplore"
+                                                                  Title="@Loc["SearchNoResultsTitle"]"
+                                                                  Content="@Loc["SearchNoResultsMessage"]"
+                                                                  Class="wizard-empty-state" />
+                                                }
+                                                else
+                                                {
+                                                        <MudStack Spacing="3">
+                                                            <MudStack Spacing="1">
+                                                                <MudText Typo="Typo.h6">@Loc["SearchResultsTitle"]</MudText>
+                                                                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["SelectCompanyPrompt"]</MudText>
+                                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["SearchResultsSummary", _searchResults.Count]</MudText>
+                                                        </MudStack>
+                                                        <div class="company-check-result-table">
+                                                        <MudTable T="CreditSafeCompanySummary"
+                                                                  Items="_searchResults"
+                                                                  Hover="true"
+                                                                  Dense="true"
+                                                                  Class="company-check-result-table__table">
+                                                                <HeaderContent>
+                                                                    <MudTh>@Loc["ReportMetaName"]</MudTh>
+                                                                    <MudTh>@Loc["ReportMetaAddress"]</MudTh>
+                                                                    <MudTh>@Loc["SearchResultsLatestAccounts"]</MudTh>
+                                                                    <MudTh>@Loc["ReportMetaStatus"]</MudTh>
+                                                                    <MudTh Class="company-check-result-table__actions-header">@Loc["SearchResultsActionColumn"]</MudTh>
+                                                                </HeaderContent>
+                                                                <RowTemplate>
+                                                                    <MudTd DataLabel="@Loc["ReportMetaName"]">@context.Name</MudTd>
+                                                                    <MudTd DataLabel="@Loc["ReportMetaAddress"]">@context.Address</MudTd>
+                                                                    <MudTd DataLabel="@Loc["SearchResultsLatestAccounts"]">@FormatLatestAccountsDate(context.LatestAccountsDate)</MudTd>
+                                                                    <MudTd DataLabel="@Loc["ReportMetaStatus"]">@context.Status</MudTd>
+                                                                    <MudTd DataLabel="@Loc["SearchResultsActionColumn"]" Class="company-check-result-table__actions-cell">
+                                                                        <MudButton Variant="Variant.Text"
+                                                                                   Color="Color.Primary"
+                                                                                   OnClick="@(() => OnSelectCompanyClickedAsync(context))"
+                                                                                   DisableElevation="true">
+                                                                            @Loc["SearchResultsDetailsButton"]
+                                                                        </MudButton>
+                                                                    </MudTd>
+                                                                </RowTemplate>
+                                                            </MudTable>
+                                                        </div>
+                                                    </MudStack>
+                                                }
+                                            </MudPaper>
+                                        </MudStack>
+                                        break;
+
+                                    case 2:
+                                        <MudStack Spacing="4">
+                                            <MudPaper Class="pa-5 wizard-section" Elevation="0">
+                                                <MudStack Spacing="3" AlignItems="AlignItems.Center">
+                                                    <MudText Typo="Typo.h6">@Loc["ConfirmOrderTitle"]</MudText>
+                                                    <MudText Typo="Typo.body2" Class="mud-text-secondary wizard-text-center">@Loc["ConfirmOrderMessage"]</MudText>
+                                                    <MudButton Variant="Variant.Filled"
+                                                               Color="Color.Primary"
+                                                               Class="wizard-primary-action"
+                                                               OnClick="ConfirmOrderAsync">
+                                                        @Loc["ConfirmOrderButton"]
+                                                    </MudButton>
+                                                </MudStack>
+                                            </MudPaper>
+                                        </MudStack>
+                                        break;
+
+                                    case 3:
+                                        <MudStack Spacing="4">
+                                            <MudPaper Class="pa-5 wizard-section" Elevation="0">
+                                                @if (_reportReady && _report is not null)
+                                                {
+                                                    <MudStack Spacing="3">
+                                                        <MudGrid Class="wizard-report-grid" GutterSize="16px">
+                                                            @if (!string.IsNullOrWhiteSpace(_report?.Name))
+                                                            {
+                                                                <MudItem xs="12">
+                                                                    <MudText Typo="Typo.subtitle1">@Loc["ReportMetaName"]: @_report?.Name</MudText>
+                                                                </MudItem>
+                                                            }
+
+                                                            @if (!string.IsNullOrWhiteSpace(_report?.RegistrationNumber))
+                                                            {
+                                                                <MudItem xs="12" sm="6">
+                                                                    <MudText Typo="Typo.body2">@Loc["ReportMetaNumber"]: @_report?.RegistrationNumber</MudText>
+                                                                </MudItem>
+                                                            }
+
+                                                            @if (!string.IsNullOrWhiteSpace(_report?.CountryCode))
+                                                            {
+                                                                <MudItem xs="12" sm="6">
+                                                                    <MudText Typo="Typo.body2">@Loc["ReportMetaCountry"]: @_report?.CountryCode</MudText>
+                                                                </MudItem>
+                                                            }
+
+                                                            @if (!string.IsNullOrWhiteSpace(_report?.Address))
+                                                            {
+                                                                <MudItem xs="12">
+                                                                    <MudText Typo="Typo.body2">@Loc["ReportMetaAddress"]: @_report?.Address</MudText>
+                                                                </MudItem>
+                                                            }
+
+                                                            @if (!string.IsNullOrWhiteSpace(_report?.Status))
+                                                            {
+                                                                <MudItem xs="12" sm="6">
+                                                                    <MudText Typo="Typo.body2">@Loc["ReportMetaStatus"]: @_report?.Status</MudText>
+                                                                </MudItem>
+                                                            }
+
+                                                            @if (!string.IsNullOrWhiteSpace(_report?.Score))
+                                                            {
+                                                                <MudItem xs="12" sm="6">
+                                                                    <MudText Typo="Typo.body2">Score: @_report?.Score</MudText>
+                                                                </MudItem>
+                                                            }
+
+                                                            @if (!string.IsNullOrWhiteSpace(_report?.VatNumber))
+                                                            {
+                                                                <MudItem xs="12" sm="6">
+                                                                    <MudText Typo="Typo.body2">VAT: @_report?.VatNumber</MudText>
+                                                                </MudItem>
+                                                            }
+
+                                                            @if (_currentRequest?.PaymentConfirmedAt is not null)
+                                                            {
+                                                                <MudItem xs="12" sm="6">
+                                                                    <MudText Typo="Typo.body2">@Loc["HistoryTablePaidAt"]: @_currentRequest?.PaymentConfirmedAt?.ToLocalTime()</MudText>
+                                                                </MudItem>
+                                                            }
+                                                        </MudGrid>
+                                                        <MudStack Direction="Row" Justify="Justify.FlexEnd" Spacing="2">
+                                                            <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="NavigateToHistory">
+                                                                @Loc["HistoryPageTitle"]
+                                                            </MudButton>
+                                                            <MudButton Variant="Variant.Filled"
+                                                                       Color="Color.Primary"
+                                                                       Disabled="string.IsNullOrWhiteSpace(_reportDownloadUrl) || _isGeneratingPdf"
+                                                                       Loading="_isGeneratingPdf"
+                                                                       Href="@_reportDownloadUrl"
+                                                                       Target="_blank">
+                                                                @Loc["ReportDownloadButton"]
+                                                            </MudButton>
+                                                        </MudStack>
+                                                        @if (_isGeneratingPdf)
+                                                        {
+                                                            <MudText Typo="Typo.caption" Class="mud-text-secondary" Align="Align.Right">
+                                                                @Loc["PdfGenerationInProgress"]
+                                                            </MudText>
+                                                        }
+                                                        else if (string.IsNullOrWhiteSpace(_reportDownloadUrl))
+                                                        {
+                                                            <MudAlert Severity="Severity.Warning" Variant="Variant.Outlined" Dense="true">
+                                                                @Loc["ReportDownloadUnavailable"]
+                                                            </MudAlert>
+                                                        }
+                                                        else
+                                                        {
+                                                            <MudText Typo="Typo.caption" Class="mud-text-secondary" Align="Align.Right">
+                                                                @Loc["ReportDownloadReady"]
+                                                            </MudText>
+                                                        }
+                                                    </MudStack>
+                                                }
+                                                else
+                                                {
+                                                    <MudStack Spacing="2" AlignItems="AlignItems.Center">
+                                                        <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+                                                        <MudText Typo="Typo.body2" Class="mud-text-secondary wizard-text-center">@Loc["LoadingReportMessage"]</MudText>
+                                                    </MudStack>
+                                                }
+                                            </MudPaper>
+                                        </MudStack>
+                                        break;
+                                }
+                            </div>
+                        </MudStack>
+                    </div>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+    <div class="company-checks-footer" role="contentinfo">
+        <MudText Typo="Typo.caption" Class="mud-text-secondary text-uppercase" Align="Align.Center">
+            @Loc["ModuleTitle"]
+        </MudText>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+@using System.ComponentModel.DataAnnotations
+@using Oikos.Application.Services.Partner
+@using Oikos.Application.Services.Partner.Models
+@namespace Oikos.Web.Components.Pages.Partners.Partners.Dialogs
+
+<MudDialog>
+    <DialogContent>
+        <EditForm Model="_model" OnValidSubmit="SaveAsync">
+            <DataAnnotationsValidator />
+            <MudStack Spacing="2">
+                <MudTextField @bind-Value="_model.Name" Label="@Loc["PartnerDialog_NameLabel"]" Variant="Variant.Outlined"
+                              For="@(() => _model.Name)" Required="true" Disabled="_isSaving" />
+                <MudTextField @bind-Value="_model.Code" Label="@Loc["PartnerDialog_CodeLabel"]" Variant="Variant.Outlined"
+                              For="@(() => _model.Code)" Required="true" HelperText="@Loc["PartnerDialog_CodeHelper"]"
+                              Disabled="_isSaving" />
+                <MudTextField @bind-Value="_model.ContactEmail" Label="@Loc["PartnerDialog_ContactLabel"]" Variant="Variant.Outlined"
+                              For="@(() => _model.ContactEmail)" Disabled="_isSaving" />
+                <MudTextField @bind-Value="_model.Notes" Label="@Loc["PartnerDialog_NotesLabel"]" Variant="Variant.Outlined"
+                              For="@(() => _model.Notes)" Disabled="_isSaving" Lines="3" />
+            </MudStack>
+            <DialogActions>
+                <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="Cancel" ButtonType="ButtonType.Button" Disabled="_isSaving">
+                    @Loc["PartnerDialog_Cancel"]
+                </MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" Disabled="_isSaving">
+                    @Loc["PartnerDialog_Save"]
+                </MudButton>
+            </DialogActions>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [Parameter]
+    public PartnerDetail? Partner { get; set; }
+
+    [CascadingParameter]
+    public IMudDialogInstance? MudDialog { get; set; }
+
+    [Inject]
+    private IPartnerService PartnerService { get; set; } = null!;
+
+    private PartnerEditModel _model = new();
+    private bool _isSaving;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (Partner != null)
+        {
+            _model = new PartnerEditModel
+            {
+                Name = Partner.Name,
+                Code = Partner.Code,
+                ContactEmail = Partner.ContactEmail,
+                Notes = Partner.Notes
+            };
+        }
+    }
+
+    private async Task SaveAsync()
+    {
+        _isSaving = true;
+        try
+        {
+            var request = new PartnerRequest
+            {
+                Name = _model.Name,
+                Code = _model.Code,
+                ContactEmail = _model.ContactEmail,
+                Notes = _model.Notes
+            };
+
+            PartnerDetail result;
+            if (Partner == null)
+            {
+                result = await PartnerService.CreateAsync(request);
+                _snackbarService.Add(Loc["PartnerDialog_CreateSuccess"].Value, Severity.Success);
+            }
+            else
+            {
+                result = await PartnerService.UpdateAsync(Partner.Id, request);
+                _snackbarService.Add(Loc["PartnerDialog_UpdateSuccess"].Value, Severity.Success);
+            }
+
+            MudDialog?.Close(DialogResult.Ok(result));
+        }
+        catch (Exception ex)
+        {
+            _snackbarService.Add(ex.Message, Severity.Error);
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    private void Cancel()
+    {
+        MudDialog?.Cancel();
+    }
+
+    private class PartnerEditModel
+    {
+        [Required]
+        [MaxLength(200)]
+        public string Name { get; set; } = string.Empty;
+
+        [Required]
+        [MaxLength(50)]
+        public string Code { get; set; } = string.Empty;
+
+        [EmailAddress]
+        [MaxLength(200)]
+        public string? ContactEmail { get; set; }
+
+        [MaxLength(500)]
+        public string? Notes { get; set; }
+    }
+}

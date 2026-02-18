@@ -1,0 +1,166 @@
+@page "/admin/users"
+@using Oikos.Web.Components.Layout.PageLayout
+@using Oikos.Web.Components.Shared.Dialogs
+@using Oikos.Common.Resources
+
+
+
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["UserPage_Title"]">
+            <ChildContent>
+                <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Tune" OnClick="ToggleFilters">
+                    @Loc["UserPage_Filters"]
+                </MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="AddUserClick">
+                    @Loc["UserPage_CreateNewTitle"]
+                </MudButton>
+            </ChildContent>
+        </StandardPageHeader>
+        <MudCollapse Expanded="_filtersOpen">
+            <MudPaper Class="pa-3 mt-2" Elevation="0" Outlined="true">
+                <MudStack Row="true" Spacing="2" Class="flex-wrap">
+                    <div style="width:160px">
+                        <MudTextField T="string" @bind-Value="_searchObject.SearchText" Margin="Margin.Dense" Label="@Loc["UserPage_SearchName"]"
+                                      Variant="Variant.Outlined" Clearable Class="search-com"></MudTextField>
+                    </div>
+                    <div style="width:160px">
+                        <MudTextField T="string" @bind-Value="_searchObject.SearchRealName" Margin="Margin.Dense" Label="@Loc["UserPage_SearchRealName"]"
+                                      Variant="Variant.Outlined" Clearable Class="search-com"></MudTextField>
+                    </div>
+                    @* Role filter removed for Admin-only view *@
+                    <div style="width:180px">
+                        <MudSelect T="bool?" @bind-Value="_searchObject.HasActiveSubscription" Margin="Margin.Dense" Label="@Loc["UserPage_FilterActivePlan"]"
+                                   Variant="Variant.Outlined" Clearable Class="search-com">
+                            <MudSelectItem Value="@(null as bool?)">@Loc["UserPage_FilterActivePlanAll"]</MudSelectItem>
+                            <MudSelectItem Value="@(true as bool?)">@Loc["UserPage_FilterActivePlanYes"]</MudSelectItem>
+                            <MudSelectItem Value="@(false as bool?)">@Loc["UserPage_FilterActivePlanNo"]</MudSelectItem>
+                        </MudSelect>
+                    </div>
+                    <div style="width:180px">
+                        <MudSelect T="int?" @bind-Value="_searchObject.PartnerId" Margin="Margin.Dense" Label="@Loc["UserPage_FilterPartner"]"
+                                   Variant="Variant.Outlined" Clearable Class="search-com">
+                            <MudSelectItem Value="@(null as int?)">@Loc["UserPage_FilterPartnerAll"]</MudSelectItem>
+                            @foreach (var partner in _partnerList)
+                            {
+                                <MudSelectItem Value="@((int?)partner.Id)">@partner.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" OnClick="ApplyFiltersAsync">
+                            @Loc["UserPage_Search"]
+                        </MudButton>
+                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.SearchOff" OnClick="SearchReset">
+                            @Loc["UserPage_Reset"]
+                        </MudButton>
+                    </MudStack>
+                </MudStack>
+            </MudPaper>
+        </MudCollapse>
+    </HeaderContent>
+    <ChildContent>
+        @if (_isLoading)
+        {
+            <MudStack Spacing="2">
+                <MudSkeleton Variant="Variant.Text" Width="40%" Height="24px" />
+                <MudSkeleton Variant="Variant.Rectangular" Height="220px" />
+            </MudStack>
+        }
+        else
+        {
+            <MudTable Items="_users" Hover="true" Dense="true">
+                <HeaderContent>
+                    <MudTh>#</MudTh>
+                    <MudTh>@Loc["UserPage_TableH3"]</MudTh>
+                    <MudTh>@Loc["UserPage_TableH7"]</MudTh>
+
+                    <MudTh>@Loc["UserPage_TableCompany"]</MudTh>
+                    <MudTh>@Loc["UserPage_TableH4"]</MudTh>
+                    <MudTh class="text-right">@Loc["UserPage_TableH5"]</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="#">@context.Number</MudTd>
+                    <MudTd DataLabel='@Loc["UserPage_TableH3"]'>
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                            <MudLink Href="@($"/admin/users/{context.Id}")" Underline="Underline.None">
+                                @if (string.IsNullOrEmpty(context.Avatar))
+                                {
+                                    <MudAvatar Color="Color.Primary">
+                                        @((string.IsNullOrWhiteSpace(context.FirstName) ? context.RealName : context.FirstName)?.FirstOrDefault())
+                                    </MudAvatar>
+                                }
+                                else
+                                {
+                                    <MudAvatar>
+                                        <MudImage Src="@("Avatars/" + context.Avatar)">
+                                        </MudImage>
+                                    </MudAvatar>
+                                }
+                            </MudLink>
+                            <MudStack Spacing="0">
+                                <MudLink Href="@($"/admin/users/{context.Id}")" Underline="Underline.None">
+                                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                                        <MudText Typo="Typo.subtitle2">@context.RealName</MudText>
+                                        @if (context.HasActiveSubscription)
+                                        {
+                                            <MudTooltip Text="@Loc["UserPage_ActivePlanIndicator"]" Color="Color.Success">
+                                                <MudIcon Icon="@Icons.Material.Filled.Verified" Color="Color.Success" Size="Size.Small" />
+                                            </MudTooltip>
+                                        }
+                                    </MudStack>
+                                </MudLink>
+                                @if (!string.IsNullOrWhiteSpace(context.Email))
+                                {
+                                    <MudLink Href="@($"/admin/users/{context.Id}")" Underline="Underline.None">
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.Email</MudText>
+                                    </MudLink>
+                                }
+                            </MudStack>
+                        </MudStack>
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["UserPage_TableH7"]'>
+                        <MudStack Row="true" Spacing="1" Class="flex-wrap">
+                            @foreach (var role in context.Roles)
+                            {
+                                <MudChip T="string" Size="MudBlazor.Size.Small" Color="Color.Primary" Variant="Variant.Outlined">@role</MudChip>
+                            }
+                        </MudStack>
+                    </MudTd>
+
+                    <MudTd DataLabel='@Loc["UserPage_TableCompany"]'>
+                        <MudText Typo="Typo.body2">@context.Company</MudText>
+                        @if (!string.IsNullOrWhiteSpace(context.CustomerNumber))
+                        {
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.CustomerNumber</MudText>
+                        }
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["UserPage_TableH4"]'>
+                        <MudSwitch Value="@context.IsEnabled" T="bool"
+                                   ValueChanged="@(async v => await ChangeUserActive(context.Id, v))" Color="Color.Primary">
+                        </MudSwitch>
+                    </MudTd>
+                    <MudTd Class="text-right" DataLabel='@Loc["UserPage_TableH5"]'>
+                        <MudTooltip Text='@Loc["UserPage_Details"]'>
+                            <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Color="Color.Primary"
+                                           OnClick="@(() => _navManager.NavigateTo($"/admin/users/{context.Id}"))" />
+                        </MudTooltip>
+                        <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Primary"
+                                       OnClick="() => EditUserClick(context.Id)" />
+
+                        <MudIconButton Icon="@Icons.Material.Outlined.Key" Color="Color.Secondary"
+                                       OnClick="() => ChangePasswordClick(context.Id)" />
+
+                        <MudIconButton Icon="@Icons.Material.Outlined.Delete" Color="Color.Error"
+                                       OnClick="() => DeleteUserClick(context.Id)" />
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+    </ChildContent>
+    <FooterContent>
+        <PagePagination PageInfo="_searchObject" PageChangedClick="PageChangedClick"></PagePagination>
+    </FooterContent>
+</PageLayout>

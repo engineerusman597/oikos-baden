@@ -1,0 +1,140 @@
+@page "/admin/invoices"
+@using Oikos.Web.Components.Layout.PageLayout
+@using Oikos.Application.Services.Invoice.Models
+@using Oikos.Domain.Enums
+
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@rendermode InteractiveServer
+@attribute [StreamRendering]
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["AdminTitle"]">
+            <ChildContent>
+                <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Tune" OnClick="ToggleFilters">
+                    @Loc["AdminFilters"]
+                </MudButton>
+                @if (_canRefresh)
+                {
+                    <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Refresh" OnClick="RefreshAsync">
+                        @Loc["AdminRefresh"]
+                    </MudButton>
+                }
+            </ChildContent>
+        </StandardPageHeader>
+        <MudCollapse Expanded="_filtersOpen">
+            <MudPaper Class="pa-3 mt-2 invoice-filters" Elevation="0" Outlined="true">
+                <MudStack Row="true" Spacing="2" Class="invoice-filter-stack">
+                    <div style="width:200px">
+                        <MudTextField T="string" @bind-Value="_searchObject.SearchText" Margin="Margin.Dense"
+                                      Variant="Variant.Outlined" Label="@Loc["AdminTableHeaderUser"]" Clearable Class="search-com" />
+                    </div>
+                    <div style="width:200px">
+                        <MudSelect T="int?" @bind-Value="_searchObject.StageId" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                   Label="@Loc["AdminFilterLabel"]" Class="search-com">
+                            <MudSelectItem Value="@((int?)null)">@Loc["AdminFilterAll"]</MudSelectItem>
+                            @foreach (var stage in _stageOptions)
+                            {
+                                <MudSelectItem T="int?" Value="@((int?)stage.Id)">@stage.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div style="width:200px">
+                        <MudSelect T="InvoicePrimaryStatus?" @bind-Value="_searchObject.PrimaryStatus" Margin="Margin.Dense" Variant="Variant.Outlined"
+                                   Label="@Loc["InvoicePrimaryStatusLabel"]" Class="search-com">
+                            <MudSelectItem T="InvoicePrimaryStatus?" Value="@((InvoicePrimaryStatus?)null)">@Loc["AdminFilterAll"]</MudSelectItem>
+                            @foreach (var status in Enum.GetValues<InvoicePrimaryStatus>())
+                            {
+                                <MudSelectItem T="InvoicePrimaryStatus?" Value="@((InvoicePrimaryStatus?)status)">@Loc[$"InvoicePrimaryStatus_{status}"]</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <MudStack Row="true" Spacing="1" AlignItems="AlignItems.Center" Class="invoice-filter-actions">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Search" OnClick="ApplyFiltersAsync">
+                            @Loc["AdminSearch"]
+                        </MudButton>
+                        <MudButton Variant="Variant.Outlined" Color="Color.Primary" StartIcon="@Icons.Material.Filled.SearchOff" OnClick="SearchReset">
+                            @Loc["AdminReset"]
+                        </MudButton>
+                    </MudStack>
+                </MudStack>
+            </MudPaper>
+        </MudCollapse>
+    </HeaderContent>
+    <ChildContent>
+        <MudPaper Class="rounded-lg">
+            <MudTable Items="_invoices" Hover="true" Dense="true">
+                <HeaderContent>
+                    <MudTh>#</MudTh>
+                    <MudTh>@Loc["TableHeaderTicketNumber"]</MudTh>
+                    <MudTh>@Loc["AdminTableHeaderUser"]</MudTh>
+                    <MudTh>@Loc["TableHeaderCompany"]</MudTh>
+                    <MudTh>@Loc["TableHeaderDate"]</MudTh>
+                    <MudTh>@Loc["TableHeaderAmount"]</MudTh>
+                    <MudTh>@Loc["InvoicePrimaryStatusLabel"]</MudTh>
+                    <MudTh>@Loc["TableHeaderStatus"]</MudTh>
+                    <MudTh class="text-right">@Loc["AdminTableHeaderActions"]</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel="#">@context.Number</MudTd>
+                    <MudTd DataLabel='@Loc["TableHeaderTicketNumber"]'>@(string.IsNullOrWhiteSpace(context.TicketNumber) ? Loc["TableValueUnknown"] : context.TicketNumber)</MudTd>
+                    <MudTd DataLabel='@Loc["AdminTableHeaderUser"]'>
+                        <MudStack Spacing="0">
+                            @if (_canViewDetails)
+                            {
+                                <MudLink Href="@($"/admin/invoices/{context.Id}")" Underline="Underline.None">
+                                    <MudText Typo="Typo.subtitle2">@context.UserName</MudText>
+                                </MudLink>
+                                @if (!string.IsNullOrWhiteSpace(context.UserEmail))
+                                {
+                                    <MudLink Href="@($"/admin/invoices/{context.Id}")" Underline="Underline.None">
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.UserEmail</MudText>
+                                    </MudLink>
+                                }
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.subtitle2">@context.UserName</MudText>
+                                @if (!string.IsNullOrWhiteSpace(context.UserEmail))
+                                {
+                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.UserEmail</MudText>
+                                }
+                            }
+                        </MudStack>
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["TableHeaderCompany"]'>@context.Company</MudTd>
+                    <MudTd DataLabel='@Loc["TableHeaderDate"]'>@FormatCreatedAt(context)</MudTd>
+                    <MudTd DataLabel='@Loc["TableHeaderAmount"]'>@FormatAmount(context)</MudTd>
+                    <MudTd DataLabel='@Loc["InvoicePrimaryStatusLabel"]'>
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Text" Color="@GetPrimaryStatusColor(context.PrimaryStatus)">
+                            @Loc[$"InvoicePrimaryStatus_{context.PrimaryStatus}"]
+                        </MudChip>
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["TableHeaderStatus"]'>
+                        <MudText Typo="Typo.body2">@context.StageName</MudText>
+                    </MudTd>
+                    <MudTd Class="text-right" DataLabel='@Loc["AdminTableHeaderActions"]'>
+                        @if (_canViewDetails)
+                        {
+                            <MudTooltip Text="@Loc["AdminViewDetails"]" Color="Color.Primary">
+                                <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Color="Color.Primary"
+                                               OnClick="@(() => NavigateToDetails(context.Id))" />
+                            </MudTooltip>
+                        }
+                        <MudTooltip Text="@Loc["InvoiceDeleteAction"]" Color="Color.Error">
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                           Color="Color.Error"
+                                           OnClick="@(() => DeleteInvoiceAsync(context))" />
+                        </MudTooltip>
+                    </MudTd>
+                </RowTemplate>
+                <NoRecordsContent>
+                    <MudText Typo="Typo.body2" Class="pa-4 mud-text-secondary">@Loc["AdminNoInvoices"]</MudText>
+                </NoRecordsContent>
+            </MudTable>
+        </MudPaper>
+    </ChildContent>
+    <FooterContent>
+        <PagePagination PageInfo="_searchObject" PageChangedClick="PageChangedClick"></PagePagination>
+    </FooterContent>
+</PageLayout>

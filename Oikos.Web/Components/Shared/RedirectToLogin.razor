@@ -1,0 +1,14 @@
+@using Microsoft.AspNetCore.Components
+@inject NavigationManager NavigationManager
+
+@code {
+    protected override void OnInitialized()
+    {
+        var returnUrl = NavigationManager.Uri;
+        // avoid redirect loop
+        if (!returnUrl.Contains("login", StringComparison.OrdinalIgnoreCase))
+        {
+             NavigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(returnUrl)}");
+        }
+    }
+}

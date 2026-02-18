@@ -1,0 +1,424 @@
+@page "/cases/new"
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@rendermode InteractiveServer
+
+@using System.ComponentModel.DataAnnotations
+@using System.Globalization
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.Extensions.Localization
+@using Oikos.Common.Resources
+@using Domain.Entities.Invoice
+@using Oikos.Web.Components.Invoice
+@using Oikos.Web.Components.Pages.User.NewInvoiceWizard.Models
+@using DebtorType = Oikos.Web.Components.Pages.User.NewInvoiceWizard.Models.DebtorType
+@using ClaimStartOption = Oikos.Web.Components.Pages.User.NewInvoiceWizard.Models.ClaimStartOption
+
+<div class="wizard-background">
+    <MudContainer MaxWidth="MaxWidth.False" Class="wizard-container">
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="12" lg="12">
+                <MudPaper Class="new-invoice-wizard" Elevation="0">
+                    <div class="wizard-content">
+                        <MudStack Spacing="4" Class="wizard-shell">
+                            <div class="wizard-progress-card">
+                                <div class="wizard-progress">
+                                    @for (var index = 0; index < _steps.Length; index++)
+                                    {
+                                        var step = _steps[index];
+                                        var stepIndex = index;
+                                        var stepNumber = stepIndex + 1;
+                                        <div class="@($"wizard-progress-item {(stepIndex < _currentStep ? "completed" : stepIndex == _currentStep ? "active" : string.Empty)}")">
+                                            <MudButton Class="wizard-progress-button"
+                                                       Variant="Variant.Text"
+                                                       DisableElevation="true"
+                                                       DisableRipple="true"
+                                                       ButtonType="ButtonType.Button"
+                                                       Disabled="@(stepIndex > _currentStep)"
+                                                       OnClick="@(() => NavigateToStep(stepIndex))">
+                                                <div class="wizard-progress-circle">
+                                                    <MudIcon Icon="@((stepIndex < _currentStep) ? Icons.Material.Filled.CheckCircle : step.Icon)" />
+                                                    <span class="wizard-progress-index">@stepNumber</span>
+                                                </div>
+                                                <div class="wizard-progress-text">
+                                                    <MudText Typo="Typo.subtitle2">@Loc[step.TitleKey]</MudText>
+                                                </div>
+                                            </MudButton>
+                                        </div>
+                                        @if (index < _steps.Length - 1)
+                                        {
+                                            <div class="wizard-progress-connector"></div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="wizard-step-body">
+                        @switch (_currentStep)
+                        {
+                            case 0:
+                                <MudStack Spacing="4">
+                                    <MudPaper Class="pa-6 wizard-hero" Elevation="0">
+                                        <MudStack Spacing="1" AlignItems="AlignItems.Center">
+                                            <MudText Typo="Typo.h4" Class="wizard-text-center">@Loc["WizardUploadIntroTitle"]</MudText>
+                                            <MudText Typo="Typo.body1" Class="mud-text-secondary wizard-text-center">@Loc["WizardUploadIntroSubtitle"]</MudText>
+                                        </MudStack>
+                                    </MudPaper>
+
+                                    <div class="wizard-drop-wrapper">
+                                        <MudFileUpload @ref="_fileUpload"
+                                                       Class="wizard-drop-upload"
+                                                       T="IBrowserFile"
+                                                       InputClass="wizard-drop-input"
+                                                       Disabled="@_isUploading"
+                                                       Accept="application/pdf,.pdf"
+                                                       MaximumFileCount="1"
+                                                       OnFilesChanged="HandleFileUploadChanged">
+                                            <ActivatorContent>
+                                                <div class="wizard-drop-zone @(_isUploading ? "is-disabled" : string.Empty)">
+                                                    <div class="wizard-drop-content">
+                                                        <div class="wizard-drop-icon">
+                                                            <MudIcon Icon="@Icons.Material.Outlined.PictureAsPdf" />
+                                                        </div>
+                                                        <MudText Typo="Typo.subtitle1" Class="wizard-text-center">@Loc["WizardUploadDropTitle"]</MudText>
+                                                        <MudText Typo="Typo.body2" Class="mud-text-secondary wizard-text-center">@Loc["WizardUploadDropSubtitle"]</MudText>
+                                                        <MudText Typo="Typo.caption" Class="mud-text-secondary wizard-text-center">@Loc["UploadLimit"]</MudText>
+                                                    </div>
+                                                </div>
+                                            </ActivatorContent>
+                                        </MudFileUpload>
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary wizard-text-center mt-2">@Loc["WizardUploadDropHelper"]</MudText>
+                                    </div>
+
+                                    @if (_isUploading || _uploadCompleted)
+                                    {
+                                        <MudPaper Class="pa-5 wizard-upload-status" Elevation="0">
+                                            <MudStack Spacing="2" AlignItems="AlignItems.Center">
+                                                <MudIcon Icon="@(_uploadCompleted ? Icons.Material.Filled.CheckCircle : Icons.Material.Filled.Autorenew)" Color="@(_uploadCompleted ? Color.Success : Color.Primary)" Size="Size.Large" Class="@GetUploadStatusIconClass()" />
+                                                <MudText Typo="Typo.h6" Class="wizard-text-center">@Loc["WizardUploadProcessingTitle"]</MudText>
+                                                <MudText Typo="Typo.body2" Class="mud-text-secondary wizard-text-center">@Loc[_uploadCompleted ? "WizardUploadProcessingComplete" : "WizardUploadProcessingSubtitle"]</MudText>
+                                                <MudProgressLinear Class="wizard-upload-progress" Color="@(_uploadCompleted ? Color.Success : Color.Primary)" Rounded="true" Value="@(_uploadCompleted ? 100 : Math.Max(5, _uploadProgress * 100))" />
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary wizard-text-center">
+                                                    @(_uploadCompleted
+                                                        ? Loc["WizardUploadProcessingSuccess"]
+                                                        : string.Format(Loc["WizardUploadProcessingProgress"], Math.Max(1, (int)Math.Round(_uploadProgress * 100))))
+                                                </MudText>
+                                            </MudStack>
+                                        </MudPaper>
+                                    }
+
+                                    @if (_invoiceDrafts.Any())
+                                    {
+                                        <MudPaper Class="pa-4 wizard-uploaded-list">
+                                            <MudStack Spacing="2">
+                                                <MudStack Direction="Row" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                                    <MudText Typo="Typo.subtitle1">@Loc["WizardUploadedInvoicesTitle"]</MudText>
+                                                    <MudChip T="int" Color="Color.Primary" Variant="Variant.Outlined" Dense="true">@_invoiceDrafts.Count</MudChip>
+                                                </MudStack>
+                                                <MudStack Spacing="1">
+                                                    @foreach (var draft in _invoiceDrafts)
+                                                    {
+                                                        <MudPaper Class="pa-3 wizard-uploaded-item">
+                                                            <MudStack Direction="Row" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Spacing="2">
+                                                                <MudStack Spacing="1" Class="wizard-uploaded-item-meta">
+                                                                    <MudText Typo="Typo.subtitle2">@draft.FileName</MudText>
+                                                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@FormatFileSize(draft.Size)</MudText>
+                                                                </MudStack>
+                                                                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => RemoveInvoice(draft.Id))" />
+                                                            </MudStack>
+                                                        </MudPaper>
+                                                    }
+                                                </MudStack>
+                                            </MudStack>
+                                        </MudPaper>
+                                    }
+                                </MudStack>
+                                break;
+                            case 1:
+                                <MudGrid GutterSize="24px">
+                                    <MudItem xs="12" lg="4">
+                                        @if (_invoiceDrafts.FirstOrDefault() is { } previewDraft)
+                                        {
+                                            <MudPaper Class="pa-4 wizard-section wizard-preview-card">
+                                                <MudStack Spacing="2">
+                                                    <MudText Typo="Typo.subtitle1">@Loc["WizardPreviewTitle"]</MudText>
+                                                    <div class="wizard-preview-wrapper">
+                                                        @if (!string.IsNullOrWhiteSpace(previewDraft.PreviewUrl))
+                                                        {
+                                                            <object data="@previewDraft.PreviewUrl"
+                                                                    type="application/pdf"
+                                                                    class="wizard-preview-object">
+                                                                <MudStack Spacing="1" AlignItems="AlignItems.Center" Class="wizard-preview-fallback">
+                                                                    <MudIcon Icon="@Icons.Material.Outlined.PictureAsPdf" Size="Size.Large" />
+                                                                    <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["WizardPreviewUnavailable"]</MudText>
+                                                                    <MudLink Href="@previewDraft.PreviewUrl" Target="_blank" Rel="noopener noreferrer">@Loc["WizardPreviewOpenLink"]</MudLink>
+                                                                </MudStack>
+                                                            </object>
+                                                        }
+                                                        else
+                                                        {
+                                                            <MudStack Spacing="1" AlignItems="AlignItems.Center" Class="wizard-preview-fallback">
+                                                                <MudIcon Icon="@Icons.Material.Outlined.PictureAsPdf" Size="Size.Large" />
+                                                                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["WizardPreviewUnavailable"]</MudText>
+                                                            </MudStack>
+                                                        }
+                                                    </div>
+                                                </MudStack>
+                                            </MudPaper>
+                                        }
+                                    </MudItem>
+                                    <MudItem xs="12" lg="8">
+                                        <MudGrid GutterSize="24px">
+                                            <MudItem xs="12" md="7">
+                                                <MudPaper Class="pa-4 wizard-section">
+                                                    <MudForm @ref="_debtorForm">
+                                                        <MudStack Spacing="3">
+                                                            <MudStack Spacing="1">
+                                                                <MudText Typo="Typo.h6">@Loc["WizardDebtorSectionTitle"]</MudText>
+                                                                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["WizardDebtorSectionSubtitle"]</MudText>
+                                                            </MudStack>
+                                                            <MudRadioGroup T="DebtorType" SelectedOption="_debtor.DebtorType" SelectedOptionChanged="OnDebtorTypeChanged">
+                                                                <MudRadio T="DebtorType" Option="DebtorType.Company" Label="@Loc["WizardDebtorTypeCompany"]" />
+                                                                <MudRadio T="DebtorType" Option="DebtorType.Individual" Label="@Loc["WizardDebtorTypeIndividual"]" />
+                                                            </MudRadioGroup>
+
+                                                            <MudGrid GutterSize="16px">
+                                                                <MudItem xs="12">
+                                                                    <MudTextField @bind-Value="_debtor.CompanyName" Label="@Loc["WizardDebtorCompanyName"]" Required="true" />
+                                                                </MudItem>
+                                                                <MudItem xs="12">
+                                                                    <MudTextField @bind-Value="_debtor.Street" Label="@Loc["WizardDebtorStreet"]" Required="true" />
+                                                                </MudItem>
+                                                                <MudItem xs="12" sm="6">
+                                                                    <MudTextField @bind-Value="_debtor.PostalCode" Label="@Loc["WizardDebtorPostalCode"]" Required="true" />
+                                                                </MudItem>
+                                                                <MudItem xs="12" sm="6">
+                                                                    <MudTextField @bind-Value="_debtor.City" Label="@Loc["WizardDebtorCity"]" Required="true" />
+                                                                </MudItem>
+                                                                <MudItem xs="12">
+                                                                    <MudTextField @bind-Value="_debtor.ContactName" Label="@Loc["WizardDebtorContactName"]" />
+                                                                </MudItem>
+                                                                <MudItem xs="12">
+                                                                    <MudTextField @bind-Value="_debtor.ContactEmail"
+                                                                                  Label="@Loc["WizardDebtorContactEmail"]"
+                                                                                  Validation="ValidateContactEmail"
+                                                                                  Immediate="true"
+                                                                                  Required="@(_debtor.DebtorType == DebtorType.Company)" />
+                                                                </MudItem>
+                                                                <MudItem xs="12">
+                                                                    <MudTextField @bind-Value="_debtor.ContactPhone" Label="@Loc["WizardDebtorContactPhone"]" />
+                                                                </MudItem>
+                                                            </MudGrid>
+                                                        </MudStack>
+                                                    </MudForm>
+                                                </MudPaper>
+                                            </MudItem>
+                                            <MudItem xs="12" md="5">
+                                                <MudPaper Class="pa-4 wizard-section">
+                                                    <MudStack Spacing="2">
+                                                        <MudText Typo="Typo.subtitle1">@Loc["WizardInvoiceDetailsTitle"]</MudText>
+                                                        <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["WizardInvoiceDetailsSubtitle"]</MudText>
+
+                                                        @foreach (var draft in _invoiceDrafts)
+                                                        {
+                                                            <MudPaper Class="pa-3 wizard-invoice-detail" Elevation="1">
+                                                                <MudStack Spacing="2">
+                                                                    <MudStack Direction="Row" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                                                        <MudText Typo="Typo.subtitle2">@draft.FileName</MudText>
+                                                                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => RemoveInvoice(draft.Id))" />
+                                                                    </MudStack>
+                                                                    <MudTextField @bind-Value="draft.Details.InvoiceNumber" Label="@Loc["WizardInvoiceNumber"]" Required="true" />
+                                                                    <MudGrid GutterSize="16px">
+                                                                        <MudItem xs="12">
+                                                                            <MudTextField @bind-Value="draft.Details.Amount" Label="@Loc["WizardInvoiceAmount"]" Required="true" Adornment="Adornment.End" AdornmentText="@draft.Details.Currency" Immediate="true" />
+                                                                        </MudItem>
+                                                                        <MudItem xs="12">
+                                                                            <MudTextField @bind-Value="draft.Details.VatAmount" Label="@Loc["WizardInvoiceVat"]" Adornment="Adornment.End" AdornmentText="@draft.Details.Currency" Immediate="true" />
+                                                                        </MudItem>
+                                                                        <MudItem xs="12" sm="6">
+                                                                            <MudSelect @bind-Value="draft.Details.Currency" Label="@Loc["WizardInvoiceCurrency"]" Required="true">
+                                                                                @foreach (var currency in _currencies)
+                                                                                {
+                                                                                    <MudSelectItem Value="@currency">@currency</MudSelectItem>
+                                                                                }
+                                                                            </MudSelect>
+                                                                        </MudItem>
+                                                                        <MudItem xs="12">
+                                                                            <MudDatePicker @bind-Date="draft.Details.InvoiceDate" Label="@Loc["WizardInvoiceDate"]" Required="true" DateFormat="dd.MM.yyyy" MaxDate="@DateTime.Today" />
+                                                                        </MudItem>
+                                                                    </MudGrid>
+                                                                    <MudTextField @bind-Value="draft.Details.Description" Label="@Loc["WizardInvoiceDescription"]" Lines="3" />
+                                                                </MudStack>
+                                                            </MudPaper>
+                                                        }
+
+                                                        <MudDivider />
+                                                        <MudStack Direction="Row" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center">
+                                                            <MudText Typo="Typo.subtitle2">@Loc["WizardInvoiceSummaryLabel"]</MudText>
+                                                            <MudText Typo="Typo.subtitle2">@FormatTotalAmount()</MudText>
+                                                        </MudStack>
+                                                    </MudStack>
+                                                </MudPaper>
+                                            </MudItem>
+                                        </MudGrid>
+                                    </MudItem>
+                                </MudGrid>
+                                break;
+                            case 2:
+                                <MudForm @ref="_finalForm">
+                                    <MudStack Spacing="3">
+                                        <MudPaper Class="pa-4 wizard-section">
+                                            <MudStack Spacing="2">
+                                                <MudText Typo="Typo.h6">@Loc["WizardReviewTitle"]</MudText>
+                                                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["WizardReviewSubtitle"]</MudText>
+
+                                                <MudGrid GutterSize="16px">
+                                                    <MudItem xs="12" md="4">
+                                                        <MudStack Spacing="1">
+                                                            <MudText Typo="Typo.subtitle2">@Loc["WizardSummaryYou"]</MudText>
+                                                            <MudText Typo="Typo.body2">@_currentUserName</MudText>
+                                                        </MudStack>
+                                                    </MudItem>
+                                                    <MudItem xs="12" md="4">
+                                                        <MudStack Spacing="1">
+                                                            <MudText Typo="Typo.subtitle2">@Loc["WizardSummaryDebtor"]</MudText>
+                                                            <MudText Typo="Typo.body2">@_debtor.CompanyName</MudText>
+                                                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@_debtor.Street, @_debtor.PostalCode @_debtor.City</MudText>
+                                                        </MudStack>
+                                                    </MudItem>
+                                                    <MudItem xs="12" md="4">
+                                                        <MudStack Spacing="1">
+                                                            <MudText Typo="Typo.subtitle2">@Loc["WizardSummaryClaims"]</MudText>
+                                                            <MudText Typo="Typo.body2">@FormatTotalAmount()</MudText>
+                                                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@string.Format(Loc["WizardSummaryInvoices"], _invoiceDrafts.Count)</MudText>
+                                                        </MudStack>
+                                                    </MudItem>
+                                                </MudGrid>
+                                            </MudStack>
+                                        </MudPaper>
+
+                                        <MudPaper Class="pa-4 wizard-section">
+                                            <MudStack Spacing="2">
+                                                <MudText Typo="Typo.subtitle1">@Loc["WizardStartOptionTitle"]</MudText>
+                                                <MudRadioGroup T="ClaimStartOption"
+                                                               SelectedOption="@_preferences.StartOption"
+                                                               SelectedOptionChanged="@OnStartOptionChanged">
+                                                    <MudRadio T="ClaimStartOption" Option="ClaimStartOption.Immediate" Label="@Loc["WizardStartOptionImmediate"]" />
+                                                    <MudRadio T="ClaimStartOption" Option="ClaimStartOption.AfterSevenDays" Label="@Loc["WizardStartOptionAfterSevenDays"]" />
+                                                    <MudRadio T="ClaimStartOption" Option="ClaimStartOption.AfterReminder">
+                                                        <LabelContent>
+                                                            <div class="start-option-date-row">
+                                                                <MudText>@Loc["WizardStartOptionAfterReminder"]</MudText>
+                                                                <MudDatePicker @bind-Date="_preferences.StartAfterReminderAt"
+                                                                               DateFormat="dd.MM.yyyy"
+                                                                               Dense="true"
+                                                                               MinDate="@DateTime.Today"
+                                                                               Class="start-option-date-picker" />
+                                                            </div>
+                                                        </LabelContent>
+                                                    </MudRadio>
+                                                </MudRadioGroup>
+                                            </MudStack>
+                                        </MudPaper>
+
+                                        <MudPaper Class="pa-4 wizard-section">
+                                            <MudStack Spacing="2">
+                                                <MudText Typo="Typo.subtitle1">@Loc["WizardLegalTitle"]</MudText>
+                                                <MudCheckBox @bind-Value="_preferences.AgreeTerms" Required="true">
+                                                    <LabelContent>
+                                                        <MudText Typo="Typo.body2">
+                                                            @Loc["WizardLegalAgreeTermsPrefix"]<MudLink Href="@TermsUrl" Target="_blank" Rel="noopener noreferrer">@Loc["WizardLegalTermsLinkText"]</MudLink>@Loc["WizardLegalAgreeTermsSuffix"]
+                                                        </MudText>
+                                                    </LabelContent>
+                                                </MudCheckBox>
+                                                <MudCheckBox @bind-Value="_preferences.AgreePrivacy" Required="true">
+                                                    <LabelContent>
+                                                        <MudText Typo="Typo.body2">
+                                                            @Loc["WizardLegalAgreePrivacyPrefix"]<MudLink Href="@PrivacyUrl" Target="_blank" Rel="noopener noreferrer">@Loc["WizardLegalPrivacyLinkText"]</MudLink>@Loc["WizardLegalAgreePrivacySuffix"]
+                                                        </MudText>
+                                                    </LabelContent>
+                                                </MudCheckBox>
+                                                <MudTextField @bind-Value="_preferences.AdditionalNotes" Label="@Loc["WizardNotesLabel"]" Lines="4" />
+                                            </MudStack>
+                                        </MudPaper>
+                                    </MudStack>
+                                </MudForm>
+                                break;
+                            case 3:
+                                <MudForm @ref="_powerOfAttorneyForm">
+                                    <MudStack Spacing="3">
+                                        <MudPaper Class="pa-4 wizard-section">
+                                            <MudStack Spacing="2">
+                                                <MudText Typo="Typo.h6">@Loc["WizardPowerOfAttorneyTitle"]</MudText>
+                                                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["WizardPowerOfAttorneySubtitle"]</MudText>
+
+                                                <MudPaper Class="pa-4 wizard-power-of-attorney-card" Elevation="1">
+                                                    <MudStack Spacing="2">
+                                                        <MudText Typo="Typo.subtitle1">@Loc["WizardPowerOfAttorneyDocumentTitle"]</MudText>
+                                                        <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["WizardPowerOfAttorneyDescription"]</MudText>
+                                                        <MudAlert Severity="Severity.Info" Variant="Variant.Filled" Dense="true">
+                                                            @Loc["WizardPowerOfAttorneyInfo"]
+                                                        </MudAlert>
+                                                        <MudLink Href="/Vollmacht.pdf" Target="_blank" Rel="noopener noreferrer">
+                                                            @Loc["WizardPowerOfAttorneyTemplateLink"]
+                                                        </MudLink>
+                                                    </MudStack>
+                                                </MudPaper>
+
+                                                <MudCheckBox @bind-Value="_powerOfAttorney.Accepted" Required="true">
+                                                    <LabelContent>
+                                                        <MudText Typo="Typo.body2">@Loc["WizardLegalAgreePowerOfAttorney"]</MudText>
+                                                    </LabelContent>
+                                                </MudCheckBox>
+
+                                                <MudTextField @bind-Value="_powerOfAttorney.Signature"
+                                                              Label="@Loc["WizardPowerOfAttorneySignatureLabel"]"
+                                                              HelperText="@Loc["WizardPowerOfAttorneySignatureHelper"]"
+                                                              Required="true"
+                                                              Immediate="true"
+                                                              RequiredError="@Loc["WizardPowerOfAttorneySignatureRequired"]" />
+                                            </MudStack>
+                                        </MudPaper>
+                                    </MudStack>
+                                </MudForm>
+                                break;
+                        }
+                    </div>
+
+                            @if (_currentStep > 0)
+                            {
+                                <MudStack Direction="Row" Justify="Justify.FlexEnd" AlignItems="AlignItems.Center" Spacing="1" Class="wizard-actions">
+                                    <MudButton Class="wizard-primary-action"
+                                               Variant="Variant.Filled"
+                                               Color="Color.Primary"
+                                               Disabled="@(!CanProceed() || _isSubmitting)"
+                                               OnClick="GoNextAsync">
+                                        @if (_currentStep < _steps.Length - 1)
+                                        {
+                                            @Loc["WizardContinue"]
+                                        }
+                                        else if (_isSubmitting)
+                                        {
+                                            <MudProgressCircular Indeterminate="true" Size="Size.Small" Class="me-2" />
+                                            @Loc["WizardSubmitProcessing"]
+                                        }
+                                        else
+                                        {
+                                            @Loc["WizardSubmitButton"]
+                                        }
+                                    </MudButton>
+                                    <MudButton Class="wizard-cancel-action"
+                                               Variant="Variant.Text"
+                                               Color="Color.Secondary"
+                                               Disabled="@_isSubmitting"
+                                               OnClick="CancelWizard">
+                                        @Loc["WizardCancel"]
+                                    </MudButton>
+                                </MudStack>
+                            }
+                        </MudStack>
+                    </div>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
+</div>

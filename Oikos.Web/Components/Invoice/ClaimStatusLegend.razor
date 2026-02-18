@@ -1,0 +1,48 @@
+@using Microsoft.Extensions.Localization
+@using Oikos.Common.Resources
+
+
+
+<div class="status-legend-wrapper">
+    <MudPaper Class="status-legend" Elevation="1">
+        <MudStack Spacing="2">
+            <MudText Typo="Typo.h5" FontWeight="FontWeight.Bold">@Loc["StatusLegendTitle"]</MudText>
+            <MudText Typo="Typo.body1" Color="Color.Secondary">@Loc["StatusLegendSubtitle"]</MudText>
+
+            <MudTable Items="@StatusRows" Dense="true" Hover="true" Elevation="0" Class="status-legend-table" Breakpoint="Breakpoint.Sm" Bordered="false" Square="false">
+                <HeaderContent>
+                    <MudTh>@Loc["StatusLegendHeaderStatus"]</MudTh>
+                    <MudTh>@Loc["StatusLegendHeaderDescription"]</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel='@Loc["StatusLegendHeaderStatus"]'>
+                        <MudText Typo="Typo.subtitle2" Class="status-legend-name">@context.Status</MudText>
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["StatusLegendHeaderDescription"]'>
+                        <MudText Typo="Typo.body2" Class="status-legend-description">@context.Description</MudText>
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudStack>
+    </MudPaper>
+</div>
+
+@code {
+    private IEnumerable<ClaimStatusEntry> StatusRows => new List<ClaimStatusEntry>
+    {
+        new(Loc["StatusLegendAcceptedStatus"], Loc["StatusLegendAcceptedDescription"]),
+        new(Loc["StatusLegendStatusMessageStatus"], Loc["StatusLegendStatusMessageDescription"]),
+        new(Loc["StatusLegendDunningStatus"], Loc["StatusLegendDunningDescription"]),
+        new(Loc["StatusLegendCaseNumberStatus"], Loc["StatusLegendCaseNumberDescription"]),
+        new(Loc["StatusLegendReceivedStatus"], Loc["StatusLegendReceivedDescription"]),
+        new(Loc["StatusLegendFinalCheckStatus"], Loc["StatusLegendFinalCheckDescription"]),
+        new(Loc["StatusLegendDunningSentStatus"], Loc["StatusLegendDunningSentDescription"]),
+        new(Loc["StatusLegendDunningReceivedStatus"], Loc["StatusLegendDunningReceivedDescription"]),
+        new(Loc["StatusLegendDeadlineStatus"], Loc["StatusLegendDeadlineDescription"]),
+        new(Loc["StatusLegendObjectionStatus"], Loc["StatusLegendObjectionDescription"]),
+        new(Loc["StatusLegendEnforcementStatus"], Loc["StatusLegendEnforcementDescription"]),
+        new(Loc["StatusLegendTitleReceivedStatus"], Loc["StatusLegendTitleReceivedDescription"]),
+    };
+
+    private record ClaimStatusEntry(string Status, string Description);
+}

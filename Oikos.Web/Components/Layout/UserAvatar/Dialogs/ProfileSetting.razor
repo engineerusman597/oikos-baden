@@ -1,0 +1,17 @@
+@using Oikos.Web.Components.Layout.UserAvatar.Dialogs.Com
+@using Infrastructure.Security
+@using Oikos.Web.States
+@using Oikos.Common.Resources
+
+
+
+<MudDialog Gutters="false">
+        <DialogContent>
+                <div style="width:820px;max-width:90vw;" class="pa-4">
+                        <MudStack Spacing="2">
+                                <MudText Typo="Typo.h6" Class="mb-1">@Loc["AccountSettings_Title"]</MudText>
+                                <BasicInfoConfig />
+                        </MudStack>
+                </div>
+        </DialogContent>
+</MudDialog>

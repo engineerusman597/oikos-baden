@@ -1,0 +1,3596 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata" />
+          <xsd:element name="assembly" />
+          <xsd:element name="data" />
+          <xsd:element name="resheader" />
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HomePage_GreetingMorningWithName" xml:space="preserve">
+    <value>Guten Morgen, {0}</value>
+  </data>
+  <data name="HomePage_GreetingMorningWithoutName" xml:space="preserve">
+    <value>Guten Morgen</value>
+  </data>
+  <data name="HomePage_GreetingDayWithName" xml:space="preserve">
+    <value>Gute Tag, {0}</value>
+  </data>
+  <data name="HomePage_GreetingDayWithoutName" xml:space="preserve">
+    <value>Gute Tag</value>
+  </data>
+  <data name="HomePage_GreetingEveningWithName" xml:space="preserve">
+    <value>Gute Abend, {0}</value>
+  </data>
+  <data name="HomePage_GreetingEveningWithoutName" xml:space="preserve">
+    <value>Gute Abend</value>
+  </data>
+  <data name="HomePage_ClaimsCenterTitle" xml:space="preserve">
+    <value>Forderungs-Center</value>
+  </data>
+  <data name="HomePage_StatusInReviewTitle" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="HomePage_StatusInReviewDescription" xml:space="preserve">
+    <value>Forderungen in Prüfung</value>
+  </data>
+  <data name="HomePage_StatusAcceptedTitle" xml:space="preserve">
+    <value>Akzeptiert</value>
+  </data>
+  <data name="HomePage_StatusAcceptedDescription" xml:space="preserve">
+    <value>Akzeptierte Forderungen</value>
+  </data>
+  <data name="HomePage_StatusArchivedTitle" xml:space="preserve">
+    <value>Archiviert</value>
+  </data>
+  <data name="HomePage_StatusArchivedDescription" xml:space="preserve">
+    <value>Archivierte Forderungen</value>
+  </data>
+  <data name="HomePage_NewClaimTitle" xml:space="preserve">
+    <value>Neue Forderung</value>
+  </data>
+  <data name="HomePage_NewClaimDescription" xml:space="preserve">
+    <value>Neue Forderung einreichen</value>
+  </data>
+  <data name="HomePage_ClaimsCenterSubtitle" xml:space="preserve">
+    <value>Behalten Sie Ihre Forderungen im Blick</value>
+  </data>
+  <data name="HomePage_NewClaimCta" xml:space="preserve">
+    <value>Forderung melden</value>
+  </data>
+  <data name="HomePage_NewsLinkLabel" xml:space="preserve">
+    <value>Mehr erfahren</value>
+  </data>
+  <data name="HomePage_NoActivePlanWarning" xml:space="preserve">
+    <value>Sie haben keinen aktiven Plan. Bitte erwerben Sie über diesen Link ein Abonnement.</value>
+  </data>
+  <data name="HomePage_PurchaseLinkLabel" xml:space="preserve">
+    <value>Zu den Preisen</value>
+  </data>
+  <data name="SubscriptionRequiredMessage" xml:space="preserve">
+    <value>Für diese Funktion wird ein aktiver Plan benötigt.</value>
+  </data>
+  <data name="HomePage_Title" xml:space="preserve">
+    <value>Systemübersicht</value>
+  </data>
+  <data name="HomePage_UserCount" xml:space="preserve">
+    <value>Gesamte Benutzer</value>
+  </data>
+  <data name="HomePage_OrgCount" xml:space="preserve">
+    <value>Organisationen</value>
+  </data>
+  <data name="HomePage_TodayLogin" xml:space="preserve">
+    <value>Heutige Anmeldungen</value>
+  </data>
+  <data name="HomePage_TodayOperation" xml:space="preserve">
+    <value>Heutige Aktionen</value>
+  </data>
+  <data name="HomePage_SystemNotification" xml:space="preserve">
+    <value>Systembenachrichtigungen</value>
+  </data>
+  <data name="HomePage_RecentLogin" xml:space="preserve">
+    <value>Neueste Anmeldungen</value>
+  </data>
+  <data name="ModuleTitle" xml:space="preserve">
+    <value>Bonix – Digitale Bonität auf Abruf</value>
+  </data>
+  <data name="WizardStepSearch" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="WizardStepReview" xml:space="preserve">
+    <value>Überprüfung</value>
+  </data>
+  <data name="WizardStepPayment" xml:space="preserve">
+    <value>Zahlung</value>
+  </data>
+  <data name="WizardStepConfirmation" xml:space="preserve">
+    <value>Bestätigung</value>
+  </data>
+  <data name="WizardStepDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="SearchIntro" xml:space="preserve">
+    <value>Geben Sie den Firmennamen ein, um in der Bonix-Datenbank zu suchen.</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Unternehmensname</value>
+  </data>
+  <data name="SearchShowAdvanced" xml:space="preserve">
+    <value>Erweiterte Filter anzeigen</value>
+  </data>
+  <data name="SearchHideAdvanced" xml:space="preserve">
+    <value>Erweiterte Filter ausblenden</value>
+  </data>
+  <data name="SearchCountryLabel" xml:space="preserve">
+    <value>Land (ISO-2)</value>
+  </data>
+  <data name="SearchRegistrationNumberLabel" xml:space="preserve">
+    <value>Registernummer</value>
+  </data>
+  <data name="SearchVatLabel" xml:space="preserve">
+    <value>USt-IdNr.</value>
+  </data>
+  <data name="SearchPhoneLabel" xml:space="preserve">
+    <value>Telefonnummer</value>
+  </data>
+  <data name="SearchStreetLabel" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="SearchCityLabel" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="SearchPostCodeLabel" xml:space="preserve">
+    <value>Postleitzahl</value>
+  </data>
+  <data name="AdminDashboard_CaseManagementTitle" xml:space="preserve">
+    <value>Fallverwaltung</value>
+  </data>
+  <data name="AdminDashboard_CaseManagementSubtitle" xml:space="preserve">
+    <value>Verwalten Sie alle eingehenden Fälle.</value>
+  </data>
+  <data name="AdminDashboard_MandantenButton" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
+  <data name="AdminDashboard_Status_Neu" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="AdminDashboard_Status_InPruefung" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="AdminDashboard_Status_Rueckfragen" xml:space="preserve">
+    <value>Rückfragen</value>
+  </data>
+  <data name="AdminDashboard_Status_Akzeptiert" xml:space="preserve">
+    <value>Akzeptiert</value>
+  </data>
+  <data name="AdminDashboard_Status_Gericht" xml:space="preserve">
+    <value>Gericht</value>
+  </data>
+  <data name="AdminDashboard_Status_Fristen" xml:space="preserve">
+    <value>Fristen</value>
+  </data>
+  <data name="AdminDashboard_Status_Vollstreckung" xml:space="preserve">
+    <value>Vollstreckung</value>
+  </data>
+  <data name="AdminDashboard_Status_Completed" xml:space="preserve">
+    <value>Abgeschlossen</value>
+  </data>
+  <data name="InvoiceDetail_StatusManagementTitle" xml:space="preserve">
+    <value>Statusverwaltung</value>
+  </data>
+  <data name="InvoiceDetail_StatusUpdateSuccess" xml:space="preserve">
+    <value>Status wurde erfolgreich aktualisiert.</value>
+  </data>
+  <data name="InvoiceDetail_StatusUpdateError" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des Status.</value>
+  </data>
+  <data name="InvoiceDetail_ActionLabel" xml:space="preserve">
+    <value>Aktion / Status</value>
+  </data>
+  <data name="InvoiceDetail_SaveStatus" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SearchStatusLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="SearchCompanyTypeLabel" xml:space="preserve">
+    <value>Rechtsform</value>
+  </data>
+  <data name="SearchCompanyTypeAny" xml:space="preserve">
+    <value>Beliebig</value>
+  </data>
+  <data name="SearchCompanyTypeLtd" xml:space="preserve">
+    <value>Unternehmen</value>
+  </data>
+  <data name="SearchCompanyTypeNonLtd" xml:space="preserve">
+    <value>Privatperson</value>
+  </data>
+  <data name="SearchStatusAny" xml:space="preserve">
+    <value>Alle Status</value>
+  </data>
+  <data name="SearchStatusActive" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="ModuleTitle" xml:space="preserve">
+    <value>Bonix Auskunft</value>
+  </data>
+  <data name="SearchStatusNonActive" xml:space="preserve">
+    <value>Nicht aktiv</value>
+  </data>
+  <data name="SearchStatusPending" xml:space="preserve">
+    <value>In Bearbeitung</value>
+  </data>
+  <data name="SearchStatusOther" xml:space="preserve">
+    <value>Andere</value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="SearchPurposeCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="SearchPurposeConfirm" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Draft" xml:space="preserve">
+    <value>Entwurf</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Submitted" xml:space="preserve">
+    <value>Eingereicht</value>
+  </data>
+  <data name="InvoicePrimaryStatus_InReview" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Inquiry" xml:space="preserve">
+    <value>Rückfrage</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Accepted" xml:space="preserve">
+    <value>Akzeptiert</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Court" xml:space="preserve">
+    <value>Gericht</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Completed" xml:space="preserve">
+    <value>Abgeschlossen</value>
+  </data>
+  <data name="SearchPurposeDescription" xml:space="preserve">
+    <value>Bitte geben Sie Ihr berechtigtes Interesse im Sinne der EU-DSGVO wahrheitsgemäß an.</value>
+  </data>
+  <data name="SearchPurposeOptionClaimTransfer" xml:space="preserve">
+    <value>Prüfung Realisierung des Forderungsübergangs</value>
+  </data>
+  <data name="SearchPurposeOptionCreditDecision" xml:space="preserve">
+    <value>Kreditentscheidung</value>
+  </data>
+  <data name="SearchPurposeOptionExistingBusiness" xml:space="preserve">
+    <value>Bonitätsprüfung - bestehende Geschäftsverbindung (mit Ausfallrisiken)</value>
+  </data>
+  <data name="SearchPurposeOptionInsuranceContract" xml:space="preserve">
+    <value>Versicherungsvertrag - beabsichtigter Versicherungsvertragsabschluss (mit Ausfallrisiken)</value>
+  </data>
+  <data name="SearchPurposeOptionLeasingContract" xml:space="preserve">
+    <value>Vertrag - beabsichtigter Abschluss Leasing-, Miet- oder Pachtvertrag</value>
+  </data>
+  <data name="SearchPurposeOptionNewBusiness" xml:space="preserve">
+    <value>Bonitätsprüfung - beabsichtigte Geschäftsanbahnung (mit Ausfallrisiken)</value>
+  </data>
+  <data name="SearchPurposeOptionPurchaseAgreement" xml:space="preserve">
+    <value>Kaufvertrag - beabsichtigter Abschluss eines Kaufvertrages (mit Ausfallrisiken)</value>
+  </data>
+  <data name="SearchPurposeOptionTradeCreditInsurance" xml:space="preserve">
+    <value>Warenkreditversicherung - beabsichtigter Abschluss Versicherungsvertrag</value>
+  </data>
+  <data name="SearchPurposeRequired" xml:space="preserve">
+    <value>Bitte wählen Sie ein berechtigtes Interesse aus.</value>
+  </data>
+  <data name="SearchPurposeTitle" xml:space="preserve">
+    <value>Berechtigtes Interesse</value>
+  </data>
+  <data name="SearchResultsTitle" xml:space="preserve">
+    <value>Unternehmen auswählen</value>
+  </data>
+  <data name="SearchResultsBackToSearch" xml:space="preserve">
+    <value>Zurück zur Suche</value>
+  </data>
+  <data name="SelectCompanyPrompt" xml:space="preserve">
+    <value>Wählen Sie das passende Unternehmen aus und prüfen Sie die Details, bevor Sie fortfahren.</value>
+  </data>
+  <data name="SearchResultsSummary" xml:space="preserve">
+    <value>{0} Unternehmen gefunden. Nutzen Sie den Button "Auswählen", um die Details zu prüfen.</value>
+  </data>
+  <data name="SearchResultsSafeNumber" xml:space="preserve">
+    <value>Safe-Nummer</value>
+  </data>
+  <data name="SearchResultsLatestAccounts" xml:space="preserve">
+    <value>Letzte Abschlüsse</value>
+  </data>
+  <data name="SearchResultsGetReportButton" xml:space="preserve">
+    <value>Erhalte deine Auskunft</value>
+  </data>
+  <data name="SearchResultsDetailsHeading" xml:space="preserve">
+    <value>Firmenübersicht</value>
+  </data>
+  <data name="SearchResultsActionColumn" xml:space="preserve">
+    <value>Auswahl</value>
+  </data>
+  <data name="SearchResultsDetailsButton" xml:space="preserve">
+    <value>Details anzeigen</value>
+  </data>
+  <data name="SearchResultsDetailsError" xml:space="preserve">
+    <value>Unternehmensdetails konnten nicht geladen werden. {0}</value>
+  </data>
+  <data name="SearchResultsDetailsUnavailable" xml:space="preserve">
+    <value>Unternehmensdetails sind derzeit nicht verfügbar.</value>
+  </data>
+  <data name="SearchResultsDialogCloseButton" xml:space="preserve">
+    <value>Dialog schließen</value>
+  </data>
+  <data name="SearchResultsValueMissing" xml:space="preserve">
+    <value>Nicht verfügbar</value>
+  </data>
+  <data name="SearchResultsFoundedOn" xml:space="preserve">
+    <value>Gründungsdatum</value>
+  </data>
+  <data name="SearchNoResultsTitle" xml:space="preserve">
+    <value>Kein Unternehmen gefunden</value>
+  </data>
+  <data name="SearchNoResultsMessage" xml:space="preserve">
+    <value>Wir konnten kein Unternehmen finden, das dem angegebenen Namen entspricht.</value>
+  </data>
+  <data name="PriceNotice" xml:space="preserve">
+    <value>Berichtspreis</value>
+  </data>
+  <data name="PaymentDescription" xml:space="preserve">
+    <value>Schließen Sie die Zahlung ab, um den vollständigen Unternehmensbericht freizuschalten.</value>
+  </data>
+  <data name="PaymentConfirmedTitle" xml:space="preserve">
+    <value>Zahlung bestätigt</value>
+  </data>
+  <data name="PaymentConfirmedMessage" xml:space="preserve">
+    <value>Ihre Zahlung wurde erfolgreich bestätigt.</value>
+  </data>
+  <data name="PaymentFailedMessage" xml:space="preserve">
+    <value>Wir konnten die Zahlung nicht verifizieren. Bitte versuchen Sie es erneut oder kontaktieren Sie den Support.</value>
+  </data>
+  <data name="PaymentCancelledMessage" xml:space="preserve">
+    <value>Die Zahlung wurde abgebrochen.</value>
+  </data>
+  <data name="ConfirmOrderTitle" xml:space="preserve">
+    <value>Bestellung bestätigen</value>
+  </data>
+  <data name="ConfirmOrderMessage" xml:space="preserve">
+    <value>Bitte bestätigen Sie, dass Sie diesen Unternehmensbericht bestellen möchten.</value>
+  </data>
+  <data name="ConfirmOrderButton" xml:space="preserve">
+    <value>Bestellung bestätigen</value>
+  </data>
+  <data name="SearchResultsScore" xml:space="preserve">
+    <value>Bonitätsscore</value>
+  </data>
+  <data name="SearchResultsSelectButton" xml:space="preserve">
+    <value>Unternehmen auswählen</value>
+  </data>
+  <data name="SearchResultsVatNumber" xml:space="preserve">
+    <value>USt-IdNr.</value>
+  </data>
+  <data name="SearchResultsIndustry" xml:space="preserve">
+    <value>Branche</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Konfiguration erforderlich</value>
+  </data>
+  <data name="CreditSafeMissingConfiguration" xml:space="preserve">
+    <value>Bonix-Zugangsdaten fehlen. Bitte wenden Sie sich an einen Administrator.</value>
+  </data>
+  <data name="AccessIntroMessage" xml:space="preserve">
+    <value>Der Zugriff auf die Bonix-Unternehmensprüfungen erfordert Ihre Bestätigung. Fahren Sie fort, um ein SEPA-Lastschriftsmandat anzufordern.</value>
+  </data>
+  <data name="AccessIntroAccept" xml:space="preserve">
+    <value>Akzeptieren</value>
+  </data>
+  <data name="AccessIntroCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="SepaTitle" xml:space="preserve">
+    <value>SEPA-Firmenlastschriftmandat erforderlich</value>
+  </data>
+  <data name="SepaDescription" xml:space="preserve">
+    <value>Um die Rechtfix-Unternehmensprüfungen freizuschalten, benötigen wir Ihre Autorisierung für ein SEPA-Firmenlastschriftmandat (B2B). Bitte bestätigen Sie die Mandatsangaben unten.</value>
+  </data>
+  <data name="SepaMissingInfoPrompt" xml:space="preserve">
+    <value>Wir haben Ihr SEPA-B2B-Mandat automatisch erzeugt. Bitte ergänzen Sie unten fehlende Angaben.</value>
+  </data>
+  <data name="SepaConsentLabel" xml:space="preserve">
+    <value>Ich ermächtige die Oikos Holding GmbH – Marke Rechtfix zum Einzug per SEPA-Firmenlastschrift (B2B).</value>
+  </data>
+  <data name="SepaTermsLabel" xml:space="preserve">
+    <value>Ich stimme den Allgemeinen Geschäftsbedingungen zu.</value>
+  </data>
+  <data name="SepaAccountHolderLabel" xml:space="preserve">
+    <value>Kontoinhaber</value>
+  </data>
+  <data name="SepaEmailLabel" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="SepaIbanLabel" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="SepaBicLabel" xml:space="preserve">
+    <value>BIC</value>
+  </data>
+  <data name="SepaAddressLabel" xml:space="preserve">
+    <value>Straße und Hausnummer</value>
+  </data>
+  <data name="SepaPostalCodeLabel" xml:space="preserve">
+    <value>Postleitzahl</value>
+  </data>
+  <data name="SepaCityLabel" xml:space="preserve">
+    <value>Stadt</value>
+  </data>
+  <data name="SepaCountryLabel" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="SepaCompanyLabel" xml:space="preserve">
+    <value>Firma / Name</value>
+  </data>
+  <data name="SepaLegalFormLabel" xml:space="preserve">
+    <value>Rechtsform</value>
+  </data>
+  <data name="SepaRepresentativeLabel" xml:space="preserve">
+    <value>Vertretungsberechtigte Person</value>
+  </data>
+  <data name="SepaBankLabel" xml:space="preserve">
+    <value>Kreditinstitut</value>
+  </data>
+  <data name="SepaPaymentPurposeLabel" xml:space="preserve">
+    <value>Zahlungszweck</value>
+  </data>
+  <data name="SepaPaymentPurposeBasic" xml:space="preserve">
+    <value>Rechtfix Basic – Jahresmitgliedschaft (12 Monate)</value>
+  </data>
+  <data name="SepaPaymentPurposeStandard" xml:space="preserve">
+    <value>Rechtfix Standard – Jahresmitgliedschaft (12 Monate)</value>
+  </data>
+  <data name="SepaPaymentPurposePro" xml:space="preserve">
+    <value>Rechtfix Pro – Jahresmitgliedschaft (12 Monate)</value>
+  </data>
+  <data name="SepaPaymentIntervalLabel" xml:space="preserve">
+    <value>Zahlungsintervall</value>
+  </data>
+  <data name="SepaPaymentIntervalAnnual" xml:space="preserve">
+    <value>jährlich</value>
+  </data>
+  <data name="SepaPaymentIntervalMonthly" xml:space="preserve">
+    <value>monatlich (innerhalb der jährlichen Mindestlaufzeit)</value>
+  </data>
+  <data name="SepaSignatureCityLabel" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="SepaSignatureDateLabel" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="SepaCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="SepaConfirm" xml:space="preserve">
+    <value>Mandat bestätigen</value>
+  </data>
+  <data name="SepaMissingFields" xml:space="preserve">
+    <value>Bitte füllen Sie die erforderlichen Mandatsangaben aus.</value>
+  </data>
+  <data name="SepaGenerationFailed" xml:space="preserve">
+    <value>Das Mandat konnte nicht erstellt werden. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="SepaMandateGenerated" xml:space="preserve">
+    <value>Mandat erstellt. Bitte laden Sie das Dokument herunter und unterschreiben Sie es.</value>
+  </data>
+  <data name="SepaConsentRequired" xml:space="preserve">
+    <value>Bitte bestätigen Sie das Mandat, um fortzufahren.</value>
+  </data>
+  <data name="MissingPriceError" xml:space="preserve">
+    <value>Der Berichtspreis ist nicht konfiguriert.</value>
+  </data>
+  <data name="ContinueButton" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="ReportSummaryTitle" xml:space="preserve">
+    <value>Unternehmensbericht</value>
+  </data>
+  <data name="ReportMetaName" xml:space="preserve">
+    <value>Unternehmensname</value>
+  </data>
+  <data name="ReportMetaNumber" xml:space="preserve">
+    <value>Registrierungsnummer</value>
+  </data>
+  <data name="ReportMetaCountry" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="ReportMetaAddress" xml:space="preserve">
+    <value>Registrierte Adresse</value>
+  </data>
+  <data name="ReportMetaStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="HistoryPageTitle" xml:space="preserve">
+    <value>Unternehmensberichte</value>
+  </data>
+  <data name="HistoryPageSubtitle" xml:space="preserve">
+    <value>Ihre Unternehmensrecherchen im Überblick.</value>
+  </data>
+  <data name="HistoryTableCompany" xml:space="preserve">
+    <value>Unternehmen</value>
+  </data>
+  <data name="HistoryTableAddress" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="HistoryTableCountry" xml:space="preserve">
+    <value>Land</value>
+  </data>
+  <data name="HistoryTablePaidAt" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="HistoryTableAmount" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+  <data name="HistoryPurchaseSummaryTitle" xml:space="preserve">
+    <value>Kaufdetails</value>
+  </data>
+  <data name="HistoryTableActions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="HistoryDetailsButton" xml:space="preserve">
+    <value>Details anzeigen</value>
+  </data>
+  <data name="HistoryEmptyStateTitle" xml:space="preserve">
+    <value>Noch keine Unternehmensprüfungen</value>
+  </data>
+  <data name="HistoryEmptyStateDescription" xml:space="preserve">
+    <value>Keine Unternehmensberichte in diesem Status gefunden.</value>
+  </data>
+  <data name="HistoryEmptyStateButton" xml:space="preserve">
+    <value>Neuer Fall</value>
+  </data>
+  <data name="DetailsDialogTitle" xml:space="preserve">
+    <value>Unternehmensbericht</value>
+  </data>
+  <data name="DetailsCloseButton" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="HistoryDownloadButton" xml:space="preserve">
+    <value>Bericht herunterladen (PDF)</value>
+  </data>
+  <data name="ReportDownloadButton" xml:space="preserve">
+    <value>Bericht herunterladen (PDF)</value>
+  </data>
+  <data name="PdfGenerationInProgress" xml:space="preserve">
+    <value>PDF-Bericht wird erstellt …</value>
+  </data>
+  <data name="ReportDownloadUnavailable" xml:space="preserve">
+    <value>Der PDF-Bericht wird vorbereitet. Bitte warten Sie einen Moment und versuchen Sie es erneut.</value>
+  </data>
+  <data name="ReportDownloadReady" xml:space="preserve">
+    <value>Ihr PDF-Bericht steht zum Download bereit.</value>
+  </data>
+  <data name="PdfDownloadFailed" xml:space="preserve">
+    <value>Der PDF-Bericht konnte nicht heruntergeladen werden.</value>
+  </data>
+  <data name="PdfDownloadSuccess" xml:space="preserve">
+    <value>Der PDF-Bericht wurde erfolgreich erstellt.</value>
+  </data>
+  <data name="EmailReportReadySubject" xml:space="preserve">
+    <value>Ihr Unternehmensbericht ist fertig</value>
+  </data>
+  <data name="EmailReportReadyIntro" xml:space="preserve">
+    <value>Der PDF-Bericht für {0} ist im Anhang enthalten.</value>
+  </data>
+  <data name="EmailReportReadyDownload" xml:space="preserve">
+    <value>Falls der Download nicht automatisch startet, können Sie die angehängte Datei verwenden.</value>
+  </data>
+  <data name="PdfDownloadError" xml:space="preserve">
+    <value>PDF-Erstellung fehlgeschlagen</value>
+  </data>
+  <data name="AuthorizedLayout_ColorPickerTitle" xml:space="preserve">
+    <value>Primärfarbe auswählen</value>
+  </data>
+  <data name="AuthorizedLayout_Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="AuthorizedLayout_Language_dede" xml:space="preserve">
+    <value>Deutsch</value>
+  </data>
+  <data name="AuthorizedLayout_Language_enus" xml:space="preserve">
+    <value>Englisch</value>
+  </data>
+  <data name="AuthorizedLayout_Logout" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
+  <data name="AuthorizedLayout_Setting" xml:space="preserve">
+    <value>Konto</value>
+  </data>
+  <data name="AuthorizedLayout_CustomerNumberLabel" xml:space="preserve">
+    <value>Kundennummer</value>
+  </data>
+  <data name="AuthorizedLayout_UpgradeAccount" xml:space="preserve">
+    <value>Konto upgraden</value>
+  </data>
+  <data name="AuthorizedLayout_BackToBonix" xml:space="preserve">
+    <value>Zurück zu Bonix</value>
+  </data>
+  <data name="AuthorizedLayout_ContactUs" xml:space="preserve">
+    <value>Kontaktieren Sie uns</value>
+  </data>
+  <data name="BackToHome_Text" xml:space="preserve">
+    <value>Zur Startseite zurück</value>
+  </data>
+  <data name="Error_Text" xml:space="preserve">
+    <value>Es ist ein Systemfehler aufgetreten!</value>
+  </data>
+  <data name="LoginLogPage_LoginFail" xml:space="preserve">
+    <value>Fehlgeschlagen</value>
+  </data>
+  <data name="LoginLogPage_LoginSuccess" xml:space="preserve">
+    <value>Erfolgreich</value>
+  </data>
+  <data name="LoginLogPage_TableH1" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="LoginLogPage_TableH2" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="LoginLogPage_TableH3" xml:space="preserve">
+    <value>Anmeldezeit</value>
+  </data>
+  <data name="LoginLogPage_TableH4" xml:space="preserve">
+    <value>IP</value>
+  </data>
+  <data name="LoginLogPage_TableH5" xml:space="preserve">
+    <value>Erfolgreich?</value>
+  </data>
+  <data name="LoginLogPage_TableH6" xml:space="preserve">
+    <value>Client</value>
+  </data>
+  <data name="LoginLogPage_Title" xml:space="preserve">
+    <value>Anmeldelog</value>
+  </data>
+  <data name="Login_LoginText" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Login_CreateAccountPrompt" xml:space="preserve">
+    <value>Neu hier? Konto erstellen</value>
+  </data>
+  <data name="Login_CreateAccountDialogTitle" xml:space="preserve">
+    <value>Konto erstellen</value>
+  </data>
+  <data name="Login_PasswordHelpText" xml:space="preserve">
+    <value>Bitte Passwort eingeben</value>
+  </data>
+  <data name="Login_EmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse oder Benutzername</value>
+  </data>
+  <data name="Login_ForgotPassword" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="Login_InvalidCredentials" xml:space="preserve">
+    <value>Benutzername oder Passwort ist falsch!</value>
+  </data>
+  <data name="Login_MembershipLink" xml:space="preserve">
+    <value>Mitglied werden</value>
+  </data>
+  <data name="Login_MembershipPrompt" xml:space="preserve">
+    <value>Noch kein Mitglied?</value>
+  </data>
+  <data name="Login_NewsletterBenefit2" xml:space="preserve">
+    <value>Einladungslink ganz einfach weiterleiten.</value>
+  </data>
+  <data name="Login_NewsletterBenefit3" xml:space="preserve">
+    <value>Erhalten Sie exklusive Rechtstipps direkt in Ihr Postfach.</value>
+  </data>
+  <data name="Login_NewsletterEmailInvalid" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="Login_NewsletterEmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="Login_NewsletterEmailPlaceholder" xml:space="preserve">
+    <value>name@unternehmen.de</value>
+  </data>
+  <data name="Login_NewsletterEmailRequired" xml:space="preserve">
+    <value>Bitte geben Sie eine E-Mail-Adresse an.</value>
+  </data>
+  <data name="Login_NewsletterHighlight" xml:space="preserve">
+    <value>Bleiben Sie informiert</value>
+  </data>
+  <data name="Login_NewsletterHint" xml:space="preserve">
+    <value>Sie können sich jederzeit wieder abmelden.</value>
+  </data>
+  <data name="Login_NewsletterReopenPrompt" xml:space="preserve">
+    <value>Newsletter verpasst? Hier erneut öffnen.</value>
+  </data>
+  <data name="Login_NewsletterReopenButton" xml:space="preserve">
+    <value>Newsletter anzeigen</value>
+  </data>
+  <data name="Login_NewsletterTabLabel" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
+  <data name="Login_NewsletterStatus" xml:space="preserve">
+    <value>Newsletter AKTIV / inaktiv schaltbar</value>
+  </data>
+  <data name="Login_NewsletterSubscribe" xml:space="preserve">
+    <value>Jetzt abonnieren</value>
+  </data>
+  <data name="Login_NewsletterSuccess" xml:space="preserve">
+    <value>Vielen Dank! Wir haben Ihre Newsletter-Anmeldung erhalten.</value>
+  </data>
+  <data name="Login_NewsletterWelcomeSubject" xml:space="preserve">
+    <value>Willkommen im Rechtfix-Newsletter</value>
+  </data>
+  <data name="Login_NewsletterWelcomeBody" xml:space="preserve">
+    <value>Schön, dass Sie dabei sind. Ab sofort erhalten Sie Neuigkeiten, Tipps und Angebote rund um Rechtfix.</value>
+  </data>
+  <data name="Login_NewsletterTitle" xml:space="preserve">
+    <value>Rechtfix Newsletter</value>
+  </data>
+  <data name="Login_PasswordLabel" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Login_RegisterButton" xml:space="preserve">
+    <value>Jetzt registrieren</value>
+  </data>
+  <data name="Login_SubmitButton" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Login_Subtitle" xml:space="preserve">
+    <value>Melden Sie sich mit Ihren Zugangsdaten an, um das Rechtfix Portal zu nutzen.</value>
+  </data>
+  <data name="Login_Title" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Login_TooManyAttempts" xml:space="preserve">
+    <value>Zu viele Anmeldeversuche. Bitte versuchen Sie es in {0} Minuten erneut!</value>
+  </data>
+  <data name="Login_UserNameHelpText" xml:space="preserve">
+    <value>E-Mail oder Benutzername</value>
+  </data>
+  <data name="Login_WelcomeBack" xml:space="preserve">
+    <value>Willkommen zurück, {0}!</value>
+  </data>
+  <data name="Register_CompanyLabel" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="Register_CompanyRequired" xml:space="preserve">
+    <value>Firma ist erforderlich.</value>
+  </data>
+  <data name="Register_ConfirmPasswordLabel" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="Register_ConfirmPasswordRequired" xml:space="preserve">
+    <value>Bestätigung des Passworts ist erforderlich.</value>
+  </data>
+  <data name="Register_InvalidPartnerCode" xml:space="preserve">
+    <value>Der Partnercode wurde nicht gefunden.</value>
+  </data>
+  <data name="Register_EmailInvalid" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="Register_EmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="Register_EmailRequired" xml:space="preserve">
+    <value>E-Mail ist erforderlich.</value>
+  </data>
+  <data name="Register_GenderLabel" xml:space="preserve">
+    <value>Geschlecht</value>
+  </data>
+  <data name="Register_GenderPlaceholder" xml:space="preserve">
+    <value>Wählen Sie ein Geschlecht</value>
+  </data>
+  <data name="Register_GenderOptionFemale" xml:space="preserve">
+    <value>Weiblich</value>
+  </data>
+  <data name="Register_GenderOptionMale" xml:space="preserve">
+    <value>Männlich</value>
+  </data>
+  <data name="Register_GenderOptionDiverse" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="Register_GenderRequired" xml:space="preserve">
+    <value>Geschlecht ist erforderlich.</value>
+  </data>
+  <data name="Register_TitleLabel" xml:space="preserve">
+    <value>Akademischer Titel</value>
+  </data>
+  <data name="Register_TitlePlaceholder" xml:space="preserve">
+    <value>Titel wählen (optional)</value>
+  </data>
+  <data name="Register_TitleOptionDr" xml:space="preserve">
+    <value>Dr.</value>
+  </data>
+  <data name="Register_TitleOptionProf" xml:space="preserve">
+    <value>Prof.</value>
+  </data>
+  <data name="Register_TitleOptionProfDr" xml:space="preserve">
+    <value>Prof. Dr.</value>
+  </data>
+  <data name="Register_NameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Register_FirstNameLabel" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="Register_FirstNameRequired" xml:space="preserve">
+    <value>Vorname ist erforderlich.</value>
+  </data>
+  <data name="Register_LastNameLabel" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="Register_LastNameRequired" xml:space="preserve">
+    <value>Nachname ist erforderlich.</value>
+  </data>
+  <data name="Register_PartnerCodeHelper" xml:space="preserve">
+    <value>Optional. Partnercode des Vermittlers eintragen.</value>
+  </data>
+  <data name="Register_PartnerCodeLabel" xml:space="preserve">
+    <value>Partnercode</value>
+  </data>
+  <data name="Register_NameRequired" xml:space="preserve">
+    <value>Name ist erforderlich.</value>
+  </data>
+  <data name="Register_PasswordLabel" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Register_PasswordMinLength" xml:space="preserve">
+    <value>Das Passwort muss mindestens 6 Zeichen lang sein.</value>
+  </data>
+  <data name="Register_PasswordMismatch" xml:space="preserve">
+    <value>Die Passwörter stimmen nicht überein.</value>
+  </data>
+  <data name="Register_PasswordRequired" xml:space="preserve">
+    <value>Passwort ist erforderlich.</value>
+  </data>
+  <data name="Register_PrivacyLinkText" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="Register_PrivacyPrefix" xml:space="preserve">
+    <value>Ich habe die</value>
+  </data>
+  <data name="Register_PrivacyRequired" xml:space="preserve">
+    <value>Die Datenschutzerklärung muss akzeptiert werden.</value>
+  </data>
+  <data name="Register_PrivacySuffix" xml:space="preserve">
+    <value> gelesen.</value>
+  </data>
+  <data name="Register_SubmitButton" xml:space="preserve">
+    <value>Absenden</value>
+  </data>
+  <data name="Register_Subtitle" xml:space="preserve">
+    <value>Bereits Mitglied?</value>
+  </data>
+  <data name="Register_SubtitleLink" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Register_Success" xml:space="preserve">
+    <value>Konto erfolgreich erstellt.</value>
+  </data>
+  <data name="Register_Title" xml:space="preserve">
+    <value>Registrierung</value>
+  </data>
+  <data name="Register_UserExists" xml:space="preserve">
+    <value>Ein Konto mit dieser E-Mail-Adresse existiert bereits.</value>
+  </data>
+  <data name="Register_NotMemberButton" xml:space="preserve">
+    <value>Noch kein Mitglied?</value>
+  </data>
+  <data name="ForgotPassword_Title" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="ForgotPassword_Subtitle" xml:space="preserve">
+    <value>Geben Sie die E-Mail-Adresse Ihres Kontos ein und wir senden Ihnen einen Link zum Zurücksetzen.</value>
+  </data>
+  <data name="ForgotPassword_Success" xml:space="preserve">
+    <value>Wenn ein Konto mit dieser E-Mail-Adresse existiert, haben wir einen Link zum Zurücksetzen des Passworts gesendet.</value>
+  </data>
+  <data name="ForgotPassword_EmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="ForgotPassword_EmailRequired" xml:space="preserve">
+    <value>Die E-Mail-Adresse ist erforderlich.</value>
+  </data>
+  <data name="ForgotPassword_EmailInvalid" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="ForgotPassword_BackToLogin" xml:space="preserve">
+    <value>Zurück zum Login</value>
+  </data>
+  <data name="ForgotPassword_Submit" xml:space="preserve">
+    <value>Link senden</value>
+  </data>
+  <data name="ForgotPassword_EmailSettingsMissing" xml:space="preserve">
+    <value>Die E-Mail-Einstellungen sind nicht konfiguriert. Bitte wenden Sie sich an einen Administrator.</value>
+  </data>
+  <data name="ForgotPassword_EmailSendFailed" xml:space="preserve">
+    <value>Der Reset-Link konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.</value>
+  </data>
+  <data name="ResetPassword_Title" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="ResetPassword_Subtitle" xml:space="preserve">
+    <value>Erstellen Sie ein neues Passwort für Ihr Konto.</value>
+  </data>
+  <data name="ResetPassword_Success" xml:space="preserve">
+    <value>Ihr Passwort wurde erfolgreich aktualisiert.</value>
+  </data>
+  <data name="ResetPassword_InvalidToken" xml:space="preserve">
+    <value>Dieser Link zum Zurücksetzen ist ungültig oder abgelaufen.</value>
+  </data>
+  <data name="ResetPassword_RequestNew" xml:space="preserve">
+    <value>Neuen Link anfordern</value>
+  </data>
+  <data name="ResetPassword_NewPasswordLabel" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="ResetPassword_ConfirmPasswordLabel" xml:space="preserve">
+    <value>Neues Passwort bestätigen</value>
+  </data>
+  <data name="ResetPassword_Submit" xml:space="preserve">
+    <value>Passwort aktualisieren</value>
+  </data>
+  <data name="ResetPassword_PasswordRequired" xml:space="preserve">
+    <value>Ein Passwort ist erforderlich.</value>
+  </data>
+  <data name="ResetPassword_ConfirmPasswordRequired" xml:space="preserve">
+    <value>Die Bestätigung des Passworts ist erforderlich.</value>
+  </data>
+  <data name="ResetPassword_PasswordMismatch" xml:space="preserve">
+    <value>Die Passwörter stimmen nicht überein.</value>
+  </data>
+  <data name="ResetPassword_UpdateFailed" xml:space="preserve">
+    <value>Das Passwort konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="Register_SubscriptionHint" xml:space="preserve">
+    <value>Verwenden Sie die E-Mail-Adresse aus dem Kauf, damit Ihr Paket automatisch freigeschaltet wird.</value>
+  </data>
+  <data name="Register_SubscriptionRequired" xml:space="preserve">
+    <value>Für diese E-Mail wurde kein Kauf gefunden. Bitte nutzen Sie die Adresse aus dem Stripe-Checkout.</value>
+  </data>
+  <data name="Register_SubscriptionLookupFailed" xml:space="preserve">
+    <value>Ihr Kauf konnte keinem Paket zugeordnet werden. Bitte kontaktieren Sie den Support.</value>
+  </data>
+  <data name="ChangePassword_Title" xml:space="preserve">
+    <value>Passwort ändern</value>
+  </data>
+  <data name="ChangePassword_Subtitle" xml:space="preserve">
+    <value>Geben Sie Ihr aktuelles Passwort ein, um ein neues festzulegen.</value>
+  </data>
+  <data name="ChangePassword_CurrentPasswordPlaceholder" xml:space="preserve">
+    <value>Aktuelles Passwort eingeben</value>
+  </data>
+  <data name="ChangePassword_NewPasswordPlaceholder" xml:space="preserve">
+    <value>Neues Passwort eingeben</value>
+  </data>
+  <data name="ChangePassword_ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Neues Passwort bestätigen</value>
+  </data>
+  <data name="ChangePassword_Submit" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="ChangePassword_CurrentPasswordInvalid" xml:space="preserve">
+    <value>Das aktuelle Passwort ist falsch!</value>
+  </data>
+  <data name="ChangePassword_Success" xml:space="preserve">
+    <value>Passwort wurde erfolgreich aktualisiert!</value>
+  </data>
+  <data name="ChangePassword_UserMissing" xml:space="preserve">
+    <value>Benutzerdaten sind nicht vorhanden!</value>
+  </data>
+  <data name="ChangePassword_CurrentPasswordRequired" xml:space="preserve">
+    <value>Bitte geben Sie Ihr aktuelles Passwort ein.</value>
+  </data>
+  <data name="ChangePassword_NewPasswordRequired" xml:space="preserve">
+    <value>Bitte geben Sie ein Passwort ein.</value>
+  </data>
+  <data name="ChangePassword_PasswordTooShort" xml:space="preserve">
+    <value>Das Passwort ist zu kurz.</value>
+  </data>
+  <data name="ChangePassword_PasswordTooLong" xml:space="preserve">
+    <value>Das Passwort ist zu lang.</value>
+  </data>
+  <data name="ChangePassword_PasswordComplexity" xml:space="preserve">
+    <value>Das Passwort muss Groß- und Kleinbuchstaben sowie Zahlen enthalten.</value>
+  </data>
+  <data name="ChangePassword_PasswordsDoNotMatch" xml:space="preserve">
+    <value>Die Passwörter stimmen nicht überein.</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Forderungscenter</value>
+  </data>
+  <data name="PageSubtitle" xml:space="preserve">
+    <value>Verwalten Sie alle Ihre Fälle an einem Ort.</value>
+  </data>
+  <data name="NewCaseButton" xml:space="preserve">
+    <value>Neuer Fall</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Fall-ID oder Schuldner suchen...</value>
+  </data>
+  <data name="StatusFilterLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusFilterAll" xml:space="preserve">
+    <value>Alle Status</value>
+  </data>
+  <data name="NavigationAllInvoices" xml:space="preserve">
+    <value>Forderungscenter</value>
+  </data>
+  <data name="NavigationAccepted" xml:space="preserve">
+    <value>Angenommen</value>
+  </data>
+  <data name="NavigationInReview" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="NavigationArchived" xml:space="preserve">
+    <value>Archiviert</value>
+  </data>
+  <data name="NavigationNewInvoice" xml:space="preserve">
+    <value>Neue Rechnung</value>
+  </data>
+  <data name="UploadWelcomeTitle" xml:space="preserve">
+    <value>Willkommen zurück</value>
+  </data>
+  <data name="UploadWelcomeSubtitle" xml:space="preserve">
+    <value>Legen Sie direkt los. Welche Rechnungen sollen wir für Sie bearbeiten?</value>
+  </data>
+  <data name="UploadInstruction" xml:space="preserve">
+    <value>Ziehen Sie eine PDF-Datei hierher oder klicken Sie, um eine auszuwählen.</value>
+  </data>
+  <data name="UploadButtonLabel" xml:space="preserve">
+    <value>Datei auswählen</value>
+  </data>
+  <data name="UploadLimit" xml:space="preserve">
+    <value>Weitere Rechnungen können später hochgeladen werden (max. 15 MB).</value>
+  </data>
+  <data name="UploadPdfOnly" xml:space="preserve">
+    <value>Bitte laden Sie eine PDF-Datei hoch.</value>
+  </data>
+  <data name="UploadFileTooLarge" xml:space="preserve">
+    <value>Die ausgewählte Datei überschreitet die Grenze von 15 MB.</value>
+  </data>
+  <data name="UploadInProgress" xml:space="preserve">
+    <value>Rechnung wird hochgeladen...</value>
+  </data>
+  <data name="UploadError" xml:space="preserve">
+    <value>Upload fehlgeschlagen. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="UploadSuccess" xml:space="preserve">
+    <value>Rechnung hochgeladen. Verarbeitung läuft im Hintergrund...</value>
+  </data>
+  <data name="StatusAccepted" xml:space="preserve">
+    <value>Angenommen</value>
+  </data>
+  <data name="StatusInReview" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="StatusArchived" xml:space="preserve">
+    <value>Archiviert</value>
+  </data>
+  <data name="StageInReviewName" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="StageInReviewSummary" xml:space="preserve">
+    <value>Wir prüfen Ihre Forderung.</value>
+  </data>
+  <data name="StageInReviewDescription" xml:space="preserve">
+    <value>Unsere Spezialist:innen überprüfen Ihre Unterlagen, um sicherzustellen, dass alles vollständig ist.</value>
+  </data>
+  <data name="StageInReviewNextSteps" xml:space="preserve">
+    <value>Wir informieren Sie, falls wir zusätzliche Informationen benötigen.</value>
+  </data>
+  <data name="StageAcceptedName" xml:space="preserve">
+    <value>Angenommen</value>
+  </data>
+  <data name="StageAcceptedSummary" xml:space="preserve">
+    <value>Ihre Forderung wurde genehmigt.</value>
+  </data>
+  <data name="StageAcceptedDescription" xml:space="preserve">
+    <value>Die Forderung hat unsere Prüfung bestanden und ist bereit für die Zahlungsabwicklung.</value>
+  </data>
+  <data name="StageAcceptedNextSteps" xml:space="preserve">
+    <value>Wir überweisen den vereinbarten Betrag und senden Ihnen in Kürze eine Bestätigung.</value>
+  </data>
+  <data name="StageArchivedName" xml:space="preserve">
+    <value>Archiviert</value>
+  </data>
+  <data name="StageArchivedSummary" xml:space="preserve">
+    <value>Forderung abgeschlossen.</value>
+  </data>
+  <data name="StageArchivedDescription" xml:space="preserve">
+    <value>Diese Forderung ist geschlossen und zu Ihren Unterlagen archiviert.</value>
+  </data>
+  <data name="StageArchivedNextSteps" xml:space="preserve">
+    <value>Es ist keine weitere Aktion erforderlich. Sie können die Dokumente bei Bedarf jederzeit herunterladen.</value>
+  </data>
+  <data name="SummaryAcceptedTitle" xml:space="preserve">
+    <value>Angenommene Rechnungen</value>
+  </data>
+  <data name="SummaryAcceptedDescription" xml:space="preserve">
+    <value>Bereits freigegebene Rechnungen.</value>
+  </data>
+  <data name="SummaryAcceptedEmpty" xml:space="preserve">
+    <value>Noch keine angenommenen Rechnungen.</value>
+  </data>
+  <data name="SummaryInReviewTitle" xml:space="preserve">
+    <value>Rechnungen in Prüfung</value>
+  </data>
+  <data name="SummaryInReviewDescription" xml:space="preserve">
+    <value>Diese Rechnungen werden aktuell geprüft.</value>
+  </data>
+  <data name="SummaryInReviewEmpty" xml:space="preserve">
+    <value>Derzeit werden keine Rechnungen geprüft.</value>
+  </data>
+  <data name="SummaryArchivedTitle" xml:space="preserve">
+    <value>Archivierte Rechnungen</value>
+  </data>
+  <data name="SummaryArchivedDescription" xml:space="preserve">
+    <value>Abgeschlossene oder archivierte Rechnungen.</value>
+  </data>
+  <data name="SummaryArchivedEmpty" xml:space="preserve">
+    <value>Keine archivierten Rechnungen.</value>
+  </data>
+  <data name="SectionAcceptedTitle" xml:space="preserve">
+    <value>Angenommene Rechnungen</value>
+  </data>
+  <data name="SectionAcceptedDescription" xml:space="preserve">
+    <value>Hier finden Sie alle vollständig bearbeiteten Rechnungen.</value>
+  </data>
+  <data name="SectionInReviewTitle" xml:space="preserve">
+    <value>Rechnungen in Prüfung</value>
+  </data>
+  <data name="SectionInReviewDescription" xml:space="preserve">
+    <value>Diese Rechnungen werden überprüft. Wir melden uns, sobald sie angenommen wurden.</value>
+  </data>
+  <data name="SectionArchivedTitle" xml:space="preserve">
+    <value>Archivierte Rechnungen</value>
+  </data>
+  <data name="SectionArchivedDescription" xml:space="preserve">
+    <value>Archivierte Rechnungen bleiben zur Nachverfolgung verfügbar.</value>
+  </data>
+  <data name="TableEmpty" xml:space="preserve">
+    <value>Keine Rechnungen in diesem Status gefunden.</value>
+  </data>
+  <data name="TableHeaderCompany" xml:space="preserve">
+    <value>Unternehmen</value>
+  </data>
+  <data name="TableHeaderDate" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="TableHeaderTicketNumber" xml:space="preserve">
+    <value>Aktenzeichen</value>
+  </data>
+  <data name="TableHeaderAmount" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+  <data name="TableHeaderInvoiceDate" xml:space="preserve">
+    <value>Rechnungsdatum</value>
+  </data>
+  <data name="TableHeaderCurrency" xml:space="preserve">
+    <value>Währung</value>
+  </data>
+  <data name="TableHeaderDescription" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="TableHeaderStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TableHeaderUpdated" xml:space="preserve">
+    <value>Aktualisiert</value>
+  </data>
+  <data name="TableHeaderCreated" xml:space="preserve">
+    <value>Erstellt</value>
+  </data>
+  <data name="TableValueUnknown" xml:space="preserve">
+    <value>k. A.</value>
+  </data>
+  <data name="LatestUpdatesTitle" xml:space="preserve">
+    <value>Neueste Aktualisierungen</value>
+  </data>
+  <data name="LatestUpdatesEmpty" xml:space="preserve">
+    <value>Noch keine Aktivitäten.</value>
+  </data>
+  <data name="LatestUpdatesUpdatedOn" xml:space="preserve">
+    <value>Aktualisiert am</value>
+  </data>
+  <data name="LatestUpdatesAmount" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+  <data name="LatestUpdatesStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="AdminTitle" xml:space="preserve">
+    <value>Fallverwaltung</value>
+  </data>
+  <data name="AdminUnauthorized" xml:space="preserve">
+    <value>Sie sind nicht berechtigt, Rechnungen zu verwalten.</value>
+  </data>
+  <data name="AdminStatusUpdated" xml:space="preserve">
+    <value>Rechnungsstatus aktualisiert.</value>
+  </data>
+  <data name="AdminInvoiceNotFound" xml:space="preserve">
+    <value>Rechnung nicht gefunden.</value>
+  </data>
+  <data name="AdminTableHeaderUser" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="AdminTableHeaderCustomerNumber" xml:space="preserve">
+    <value>Kundennummer</value>
+  </data>
+  <data name="AdminTableHeaderFile" xml:space="preserve">
+    <value>Dokument</value>
+  </data>
+  <data name="AdminTableHeaderPowerOfAttorney" xml:space="preserve">
+    <value>Vollmacht</value>
+  </data>
+  <data name="AdminTableHeaderActions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="InvoiceDeleteAction" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="InvoiceDeleteTitle" xml:space="preserve">
+    <value>Claim löschen</value>
+  </data>
+  <data name="InvoiceDeleteMessage" xml:space="preserve">
+    <value>Möchten Sie diesen Claim wirklich löschen? Die Rechnung und ihre Dokumente werden entfernt.</value>
+  </data>
+  <data name="InvoiceDeleteConfirm" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="InvoiceDeleteCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="InvoiceDeleteSuccess" xml:space="preserve">
+    <value>Claim gelöscht.</value>
+  </data>
+  <data name="InvoiceDeleteError" xml:space="preserve">
+    <value>Der Claim konnte nicht gelöscht werden. Bitte erneut versuchen.</value>
+  </data>
+  <data name="InvoiceDeleteNotFound" xml:space="preserve">
+    <value>Claim nicht gefunden.</value>
+  </data>
+  <data name="AdminFilterLabel" xml:space="preserve">
+    <value>Nach Status filtern</value>
+  </data>
+  <data name="AdminFilterAll" xml:space="preserve">
+    <value>Alle Status</value>
+  </data>
+  <data name="AdminFilters" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="AdminSearch" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="AdminReset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="InvoiceDetailBack" xml:space="preserve">
+    <value>Zurück zu Rechnungen</value>
+  </data>
+  <data name="InvoiceDetailTicketLabel" xml:space="preserve">
+    <value>Ticket #{0}</value>
+  </data>
+  <data name="InvoiceDetailSectionInvoice" xml:space="preserve">
+    <value>Rechnungsdetails</value>
+  </data>
+  <data name="InvoiceDetailSectionCustomer" xml:space="preserve">
+    <value>Kundendetails</value>
+  </data>
+  <data name="InvoiceDetailSectionDocuments" xml:space="preserve">
+    <value>Dokumente</value>
+  </data>
+  <data name="InvoiceDetailDownloadPdf" xml:space="preserve">
+    <value>PDF herunterladen</value>
+  </data>
+  <data name="InvoiceDetailEmailLabel" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="AdminNoInvoices" xml:space="preserve">
+    <value>Keine Rechnungen vorhanden.</value>
+  </data>
+  <data name="AdminActionView" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="AdminRefresh" xml:space="preserve">
+    <value>Aktualisieren</value>
+  </data>
+  <data name="AdminCreatedOn" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="AdminUpdatedOn" xml:space="preserve">
+    <value>Zuletzt aktualisiert</value>
+  </data>
+  <data name="DashboardCtaTitle" xml:space="preserve">
+    <value>Neue Forderung einreichen</value>
+  </data>
+  <data name="DashboardCtaSubtitle" xml:space="preserve">
+    <value>Starten Sie den dreistufigen Paywise-Prozess und übergeben Sie uns Ihre nächste Forderung.</value>
+  </data>
+  <data name="DashboardCtaButton" xml:space="preserve">
+    <value>Assistent öffnen</value>
+  </data>
+  <data name="WizardTitle" xml:space="preserve">
+    <value>Neue Forderung anlegen</value>
+  </data>
+  <data name="WizardStep1Title" xml:space="preserve">
+    <value>Ihre Unterlagen</value>
+  </data>
+  <data name="WizardStep1Description" xml:space="preserve">
+    <value>Rechnungen hochladen</value>
+  </data>
+  <data name="WizardStep2Title" xml:space="preserve">
+    <value>Auftrag abschließen</value>
+  </data>
+  <data name="WizardStep2Description" xml:space="preserve">
+    <value>Prüfen und absenden</value>
+  </data>
+  <data name="WizardStep3Title" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="WizardStep3Description" xml:space="preserve">
+    <value>Wer schuldet Ihnen?</value>
+  </data>
+  <data name="WizardUploadIntroTitle" xml:space="preserve">
+    <value>Willkommen zurück</value>
+  </data>
+  <data name="WizardUploadIntroSubtitle" xml:space="preserve">
+    <value>Lassen Sie uns direkt starten. Welche Forderung sollen wir für Sie einziehen?</value>
+  </data>
+  <data name="WizardUploadDropTitle" xml:space="preserve">
+    <value>PDF-Rechnung hier ablegen</value>
+  </data>
+  <data name="WizardUploadDropSubtitle" xml:space="preserve">
+    <value>Klicken Sie, um eine einzelne PDF-Datei bis 15 MB auszuwählen.</value>
+  </data>
+  <data name="WizardUploadEmpty" xml:space="preserve">
+    <value>Fügen Sie mindestens eine PDF-Rechnung hinzu, um fortzufahren.</value>
+  </data>
+  <data name="WizardUploadEmptyError" xml:space="preserve">
+    <value>Bitte laden Sie mindestens eine PDF-Rechnung hoch, bevor Sie fortfahren.</value>
+  </data>
+  <data name="WizardUploadedInvoicesTitle" xml:space="preserve">
+    <value>Ihre hochgeladenen Rechnungen</value>
+  </data>
+  <data name="WizardInvoiceDetailsTitle" xml:space="preserve">
+    <value>Rechnungsdetails</value>
+  </data>
+  <data name="WizardInvoiceDetailsSubtitle" xml:space="preserve">
+    <value>Ergänzen Sie die wichtigsten Angaben, damit wir sofort loslegen können.</value>
+  </data>
+  <data name="WizardInvoiceNumber" xml:space="preserve">
+    <value>Rechnungsnummer</value>
+  </data>
+  <data name="WizardInvoiceAmount" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+  <data name="WizardInvoiceVat" xml:space="preserve">
+    <value>USt.</value>
+  </data>
+  <data name="WizardInvoiceCurrency" xml:space="preserve">
+    <value>Währung</value>
+  </data>
+  <data name="WizardInvoiceDate" xml:space="preserve">
+    <value>Rechnungsdatum</value>
+  </data>
+  <data name="WizardInvoiceDescription" xml:space="preserve">
+    <value>Beschreibung (optional)</value>
+  </data>
+  <data name="WizardInvoiceSummaryLabel" xml:space="preserve">
+    <value>Gesamte Forderung</value>
+  </data>
+  <data name="WizardInvoiceSummaryEmpty" xml:space="preserve">
+    <value>Noch kein Betrag</value>
+  </data>
+  <data name="WizardContinue" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
+  <data name="WizardBack" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="WizardCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="WizardStartOptionTitle" xml:space="preserve">
+    <value>Wie sollen wir mit dem Einzug beginnen?</value>
+  </data>
+  <data name="WizardStartOptionImmediate" xml:space="preserve">
+    <value>Sofort starten</value>
+  </data>
+  <data name="WizardStartOptionAfterSevenDays" xml:space="preserve">
+    <value>In 7 Tagen starten (Kundenfrist)</value>
+  </data>
+  <data name="WizardStartOptionAfterReminder" xml:space="preserve">
+    <value>Zeitpunkt wählen</value>
+  </data>
+  <data name="WizardLegalTitle" xml:space="preserve">
+    <value>Rechtliches</value>
+  </data>
+  <data name="WizardLegalAgreeTerms" xml:space="preserve">
+    <value>Ich akzeptiere die Allgemeinen Geschäftsbedingungen.</value>
+  </data>
+  <data name="WizardLegalAgreePrivacy" xml:space="preserve">
+    <value>Ich stimme der Datenschutzerklärung zu.</value>
+  </data>
+  <data name="WizardNotesLabel" xml:space="preserve">
+    <value>Gibt es sonst noch etwas? (optional)</value>
+  </data>
+  <data name="WizardSubmitButton" xml:space="preserve">
+    <value>Auftrag absenden</value>
+  </data>
+  <data name="WizardSubmitProcessing" xml:space="preserve">
+    <value>Wird gesendet...</value>
+  </data>
+  <data name="WizardClaimSubmittedEmailSubject" xml:space="preserve">
+    <value>Your claim has been submitted</value>
+  </data>
+  <data name="WizardClaimSubmittedEmailIntro" xml:space="preserve">
+    <value>Thanks for submitting your claim. We have saved your documents and started the process.</value>
+  </data>
+  <data name="WizardClaimSubmittedEmailInvoices" xml:space="preserve">
+    <value>Invoices submitted: {0}</value>
+  </data>
+  <data name="WizardClaimSubmittedEmailNextSteps" xml:space="preserve">
+    <value>We will notify you about updates. You can track your claim in the Claims Center.</value>
+  </data>
+  <data name="WizardClaimSubmittedEmailNoInvoiceNumber" xml:space="preserve">
+    <value>Pending invoice number</value>
+  </data>
+  <data name="WizardSuccessMessage" xml:space="preserve">
+    <value>Ihre Forderung wurde übermittelt. Wir melden uns in Kürze.</value>
+  </data>
+  <data name="WizardValidationErrors" xml:space="preserve">
+    <value>Bitte füllen Sie alle Pflichtfelder zu Schuldner und Rechnungen aus.</value>
+  </data>
+  <data name="WizardLegalValidation" xml:space="preserve">
+    <value>Bitte bestätigen Sie die rechtlichen Hinweise vor dem Absenden.</value>
+  </data>
+  <data name="WizardReviewTitle" xml:space="preserve">
+    <value>Prüfen und bestätigen</value>
+  </data>
+  <data name="WizardReviewSubtitle" xml:space="preserve">
+    <value>Kontrollieren Sie die Angaben, bevor Sie den Auftrag senden.</value>
+  </data>
+  <data name="WizardSummaryYou" xml:space="preserve">
+    <value>Sie</value>
+  </data>
+  <data name="WizardSummaryDebtor" xml:space="preserve">
+    <value>Schuldner</value>
+  </data>
+  <data name="WizardSummaryClaims" xml:space="preserve">
+    <value>Forderungen</value>
+  </data>
+  <data name="WizardSummaryInvoices" xml:space="preserve">
+    <value>{0} Rechnung(en)</value>
+  </data>
+  <data name="WizardSummaryDefaultName" xml:space="preserve">
+    <value>Ihr Unternehmen</value>
+  </data>
+  <data name="WizardDescriptionInvoiceNumber" xml:space="preserve">
+    <value>Rechnungsnummer: {0}</value>
+  </data>
+  <data name="WizardDescriptionContact" xml:space="preserve">
+    <value>Ansprechpartner: {0}</value>
+  </data>
+  <data name="WizardDescriptionVat" xml:space="preserve">
+    <value>USt.-Betrag: {0}</value>
+  </data>
+  <data name="WizardDescriptionNotes" xml:space="preserve">
+    <value>Zusätzliche Hinweise: {0}</value>
+  </data>
+  <data name="WizardDescriptionStart" xml:space="preserve">
+    <value>Startwunsch: {0}</value>
+  </data>
+  <data name="WizardDebtorSectionTitle" xml:space="preserve">
+    <value>Wer ist Ihr Schuldner?</value>
+  </data>
+  <data name="WizardDebtorSectionSubtitle" xml:space="preserve">
+    <value>Teilen Sie uns mit, ob es sich um ein Unternehmen oder eine Privatperson handelt und wie wir ihn erreichen.</value>
+  </data>
+  <data name="WizardDebtorTypeCompany" xml:space="preserve">
+    <value>Unternehmen</value>
+  </data>
+  <data name="WizardDebtorTypeIndividual" xml:space="preserve">
+    <value>Privatperson</value>
+  </data>
+  <data name="WizardDebtorCompanyName" xml:space="preserve">
+    <value>Unternehmens- bzw. Schuldnername</value>
+  </data>
+  <data name="WizardDebtorStreet" xml:space="preserve">
+    <value>Straße und Hausnummer</value>
+  </data>
+  <data name="WizardDebtorPostalCode" xml:space="preserve">
+    <value>Postleitzahl</value>
+  </data>
+  <data name="WizardDebtorCity" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="WizardDebtorContactName" xml:space="preserve">
+    <value>Ihr Ansprechpartner</value>
+  </data>
+  <data name="WizardDebtorContactEmail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="WizardContactEmailInvalid" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="WizardContactEmailRequired" xml:space="preserve">
+    <value>E-Mail ist erforderlich.</value>
+  </data>
+  <data name="WizardDebtorContactPhone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="WizardUploadDropHelper" xml:space="preserve">
+    <value>Sie können eine PDF-Rechnung bis 15 MB hochladen. Ziehen Sie die Datei hierher oder klicken Sie zum Auswählen.</value>
+  </data>
+  <data name="WizardUploadProcessingTitle" xml:space="preserve">
+    <value>Wir bereiten Ihren Auftrag vor</value>
+  </data>
+  <data name="WizardUploadProcessingSubtitle" xml:space="preserve">
+    <value>Ihre Rechnung wird jetzt hochgeladen und ausgewertet. Das kann einen Moment dauern.</value>
+  </data>
+  <data name="WizardUploadProcessingComplete" xml:space="preserve">
+    <value>Fertig! Die Rechnungsdetails wurden automatisch übernommen.</value>
+  </data>
+  <data name="WizardUploadProcessingSuccess" xml:space="preserve">
+    <value>Prüfen Sie die vorausgefüllten Angaben und ergänzen Sie fehlende Informationen.</value>
+  </data>
+  <data name="WizardUploadProcessingProgress" xml:space="preserve">
+    <value>Rechnung wird verarbeitet … {0}%</value>
+  </data>
+  <data name="WizardUploadParseWarning" xml:space="preserve">
+    <value>Wir konnten nicht alle Rechnungsfelder automatisch auslesen. Bitte ergänzen Sie die fehlenden Angaben manuell.</value>
+  </data>
+  <data name="WizardUploadProcessingWait" xml:space="preserve">
+    <value>Bitte warten Sie, bis der Rechnungs-Upload abgeschlossen ist.</value>
+  </data>
+  <data name="WizardLegalAgreeTermsPrefix" xml:space="preserve">
+    <value>Ich akzeptiere die </value>
+  </data>
+  <data name="WizardLegalAgreeTermsSuffix" xml:space="preserve">
+    <value>.</value>
+  </data>
+  <data name="WizardLegalAgreePrivacyPrefix" xml:space="preserve">
+    <value>Ich stimme der </value>
+  </data>
+  <data name="WizardLegalAgreePrivacySuffix" xml:space="preserve">
+    <value> zu.</value>
+  </data>
+  <data name="WizardLegalTermsLinkText" xml:space="preserve">
+    <value>Allgemeinen Geschäftsbedingungen</value>
+  </data>
+  <data name="WizardLegalPrivacyLinkText" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="WizardLegalAgreePowerOfAttorney" xml:space="preserve">
+    <value>Ich erteile die Vollmacht.</value>
+  </data>
+  <data name="WizardPreviewTitle" xml:space="preserve">
+    <value>Rechnungsansicht</value>
+  </data>
+  <data name="WizardPreviewUnavailable" xml:space="preserve">
+    <value>Vorschau nicht verfügbar</value>
+  </data>
+  <data name="WizardPreviewOpenLink" xml:space="preserve">
+    <value>PDF öffnen</value>
+  </data>
+  <data name="ClaimsQuotaTitle" xml:space="preserve">
+    <value>Monatliches Forderungslimit</value>
+  </data>
+  <data name="ClaimsQuotaRemainingMessage" xml:space="preserve">
+    <value>Sie haben in diesem Monat noch {0} von {1} Forderungen im Tarif {2} übrig.</value>
+  </data>
+  <data name="ClaimsQuotaUnlimitedMessage" xml:space="preserve">
+    <value>Ihr Tarif {0} beinhaltet unbegrenzte Forderungen pro Monat.</value>
+  </data>
+  <data name="ClaimsQuotaIntervalMonthly" xml:space="preserve">
+    <value>monatlich</value>
+  </data>
+  <data name="ClaimsQuotaIntervalYearly" xml:space="preserve">
+    <value>jährlich</value>
+  </data>
+  <data name="ClaimsQuotaActivationLabel" xml:space="preserve">
+    <value>Aktiv seit {0} • Abgerechnet {1}</value>
+  </data>
+  <data name="ClaimsQuotaManageButton" xml:space="preserve">
+    <value>Plan verwalten</value>
+  </data>
+  <data name="ClaimsQuotaPlanBasic" xml:space="preserve">
+    <value>Basis</value>
+  </data>
+  <data name="ClaimsQuotaPlanPlus" xml:space="preserve">
+    <value>Plus</value>
+  </data>
+  <data name="ClaimsQuotaPlanPremium" xml:space="preserve">
+    <value>Premium</value>
+  </data>
+  <data name="ClaimsQuotaPlanUnlimited" xml:space="preserve">
+    <value>Unbegrenzt</value>
+  </data>
+  <data name="ClaimsQuotaPlanLabel" xml:space="preserve">
+    <value>Tarif {0}</value>
+  </data>
+  <data name="WizardStep4Title" xml:space="preserve">
+    <value>Vollmacht</value>
+  </data>
+  <data name="WizardStep4Description" xml:space="preserve">
+    <value>Unterzeichnen Sie die Bevollmächtigung.</value>
+  </data>
+  <data name="WizardPowerOfAttorneyTitle" xml:space="preserve">
+    <value>Vollmacht unterschreiben</value>
+  </data>
+  <data name="WizardPowerOfAttorneySubtitle" xml:space="preserve">
+    <value>Wir benötigen Ihre Bevollmächtigung, bevor wir mit Ihrem Auftrag fortfahren können.</value>
+  </data>
+  <data name="WizardPowerOfAttorneyDocumentTitle" xml:space="preserve">
+    <value>Vollmacht (Power of Attorney)</value>
+  </data>
+  <data name="WizardPowerOfAttorneyDescription" xml:space="preserve">
+    <value>Mit Ihrer Unterschrift bevollmächtigen Sie Oikos, Sie für die eingereichten Rechnungen zu vertreten, mit dem Schuldner zu kommunizieren und die erforderlichen rechtlichen Schritte einzuleiten.</value>
+  </data>
+  <data name="WizardPowerOfAttorneyInfo" xml:space="preserve">
+    <value>Ihre Vollmacht gilt für alle Rechnungen, die Sie in diesem Vorgang einreichen.</value>
+  </data>
+  <data name="WizardPowerOfAttorneyTemplateLink" xml:space="preserve">
+    <value>Vollmacht-Vorlage öffnen (PDF)</value>
+  </data>
+  <data name="WizardPowerOfAttorneySignatureLabel" xml:space="preserve">
+    <value>Unterschrift</value>
+  </data>
+  <data name="WizardPowerOfAttorneySignatureHelper" xml:space="preserve">
+    <value>Geben Sie Ihren vollständigen Namen als rechtsverbindliche Unterschrift ein.</value>
+  </data>
+  <data name="WizardPowerOfAttorneySignatureRequired" xml:space="preserve">
+    <value>Eine Unterschrift ist erforderlich, um fortzufahren.</value>
+  </data>
+  <data name="WizardPowerOfAttorneyValidation" xml:space="preserve">
+    <value>Bitte unterschreiben Sie die Vollmacht, bevor Sie fortfahren.</value>
+  </data>
+  <data name="WizardDescriptionPowerOfAttorneySignature" xml:space="preserve">
+    <value>Vollmacht unterschrieben von {0} am {1}.</value>
+  </data>
+  <data name="AdminStageNotFound" xml:space="preserve">
+    <value>Status nicht gefunden.</value>
+  </data>
+  <data name="AdminStageUnknown" xml:space="preserve">
+    <value>Unbekannter Status</value>
+  </data>
+  <data name="AdminInvoiceDetailTitle" xml:space="preserve">
+    <value>Rechnungsdetails</value>
+  </data>
+  <data name="MyInvoiceDetailTitle" xml:space="preserve">
+    <value>Forderungsdetails</value>
+  </data>
+  <data name="AdminViewDetails" xml:space="preserve">
+    <value>Details anzeigen</value>
+  </data>
+  <data name="InvoiceDetailTooltip" xml:space="preserve">
+    <value>Details anzeigen</value>
+  </data>
+  <data name="InvoiceDetailDialogTitle" xml:space="preserve">
+    <value>Rechnungsdetails</value>
+  </data>
+  <data name="InvoiceDetailDialogTitleWithId" xml:space="preserve">
+    <value>Rechnungsdetails (#{0})</value>
+  </data>
+  <data name="InvoiceDetailNotFound" xml:space="preserve">
+    <value>Die Rechnung wurde nicht gefunden.</value>
+  </data>
+  <data name="InvoiceDetailPrimaryStageLabel" xml:space="preserve">
+    <value>Aktueller Status</value>
+  </data>
+  <data name="InvoiceDetailAmountLabel" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+  <data name="InvoiceDetailUpdatedLabel" xml:space="preserve">
+    <value>Zuletzt aktualisiert</value>
+  </data>
+  <data name="InvoiceDetailCreatedLabel" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="InvoiceDetailDescriptionLabel" xml:space="preserve">
+    <value>Statusbeschreibung</value>
+  </data>
+  <data name="InvoiceDetailNextStepsLabel" xml:space="preserve">
+    <value>Nächste Schritte</value>
+  </data>
+  <data name="InvoiceDetailHistoryTitle" xml:space="preserve">
+    <value>Statusverlauf</value>
+  </data>
+  <data name="InvoiceDetailHistoryEmpty" xml:space="preserve">
+    <value>Es wurden noch keine Statusänderungen protokolliert.</value>
+  </data>
+  <data name="InvoiceDetailHistoryChanged" xml:space="preserve">
+    <value>Geändert am {0} von {1}</value>
+  </data>
+  <data name="InvoiceDetailHistoryChangedBy" xml:space="preserve">
+    <value>Geändert von {0}</value>
+  </data>
+  <data name="InvoiceDetail_InternBadge" xml:space="preserve">
+    <value>Intern</value>
+  </data>
+  <data name="InvoiceDetailSystemUser" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="CommonClose" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="StageUnknown" xml:space="preserve">
+    <value>Unbekannter Status</value>
+  </data>
+  <data name="TableHeaderActions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="StageManagerTitle" xml:space="preserve">
+    <value>Status verwalten</value>
+  </data>
+  <data name="StageManagerAddButton" xml:space="preserve">
+    <value>Status hinzufügen</value>
+  </data>
+  <data name="StageManagerNameColumn" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="StageManagerSlugColumn" xml:space="preserve">
+    <value>Kurzname</value>
+  </data>
+  <data name="StageManagerSummaryColumn" xml:space="preserve">
+    <value>Kurzbeschreibung</value>
+  </data>
+  <data name="StageManagerUpdatedColumn" xml:space="preserve">
+    <value>Aktualisiert</value>
+  </data>
+  <data name="StageManagerActionsColumn" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="StageManagerMoveUpTooltip" xml:space="preserve">
+    <value>Nach oben</value>
+  </data>
+  <data name="StageManagerMoveDownTooltip" xml:space="preserve">
+    <value>Nach unten</value>
+  </data>
+  <data name="StageManagerEditTooltip" xml:space="preserve">
+    <value>Status bearbeiten</value>
+  </data>
+  <data name="StageManagerDeleteTooltip" xml:space="preserve">
+    <value>Status löschen</value>
+  </data>
+  <data name="StageManagerEmpty" xml:space="preserve">
+    <value>Keine Status vorhanden.</value>
+  </data>
+  <data name="StageManagerAddDialogTitle" xml:space="preserve">
+    <value>Status anlegen</value>
+  </data>
+  <data name="StageManagerEditDialogTitle" xml:space="preserve">
+    <value>Status bearbeiten</value>
+  </data>
+  <data name="StageManagerDeleteDialogTitle" xml:space="preserve">
+    <value>Status löschen</value>
+  </data>
+  <data name="StageManagerDeleteDialogMessage" xml:space="preserve">
+    <value>Möchten Sie den Status "{0}" wirklich löschen?</value>
+  </data>
+  <data name="StageManagerDeleteBlocked" xml:space="preserve">
+    <value>Dieser Status ist noch Rechnungen zugeordnet und kann nicht gelöscht werden.</value>
+  </data>
+  <data name="StageManagerDeleteSuccess" xml:space="preserve">
+    <value>Status erfolgreich gelöscht.</value>
+  </data>
+  <data name="StageManagerNotFound" xml:space="preserve">
+    <value>Status nicht gefunden.</value>
+  </data>
+  <data name="StageManagerSlugValidation" xml:space="preserve">
+    <value>Bitte geben Sie einen gültigen Slug ein.</value>
+  </data>
+  <data name="StageManagerSlugExists" xml:space="preserve">
+    <value>Der Slug wird bereits verwendet.</value>
+  </data>
+  <data name="StageManagerSaveSuccess" xml:space="preserve">
+    <value>Status erfolgreich gespeichert.</value>
+  </data>
+  <data name="StageManagerNameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="StageManagerSlugLabel" xml:space="preserve">
+    <value>Kurzname</value>
+  </data>
+  <data name="StageManagerSummaryLabel" xml:space="preserve">
+    <value>Kurzbeschreibung</value>
+  </data>
+  <data name="StageManagerDescriptionLabel" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="StageManagerNextStepsLabel" xml:space="preserve">
+    <value>Nächste Schritte</value>
+  </data>
+  <data name="StageManagerIconLabel" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="StageManagerIconSearchPlaceholder" xml:space="preserve">
+    <value>Symbole suchen</value>
+  </data>
+  <data name="StageManagerColorLabel" xml:space="preserve">
+    <value>Farbe</value>
+  </data>
+  <data name="WizardMissingStageError" xml:space="preserve">
+    <value>Es sind keine Rechnungsstatus konfiguriert. Bitte wenden Sie sich an den Support.</value>
+  </data>
+  <data name="WizardMonthlyClaimLimitExceeded" xml:space="preserve">
+    <value>Sie können in diesem Monat noch {0} Claims einreichen.</value>
+  </data>
+  <data name="WizardSubscriptionExpired" xml:space="preserve">
+    <value>Ihr Abonnement ist am {0} abgelaufen. Bitte verlängern Sie, um Claims einzureichen.</value>
+  </data>
+  <data name="StatusLegendTitle" xml:space="preserve">
+    <value>Statusübersicht</value>
+  </data>
+  <data name="StatusLegendSubtitle" xml:space="preserve">
+    <value>Hier finden Sie eine Beschreibung aller möglichen Statusmeldungen im Forderungsprozess.</value>
+  </data>
+  <data name="StatusLegendHeaderStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusLegendHeaderDescription" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="StatusLegendAcceptedStatus" xml:space="preserve">
+    <value>Angenommene Rechnungen</value>
+  </data>
+  <data name="StatusLegendAcceptedEnglish" xml:space="preserve">
+    <value>Accepted invoices</value>
+  </data>
+  <data name="StatusLegendAcceptedDescription" xml:space="preserve">
+    <value>Rechnungen, die vollständig geprüft und akzeptiert wurden.</value>
+  </data>
+  <data name="StatusLegendStatusMessageStatus" xml:space="preserve">
+    <value>Status Meldung</value>
+  </data>
+  <data name="StatusLegendStatusMessageEnglish" xml:space="preserve">
+    <value>Status message</value>
+  </data>
+  <data name="StatusLegendStatusMessageDescription" xml:space="preserve">
+    <value>Allgemeine Statusmeldung zum aktuellen Bearbeitungsstand.</value>
+  </data>
+  <data name="StatusLegendDunningStatus" xml:space="preserve">
+    <value>Mahnantrag</value>
+  </data>
+  <data name="StatusLegendDunningEnglish" xml:space="preserve">
+    <value>Dunning application</value>
+  </data>
+  <data name="StatusLegendDunningDescription" xml:space="preserve">
+    <value>Antrag auf Erlass eines Mahnbescheids beim zuständigen Gericht.</value>
+  </data>
+  <data name="StatusLegendCaseNumberStatus" xml:space="preserve">
+    <value>Fallnummer</value>
+  </data>
+  <data name="StatusLegendCaseNumberEnglish" xml:space="preserve">
+    <value>Case number</value>
+  </data>
+  <data name="StatusLegendCaseNumberDescription" xml:space="preserve">
+    <value>Eindeutige Referenz- bzw. Aktennummer Ihres Falls.</value>
+  </data>
+  <data name="StatusLegendReceivedStatus" xml:space="preserve">
+    <value>Eingang</value>
+  </data>
+  <data name="StatusLegendReceivedEnglish" xml:space="preserve">
+    <value>Received</value>
+  </data>
+  <data name="StatusLegendReceivedDescription" xml:space="preserve">
+    <value>Datum, an dem Ihr Antrag oder Ihre Rechnung bei uns eingegangen ist.</value>
+  </data>
+  <data name="StatusLegendFinalCheckStatus" xml:space="preserve">
+    <value>Final geprüft</value>
+  </data>
+  <data name="StatusLegendFinalCheckEnglish" xml:space="preserve">
+    <value>Finally checked</value>
+  </data>
+  <data name="StatusLegendFinalCheckDescription" xml:space="preserve">
+    <value>Ihre Unterlagen wurden abschließend geprüft.</value>
+  </data>
+  <data name="StatusLegendDunningSentStatus" xml:space="preserve">
+    <value>Mahnantrag an das zuständige Gericht versendet</value>
+  </data>
+  <data name="StatusLegendDunningSentEnglish" xml:space="preserve">
+    <value>Dunning application sent to the competent court</value>
+  </data>
+  <data name="StatusLegendDunningSentDescription" xml:space="preserve">
+    <value>Der Mahnantrag wurde an das zuständige Gericht übermittelt.</value>
+  </data>
+  <data name="StatusLegendDunningReceivedStatus" xml:space="preserve">
+    <value>Mahnantrag erfolgreich erhalten</value>
+  </data>
+  <data name="StatusLegendDunningReceivedEnglish" xml:space="preserve">
+    <value>Dunning application successfully received</value>
+  </data>
+  <data name="StatusLegendDunningReceivedDescription" xml:space="preserve">
+    <value>Das Gericht hat den Mahnantrag erfolgreich erhalten.</value>
+  </data>
+  <data name="StatusLegendDeadlineStatus" xml:space="preserve">
+    <value>Frist</value>
+  </data>
+  <data name="StatusLegendDeadlineEnglish" xml:space="preserve">
+    <value>Deadline</value>
+  </data>
+  <data name="StatusLegendDeadlineDescription" xml:space="preserve">
+    <value>Frist, innerhalb derer der Schuldner reagieren kann.</value>
+  </data>
+  <data name="StatusLegendObjectionStatus" xml:space="preserve">
+    <value>Widerspruch eingelegt</value>
+  </data>
+  <data name="StatusLegendObjectionEnglish" xml:space="preserve">
+    <value>Objection filed</value>
+  </data>
+  <data name="StatusLegendObjectionDescription" xml:space="preserve">
+    <value>Der Schuldner hat Widerspruch gegen den Mahnbescheid eingelegt.</value>
+  </data>
+  <data name="StatusLegendEnforcementStatus" xml:space="preserve">
+    <value>Vollstreckungsantrag</value>
+  </data>
+  <data name="StatusLegendEnforcementEnglish" xml:space="preserve">
+    <value>Enforcement application</value>
+  </data>
+  <data name="StatusLegendEnforcementDescription" xml:space="preserve">
+    <value>Antrag auf Zwangsvollstreckung aus dem Titel.</value>
+  </data>
+  <data name="StatusLegendTitleReceivedStatus" xml:space="preserve">
+    <value>Vollstreckungstitel erhalten</value>
+  </data>
+  <data name="StatusLegendTitleReceivedEnglish" xml:space="preserve">
+    <value>Enforcement title received</value>
+  </data>
+  <data name="StatusLegendTitleReceivedDescription" xml:space="preserve">
+    <value>Der Vollstreckungstitel wurde erteilt und liegt vor.</value>
+  </data>
+  <data name="NavAudit" xml:space="preserve">
+    <value>Audit</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Logs" xml:space="preserve">
+    <value>Protokolle</value>
+  </data>
+  <data name="NavLog" xml:space="preserve">
+    <value>Protokoll</value>
+  </data>
+  <data name="Permission" xml:space="preserve">
+    <value>Berechtigungen</value>
+  </data>
+  <data name="NavPermission" xml:space="preserve">
+    <value>Berechtigung</value>
+  </data>
+  <data name="NavUser" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Anmeldung</value>
+  </data>
+  <data name="NavLogin" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="NavSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Audit" xml:space="preserve">
+    <value>Audit</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Rollen</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menü</value>
+  </data>
+  <data name="Partnernetzwerk" xml:space="preserve">
+    <value>Partnernetzwerk</value>
+  </data>
+  <data name="PartnerNetwork_ComingSoon" xml:space="preserve">
+    <value>Bald verfügbar</value>
+  </data>
+  <data name="AvatarUpdateFailed" xml:space="preserve">
+    <value>Avatar-Aktualisierung fehlgeschlagen.</value>
+  </data>
+  <data name="AvatarUpdateSuccess" xml:space="preserve">
+    <value>Avatar erfolgreich aktualisiert!</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Metrics" xml:space="preserve">
+    <value>Kennzahlen</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="NavMenu" xml:space="preserve">
+    <value>Menü</value>
+  </data>
+  <data name="NavRole" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="NavConfig" xml:space="preserve">
+    <value>Konfiguration</value>
+  </data>
+  <data name="NavHome" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Claims" xml:space="preserve">
+    <value>Forderungen</value>
+  </data>
+  <data name="Claims Center" xml:space="preserve">
+    <value>Forderungscenter</value>
+  </data>
+  <data name="Claims In Review" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="Claims Accepted" xml:space="preserve">
+    <value>Angenommen</value>
+  </data>
+  <data name="Claims Archived" xml:space="preserve">
+    <value>Archiviert</value>
+  </data>
+  <data name="New Claim" xml:space="preserve">
+    <value>Neue Forderung</value>
+  </data>
+  <data name="Invoices" xml:space="preserve">
+    <value>Rechnungen</value>
+  </data>
+  <data name="Company Checks" xml:space="preserve">
+    <value>Unternehmensprüfungen</value>
+  </data>
+  <data name="Zu unseren Partnerbanken" xml:space="preserve">
+    <value>Zu unseren Partnerbanken</value>
+  </data>
+  <data name="Versicherungspartner im Überblick" xml:space="preserve">
+    <value>Versicherungspartner im Überblick</value>
+  </data>
+  <data name="Bonix – Digitale Bonität auf Abruf" xml:space="preserve">
+    <value>Bonix – Digitale Bonität auf Abruf</value>
+  </data>
+  <data name="Previous Checks" xml:space="preserve">
+    <value>Vorherige Prüfungen</value>
+  </data>
+  <data name="Claims Admin" xml:space="preserve">
+    <value>Forderungsverwaltung</value>
+  </data>
+  <data name="ThemeDarkMode" xml:space="preserve">
+    <value>Dunkelmodus</value>
+  </data>
+  <data name="ThemeLight" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="ThemeDark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="ThemePrimary" xml:space="preserve">
+    <value>Primär</value>
+  </data>
+  <data name="CultureLanguage" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="NavMetrics" xml:space="preserve">
+    <value>Metriken</value>
+  </data>
+  <data name="NavCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Benachrichtigung</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>Nachricht senden</value>
+  </data>
+  <data name="ViewUnread" xml:space="preserve">
+    <value>Ungelesene anzeigen</value>
+  </data>
+  <data name="MarkAllAsRead" xml:space="preserve">
+    <value>Alle als gelesen markieren</value>
+  </data>
+  <data name="DeleteAllRead" xml:space="preserve">
+    <value>Alle gelesenen Nachrichten löschen</value>
+  </data>
+  <data name="NoNotifications" xml:space="preserve">
+    <value>Keine Benachrichtigungen</value>
+  </data>
+  <data name="MarkAsRead" xml:space="preserve">
+    <value>Als gelesen markieren</value>
+  </data>
+  <data name="DeleteMessage" xml:space="preserve">
+    <value>Nachricht löschen</value>
+  </data>
+  <data name="ViewDetails" xml:space="preserve">
+    <value>Details anzeigen</value>
+  </data>
+  <data name="SystemSender" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Sender" xml:space="preserve">
+    <value>Absender</value>
+  </data>
+  <data name="Receiver" xml:space="preserve">
+    <value>Empfänger</value>
+  </data>
+  <data name="SendTime" xml:space="preserve">
+    <value>Sendezeit</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Senden</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Inhalt</value>
+  </data>
+  <data name="Receivers" xml:space="preserve">
+    <value>Empfänger</value>
+  </data>
+  <data name="TitleRequired" xml:space="preserve">
+    <value>Titel ist erforderlich</value>
+  </data>
+  <data name="ContentRequired" xml:space="preserve">
+    <value>Inhalt ist erforderlich</value>
+  </data>
+  <data name="ReceiversRequired" xml:space="preserve">
+    <value>Bitte Empfänger auswählen</value>
+  </data>
+  <data name="AccountSettings_Title" xml:space="preserve">
+    <value>Kontoeinstellungen</value>
+  </data>
+  <data name="AccountSettings_Info" xml:space="preserve">
+    <value>Kontoinformationen</value>
+  </data>
+  <data name="AccountSettings_Username" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="AccountSettings_FullName" xml:space="preserve">
+    <value>Vollständiger Name</value>
+  </data>
+  <data name="AccountSettings_AcademicTitle" xml:space="preserve">
+    <value>Akademischer Titel</value>
+  </data>
+  <data name="AccountSettings_Gender" xml:space="preserve">
+    <value>Geschlecht</value>
+  </data>
+  <data name="AccountSettings_Company" xml:space="preserve">
+    <value>Unternehmen</value>
+  </data>
+  <data name="AccountSettings_Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="AccountSettings_Phone" xml:space="preserve">
+    <value>Telefonnummer</value>
+  </data>
+  <data name="AccountSettings_CustomerNumber" xml:space="preserve">
+    <value>Kundennummer</value>
+  </data>
+  <data name="AccountSettings_NotProvided" xml:space="preserve">
+    <value>Nicht angegeben</value>
+  </data>
+  <data name="AccountSettings_NotAssigned" xml:space="preserve">
+    <value>Nicht zugewiesen</value>
+  </data>
+  <data name="AccountSettings_Security" xml:space="preserve">
+    <value>Sicherheit</value>
+  </data>
+  <data name="AccountSettings_ChangePassword" xml:space="preserve">
+    <value>Passwort ändern</value>
+  </data>
+  <data name="AccountSettings_ActivePlan" xml:space="preserve">
+    <value>Aktiver Tarif</value>
+  </data>
+  <data name="AccountSettings_PlanLabel" xml:space="preserve">
+    <value>Tarif:</value>
+  </data>
+  <data name="AccountSettings_ExpiresLabel" xml:space="preserve">
+    <value>Läuft ab:</value>
+  </data>
+  <data name="AccountSettings_NoExpiration" xml:space="preserve">
+    <value>Kein Ablaufdatum</value>
+  </data>
+  <data name="AccountSettings_EditAvatarTitle" xml:space="preserve">
+    <value>Bild bearbeiten</value>
+  </data>
+  <data name="Admin_PageTitle" xml:space="preserve">
+    <value>Partnernetzwerk verwalten</value>
+  </data>
+  <data name="Admin_PageSubtitle" xml:space="preserve">
+    <value>Pflegen Sie hier zentrale Inhalte für Partnerbanken und Versicherungspartner, damit die Fachseite automatisch aktualisiert wird.</value>
+  </data>
+  <data name="Admin_BanksTitle" xml:space="preserve">
+    <value>Partnerbanken</value>
+  </data>
+  <data name="Admin_BanksSubtitle" xml:space="preserve">
+    <value>Verwalten Sie die Inhalte der Partnerbanken für die öffentliche Seite.</value>
+  </data>
+  <data name="Admin_BanksPanelTitle" xml:space="preserve">
+    <value>Partnerbanken</value>
+  </data>
+  <data name="Admin_BanksAdd" xml:space="preserve">
+    <value>Neue Bank</value>
+  </data>
+  <data name="Admin_BanksEmptyTitle" xml:space="preserve">
+    <value>Noch keine Partnerbank erfasst</value>
+  </data>
+  <data name="Admin_BanksEmptyDescription" xml:space="preserve">
+    <value>Erstellen Sie die erste Bank, um die Fachseite befüllen zu können.</value>
+  </data>
+  <data name="Admin_InsurancePanelTitle" xml:space="preserve">
+    <value>Versicherungspartner</value>
+  </data>
+  <data name="Admin_InsuranceTitle" xml:space="preserve">
+    <value>Versicherungspartner</value>
+  </data>
+  <data name="Admin_InsuranceSubtitle" xml:space="preserve">
+    <value>Verwalten Sie die Inhalte der Versicherungspartner für die öffentliche Seite.</value>
+  </data>
+  <data name="Admin_InsuranceAdd" xml:space="preserve">
+    <value>Neuer Partner</value>
+  </data>
+  <data name="Admin_InsuranceEmptyTitle" xml:space="preserve">
+    <value>Noch kein Versicherungspartner</value>
+  </data>
+  <data name="Admin_InsuranceEmptyDescription" xml:space="preserve">
+    <value>Legen Sie Versicherungsangebote an, die auf der Partnerseite erscheinen sollen.</value>
+  </data>
+  <data name="Admin_SaveBankSuccess" xml:space="preserve">
+    <value>Partnerbank gespeichert</value>
+  </data>
+  <data name="Admin_DeleteBankSuccess" xml:space="preserve">
+    <value>Partnerbank gelöscht</value>
+  </data>
+  <data name="Admin_DeleteBankConfirmTitle" xml:space="preserve">
+    <value>Bank löschen</value>
+  </data>
+  <data name="Admin_DeleteBankConfirmMessage" xml:space="preserve">
+    <value>Soll '{0}' wirklich entfernt werden?</value>
+  </data>
+  <data name="Admin_DeleteConfirmYes" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Admin_DeleteConfirmCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Admin_SaveInsuranceSuccess" xml:space="preserve">
+    <value>Versicherungspartner gespeichert</value>
+  </data>
+  <data name="Admin_DeleteInsuranceSuccess" xml:space="preserve">
+    <value>Versicherungspartner gelöscht</value>
+  </data>
+  <data name="Admin_DeleteInsuranceConfirmTitle" xml:space="preserve">
+    <value>Versicherungspartner löschen</value>
+  </data>
+  <data name="Admin_DeleteInsuranceConfirmMessage" xml:space="preserve">
+    <value>Soll '{0}' wirklich entfernt werden?</value>
+  </data>
+  <data name="BankEditor_CreateTitle" xml:space="preserve">
+    <value>Neue Partnerbank</value>
+  </data>
+  <data name="BankEditor_EditTitle" xml:space="preserve">
+    <value>Partnerbank bearbeiten</value>
+  </data>
+  <data name="BankEditor_NameLabel" xml:space="preserve">
+    <value>Bankname</value>
+  </data>
+  <data name="BankEditor_RegionsLabel" xml:space="preserve">
+    <value>Bundesländer</value>
+  </data>
+  <data name="BankEditor_DescriptionLabel" xml:space="preserve">
+    <value>Kurzbeschreibung</value>
+  </data>
+  <data name="BankEditor_DetailsLabel" xml:space="preserve">
+    <value>Leistungs-Highlights</value>
+  </data>
+  <data name="BankEditor_DetailsHelper" xml:space="preserve">
+    <value>Mehrere Stichpunkte können mit Zeilenumbrüchen getrennt werden.</value>
+  </data>
+  <data name="BankEditor_ContactLabel" xml:space="preserve">
+    <value>Kontaktinformationen</value>
+  </data>
+  <data name="BankEditor_WebsiteLabel" xml:space="preserve">
+    <value>Webseite</value>
+  </data>
+  <data name="BankEditor_LogoLabel" xml:space="preserve">
+    <value>Logo-URL</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="InsuranceEditor_CreateTitle" xml:space="preserve">
+    <value>Neuer Versicherungspartner</value>
+  </data>
+  <data name="InsuranceEditor_EditTitle" xml:space="preserve">
+    <value>Versicherungspartner bearbeiten</value>
+  </data>
+  <data name="InsuranceEditor_NameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="InsuranceEditor_DescriptionLabel" xml:space="preserve">
+    <value>Kurzbeschreibung</value>
+  </data>
+  <data name="InsuranceEditor_CoverageLabel" xml:space="preserve">
+    <value>Leistungsumfang</value>
+  </data>
+  <data name="InsuranceEditor_ContactLabel" xml:space="preserve">
+    <value>Kontaktinformationen</value>
+  </data>
+  <data name="InsuranceEditor_WebsiteLabel" xml:space="preserve">
+    <value>Webseite</value>
+  </data>
+  <data name="InsuranceEditor_LogoLabel" xml:space="preserve">
+    <value>Logo-URL</value>
+  </data>
+  <data name="PartnerBanks_Title" xml:space="preserve">
+    <value>Zu unseren Partnerbanken</value>
+  </data>
+  <data name="PartnerBanks_Subtitle" xml:space="preserve">
+    <value>Wählen Sie Ihr Bundesland aus und sehen Sie sofort, welche Partnerbanken wir vor Ort für Sie bereitstehen haben.</value>
+  </data>
+  <data name="PartnerBanks_SelectorTitle" xml:space="preserve">
+    <value>Ihr Standort in Deutschland</value>
+  </data>
+  <data name="PartnerBanks_SelectorPlaceholder" xml:space="preserve">
+    <value>Bundesland wählen</value>
+  </data>
+  <data name="PartnerBanks_SelectPromptTitle" xml:space="preserve">
+    <value>Bitte wählen Sie zunächst ein Bundesland</value>
+  </data>
+  <data name="PartnerBanks_SelectPromptDescription" xml:space="preserve">
+    <value>Nach der Auswahl zeigen wir Ihnen alle verfügbaren Partnerbanken.</value>
+  </data>
+  <data name="PartnerBanks_NoBanksTitle" xml:space="preserve">
+    <value>Keine Partnerbank hinterlegt</value>
+  </data>
+  <data name="PartnerBanks_NoBanksDescription" xml:space="preserve">
+    <value>Für dieses Bundesland ist aktuell noch keine Partnerbank erfasst.</value>
+  </data>
+  <data name="PartnerBanks_ButtonLabel" xml:space="preserve">
+    <value>Zur Bankseite</value>
+  </data>
+  <data name="InsurancePartners_Title" xml:space="preserve">
+    <value>Versicherungspartner im Überblick</value>
+  </data>
+  <data name="InsurancePartners_Subtitle" xml:space="preserve">
+    <value>Unsere Versicherungspartner unterstützen Sie mit maßgeschneiderten Policen – transparent, digital und auf Ihren Bedarf zugeschnitten.</value>
+  </data>
+  <data name="InsurancePartners_EmptyTitle" xml:space="preserve">
+    <value>Noch keine Versicherungspartner hinterlegt</value>
+  </data>
+  <data name="InsurancePartners_EmptyDescription" xml:space="preserve">
+    <value>Sobald Partner gepflegt werden, erscheinen sie hier automatisch.</value>
+  </data>
+  <data name="InsurancePartners_ButtonLabel" xml:space="preserve">
+    <value>Mehr erfahren</value>
+  </data>
+  <data name="PartnerManagement_Add" xml:space="preserve">
+    <value>Partner hinzufügen</value>
+  </data>
+  <data name="PartnerManagement_Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="PartnerManagement_Contact" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="PartnerManagement_Created" xml:space="preserve">
+    <value>Angelegt</value>
+  </data>
+  <data name="PartnerManagement_Customers" xml:space="preserve">
+    <value>Kunden</value>
+  </data>
+  <data name="PartnerManagement_DeleteConfirm" xml:space="preserve">
+    <value>Partner {0} löschen?</value>
+  </data>
+  <data name="PartnerManagement_DeleteSuccess" xml:space="preserve">
+    <value>Partner gelöscht.</value>
+  </data>
+  <data name="PartnerManagement_DeleteTitle" xml:space="preserve">
+    <value>Partner löschen</value>
+  </data>
+  <data name="PartnerManagement_EmptyDescription" xml:space="preserve">
+    <value>Legen Sie Ihren ersten Partner an, um Leads nachzuverfolgen.</value>
+  </data>
+  <data name="PartnerManagement_EmptyTitle" xml:space="preserve">
+    <value>Noch keine Partner</value>
+  </data>
+  <data name="PartnerManagement_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PartnerManagement_Subtitle" xml:space="preserve">
+    <value>Verwalten Sie Partner, die neue Kunden vermitteln.</value>
+  </data>
+  <data name="PartnerManagement_Title" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="PartnerManagement_RechtfixLink" xml:space="preserve">
+    <value>Rechtfix-Link</value>
+  </data>
+  <data name="PartnerManagement_BonixLink" xml:space="preserve">
+    <value>Bonix-Link</value>
+  </data>
+  <data name="PartnerManagement_RechtfixLinkType" xml:space="preserve">
+    <value>Rechtfix Registrierung</value>
+  </data>
+  <data name="PartnerManagement_BonixLinkType" xml:space="preserve">
+    <value>Bonix Registrierung</value>
+  </data>
+  <data name="PartnerManagement_LinkCopied" xml:space="preserve">
+    <value>Link für {0} kopiert!</value>
+  </data>
+  <data name="PartnerManagement_CopyFailed" xml:space="preserve">
+    <value>Kopieren fehlgeschlagen. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="PartnerDialog_Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="PartnerDialog_CodeHelper" xml:space="preserve">
+    <value>Wird in Empfehlungslinks und bei der Registrierung genutzt.</value>
+  </data>
+  <data name="PartnerDialog_CodeLabel" xml:space="preserve">
+    <value>Partnercode</value>
+  </data>
+  <data name="PartnerDialog_ContactLabel" xml:space="preserve">
+    <value>Kontakt-E-Mail</value>
+  </data>
+  <data name="PartnerDialog_CreateSuccess" xml:space="preserve">
+    <value>Partner erstellt.</value>
+  </data>
+  <data name="PartnerDialog_CreateTitle" xml:space="preserve">
+    <value>Partner anlegen</value>
+  </data>
+  <data name="PartnerDialog_EditTitle" xml:space="preserve">
+    <value>Partner bearbeiten</value>
+  </data>
+  <data name="PartnerDialog_NameLabel" xml:space="preserve">
+    <value>Partnername</value>
+  </data>
+  <data name="PartnerDialog_NotesLabel" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="PartnerDialog_Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="PartnerDialog_UpdateSuccess" xml:space="preserve">
+    <value>Partner aktualisiert.</value>
+  </data>
+  <data name="MenuPage_AddButtonText" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="MenuPage_CancelButtonText" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="MenuPage_ClearBtnText" xml:space="preserve">
+    <value>Auswahl löschen</value>
+  </data>
+  <data name="MenuPage_DeleteButtonText" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="MenuPage_IconSelectLabel" xml:space="preserve">
+    <value>Menüsymbol</value>
+  </data>
+  <data name="MenuPage_MenuIdentityLabel" xml:space="preserve">
+    <value>Elementkennung</value>
+  </data>
+  <data name="MenuPage_MenuIdentityPlaceHolder" xml:space="preserve">
+    <value>Bitte die Seitenelementkennung eingeben</value>
+  </data>
+  <data name="MenuPage_MenuNameLablel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="MenuPage_MenuNamePlaceHolder" xml:space="preserve">
+    <value>Bitte den Namen eingeben</value>
+  </data>
+  <data name="MenuPage_MenuRouteLabel" xml:space="preserve">
+    <value>Route</value>
+  </data>
+  <data name="MenuPage_MenuRoutePlaceHolder" xml:space="preserve">
+    <value>Bitte die Route eingeben</value>
+  </data>
+  <data name="MenuPage_MenuTypeRadioLabel" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="MenuPage_MenuTypeRadioText1" xml:space="preserve">
+    <value>Menü</value>
+  </data>
+  <data name="MenuPage_MenuTypeRadioText2" xml:space="preserve">
+    <value>Seitenelement</value>
+  </data>
+  <data name="MenuPage_SearchIconPlaceholder" xml:space="preserve">
+    <value>Name eingeben</value>
+  </data>
+  <data name="MenuPage_SubmitButtonText" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="MenuPage_Title" xml:space="preserve">
+    <value>Menü</value>
+  </data>
+  <data name="MenuPage_UpMenuSelectTitle" xml:space="preserve">
+    <value>Hauptmenü</value>
+  </data>
+  <data name="MenuPage_UpMenuTitleText" xml:space="preserve">
+    <value>Übergeordnetes Menü auswählen</value>
+  </data>
+  <data name="OrganizationPage_Title" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="RolePage_ComfirmDeleteText" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="RolePage_CreateNewTitle" xml:space="preserve">
+    <value>Neue Rolle erstellen</value>
+  </data>
+  <data name="RolePage_DeleteTitle" xml:space="preserve">
+    <value>Löschen bestätigen</value>
+  </data>
+  <data name="RolePage_EditTitle" xml:space="preserve">
+    <value>Rolle bearbeiten</value>
+  </data>
+  <data name="RolePage_SearchKeywordPlaceholder" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="RolePage_SetRoleMenuTitle" xml:space="preserve">
+    <value>Menü festlegen</value>
+  </data>
+  <data name="RolePage_StatusChangedMessage" xml:space="preserve">
+    <value>Änderung erfolgreich!</value>
+  </data>
+  <data name="RolePage_SubmitText" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="RolePage_TableH1" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="RolePage_TableH2" xml:space="preserve">
+    <value>Rollenname</value>
+  </data>
+  <data name="RolePage_TableH3" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="RolePage_TableH4" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="RolePage_Title" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="UserPage_ComfirmDeleteText" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="UserPage_CreateNewTitle" xml:space="preserve">
+    <value>Neuen Benutzer erstellen</value>
+  </data>
+  <data name="UserPage_DeleteTitle" xml:space="preserve">
+    <value>Löschen bestätigen</value>
+  </data>
+  <data name="UserPage_EditTitle" xml:space="preserve">
+    <value>Benutzer bearbeiten</value>
+  </data>
+  <data name="UserPage_ModifyPasswordTitle" xml:space="preserve">
+    <value>Passwort ändern</value>
+  </data>
+  <data name="UserPage_SearchKeywordPlaceholder" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="UserPage_SearchName" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="UserPage_SearchOrg" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="UserPage_SearchRealName" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="UserPage_SearchRole" xml:space="preserve">
+    <value>Benutzerrolle</value>
+  </data>
+  <data name="UserPage_SetUserRoleTitle" xml:space="preserve">
+    <value>Rolle festlegen</value>
+  </data>
+  <data name="UserPage_StatusChangedMessage" xml:space="preserve">
+    <value>Änderung erfolgreich!</value>
+  </data>
+  <data name="UserPage_SubmitText" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="UserPage_TableH1" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="UserPage_TableCustomerNumber" xml:space="preserve">
+    <value>Kundennummer</value>
+  </data>
+  <data name="UserPage_TableH10" xml:space="preserve">
+    <value>Telefonnummer</value>
+  </data>
+  <data name="UserPage_TableH2" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="UserPage_TableH3" xml:space="preserve">
+    <value>Login-E-Mail</value>
+  </data>
+  <data name="UserPage_TableH4" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="UserPage_TableH5" xml:space="preserve">
+    <value>Aktion</value>
+  </data>
+  <data name="UserPage_TableH6" xml:space="preserve">
+    <value>Echter Name</value>
+  </data>
+  <data name="UserPage_TableH7" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="UserPage_TableH8" xml:space="preserve">
+    <value>Organisation</value>
+  </data>
+  <data name="UserPage_TableH9" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="UserPage_TableCompany" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="UserPage_TablePartner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="UserPage_TablePartnerCode" xml:space="preserve">
+    <value>Partnercode</value>
+  </data>
+  <data name="UserPage_TablePrivacy" xml:space="preserve">
+    <value>Datenschutz akzeptiert</value>
+  </data>
+  <data name="UserPage_TablePrivacyAt" xml:space="preserve">
+    <value>Akzeptiert am</value>
+  </data>
+  <data name="UserPage_TableSepaMandate" xml:space="preserve">
+    <value>SEPA-Mandat</value>
+  </data>
+  <data name="UserPage_ViewSepaMandate" xml:space="preserve">
+    <value>Mandat ansehen</value>
+  </data>
+  <data name="UserPage_Title" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="UserPage_TitleLabel" xml:space="preserve">
+    <value>Akademischer Titel</value>
+  </data>
+  <data name="UserPage_TitlePlaceholder" xml:space="preserve">
+    <value>Akademischen Titel auswählen</value>
+  </data>
+  <data name="UserPage_TitleOptionDr" xml:space="preserve">
+    <value>Dr.</value>
+  </data>
+  <data name="UserPage_TitleOptionMr" xml:space="preserve">
+    <value>Herr</value>
+  </data>
+  <data name="UserPage_TitleOptionMrsMs" xml:space="preserve">
+    <value>Frau</value>
+  </data>
+  <data name="UserPage_TitleOptionProf" xml:space="preserve">
+    <value>Prof.</value>
+  </data>
+  <data name="UserPage_TitleOptionProfDr" xml:space="preserve">
+    <value>Prof. Dr.</value>
+  </data>
+  <data name="UserPage_GenderLabel" xml:space="preserve">
+    <value>Geschlecht</value>
+  </data>
+  <data name="UserPage_GenderPlaceholder" xml:space="preserve">
+    <value>Geschlecht auswählen</value>
+  </data>
+  <data name="UserPage_GenderOptionFemale" xml:space="preserve">
+    <value>Weiblich</value>
+  </data>
+  <data name="UserPage_GenderOptionMale" xml:space="preserve">
+    <value>Männlich</value>
+  </data>
+  <data name="UserPage_GenderOptionDiverse" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="UserPage_FirstNameLabel" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="UserPage_LastNameLabel" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="UserPage_CustomerNumberLabel" xml:space="preserve">
+    <value>Kundennummer</value>
+  </data>
+  <data name="UserPage_CustomerNumberHelper" xml:space="preserve">
+    <value>Leer lassen, um automatisch zu generieren</value>
+  </data>
+  <data name="UserPage_CustomerNumberDuplicate" xml:space="preserve">
+    <value>Die Kundennummer wird bereits verwendet!</value>
+  </data>
+  <data name="UserPage_CustomerNumberTooLong" xml:space="preserve">
+    <value>Kundennummer ist zu lang</value>
+  </data>
+  <data name="UserPage_PartnerLabel" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="UserPage_PartnerPlaceholder" xml:space="preserve">
+    <value>Partner auswählen (optional)</value>
+  </data>
+  <data name="UserPage_NoPartnerOption" xml:space="preserve">
+    <value>Kein Partner</value>
+  </data>
+  <data name="UserPage_RoleLabel" xml:space="preserve">
+    <value>Rolle</value>
+  </data>
+  <data name="UserPage_RolePlaceholder" xml:space="preserve">
+    <value>Rolle auswählen</value>
+  </data>
+ <data name="UserPage_TableTitle" xml:space="preserve">
+    <value>Akademischer Titel</value>
+  </data>
+  <data name="UserPage_TableGender" xml:space="preserve">
+    <value>Geschlecht</value>
+  </data>
+  <data name="UserPage_TableFirstName" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="UserPage_TableLastName" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="UserPage_Filters" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="UserPage_Search" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="UserPage_Reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="UserPage_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="UserPage_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="UserPage_UserNotFound" xml:space="preserve">
+    <value>Benutzer nicht gefunden.</value>
+  </data>
+  <data name="UserPage_Active" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="UserPage_Inactive" xml:space="preserve">
+    <value>Inaktiv</value>
+  </data>
+  <data name="UserPage_Section_Account" xml:space="preserve">
+    <value>Konto</value>
+  </data>
+  <data name="UserPage_Username" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="UserPage_FullName" xml:space="preserve">
+    <value>Vollständiger Name</value>
+  </data>
+  <data name="UserPage_Details_Title" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="UserPage_Details_Gender" xml:space="preserve">
+    <value>Geschlecht</value>
+  </data>
+  <data name="UserPage_Section_Contact" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="UserPage_Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="UserPage_CustomerNumber" xml:space="preserve">
+    <value>Kundennummer</value>
+  </data>
+  <data name="UserPage_Company" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="UserPage_Section_Partner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="UserPage_PartnerCode" xml:space="preserve">
+    <value>Partnercode</value>
+  </data>
+  <data name="UserPage_Section_PrivacySepa" xml:space="preserve">
+    <value>Datenschutz &amp; SEPA</value>
+  </data>
+  <data name="UserPage_PrivacyAccepted" xml:space="preserve">
+    <value>Datenschutz akzeptiert</value>
+  </data>
+  <data name="UserPage_PrivacyAcceptedAt" xml:space="preserve">
+    <value>Akzeptiert am</value>
+  </data>
+  <data name="UserPage_Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="UserPage_No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="UserPage_Section_Roles" xml:space="preserve">
+    <value>Rollen</value>
+  </data>
+  <data name="UserPage_Section_Organizations" xml:space="preserve">
+    <value>Organisationen</value>
+  </data>
+  <data name="UserPage_Section_ActiveSubscriptions" xml:space="preserve">
+    <value>Aktive Abonnements</value>
+  </data>
+  <data name="UserPage_NoActiveSubscriptions" xml:space="preserve">
+    <value>Keine aktiven Abonnements.</value>
+  </data>
+  <data name="UserPage_Sub_Plan" xml:space="preserve">
+    <value>Plan</value>
+  </data>
+  <data name="UserPage_Sub_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="UserPage_Sub_Billing" xml:space="preserve">
+    <value>Abrechnung</value>
+  </data>
+  <data name="UserPage_Sub_Activated" xml:space="preserve">
+    <value>Aktiviert</value>
+  </data>
+  <data name="UserPage_Sub_Expires" xml:space="preserve">
+    <value>Läuft ab</value>
+  </data>
+  <data name="UserPage_Sub_AutoRenew" xml:space="preserve">
+    <value>Automatische Verlängerung</value>
+  </data>
+  <data name="UserPage_Section_Invoices" xml:space="preserve">
+    <value>Rechnungen</value>
+  </data>
+  <data name="UserPage_NoInvoices" xml:space="preserve">
+    <value>Keine Rechnungen.</value>
+  </data>
+  <data name="UserPage_Inv_Amount" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+  <data name="UserPage_Inv_Stage" xml:space="preserve">
+    <value>Phase</value>
+  </data>
+  <data name="UserPage_Inv_Updated" xml:space="preserve">
+    <value>Aktualisiert</value>
+  </data>
+  <data name="UserPage_FilterActivePlan" xml:space="preserve">
+    <value>Aktives Paket</value>
+  </data>
+  <data name="UserPage_FilterActivePlanAll" xml:space="preserve">
+    <value>Alle Pakete</value>
+  </data>
+  <data name="UserPage_FilterActivePlanYes" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="UserPage_FilterActivePlanNo" xml:space="preserve">
+    <value>Kein aktives Paket</value>
+  </data>
+  <data name="UserPage_FilterPartner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="UserPage_FilterPartnerAll" xml:space="preserve">
+    <value>Alle Partner</value>
+  </data>
+  <data name="UserPage_ActivePlanIndicator" xml:space="preserve">
+    <value>Aktives Paket</value>
+  </data>
+  <data name="UserPage_Inv_Actions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="UserPage_ViewInvoiceDetails" xml:space="preserve">
+    <value>Details anzeigen</value>
+  </data>
+  <data name="UserPage_EnterNewPassword" xml:space="preserve">
+    <value>Neues Passwort eingeben</value>
+  </data>
+  <data name="UserPage_Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="UserPage_Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="UserPage_DeleteSuccess" xml:space="preserve">
+    <value>Erfolgreich gelöscht!</value>
+  </data>
+  <data name="UserPage_DeleteBlocked" xml:space="preserve">
+    <value>Benutzer kann nicht gelöscht werden, weil: {0}</value>
+  </data>
+  <data name="UserPage_DeleteReasonSubscriptions" xml:space="preserve">
+    <value>aktive Abonnements vorhanden sind</value>
+  </data>
+  <data name="UserPage_DeleteReasonInvoices" xml:space="preserve">
+    <value>Rechnungen vorhanden sind</value>
+  </data>
+  <data name="UserPage_DeleteReasonInvoiceHistory" xml:space="preserve">
+    <value>Rechnungshistorie vorhanden ist</value>
+  </data>
+  <data name="UserPage_DeleteReasonCompanyChecks" xml:space="preserve">
+    <value>Firmenprüfungen vorhanden sind</value>
+  </data>
+  <data name="UserPage_DeleteReasonNotifications" xml:space="preserve">
+    <value>Benachrichtigungen vorhanden sind</value>
+  </data>
+  <data name="UserPage_UpdateSuccess" xml:space="preserve">
+    <value>Erfolgreich aktualisiert!</value>
+  </data>
+  <data name="UserPage_CreateSuccess" xml:space="preserve">
+    <value>Erfolgreich erstellt!</value>
+  </data>
+  <data name="UserPage_EmailDuplicate" xml:space="preserve">
+    <value>Die E-Mail-Adresse wird bereits verwendet!</value>
+  </data>
+  <data name="UserPage_SuperAdminError" xml:space="preserve">
+    <value>Sie haben keine Berechtigung, SuperAdmin-Benutzer zu verwalten.</value>
+  </data>
+  <data name="UserPage_RoleUpdateSuccess" xml:space="preserve">
+    <value>Erfolgreich übermittelt!</value>
+  </data>
+  <data name="UserPage_PasswordUpdateSuccess" xml:space="preserve">
+    <value>Passwort erfolgreich aktualisiert!</value>
+  </data>
+  <data name="Validation_Required" xml:space="preserve">
+    <value>{0} ist erforderlich.</value>
+  </data>
+  <data name="Validation_MaxLength" xml:space="preserve">
+    <value>{0} ist zu lang.</value>
+  </data>
+  <data name="Validation_MinLength" xml:space="preserve">
+    <value>{0} ist zu kurz.</value>
+  </data>
+  <data name="Validation_Email" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="Validation_PasswordComplexity" xml:space="preserve">
+    <value>Das Passwort muss Groß- und Kleinbuchstaben sowie Zahlen enthalten.</value>
+  </data>
+  <data name="RolePage_RoleInUseError" xml:space="preserve">
+    <value>Die Rolle wird derzeit verwendet und kann nicht gelöscht werden.</value>
+  </data>
+  <data name="RoleNameInUse" xml:space="preserve">
+    <value>Der Rollenname wird bereits verwendet!</value>
+  </data>
+  <data name="CodeGeneratorCopy" xml:space="preserve">
+    <value>In Zwischenablage kopieren</value>
+  </data>
+  <data name="CodeGeneratorDownload" xml:space="preserve">
+    <value>Datei herunterladen</value>
+  </data>
+  <data name="CodeGeneratorGenerate" xml:space="preserve">
+    <value>Generieren</value>
+  </data>
+  <data name="CodeGeneratorSelectEntity" xml:space="preserve">
+    <value>Eine Entität auswählen</value>
+  </data>
+  <data name="CodeGeneratorTitle" xml:space="preserve">
+    <value>Seiten-Code-Generator</value>
+  </data>
+  <data name="SystemSettingTitle" xml:space="preserve">
+    <value>Systemeinstellungen</value>
+  </data>
+  <data name="ProjectScaffoldGeneration" xml:space="preserve">
+    <value>Projektgerüst-Erstellung</value>
+  </data>
+  <data name="SwitchMode" xml:space="preserve">
+    <value>Modus wechseln</value>
+  </data>
+  <data name="SwitchToProjectGeneration" xml:space="preserve">
+    <value>Zum Projektgenerator wechseln</value>
+  </data>
+  <data name="SwitchToPageGeneration" xml:space="preserve">
+    <value>Zum Seitengenerator wechseln</value>
+  </data>
+  <data name="ProjectName" xml:space="preserve">
+    <value>Projektname</value>
+  </data>
+  <data name="GenerateProjectScaffold" xml:space="preserve">
+    <value>Projektgerüst generieren</value>
+  </data>
+  <data name="DownloadProjectScaffold" xml:space="preserve">
+    <value>Projektgerüst herunterladen</value>
+  </data>
+  <data name="CompanyCheckComTitle" xml:space="preserve">
+    <value>Einstellungen Firmenprüfung</value>
+  </data>
+  <data name="CompanyCheckSectionDescription" xml:space="preserve">
+    <value>Konfigurieren Sie Bonix-Zugangsdaten und Preise.</value>
+  </data>
+  <data name="CompanyCheckPriceLabel" xml:space="preserve">
+    <value>Berichtspreis</value>
+  </data>
+  <data name="CompanyCheckCurrencyLabel" xml:space="preserve">
+    <value>Währung</value>
+  </data>
+  <data name="CompanyCheckCreditSafeBaseUrlLabel" xml:space="preserve">
+    <value>Bonix Basis-URL</value>
+  </data>
+  <data name="CompanyCheckCreditSafeUsernameLabel" xml:space="preserve">
+    <value>Bonix-Benutzername</value>
+  </data>
+  <data name="CompanyCheckCreditSafePasswordLabel" xml:space="preserve">
+    <value>Bonix-Passwort</value>
+  </data>
+  <data name="CompanyCheckCreditSafeCountryLabel" xml:space="preserve">
+    <value>Standardland</value>
+  </data>
+  <data name="CompanyCheckPriceHelper" xml:space="preserve">
+    <value>Betrag, den Benutzer zahlen müssen, bevor der Bericht angezeigt wird.</value>
+  </data>
+  <data name="CompanyCheckSaveSuccess" xml:space="preserve">
+    <value>Einstellungen für Firmenprüfungen erfolgreich gespeichert.</value>
+  </data>
+  <data name="DashboardNewsComTitle" xml:space="preserve">
+    <value>Dashboard-Nachricht</value>
+  </data>
+  <data name="DashboardNewsComDescription" xml:space="preserve">
+    <value>Zeige eine kurze Ankündigung auf der Startseite.</value>
+  </data>
+  <data name="DashboardNewsTitleLabel" xml:space="preserve">
+    <value>Nachrichtentitel</value>
+  </data>
+  <data name="DashboardNewsSummaryLabel" xml:space="preserve">
+    <value>Zusammenfassung</value>
+  </data>
+  <data name="DashboardNewsLinkLabel" xml:space="preserve">
+    <value>Optionaler Link</value>
+  </data>
+  <data name="DashboardNewsSaveSuccess" xml:space="preserve">
+    <value>Dashboard-Nachricht erfolgreich gespeichert.</value>
+  </data>
+  <data name="SystemSettingConfiguredInAppSettings" xml:space="preserve">
+    <value>Die Einstellungen werden jetzt über die Konfiguration verwaltet.</value>
+  </data>
+  <data name="DashboardNewsSaveLabel" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SubscriptionPlansTitle" xml:space="preserve">
+    <value>Pläne</value>
+  </data>
+  <data name="SubscriptionPlansHeadline" xml:space="preserve">
+    <value>Wähle das passende Abo</value>
+  </data>
+  <data name="SubscriptionPlansIntervalMonthly" xml:space="preserve">
+    <value>Monatlich</value>
+  </data>
+  <data name="SubscriptionPlansIntervalYearly" xml:space="preserve">
+    <value>Jährlich</value>
+  </data>
+  <data name="SubscriptionPlansDescription" xml:space="preserve">
+    <value>Du kannst deinen Plan jederzeit wechseln. Preise enthalten alle aufgeführten Funktionen und Limits.</value>
+  </data>
+  <data name="SubscriptionPlansPriceLabel" xml:space="preserve">
+    <value>Abgerechnet {0}</value>
+  </data>
+  <data name="SubscriptionPlansActiveLabel" xml:space="preserve">
+    <value>Aktueller Plan</value>
+  </data>
+  <data name="SubscriptionPlansActivate" xml:space="preserve">
+    <value>Plan aktivieren</value>
+  </data>
+  <data name="SubscriptionPlansActivated" xml:space="preserve">
+    <value>Dein Abo wurde aktualisiert.</value>
+  </data>
+  <data name="SubscriptionPlansNew" xml:space="preserve">
+    <value>Neuer Plan</value>
+  </data>
+  <data name="SubscriptionPlansColumnName" xml:space="preserve">
+    <value>Titel</value>
+  </data>
+  <data name="SubscriptionPlansColumnMonthly" xml:space="preserve">
+    <value>Monatlich</value>
+  </data>
+  <data name="SubscriptionPlansColumnYearly" xml:space="preserve">
+    <value>Jährlich</value>
+  </data>
+  <data name="SubscriptionPlansColumnMonthlyClaims" xml:space="preserve">
+    <value>Monatliche Claims</value>
+  </data>
+  <data name="SubscriptionPlansColumnMonthlyChecks" xml:space="preserve">
+    <value>Monatliche Bionic-Prüfungen</value>
+  </data>
+  <data name="SubscriptionPlansColumnTeamSeats" xml:space="preserve">
+    <value>Team-Sitze</value>
+  </data>
+  <data name="SubscriptionPlansColumnDisplayOrder" xml:space="preserve">
+    <value>Reihenfolge</value>
+  </data>
+  <data name="SubscriptionPlansColumnStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="SubscriptionPlansColumnActions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="SubscriptionPlansStatusActive" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="SubscriptionPlansStatusInactive" xml:space="preserve">
+    <value>Inaktiv</value>
+  </data>
+  <data name="SubscriptionPlansDialogCreateTitle" xml:space="preserve">
+    <value>Aboplan erstellen</value>
+  </data>
+  <data name="SubscriptionPlansDialogEditTitle" xml:space="preserve">
+    <value>Aboplan bearbeiten</value>
+  </data>
+  <data name="SubscriptionPlansDeleteTitle" xml:space="preserve">
+    <value>Plan löschen</value>
+  </data>
+  <data name="SubscriptionPlansDeleteConfirm" xml:space="preserve">
+    <value>Möchtest du diesen Plan wirklich löschen?</value>
+  </data>
+  <data name="SubscriptionPlansDeleteSuccess" xml:space="preserve">
+    <value>Plan gelöscht</value>
+  </data>
+  <data name="SubscriptionPlansFieldName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SubscriptionPlansFieldSlug" xml:space="preserve">
+    <value>Slug</value>
+  </data>
+  <data name="SubscriptionPlansFieldDescription" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="SubscriptionPlansFieldMonthlyPrice" xml:space="preserve">
+    <value>Monatspreis</value>
+  </data>
+  <data name="SubscriptionPlansFieldYearlyPrice" xml:space="preserve">
+    <value>Jahrespreis</value>
+  </data>
+  <data name="SubscriptionPlansFieldMonthlyClaims" xml:space="preserve">
+    <value>Monatliches Claim-Limit</value>
+  </data>
+  <data name="SubscriptionPlansFieldMonthlyChecks" xml:space="preserve">
+    <value>Monatliches Bionic-Prüfungs-Limit</value>
+  </data>
+  <data name="SubscriptionPlansFieldTeamSeats" xml:space="preserve">
+    <value>Team-Sitz-Limit</value>
+  </data>
+  <data name="SubscriptionPlansFieldDisplayOrder" xml:space="preserve">
+    <value>Anzeigereihenfolge</value>
+  </data>
+  <data name="SubscriptionPlansFieldIsActive" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="SubscriptionPlansCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="SubscriptionPlansSave" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="SubscriptionPlansSaveSuccess" xml:space="preserve">
+    <value>Plan gespeichert</value>
+  </data>
+  <data name="SubscriptionPaymentsTitle" xml:space="preserve">
+    <value>Zahlungen</value>
+  </data>
+  <data name="SubscriptionPaymentsColumnEmail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="SubscriptionPaymentsColumnName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SubscriptionPaymentsColumnPlan" xml:space="preserve">
+    <value>Paket</value>
+  </data>
+  <data name="SubscriptionPaymentsColumnInterval" xml:space="preserve">
+    <value>Intervall</value>
+  </data>
+  <data name="SubscriptionPaymentsColumnPrice" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="SubscriptionPaymentsColumnPurchasedAt" xml:space="preserve">
+    <value>Kaufdatum</value>
+  </data>
+  <data name="SubscriptionPaymentsColumnExpiresAt" xml:space="preserve">
+    <value>Läuft ab</value>
+  </data>
+  <data name="SubscriptionPaymentsColumnRegistration" xml:space="preserve">
+    <value>Registrierung</value>
+  </data>
+  <data name="SubscriptionPaymentsRegistrationMissing" xml:space="preserve">
+    <value>Wartet auf Registrierung</value>
+  </data>
+  <data name="NavMenu_Client" xml:space="preserve">
+    <value>Mandant</value>
+  </data>
+  <data name="NavMenu_Overview" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="NavMenu_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="NavMenu_ClaimsCenter" xml:space="preserve">
+    <value>Forderungscenter</value>
+  </data>
+  <data name="NavMenu_NewCase" xml:space="preserve">
+    <value>Neuer Fall</value>
+  </data>
+  <data name="NavMenu_PoweredBy" xml:space="preserve">
+    <value>powered by</value>
+  </data>
+  <data name="NavMenu_CreditCheck" xml:space="preserve">
+    <value>Bonität prüfen</value>
+  </data>
+  <data name="NavMenu_History" xml:space="preserve">
+    <value>Abrufverlauf</value>
+  </data>
+  <data name="NavMenu_Discover" xml:space="preserve">
+    <value>ENTDECKEN SIE</value>
+  </data>
+  <data name="NavMenu_PartnerNetwork" xml:space="preserve">
+    <value>Partner-Netzwerk</value>
+  </data>
+  <data name="NavMenu_Applications" xml:space="preserve">
+    <value>Anwendungen</value>
+  </data>
+  <data name="AdminNavMenu_Home" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="AdminNavMenu_Permission" xml:space="preserve">
+    <value>BERECHTIGUNGEN</value>
+  </data>
+  <data name="AdminNavMenu_User" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="AdminNavMenu_Role" xml:space="preserve">
+    <value>Rollen</value>
+  </data>
+  <data name="AdminNavMenu_System" xml:space="preserve">
+    <value>SYSTEM</value>
+  </data>
+  <data name="AdminNavMenu_Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="AdminNavMenu_Subscriptions" xml:space="preserve">
+    <value>Abonnements</value>
+  </data>
+  <data name="AdminNavMenu_SubscriptionPayments" xml:space="preserve">
+    <value>Abonnement-Zahlungen</value>
+  </data>
+  <data name="AdminNavMenu_Partners" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="AdminNavMenu_PartnerBanks" xml:space="preserve">
+    <value>Partner-Banken</value>
+  </data>
+  <data name="AdminNavMenu_InsurancePartners" xml:space="preserve">
+    <value>Versicherungspartner</value>
+  </data>
+  <data name="AdminNavMenu_Claims" xml:space="preserve">
+    <value>FORDERUNGEN</value>
+  </data>
+  <data name="AdminNavMenu_Invoices" xml:space="preserve">
+    <value>Fallverwaltung</value>
+  </data>
+  <data name="AdminNavMenu_InvoiceStages" xml:space="preserve">
+    <value>Rechnungsphasen</value>
+  </data>
+  <data name="AdminNavMenu_UsersAndPayments" xml:space="preserve">
+    <value>BENUTZER &amp; ZAHLUNGEN</value>
+  </data>
+  <data name="InvoicePrimaryStatusLabel" xml:space="preserve">
+    <value>Hauptstatus</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Draft" xml:space="preserve">
+    <value>Entwurf</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Submitted" xml:space="preserve">
+    <value>Eingereicht</value>
+  </data>
+  <data name="InvoicePrimaryStatus_InReview" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Inquiry" xml:space="preserve">
+    <value>Rückfrage</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Accepted" xml:space="preserve">
+    <value>Akzeptiert</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Court" xml:space="preserve">
+    <value>Gericht</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Completed" xml:space="preserve">
+    <value>Abgeschlossen</value>
+  </data>
+  <data name="CommonDeleteDialogConfirmButtonText" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="CommonDeleteDialogTitle" xml:space="preserve">
+    <value>Löschen bestätigen</value>
+  </data>
+  <data name="ConfirmInputPassword" xml:space="preserve">
+    <value>Bitte geben Sie Ihr Passwort ein.</value>
+  </data>
+  <data name="ConfirmInputPasswordButtonText" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="NotFindUser" xml:space="preserve">
+    <value>Benutzerinformationen nicht gefunden!</value>
+  </data>
+  <data name="OrganizationTreeSelect_ClearBtnText" xml:space="preserve">
+    <value>Auswahl entfernen</value>
+  </data>
+  <data name="OrganizationTreeSelect_Title" xml:space="preserve">
+    <value>Bitte Organisation wählen</value>
+  </data>
+  <data name="OrganizationTreeSelect_TitleText" xml:space="preserve">
+    <value>Bitte wählen</value>
+  </data>
+  <data name="PasswordHelpText" xml:space="preserve">
+    <value>Bitte Passwort eingeben</value>
+  </data>
+  <data name="PasswordValidFail" xml:space="preserve">
+    <value>Passwort-Validierung fehlgeschlagen!</value>
+  </data>
+  <data name="HomePage_RecentAudit" xml:space="preserve">
+    <value>Letzte Aktivitäten</value>
+  </data>
+  <data name="HomePage_OperationType" xml:space="preserve">
+    <value>Vorgangstyp</value>
+  </data>
+  <data name="HomePage_Entity" xml:space="preserve">
+    <value>Entität</value>
+  </data>
+  <data name="HomePage_Time" xml:space="preserve">
+    <value>Zeit</value>
+  </data>
+  <data name="HomePage_Operation_Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="HomePage_Operation_Modify" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="HomePage_Operation_Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="AuditLogDetailDialog_TableH1" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="AuditLogDetailDialog_TableH2" xml:space="preserve">
+    <value>Eigenschaft</value>
+  </data>
+  <data name="AuditLogDetailDialog_TableH3" xml:space="preserve">
+    <value>Alter Wert</value>
+  </data>
+  <data name="AuditLogDetailDialog_TableH4" xml:space="preserve">
+    <value>Neuer Wert</value>
+  </data>
+  <data name="AuditLogPage_OperationCreate" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="AuditLogPage_OperationDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="AuditLogPage_OperationModify" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="AuditLogPage_TableH1" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="AuditLogPage_TableH2" xml:space="preserve">
+    <value>Transaktions-ID</value>
+  </data>
+  <data name="AuditLogPage_TableH3" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="AuditLogPage_TableH4" xml:space="preserve">
+    <value>Ziel</value>
+  </data>
+  <data name="AuditLogPage_TableH5" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="AuditLogPage_TableH6" xml:space="preserve">
+    <value>Zeit</value>
+  </data>
+  <data name="AuditLogPage_TableH7" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="AuditLogPage_Title" xml:space="preserve">
+    <value>Audit-Log</value>
+  </data>
+  <data name="NoAuhtorized_ChangeUserText" xml:space="preserve">
+    <value>Benutzer wechseln</value>
+  </data>
+  <data name="NoAuhtorized_Text" xml:space="preserve">
+    <value>Keine Berechtigung...</value>
+  </data>
+  <data name="NotFound_Text" xml:space="preserve">
+    <value>Seite nicht gefunden</value>
+  </data>
+  <data name="Search_Text" xml:space="preserve">
+    <value>Suchen</value>
+  </data>
+  <data name="WizardStartOptionAfterReminderPrompt" xml:space="preserve">
+    <value>Wählen Sie den Startzeitpunkt der Mahnung.</value>
+  </data>
+  <data name="WizardStartOptionAfterReminderHelper" xml:space="preserve">
+    <value>Wir beginnen, sobald Ihre Mahnung zur gewählten Zeit versendet wurde.</value>
+  </data>
+  <data name="WizardStartOptionAfterReminderSelected" xml:space="preserve">
+    <value>Geplant für {0}</value>
+  </data>
+  <data name="WizardStartOptionAfterReminderValidation" xml:space="preserve">
+    <value>Bitte wählen Sie, wann nach Ihrer Mahnung gestartet werden soll.</value>
+  </data>
+  <data name="WizardDescriptionStartScheduled" xml:space="preserve">
+    <value>Start nach Mahnung am {0}</value>
+  </data>
+  <data name="Admin_TableActions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="Register_Error" xml:space="preserve">
+    <value>Fehler bei der Registrierung</value>
+  </data>
+  <data name="QuickCheck_Title" xml:space="preserve">
+    <value>Firmen-Schnellcheck</value>
+  </data>
+  <data name="QuickCheck_Description" xml:space="preserve">
+    <value>Suchen Sie nach einer Firma und erhalten Sie sofort den Bonitätsbericht – ohne Anmeldung.</value>
+  </data>
+  <data name="QuickCheck_AdvancedSearch" xml:space="preserve">
+    <value>Erweiterte Suche</value>
+  </data>
+  <data name="QuickCheck_EmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="QuickCheck_EmailHelper" xml:space="preserve">
+    <value>Wir senden den Bericht an diese Adresse.</value>
+  </data>
+  <data name="QuickCheck_PriceLabel" xml:space="preserve">
+    <value>Preis</value>
+  </data>
+  <data name="QuickCheck_PayButton" xml:space="preserve">
+    <value>Zahlen &amp; Herunterladen</value>
+  </data>
+  <data name="QuickCheck_ProcessingTitle" xml:space="preserve">
+    <value>Zahlung wird verarbeitet...</value>
+  </data>
+  <data name="QuickCheck_ProcessingMessage" xml:space="preserve">
+    <value>Bitte warten Sie einen Moment. Ihr Bericht wird erstellt.</value>
+  </data>
+  <data name="QuickCheck_ConfirmedTitle" xml:space="preserve">
+    <value>Bestellung bestätigt</value>
+  </data>
+  <data name="QuickCheck_ConfirmedMessage" xml:space="preserve">
+    <value>Vielen Dank für Ihre Bestellung. Ihr Bericht steht zum Download bereit.</value>
+  </data>
+  <data name="QuickCheck_NewSearch" xml:space="preserve">
+    <value>Neue Suche</value>
+  </data>
+  <data name="QuickCheck_OrderFailedTitle" xml:space="preserve">
+    <value>Fehler bei der Bestellung</value>
+  </data>
+  <data name="QuickCheck_TryAgain" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
+  <data name="QuickCheck_Back" xml:space="preserve">
+    <value>Zurück</value>
+  </data>
+  <data name="Bonix_RegisterPrompt" xml:space="preserve">
+    <value>Sie haben noch kein Konto?</value>
+  </data>
+  <data name="Login_UserName" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="Login_Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Login_Processing" xml:space="preserve">
+    <value>Verarbeite...</value>
+  </data>
+  <data name="Login_AccountLocked" xml:space="preserve">
+    <value>Ihr Konto ist gesperrt.</value>
+  </data>
+  <data name="Login_Error" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten.</value>
+  </data>
+  <data name="Login_Success" xml:space="preserve">
+    <value>Erfolgreich angemeldet!</value>
+  </data>
+  <data name="Bonix_RegisterPromo" xml:space="preserve">
+    <value>Registrieren Sie sich jetzt kostenlos für eine einfachere Firmensuche.</value>
+  </data>
+  <data name="Dashboard_Title" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="Dashboard_Welcome_Bonix" xml:space="preserve">
+    <value>Willkommen bei Bonix</value>
+  </data>
+  <data name="Dashboard_History_Description" xml:space="preserve">
+    <value>Historie Ihrer Abfragen</value>
+  </data>
+  <data name="Pagination_ItemsPerPage" xml:space="preserve">
+    <value>Einträge pro Seite</value>
+  </data>
+  <data name="Theme_LightMode" xml:space="preserve">
+    <value>Heller Modus</value>
+  </data>
+  <data name="Theme_DarkMode" xml:space="preserve">
+    <value>Dunkler Modus</value>
+  </data>
+  <data name="Error_InvalidRequestId" xml:space="preserve">
+    <value>Ungültige Anfrage-ID</value>
+  </data>
+  <data name="Error_PaymentTimeout" xml:space="preserve">
+    <value>Zeitüberschreitung beim Warten auf Zahlungsbestätigung</value>
+  </data>
+  <data name="Error_ReportGenerationFailed" xml:space="preserve">
+    <value>Bericht konnte nicht erstellt werden</value>
+  </data>
+
+  <data name="Register_ActiveSubscriptionRequired" xml:space="preserve">
+    <value>Aktives Abonnement erforderlich</value>
+  </data>
+  <data name="Register_SubscriptionPlanNotFound" xml:space="preserve">
+    <value>Abonnementplan nicht gefunden</value>
+  </data>
+  <data name="AdminNavMenu_Clients" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
+  <data name="UserPage_Title_Clients" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
+  <data name="UserPage_Section_Subscriptions" xml:space="preserve">
+    <value>Abonnements</value>
+  </data>
+  <data name="UserPage_SubscriptionPlan" xml:space="preserve">
+    <value>Abo-Plan</value>
+  </data>
+  <data name="UserPage_SubscriptionStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="UserPage_BillingInterval" xml:space="preserve">
+    <value>Abrechnungsintervall</value>
+  </data>
+  <data name="UserPage_ActivatedAt" xml:space="preserve">
+    <value>Aktiviert am</value>
+  </data>
+  <data name="UserPage_ExpiresAt" xml:space="preserve">
+    <value>Läuft ab am</value>
+  </data>
+  <data name="UserPage_AutoRenew" xml:space="preserve">
+    <value>Auto-Verlängerung</value>
+  </data>
+  <data name="UserPage_Amount" xml:space="preserve">
+    <value>Betrag</value>
+  </data>
+  <data name="UserPage_Stage" xml:space="preserve">
+    <value>Phase</value>
+  </data>
+  <data name="UserPage_CreatedAt" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="UserPage_UpdatedAt" xml:space="preserve">
+    <value>Aktualisiert am</value>
+  </data>
+  <data name="Login_ForgotPassword" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+</root>

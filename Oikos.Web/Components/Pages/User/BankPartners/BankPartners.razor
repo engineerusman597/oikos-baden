@@ -1,0 +1,104 @@
+@page "/partner-banks"
+@namespace Oikos.Web.Components.Pages.User.BankPartners
+@using Oikos.Web.Components.Layout.PageLayout
+@using Oikos.Application.Services.Partner.Models
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["PartnerBanks_Title"]" />
+    </HeaderContent>
+    <ChildContent>
+        <MudStack Spacing="3">
+            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary">
+                @Loc["PartnerBanks_Subtitle"]
+            </MudText>
+
+            <MudPaper Class="partner-banks__selector" Elevation="1">
+                <MudStack Direction="Row" Spacing="2" AlignItems="AlignItems.Center" Class="flex-wrap">
+                    <MudIcon Icon="@Icons.Material.Filled.Map" Color="Color.Primary" Size="Size.Large" />
+                    <div class="partner-banks__selector-content">
+                        <MudText Typo="Typo.subtitle1">@Loc["PartnerBanks_SelectorTitle"]</MudText>
+                        <MudSelect T="string" @bind-Value="_selectedRegion" Variant="Variant.Outlined" Margin="Margin.Dense" Class="region-select"
+                                  AdornmentColor="Color.Primary" Clearable="true" Placeholder="@Loc["PartnerBanks_SelectorPlaceholder"]">
+                            @foreach (var region in GermanRegionCatalog.Regions)
+                            {
+                                <MudSelectItem Value="@region.Code">@region.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                </MudStack>
+            </MudPaper>
+
+            @if (_isLoading)
+            {
+                <MudPaper Elevation="0" Class="d-flex justify-center pa-6">
+                    <MudProgressCircular Indeterminate="true" Color="Color.Primary" Size="Size.Large" />
+                </MudPaper>
+            }
+            else if (string.IsNullOrWhiteSpace(_selectedRegion))
+            {
+                <MudEmptyState Icon="@Icons.Material.Filled.LocationSearching" Title="@Loc["PartnerBanks_SelectPromptTitle"]"
+                              Description="@Loc["PartnerBanks_SelectPromptDescription"]" />
+            }
+            else if (!FilteredBanks.Any())
+            {
+                <MudEmptyState Icon="@Icons.Material.Filled.HourglassEmpty" Title="@Loc["PartnerBanks_NoBanksTitle"]"
+                              Description="@Loc["PartnerBanks_NoBanksDescription"]" />
+            }
+            else
+            {
+                <MudGrid Gutter="Size.Small" Class="partner-banks__grid">
+                    @foreach (var bank in FilteredBanks)
+                    {
+                        <MudItem xs="12" sm="6" lg="4">
+                            <MudPaper Class="partner-banks__card" Elevation="2">
+                                <MudStack Spacing="2">
+                                    <MudStack Direction="Row" AlignItems="AlignItems.Center" Spacing="2">
+                                        <MudAvatar Icon="@Icons.Material.Filled.AccountBalance" Size="Size.Medium"
+                                                   Color="Color.Primary" Class="partner-banks__avatar" />
+                                        <MudStack Spacing="0">
+                                            <MudText Typo="Typo.h6">@bank.Name</MudText>
+                                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@GetRegionLabel(_selectedRegion)</MudText>
+                                        </MudStack>
+                                    </MudStack>
+                                    @if (!string.IsNullOrWhiteSpace(bank.Description))
+                                    {
+                                        <MudText Typo="Typo.body2">@bank.Description</MudText>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(bank.Details))
+                                    {
+                                        <MudList T="string" Dense="true" Class="partner-banks__list">
+                                            @foreach (var detail in SplitLines(bank.Details))
+                                            {
+                                                <MudListItem T="string">
+                                                    <MudListItemIcon>
+                                                        <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" />
+                                                    </MudListItemIcon>
+                                                    <MudListItemText>@detail</MudListItemText>
+                                                </MudListItem>
+                                            }
+                                        </MudList>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(bank.ContactInfo))
+                                    {
+                                        <MudAlert Severity="Severity.Info" Dense="true">@bank.ContactInfo</MudAlert>
+                                    }
+                                    <MudStack Direction="Row" Spacing="1">
+                                        @if (!string.IsNullOrWhiteSpace(bank.WebsiteUrl))
+                                        {
+                                            <MudButton Variant="Variant.Outlined" Color="Color.Primary" Target="_blank" Rel="noopener"
+                                                       Href="@bank.WebsiteUrl" StartIcon="@Icons.Material.Filled.OpenInNew">
+                                                @Loc["PartnerBanks_ButtonLabel"]
+                                            </MudButton>
+                                        }
+                                    </MudStack>
+                                </MudStack>
+                            </MudPaper>
+                        </MudItem>
+                    }
+                </MudGrid>
+            }
+        </MudStack>
+    </ChildContent>
+</PageLayout>

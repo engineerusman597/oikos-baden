@@ -1,0 +1,18 @@
+.insurance-partners {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.insurance-partners__card {
+    padding: 1.5rem;
+    border-radius: 18px;
+    min-height: 260px;
+}
+
+.insurance-partners__avatar {
+    background-color: rgba(0, 150, 136, 0.12);
+}
+
+.insurance-partners__list {
+    margin: 0 -0.5rem;
+}

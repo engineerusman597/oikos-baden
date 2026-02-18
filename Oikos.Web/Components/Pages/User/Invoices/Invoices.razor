@@ -1,0 +1,124 @@
+@page "/invoices"
+
+@using Oikos.Web.Components.Layout.PageLayout
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@using System.Globalization
+@using Microsoft.Extensions.Localization
+@using MudBlazor
+@using Oikos.Common.Resources
+@using Oikos.Application.Services.Invoice.Models
+@using Oikos.Domain.Enums
+
+@rendermode InteractiveServer
+
+<PageLayout>
+    <ChildContent>
+        <MudStack Spacing="4">
+            @* Header Section *@
+            <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                <MudStack Spacing="0">
+                    <MudText Typo="Typo.h5" Style="font-weight: 700;">@Loc["PageTitle"]</MudText>
+                    <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PageSubtitle"]</MudText>
+                </MudStack>
+                <MudButton Variant="Variant.Filled" 
+                           Color="Color.Primary" 
+                           StartIcon="@Icons.Material.Filled.Add" 
+                           Href="/cases/new">
+                    @Loc["NewCaseButton"]
+                </MudButton>
+            </MudStack>
+
+            @* Filters *@
+            <MudPaper Class="pa-4" Elevation="0" Outlined="true">
+                <MudGrid Spacing="2" AlignItems="AlignItems.Center">
+                    <MudItem xs="12" md="9">
+                        <MudTextField @bind-Value="_searchString" 
+                                      Placeholder="@Loc["SearchPlaceholder"]" 
+                                      Adornment="Adornment.Start" 
+                                      AdornmentIcon="@Icons.Material.Filled.Search" 
+                                      IconSize="Size.Medium" 
+                                      Class="mt-0" 
+                                      Variant="Variant.Outlined" 
+                                      Margin="Margin.Dense" 
+                                      Immediate="true"
+                                      DebounceInterval="300" 
+                                      OnDebounceIntervalElapsed="OnSearch" />
+                    </MudItem>
+                    <MudItem xs="12" md="3">
+                        <MudSelect T="InvoicePrimaryStatus?" Value="_selectedPrimaryStatus" 
+                                   Variant="Variant.Outlined" 
+                                   Margin="Margin.Dense" 
+                                   Class="mt-0"
+                                   AnchorOrigin="Origin.BottomLeft"
+                                   TransformOrigin="Origin.TopLeft"
+                                   ValueChanged="OnStatusFilterChanged">
+                            <MudSelectItem T="InvoicePrimaryStatus?" Value="@((InvoicePrimaryStatus?)null)">@Loc["StatusFilterAll"]</MudSelectItem>
+                            @foreach (var status in Enum.GetValues<InvoicePrimaryStatus>())
+                            {
+                                <MudSelectItem T="InvoicePrimaryStatus?" Value="@((InvoicePrimaryStatus?)status)">@Loc[$"InvoicePrimaryStatus_{status}"]</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+            </MudPaper>
+
+            @* Table *@
+            <MudPaper Class="my-invoices-table" Elevation="0" Outlined="true">
+                @if (!_filteredInvoices.Any())
+                {
+                     <MudStack AlignItems="AlignItems.Center" Class="pa-8" Spacing="2">
+                        <MudIcon Icon="@Icons.Material.Outlined.Description" Size="Size.Large" Color="Color.Default" Style="font-size: 64px; opacity: 0.5;" />
+                        <MudText Typo="Typo.h6" Class="mud-text-secondary">@Loc["TableEmpty"]</MudText>
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-2" Href="/cases/new">@Loc["NewCaseButton"]</MudButton>
+                    </MudStack>
+                }
+                else
+                {
+                    <MudTable T="MyInvoiceItemDto"
+                              Items="@_filteredInvoices"
+                              Hover="true"
+                              Dense="true"
+                              Breakpoint="Breakpoint.Sm"
+                              Class="modern-invoice-table"
+                              Elevation="0"
+                              OnRowClick="@((TableRowClickEventArgs<MyInvoiceItemDto> args) => NavigateToInvoiceDetail(args.Item))">
+                        <HeaderContent>
+                            <MudTh>@Loc["TableHeaderTicketNumber"]</MudTh>
+                            <MudTh>@Loc["TableHeaderCompany"]</MudTh>
+                            <MudTh>@Loc["TableHeaderAmount"]</MudTh>
+                            <MudTh>@Loc["TableHeaderInvoiceDate"]</MudTh>
+                            <MudTh>@Loc["TableHeaderCurrency"]</MudTh>
+                            <MudTh>@Loc["TableHeaderStatus"]</MudTh>
+                            <MudTh>@Loc["TableHeaderUpdated"]</MudTh>
+                            <MudTh Class="text-right">@Loc["AdminTableHeaderActions"]</MudTh>
+                        </HeaderContent>
+                        <RowTemplate Context="invoice">
+                            <MudTd DataLabel='@Loc["TableHeaderTicketNumber"]'>@(string.IsNullOrWhiteSpace(invoice.TicketNumber) ? Loc["TableValueUnknown"] : invoice.TicketNumber)</MudTd>
+                            <MudTd DataLabel='@Loc["TableHeaderCompany"]'>@FormatCompany(invoice)</MudTd>
+                            <MudTd DataLabel='@Loc["TableHeaderAmount"]'>@FormatAmount(invoice)</MudTd>
+                            <MudTd DataLabel='@Loc["TableHeaderInvoiceDate"]'>@FormatDate(invoice.InvoiceDate)</MudTd>
+                            <MudTd DataLabel='@Loc["TableHeaderCurrency"]'>@FormatCurrency(invoice)</MudTd>
+                            <MudTd DataLabel='@Loc["TableHeaderStatus"]'>
+                                <MudChip T="string" Color="@GetStageColor(invoice.StageId)" Variant="Variant.Filled" Size="Size.Small" Class="status-chip">@GetStageName(invoice.StageId)</MudChip>
+                            </MudTd>
+                            <MudTd DataLabel='@Loc["TableHeaderUpdated"]'>@FormatDateTime(invoice.UpdatedAt)</MudTd>
+                            <MudTd Class="text-right" DataLabel='@Loc["AdminTableHeaderActions"]'>
+                                <MudTooltip Text="@Loc["AdminViewDetails"]" Color="Color.Primary">
+                                    <span @onclick:stopPropagation="true">
+                                        <MudIconButton Icon="@Icons.Material.Outlined.Visibility"
+                                                       Color="Color.Primary"
+                                                       Size="Size.Small"
+                                                       OnClick="@(() => NavigateToInvoiceDetail(invoice))" />
+                                    </span>
+                                </MudTooltip>
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                }
+            </MudPaper>
+        </MudStack>
+    </ChildContent>
+</PageLayout>

@@ -1,0 +1,55 @@
+@page "/admin/invoice/stages"
+@using Oikos.Web.Components.Layout.PageLayout
+@using Oikos.Application.Services.Invoice.Models
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+
+@rendermode InteractiveServer
+@attribute [StreamRendering]
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["StageManagerTitle"]">
+            <ChildContent>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="AddStageAsync">
+                    @Loc["StageManagerAddButton"]
+                </MudButton>
+            </ChildContent>
+        </StandardPageHeader>
+    </HeaderContent>
+    <ChildContent>
+        <MudTable T="InvoiceStageListDto" Items="@_stages" Hover="true" Dense="true" Class="stage-manager-table">
+            <HeaderContent>
+                <MudTh style="width:60px;">#</MudTh>
+                <MudTh>@Loc["StageManagerNameColumn"]</MudTh>
+                <MudTh>@Loc["StageManagerSlugColumn"]</MudTh>
+                <MudTh>@Loc["StageManagerSummaryColumn"]</MudTh>
+                <MudTh>@Loc["StageManagerUpdatedColumn"]</MudTh>
+                <MudTh class="text-right" style="width:180px;">@Loc["StageManagerActionsColumn"]</MudTh>
+            </HeaderContent>
+            <RowTemplate Context="stage">
+                <MudTd DataLabel="#">@stage.Order</MudTd>
+                <MudTd DataLabel='@Loc["StageManagerNameColumn"]'>@stage.Name</MudTd>
+                <MudTd DataLabel='@Loc["StageManagerSlugColumn"]'>@stage.Slug</MudTd>
+                <MudTd DataLabel='@Loc["StageManagerSummaryColumn"]'>@stage.Summary</MudTd>
+                <MudTd DataLabel='@Loc["StageManagerUpdatedColumn"]'>@FormatDateTime(stage.UpdatedAt)</MudTd>
+                <MudTd Class="text-right" DataLabel='@Loc["StageManagerActionsColumn"]'>
+                    <MudTooltip Text="@Loc["StageManagerMoveUpTooltip"]" Color="Color.Primary">
+                        <MudIconButton Icon="@Icons.Material.Filled.ArrowUpward" Disabled="@(stage.IsFirst)" OnClick="@(() => MoveStageAsync(stage, -1))" />
+                    </MudTooltip>
+                    <MudTooltip Text="@Loc["StageManagerMoveDownTooltip"]" Color="Color.Primary">
+                        <MudIconButton Icon="@Icons.Material.Filled.ArrowDownward" Disabled="@(stage.IsLast)" OnClick="@(() => MoveStageAsync(stage, 1))" />
+                    </MudTooltip>
+                    <MudTooltip Text="@Loc["StageManagerEditTooltip"]" Color="Color.Primary">
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" OnClick="@(() => EditStageAsync(stage.Id))" />
+                    </MudTooltip>
+                    <MudTooltip Text="@Loc["StageManagerDeleteTooltip"]" Color="Color.Error">
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeleteStageAsync(stage))" />
+                    </MudTooltip>
+                </MudTd>
+            </RowTemplate>
+            <NoRecordsContent>
+                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["StageManagerEmpty"]</MudText>
+            </NoRecordsContent>
+        </MudTable>
+    </ChildContent>
+</PageLayout>

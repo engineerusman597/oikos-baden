@@ -1,0 +1,110 @@
+.full-screen {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem 2.5rem;
+    background: linear-gradient(130deg, #f4edff 0%, #ffe9f3 100%);
+}
+
+.login-shell {
+    display: flex;
+    width: min(1100px, 100%);
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 38px 80px rgba(86, 47, 153, 0.25);
+    background: linear-gradient(140deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.2) 100%);
+    backdrop-filter: blur(16px);
+}
+
+.login-panel {
+    flex: 1 1 60%;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 3.25rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.login-panel__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login-panel__logo-skeleton,
+.login-panel__register-skeleton,
+.login-panel__title-skeleton,
+.login-panel__subtitle-skeleton {
+    border-radius: 12px;
+}
+
+.login-panel__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.login-panel__submit.mud-button-root {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+    text-transform: none;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.9rem 2.4rem;
+    background: linear-gradient(90deg, #5a2bd4 0%, #8734e8 100%);
+    box-shadow: 0 14px 28px rgba(90, 43, 212, 0.25);
+}
+
+.login-panel__submit.mud-button-root:disabled {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.login-panel__culture {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.login-panel--loading {
+    gap: 1.75rem;
+    pointer-events: none;
+}
+
+.login-panel__culture--loading {
+    justify-content: flex-start;
+}
+
+.promo-panel {
+    flex: 1 1 40%;
+    background: linear-gradient(200deg, #4c1c88 0%, #862dd7 100%);
+    color: #fff;
+    padding: 3.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.promo-panel--loading {
+    gap: 1.25rem;
+    pointer-events: none;
+}
+
+.promo-panel__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+@media (max-width: 960px) {
+    .login-shell {
+        flex-direction: column;
+    }
+
+    .promo-panel,
+    .login-panel {
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}

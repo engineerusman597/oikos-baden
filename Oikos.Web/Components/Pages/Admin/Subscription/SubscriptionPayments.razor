@@ -1,0 +1,58 @@
+@page "/admin/subscription-payments"
+@using global::Oikos.Web.Components.Layout.PageLayout
+@namespace Oikos.Web.Components.Pages.Admin.Subscription
+@using Oikos.Application.Services.Subscription.Models
+@using static Microsoft.AspNetCore.Components.Web.RenderMode
+@rendermode InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["SubscriptionPaymentsTitle"]" />
+    </HeaderContent>
+    <ChildContent>
+        <MudTable T="SubscriptionPaymentRecord" Items="_payments" Hover="true" Dense="true" Loading="_isLoading">
+            <HeaderContent>
+                <MudTh>@Loc["SubscriptionPaymentsColumnEmail"]</MudTh>
+                <MudTh>@Loc["SubscriptionPaymentsColumnName"]</MudTh>
+                <MudTh>@Loc["SubscriptionPaymentsColumnPlan"]</MudTh>
+                <MudTh>@Loc["SubscriptionPaymentsColumnInterval"]</MudTh>
+                <MudTh>@Loc["SubscriptionPaymentsColumnPrice"]</MudTh>
+                <MudTh>@Loc["SubscriptionPaymentsColumnPurchasedAt"]</MudTh>
+                <MudTh>@Loc["SubscriptionPaymentsColumnExpiresAt"]</MudTh>
+                <MudTh>@Loc["SubscriptionPaymentsColumnRegistration"]</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel='@Loc["SubscriptionPaymentsColumnEmail"]'>@context.Email</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPaymentsColumnName"]'>@context.Name</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPaymentsColumnPlan"]'>@context.PlanName</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPaymentsColumnInterval"]'>@context.BillingInterval</MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPaymentsColumnPrice"]'>
+                    @FormatPrice(context.PriceAmount, context.PriceCurrency)
+                </MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPaymentsColumnPurchasedAt"]'>
+                    @context.PurchaseDate.ToLocalTime().ToString("g")
+                </MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPaymentsColumnExpiresAt"]'>
+                    @if (context.ExpirationDate.HasValue)
+                    {
+                        @context.ExpirationDate.Value.ToLocalTime().ToString("g")
+                    }
+                </MudTd>
+                <MudTd DataLabel='@Loc["SubscriptionPaymentsColumnRegistration"]'>
+                    @if (context.HasRegisteredUser)
+                    {
+                        <MudChip T="string" Color="Color.Success" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.CheckCircle" Dense="true">
+                            @context.RegisteredUserName
+                        </MudChip>
+                    }
+                    else
+                    {
+                        <MudChip T="string" Color="Color.Warning" Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Pending" Dense="true">
+                            @Loc["SubscriptionPaymentsRegistrationMissing"]
+                        </MudChip>
+                    }
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </ChildContent>
+</PageLayout>

@@ -1,0 +1,59 @@
+@page "/admin/roles"
+@using Oikos.Web.Components.Layout.PageLayout
+@using Oikos.Web.Components.Shared.Dialogs
+@using Oikos.Common.Resources
+
+
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["RolePage_Title"]">
+            <ChildContent>
+                <div class="d-flex align-center gap-2">
+                        <MudButton Size="MudBlazor.Size.Medium" StartIcon="@Icons.Material.Filled.Add" OnClick="AddRoleClick"
+                                   Variant="Variant.Filled" Color="Color.Primary">@Loc["RolePage_CreateNewTitle"]</MudButton>
+                </div>
+            </ChildContent>
+        </StandardPageHeader>
+    </HeaderContent>
+    <ChildContent>
+        @if (_isLoading)
+        {
+            <MudStack Spacing="2">
+                <MudSkeleton Variant="Variant.Text" Width="40%" Height="24px" />
+                <MudSkeleton Variant="Variant.Rectangular" Height="220px" />
+            </MudStack>
+        }
+        else
+        {
+            <MudTable Items="_roles" Hover="true" Dense="true">
+                <HeaderContent>
+                    <MudTh>@Loc["RolePage_TableH1"]</MudTh>
+                    <MudTh>@Loc["RolePage_TableH2"]</MudTh>
+                    <MudTh>@Loc["RolePage_TableH3"]</MudTh>
+                    <MudTh class="text-right">@Loc["RolePage_TableH4"]</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd DataLabel='@Loc["RolePage_TableH1"]'>@context.Number</MudTd>
+                    <MudTd DataLabel='@Loc["RolePage_TableH2"]'>@context.Name</MudTd>
+                    <MudTd DataLabel='@Loc["RolePage_TableH3"]'>
+                        <MudSwitch Value="@context.IsEnabled" T="bool"
+                                   ValueChanged="v=>ChangeRoleActive(context.Id,v)" Color="Color.Primary">
+                        </MudSwitch>
+                    </MudTd>
+                    <MudTd Class="text-right" DataLabel='@Loc["RolePage_TableH4"]'>
+                            <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Primary"
+                                           OnClick="()=>EditRoleClick(context.Id)" />
+
+                            <MudIconButton Icon="@Icons.Material.Outlined.Delete" Color="Color.Error"
+                                           OnClick="()=>DeleteRoleClick(context.Id)" />
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        }
+    </ChildContent>
+    <FooterContent>
+        <PagePagination PageInfo="_paginationInfo" PageChangedClick="PageChangedClick"></PagePagination>
+    </FooterContent>
+</PageLayout>

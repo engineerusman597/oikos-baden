@@ -1,0 +1,136 @@
+.register-dialog__container {
+    width: 420px;
+    padding: 1.75rem 1.5rem 2rem;
+}
+
+.register-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.register-dialog__close {
+    margin-left: -0.25rem;
+}
+
+.register-dialog__title {
+    font-weight: 700;
+}
+
+.register-dialog__subtitle {
+    margin-top: 0.5rem;
+    color: var(--mud-palette-text-secondary);
+}
+
+.register-dialog__login-link {
+    color: var(--mud-palette-primary);
+    font-weight: 600;
+}
+
+.register-dialog__form {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.register-dialog__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.register-dialog__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+
+.register-dialog__field--section {
+    grid-column: 1 / -1;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(111, 57, 244, 0.16);
+    margin-top: 0.75rem;
+    padding-bottom: 0.25rem;
+}
+
+.register-dialog__field ::deep .mud-input-root {
+    border-radius: 12px;
+    border: 1px solid #e5e2f3;
+    background-color: #f9f8ff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-dialog__field ::deep .mud-input-root:hover,
+.register-dialog__field ::deep .mud-input-root.mud-focused {
+    border-color: #c8c1ed;
+    box-shadow: 0 0 0 3px rgba(111, 57, 244, 0.12);
+}
+
+.register-dialog__field ::deep .mud-input-root .mud-input-slot,
+.register-dialog__field ::deep .mud-input-root input {
+    color: #2b2541;
+}
+
+.register-dialog__field ::deep .mud-input-root input::placeholder {
+    color: rgba(43, 37, 65, 0.45);
+}
+
+.register-dialog__field ::deep .mud-input-underline::before,
+.register-dialog__field ::deep .mud-input-underline::after {
+    display: none;
+}
+
+.register-dialog__verification-hint {
+    color: var(--mud-palette-text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.register-dialog__privacy {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.register-dialog__privacy-label {
+    color: var(--mud-palette-text-secondary);
+}
+
+.register-dialog__privacy-label a {
+    color: var(--mud-palette-primary);
+    text-decoration: underline;
+}
+
+.register-dialog__privacy-label a:hover {
+    text-decoration: none;
+}
+
+.register-dialog__submit {
+    margin-top: 1.25rem;
+    width: 100%;
+    text-transform: none;
+    font-weight: 600;
+}
+
+.register-dialog__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+.register-dialog__membership {
+    text-transform: none;
+    font-weight: 500;
+}
+
+@media (max-width: 480px) {
+    .register-dialog__container {
+        width: 100%;
+    }
+
+    .register-dialog__grid {
+        grid-template-columns: 1fr;
+    }
+}

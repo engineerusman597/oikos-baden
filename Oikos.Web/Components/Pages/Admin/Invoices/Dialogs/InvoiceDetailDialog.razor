@@ -1,0 +1,221 @@
+@using System.Globalization
+@using Oikos.Application.Services.Invoice
+@using Oikos.Application.Services.Invoice.Models
+@inject IInvoiceManagementService InvoiceService
+
+<MudDialog MaxWidth="MaxWidth.Medium" FullWidth="true">
+    <TitleContent>
+        @if (_invoice is null)
+        {
+            @Loc["InvoiceDetailDialogTitle"]
+        }
+        else
+        {
+            @string.Format(Loc["InvoiceDetailDialogTitleWithId"], FormatValue(_invoice.TicketNumber))
+        }
+    </TitleContent>
+    <DialogContent>
+        @if (_invoice is null)
+        {
+            <MudAlert Severity="Severity.Error" Dense="true">@Loc["InvoiceDetailNotFound"]</MudAlert>
+        }
+        else
+        {
+            <MudStack Spacing="3">
+                <MudPaper Elevation="0" Class="pa-4">
+                    <MudStack Spacing="1">
+                        <MudText Typo="Typo.subtitle1">@FormatCompany(_invoice)</MudText>
+                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailPrimaryStageLabel"]</MudText>
+                        <MudChip T="string" Color="@ResolveColor(_invoice.StageColor, Color.Info)" Variant="Variant.Filled" Dense="true">
+                            <MudIcon Icon="@_invoice.StageIcon" Class="mr-2" />
+                            @_invoice.StageName
+                        </MudChip>
+                    </MudStack>
+                </MudPaper>
+
+                <MudGrid>
+                    <MudItem xs="12" sm="6">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderTicketNumber"]</MudText>
+                            <MudText Typo="Typo.body1">@FormatValue(_invoice.TicketNumber)</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderUser"]</MudText>
+                            <MudText Typo="Typo.body1">@FormatValue(_invoice.UserName)</MudText>
+                            @if (!string.IsNullOrWhiteSpace(_invoice.UserEmail))
+                            {
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@_invoice.UserEmail</MudText>
+                            }
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderCustomerNumber"]</MudText>
+                            <MudText Typo="Typo.body1">@FormatValue(_invoice.CustomerNumber)</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderInvoiceDate"]</MudText>
+                            <MudText Typo="Typo.body1">@FormatDate(_invoice.InvoiceDate)</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailAmountLabel"]</MudText>
+                            <MudText Typo="Typo.body1">@FormatAmount(_invoice)</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailCreatedLabel"]</MudText>
+                            <MudText Typo="Typo.body1">@FormatDateTime(_invoice.CreatedAt)</MudText>
+                        </MudStack>
+                    </MudItem>
+                    <MudItem xs="12" sm="6">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailUpdatedLabel"]</MudText>
+                            <MudText Typo="Typo.body1">@FormatDateTime(_invoice.UpdatedAt)</MudText>
+                        </MudStack>
+                    </MudItem>
+                </MudGrid>
+
+                <MudPaper Elevation="0" Class="pa-4">
+                    <MudStack Spacing="2">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderFile"]</MudText>
+                            @if (!string.IsNullOrWhiteSpace(_invoice.FilePath))
+                            {
+                                <MudLink Href="@GetFileUrl(_invoice.FilePath)" Target="_blank">@_invoice.FileName</MudLink>
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">-</MudText>
+                            }
+                        </MudStack>
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderPowerOfAttorney"]</MudText>
+                            @if (!string.IsNullOrWhiteSpace(_invoice.PowerOfAttorneyPath))
+                            {
+                                <MudLink Href="@GetFileUrl(_invoice.PowerOfAttorneyPath)" Target="_blank">@_invoice.PowerOfAttorneyFileName</MudLink>
+                            }
+                            else
+                            {
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">-</MudText>
+                            }
+                        </MudStack>
+                    </MudStack>
+                </MudPaper>
+
+                @if (!string.IsNullOrWhiteSpace(_invoice.StageDescription))
+                {
+                    <MudPaper Elevation="0" Class="pa-4">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.subtitle2">@Loc["InvoiceDetailDescriptionLabel"]</MudText>
+                            <MudText Typo="Typo.body2">@_invoice.StageDescription</MudText>
+                        </MudStack>
+                    </MudPaper>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(_invoice.StageNextSteps))
+                {
+                    <MudPaper Elevation="0" Class="pa-4">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.subtitle2">@Loc["InvoiceDetailNextStepsLabel"]</MudText>
+                            <MudText Typo="Typo.body2">@_invoice.StageNextSteps</MudText>
+                        </MudStack>
+                    </MudPaper>
+                }
+
+                <MudStack Spacing="1">
+                    <MudText Typo="Typo.subtitle2">@Loc["InvoiceDetailHistoryTitle"]</MudText>
+                    @if (_history.Count == 0)
+                    {
+                        <MudEmptyState Icon="@Icons.Material.Filled.History" Title='@Loc["InvoiceDetailHistoryEmpty"]' />
+                    }
+                    else
+                    {
+                        <MudList T="InvoiceHistoryDto" Dense="true" Class="invoice-detail-history-list">
+                            @foreach (var entry in _history)
+                            {
+                                <MudListItem T="InvoiceHistoryDto">
+                                    <MudListItemIcon>
+                                        <MudIcon Icon="@entry.StageIcon" Color="@ResolveColor(entry.StageColor, Color.Info)" />
+                                    </MudListItemIcon>
+                                    <MudListItemText>
+                                        <MudText Typo="Typo.subtitle2">@entry.StageName</MudText>
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                                            @string.Format(Loc["InvoiceDetailHistoryChanged"], FormatDateTime(entry.ChangedAt), entry.ChangedBy ?? Loc["InvoiceDetailSystemUser"])
+                                        </MudText>
+                                    </MudListItemText>
+                                </MudListItem>
+                            }
+                        </MudList>
+                    }
+                </MudStack>
+            </MudStack>
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary" OnClick="Close">@Loc["CommonClose"]</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
+    [Parameter] public int InvoiceId { get; set; }
+
+    private InvoiceDetailDto? _invoice;
+    private List<InvoiceHistoryDto> _history = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        _invoice = await InvoiceService.GetInvoiceDetailAsync(InvoiceId, culture);
+        _history = _invoice?.History ?? new List<InvoiceHistoryDto>();
+    }
+
+    private void Close() => MudDialog.Close();
+
+    private Color ResolveColor(string? colorName, Color fallback)
+    {
+        if (!string.IsNullOrWhiteSpace(colorName) && Enum.TryParse<Color>(colorName, out var parsed))
+        {
+            return parsed;
+        }
+        return fallback;
+    }
+
+    private string FormatCompany(InvoiceDetailDto invoice)
+        => string.IsNullOrWhiteSpace(invoice.Company) ? Loc["TableValueUnknown"] : invoice.Company!;
+
+    private string FormatValue(string? value)
+        => string.IsNullOrWhiteSpace(value) ? Loc["TableValueUnknown"] : value!;
+
+    private string FormatAmount(InvoiceDetailDto invoice)
+    {
+        var amount = string.IsNullOrWhiteSpace(invoice.Amount) ? Loc["TableValueUnknown"] : invoice.Amount!.Trim();
+        if (string.IsNullOrWhiteSpace(invoice.Currency))
+        {
+            return amount;
+        }
+        return string.IsNullOrWhiteSpace(invoice.Amount)
+            ? invoice.Currency!
+            : $"{amount} {invoice.Currency}";
+    }
+
+    private string FormatDate(DateTime? date)
+        => date.HasValue
+            ? date.Value.ToLocalTime().ToString("d", CultureInfo.CurrentUICulture)
+            : Loc["TableValueUnknown"];
+
+    private string FormatDateTime(DateTime date)
+        => date.ToLocalTime().ToString("g", CultureInfo.CurrentUICulture);
+
+    private static string GetFileUrl(string path)
+        => $"/{path.TrimStart('/')}";
+}

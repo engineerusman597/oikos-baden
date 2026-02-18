@@ -1,0 +1,203 @@
+@page "/bonix-auskunft"
+@* Force regeneration *@
+@layout Oikos.Web.Components.Layout.EmptyLayout
+@attribute [AllowAnonymous]
+@rendermode InteractiveServer
+@using Oikos.Application.Services.CompanyCheck
+@using Oikos.Application.Services.CompanyCheck.Models
+@using Oikos.Domain.Entities.CompanyCheck
+
+
+<PageTitle>@Loc["ModuleTitle"]</PageTitle>
+
+<HeadContent>
+    <link rel="icon" type="image/png" href="favicon_bonix.png" />
+</HeadContent>
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-8 mb-8">
+    <MudPaper Class="pa-6" Elevation="4">
+        <MudStack Spacing="4">
+            <MudText Typo="Typo.h4" Align="Align.Center">@Loc["QuickCheck_Title"]</MudText>
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="mud-text-secondary">
+                @Loc["QuickCheck_Description"]
+            </MudText>
+
+
+            @if (_step == 0)
+            {
+                <EditForm Model="_searchModel" OnValidSubmit="SearchAsync" FormName="companySearch">
+                    <DataAnnotationsValidator />
+                    <MudStack Spacing="3">
+                        <MudTextField @bind-Value="_searchModel.CompanyName"
+                                      Label="@Loc["SearchPlaceholder"]"
+                                      Required="true"
+                                      Variant="Variant.Outlined"
+                                      Adornment="Adornment.End"
+                                      AdornmentIcon="@Icons.Material.Filled.Search" />
+
+                        <MudExpansionPanels Elevation="0">
+                            <MudExpansionPanel Text="@Loc["QuickCheck_AdvancedSearch"]">
+                                <MudGrid Spacing="2">
+                                     <MudItem xs="12" sm="6">
+                                        <MudTextField @bind-Value="_searchModel.Country" 
+                                                      Label="@Loc["SearchCountryLabel"]" 
+                                                      MaxLength="2" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6">
+                                        <MudTextField @bind-Value="_searchModel.RegistrationNumber" 
+                                                      Label="@Loc["SearchRegistrationNumberLabel"]" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6">
+                                        <MudTextField @bind-Value="_searchModel.VatNumber" 
+                                                      Label="@Loc["SearchVatLabel"]" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6">
+                                        <MudTextField @bind-Value="_searchModel.PhoneNumber" 
+                                                      Label="@Loc["SearchPhoneLabel"]" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6">
+                                        <MudTextField @bind-Value="_searchModel.Street" 
+                                                      Label="@Loc["SearchStreetLabel"]" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6">
+                                        <MudTextField @bind-Value="_searchModel.City" 
+                                                      Label="@Loc["SearchCityLabel"]" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6">
+                                        <MudTextField @bind-Value="_searchModel.PostCode" 
+                                                      Label="@Loc["SearchPostCodeLabel"]" />
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6">
+                                        <MudSelect T="string" @bind-Value="_searchModel.CompanyType"
+                                                   Label="@Loc["SearchCompanyTypeLabel"]">
+                                            <MudSelectItem Value="@((string)null)">@Loc["SearchCompanyTypeAny"]</MudSelectItem>
+                                            @foreach (var type in _companyTypes)
+                                            {
+                                                <MudSelectItem Value="@type">@Loc[$"SearchCompanyType{type}"]</MudSelectItem>
+                                            }
+                                        </MudSelect>
+                                    </MudItem>
+                                    <MudItem xs="12" sm="6">
+                                        <MudSelect T="string" @bind-Value="_searchModel.Status"
+                                                   Label="@Loc["SearchStatusLabel"]">
+                                            <MudSelectItem Value="@((string)null)">@Loc["SearchStatusAny"]</MudSelectItem>
+                                            @foreach (var status in _companyStatuses)
+                                            {
+                                                <MudSelectItem Value="@status">@Loc[$"SearchStatus{status}"]</MudSelectItem>
+                                            }
+                                        </MudSelect>
+                                    </MudItem>
+                                </MudGrid>
+                            </MudExpansionPanel>
+                        </MudExpansionPanels>
+
+                        <MudButton ButtonType="ButtonType.Submit" 
+                                   Variant="Variant.Filled" 
+                                   Color="Color.Primary" 
+                                   Size="Size.Large" 
+                                   FullWidth="true"
+                                   Disabled="_isSearching"
+                                   Loading="_isSearching">
+                            @Loc["SearchButton"]
+                        </MudButton>
+                    </MudStack>
+                </EditForm>
+            }
+            else if (_step == 1)
+            {
+                <MudButton StartIcon="@Icons.Material.Filled.ArrowBack" OnClick="@(() => _step = 0)">@Loc["QuickCheck_Back"]</MudButton>
+                
+                @if (_searchResults?.Any() == true)
+                {
+                     <MudList T="CreditSafeCompanySummary" Clickable="true">
+                        @foreach (var company in _searchResults)
+                        {
+                            <MudListItem OnClick="@(() => SelectCompany(company))">
+                                <MudStack>
+                                    <MudText Typo="Typo.subtitle1"><b>@company.Name</b></MudText>
+                                    @if(!string.IsNullOrWhiteSpace(company.Address))
+                                    {
+                                        <MudText Typo="Typo.body2">@company.Address</MudText>
+                                    }
+                                    <MudStack Row="true" Spacing="2">
+                                        @if(!string.IsNullOrWhiteSpace(company.CountryCode))
+                                        {
+                                            <MudChip T="string" Size="Size.Small">@company.CountryCode</MudChip>
+                                        }
+                                        @if(!string.IsNullOrWhiteSpace(company.RegistrationNumber))
+                                        {
+                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined">@company.RegistrationNumber</MudChip>
+                                        }
+                                    </MudStack>
+                                </MudStack>
+                            </MudListItem>
+                            <MudDivider />
+                        }
+                    </MudList>
+                }
+                else
+                {
+                     <MudAlert Severity="Severity.Info">@Loc["SearchNoResultsMessage"]</MudAlert>
+                }
+            }
+            else if (_step == 2 && _selectedCompany != null)
+            {
+                <MudButton StartIcon="@Icons.Material.Filled.ArrowBack" OnClick="@(() => _step = 1)">@Loc["QuickCheck_Back"]</MudButton>
+                
+                <MudStack Spacing="3">
+                    <MudText Typo="Typo.h5">@Loc["ConfirmOrderTitle"]</MudText>
+                    
+                    <MudPaper Class="pa-4" Outlined="true">
+                        <MudText><b>@_selectedCompany.Name</b></MudText>
+                        @if(!string.IsNullOrWhiteSpace(_selectedCompany.Address))
+                        {
+                            <MudText>@_selectedCompany.Address</MudText>
+                        }
+                        
+                        @if(!string.IsNullOrWhiteSpace(_selectedCompany.CountryCode) || !string.IsNullOrWhiteSpace(_selectedCompany.RegistrationNumber))
+                        {
+                            var details = new List<string>();
+                            if(!string.IsNullOrWhiteSpace(_selectedCompany.CountryCode)) details.Add(_selectedCompany.CountryCode);
+                            if(!string.IsNullOrWhiteSpace(_selectedCompany.RegistrationNumber)) details.Add(_selectedCompany.RegistrationNumber);
+                            
+                            <MudText>@string.Join(" - ", details)</MudText>
+                        }
+                    </MudPaper>
+
+                    <MudTextField @bind-Value="_email" 
+                                  Label="@Loc["QuickCheck_EmailLabel"]" 
+                                  Required="true" 
+                                  InputType="InputType.Email" 
+                                  Variant="Variant.Outlined" 
+                                  HelperText="@Loc["QuickCheck_EmailHelper"]" />
+
+                    <MudText Typo="Typo.h6" Color="Color.Primary" Align="Align.Right">
+                        @Loc["QuickCheck_PriceLabel"]: @_price?.ToString("C")
+                    </MudText>
+
+                    <MudButton Variant="Variant.Filled" 
+                               Color="Color.Primary" 
+                               Size="Size.Large" 
+                               FullWidth="true"
+                               OnClick="ProceedToPaymentAsync"
+                               Disabled="@(string.IsNullOrWhiteSpace(_email) || _isProcessing)"
+                               Loading="_isProcessing">
+                        @Loc["QuickCheck_PayButton"]
+                    </MudButton>
+                </MudStack>
+            }
+
+        </MudStack>
+            
+        <MudStack Spacing="1" Class="mt-8">
+             <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["Bonix_RegisterPromo"]</MudText>
+             <MudStack Row="true" AccessKey="AlignItems.Center" Spacing="2">
+                 <MudButton Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" OnClick="OpenRegisterDialog" Class="pa-0" Style="min-width: auto;">@Loc["Login_RegisterButton"]</MudButton>
+                 <MudText Typo="Typo.caption" Class="mud-text-secondary">|</MudText>
+                 <MudButton Variant="Variant.Text" Color="Color.Primary" Size="Size.Small" OnClick="OpenLoginDialog" Class="pa-0" Style="min-width: auto;">@Loc["Login_SubmitButton"]</MudButton>
+             </MudStack>
+        </MudStack>
+    </MudPaper>
+</MudContainer>
+
+

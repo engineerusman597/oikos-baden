@@ -1,0 +1,9 @@
+.stage-manager-table .stage-action-buttons {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--mud-space-1);
+}
+
+.stage-manager-table .stage-action-buttons .mud-tooltip-root {
+    display: inline-flex;
+}

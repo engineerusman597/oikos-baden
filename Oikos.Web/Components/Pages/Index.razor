@@ -1,0 +1,57 @@
+@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+@inject NavigationManager NavigationManager
+@inject IAuthenticationService _authService
+@inject AuthenticationStateProvider _authStateProvider
+
+<AuthorizeView>
+    <Authorized>
+        <!-- If not redirected, show access restricted -->
+        <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-16 text-center">
+            <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" Class="mb-4">
+                Access Restricted
+            </MudAlert>
+            <MudText Typo="Typo.h5">
+                You are logged in but do not have the required permissions to access the dashboard.
+            </MudText>
+            <MudText Class="mt-2">
+                Please contact support if you believe this is an error.
+            </MudText>
+        </MudContainer>
+    </Authorized>
+    <NotAuthorized>
+        <!-- Redirect to login logic is handled in code block -->
+        <MudContainer MaxWidth="MaxWidth.Medium" Class="mt-16 text-center">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+            <MudText Class="mt-2">Redirecting to login...</MudText>
+        </MudContainer>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await _authStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            if (user.IsInRole("Admin"))
+            {
+                 NavigationManager.NavigateTo("/admin/dashboard");
+            }
+            else if (user.IsInRole("User"))
+            {
+                 NavigationManager.NavigateTo("/dashboard");
+            }
+            else if (user.IsInRole("User_Bonix"))
+            {
+                 NavigationManager.NavigateTo("/user-bonix/dashboard");
+            }
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+    }
+}

@@ -1,0 +1,16 @@
+.invoice-filters {
+    overflow-x: hidden;
+}
+
+.invoice-filter-stack {
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.invoice-filter-actions {
+    flex-wrap: wrap;
+}
+
+.invoice-filter-actions .mud-button {
+    white-space: nowrap;
+}

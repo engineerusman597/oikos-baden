@@ -1,0 +1,28 @@
+@using System.Collections.Generic
+
+<MudDialog MaxWidth="MaxWidth.Medium" FullWidth="true" Class="company-search-purpose-dialog">
+    <DialogContent>
+        <MudStack Spacing="3" AlignItems="AlignItems.Start">
+            <MudStack Spacing="1">
+                <MudText Typo="Typo.h6">@Loc["SearchPurposeTitle"]</MudText>
+                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["SearchPurposeDescription"]</MudText>
+            </MudStack>
+
+            <MudRadioGroup T="string" @bind-Value="_selectedPurpose" Row="false">
+                <MudStack Spacing="1" AlignItems="AlignItems.Start">
+                    @foreach (var option in _purposeOptions)
+                    {
+                        <MudStack Direction="Row" AlignItems="AlignItems.Center" Spacing="1">
+                            <MudRadio T="string" Value="@option.Key" Color="Color.Primary">@option.Label</MudRadio>
+                        </MudStack>
+                    }
+                </MudStack>
+            </MudRadioGroup>
+        </MudStack>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Default" OnClick="Cancel">@Loc["SearchPurposeCancel"]</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="ConfirmAsync">@Loc["SearchPurposeConfirm"]</MudButton>
+    </DialogActions>
+</MudDialog>
+

@@ -1,0 +1,126 @@
+@using Oikos.Web.Components.Layout.Themes
+@using Oikos.Web.Components.Layout.Culture
+@using Oikos.Web.Components.Layout.NavMenus
+@using Oikos.Web.Components.Layout.UserAvatar
+@using Oikos.Web.States
+@using Oikos.Web.Components.Shared
+
+@inherits LayoutComponentBase
+
+<ProvidersAggregate></ProvidersAggregate>
+
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <PageTitle>Oikos Admin</PageTitle>
+        <HeadContent>
+            <link rel="icon" type="image/png" href="favicon.png" />
+        </HeadContent>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="User">
+    <Authorized>
+        <PageTitle>My Rechtfix Portal</PageTitle>
+        <HeadContent>
+            <link rel="icon" type="image/png" href="favicon.png" />
+        </HeadContent>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView Roles="User_Bonix">
+    <Authorized>
+        <PageTitle>My Bonix Portal</PageTitle>
+        <HeadContent>
+            <link rel="icon" type="image/png" href="favicon_bonix.png" />
+        </HeadContent>
+    </Authorized>
+</AuthorizeView>
+
+<AuthorizeView>
+    <NotAuthorized>
+        <PageTitle>Oikos Portal</PageTitle>
+        <HeadContent>
+            <link rel="icon" type="image/png" href="favicon.png" />
+        </HeadContent>
+    </NotAuthorized>
+</AuthorizeView>
+
+<LoggerErrorBoundary>
+    <ChildContent>
+        <MudLayout>
+            <AuthorizeView Context="authContext">
+                <Authorized>
+                    <MudAppBar Elevation="0" Dense="true" Color="Color.Inherit" Class="app-bar">
+                        <div class="d-flex align-center gap-2">
+                            <NavOpenButton />
+                        </div>
+                        <MudSpacer />
+
+                        <AuthorizeView Roles="User" Context="userContext">
+                            <Authorized>
+                                <div class="d-none d-md-flex align-center gap-2">
+                                    <MudTooltip Text='Contact Us'>
+                                        <MudIconButton Icon="@Icons.Material.Filled.SupportAgent"
+                                                       Color="Color.Inherit"
+                                                       Size="Size.Medium"
+                                                       Href="https://www.online-mahnantraege.de/contact#hero"
+                                                       Target="_blank"
+                                                       Rel="noopener noreferrer"
+                                                       AriaLabel='Contact Us' />
+                                    </MudTooltip>
+                                    <CultureIcon />
+                                </div>
+                            </Authorized>
+                        </AuthorizeView>
+
+                        <AuthorizeView Roles="Admin" Context="adminContext1">
+                            <Authorized>
+                                <div class="d-none d-md-flex align-center gap-2">
+                                    <CultureIcon />
+                                </div>
+                            </Authorized>
+                        </AuthorizeView>
+
+                        <UserMenuAvatar />
+                    </MudAppBar>
+
+                    <AuthorizeView Roles="User_Bonix" Context="bonixNavContext">
+                        <Authorized>
+                            <BonixUserNavMenu />
+                        </Authorized>
+                    </AuthorizeView>
+
+                    <AuthorizeView Roles="User" Context="userNavContext">
+                        <Authorized>
+                            <UserNavMenu />
+                        </Authorized>
+                    </AuthorizeView>
+
+                    <AuthorizeView Roles="Admin" Context="adminNavContext">
+                        <Authorized>
+                            <AdminNavMenu />
+                        </Authorized>
+                    </AuthorizeView>
+
+                    <MudMainContent Class="main-content">
+                        <div class="pa-2 d-flex flex-column content-scroll-container">
+                            @Body
+                        </div>
+                    </MudMainContent>
+                </Authorized>
+                <NotAuthorized>
+                    @Body
+                </NotAuthorized>
+            </AuthorizeView>
+        </MudLayout>
+    </ChildContent>
+    <ErrorContent Context="exception">
+        <div style="background: red">@exception.Message</div>
+    </ErrorContent>
+</LoggerErrorBoundary>
+
+<div id="blazor-error-ui">
+    An unhandled error has occurred.
+    <a href="" class="reload">Reload</a>
+    <a class="dismiss">&times;</a>
+</div>

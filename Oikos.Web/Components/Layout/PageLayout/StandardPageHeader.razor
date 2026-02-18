@@ -1,0 +1,21 @@
+@namespace Oikos.Web.Components.Layout.PageLayout
+
+<MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="flex-wrap" Style="width:100%;">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="flex-wrap">
+        @if (StartContent is not null)
+        {
+            @StartContent
+        }
+        <MudText Typo="Typo.h5">@Title</MudText>
+    </MudStack>
+    <MudSpacer />
+    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="flex-wrap ml-auto">
+        @ChildContent
+    </MudStack>
+</MudStack>
+
+@code {
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public RenderFragment? StartContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}

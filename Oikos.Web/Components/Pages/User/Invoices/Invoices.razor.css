@@ -1,0 +1,25 @@
+.my-invoices-container {
+    padding-top: 32px;
+    padding-bottom: 48px;
+}
+
+.my-invoices-table {
+    border-radius: var(--mud-default-borderradius);
+    overflow: hidden;
+}
+
+.modern-invoice-table .mud-table-head {
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.05);
+}
+
+::deep .modern-invoice-table .mud-table-row:hover {
+    background-color: rgba(var(--mud-palette-primary-rgb), 0.04) !important;
+}
+
+::deep .modern-invoice-table .mud-table-row {
+    cursor: pointer;
+}
+
+.status-chip {
+    font-weight: 600;
+}

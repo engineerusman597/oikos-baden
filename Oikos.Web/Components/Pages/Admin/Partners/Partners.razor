@@ -1,0 +1,73 @@
+@page "/admin/partners"
+@using Oikos.Web.Components.Layout.PageLayout
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["PartnerManagement_Title"]">
+            <ChildContent>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                           OnClick="CreatePartnerAsync" Disabled="_isBusy">
+                    @Loc["PartnerManagement_Add"]
+                </MudButton>
+            </ChildContent>
+        </StandardPageHeader>
+    </HeaderContent>
+    <ChildContent>
+        <MudStack Spacing="3">
+            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary">@Loc["PartnerManagement_Subtitle"]</MudText>
+
+            @if (_isBusy)
+            {
+                <MudPaper Elevation="0" Class="d-flex justify-center pa-6">
+                    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                </MudPaper>
+            }
+            else if (_partners.Count == 0)
+            {
+                <MudEmptyState Icon="@Icons.Material.Filled.Handshake" Title="@Loc["PartnerManagement_EmptyTitle"]"
+                               Description="@Loc["PartnerManagement_EmptyDescription"]" />
+            }
+            else
+            {
+                <MudTable Items="_partners" Hover="true" Dense="true">
+                    <HeaderContent>
+                        <MudTh>@Loc["PartnerManagement_Name"]</MudTh>
+                        <MudTh>@Loc["PartnerManagement_Code"]</MudTh>
+                        <MudTh>@Loc["PartnerManagement_Customers"]</MudTh>
+                        <MudTh>@Loc["PartnerManagement_Contact"]</MudTh>
+                        <MudTh>@Loc["PartnerManagement_RechtfixLink"]</MudTh>
+                        <MudTh>@Loc["PartnerManagement_BonixLink"]</MudTh>
+                        <MudTh class="text-right"></MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="@Loc["PartnerManagement_Name"]">@context.Name</MudTd>
+                        <MudTd DataLabel="@Loc["PartnerManagement_Code"]">@context.Code</MudTd>
+                        <MudTd DataLabel="@Loc["PartnerManagement_Customers"]">@context.CustomerCount</MudTd>
+                        <MudTd DataLabel="@Loc["PartnerManagement_Contact"]">@(!string.IsNullOrWhiteSpace(context.ContactEmail) ? context.ContactEmail : "-")</MudTd>
+                        <MudTd DataLabel="@Loc["PartnerManagement_RechtfixLink"]">
+                            <MudTooltip Text="@GetRegularRegistrationLink(context.Code)">
+                                <MudIconButton Icon="@Icons.Material.Filled.ContentCopy" 
+                                             Size="Size.Small" 
+                                             Color="Color.Primary"
+                                             OnClick="@(() => CopyToClipboardAsync(GetRegularRegistrationLink(context.Code), Loc["PartnerManagement_RechtfixLinkType"]))" />
+                            </MudTooltip>
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["PartnerManagement_BonixLink"]">
+                            <MudTooltip Text="@GetBonixRegistrationLink(context.Code)">
+                                <MudIconButton Icon="@Icons.Material.Filled.ContentCopy" 
+                                             Size="Size.Small" 
+                                             Color="Color.Secondary"
+                                             OnClick="@(() => CopyToClipboardAsync(GetBonixRegistrationLink(context.Code), Loc["PartnerManagement_BonixLinkType"]))" />
+                            </MudTooltip>
+                        </MudTd>
+                        <MudTd Class="text-right">
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="@(() => EditPartnerAsync(context))" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => DeletePartnerAsync(context))" />
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+        </MudStack>
+    </ChildContent>
+</PageLayout>

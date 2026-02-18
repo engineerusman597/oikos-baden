@@ -1,0 +1,62 @@
+@page "/user-bonix/company-checks/success"
+@using Oikos.Common.Resources
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Loc
+@attribute [AllowAnonymous]
+@rendermode InteractiveServer
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-8">
+    <MudPaper Class="pa-8" Elevation="4" Outlined="true">
+        <MudStack Spacing="4" AlignItems="AlignItems.Center">
+            @if (_isProcessing)
+            {
+                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                <MudText Typo="Typo.h5">@Loc["QuickCheck_ProcessingTitle"]</MudText>
+                <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["QuickCheck_ProcessingMessage"]</MudText>
+            }
+            else if (_isSuccess)
+            {
+                <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Size="Size.Large" Style="width: 80px; height: 80px;" />
+                <MudText Typo="Typo.h4" Color="Color.Success">@Loc["QuickCheck_ConfirmedTitle"]</MudText>
+                
+                <MudText Typo="Typo.body1" Align="Align.Center">
+                    @Loc["QuickCheck_ConfirmedMessage"]
+                </MudText>
+
+                @if (!string.IsNullOrWhiteSpace(_downloadUrl))
+                {
+                    <MudButton Variant="Variant.Filled" 
+                               Color="Color.Primary" 
+                               Size="Size.Large" 
+                               Href="@_downloadUrl" 
+                               Target="_blank"
+                               StartIcon="@Icons.Material.Filled.Download">
+                        @Loc["ReportDownloadButton"]
+                    </MudButton>
+                }
+                else
+                {
+                    <MudText Typo="Typo.body2" Color="Color.Warning">@Loc["PdfGenerationInProgress"]</MudText>
+                    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-2" />
+                }
+                
+                <MudStack Row="true" Spacing="4" Class="mt-4">
+                     <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Href="/user-bonix/company-checks/history">
+                        @Loc["NavMenu_History"]
+                    </MudButton>
+                     <MudButton Variant="Variant.Text" Color="Color.Default" Href="/user-bonix/company-checks">
+                        @Loc["QuickCheck_NewSearch"]
+                    </MudButton>
+                </MudStack>
+            }
+            else
+            {
+                 <MudIcon Icon="@Icons.Material.Filled.Error" Color="Color.Error" Size="Size.Large" Style="width: 80px; height: 80px;" />
+                 <MudText Typo="Typo.h5" Color="Color.Error">@Loc["QuickCheck_OrderFailedTitle"]</MudText>
+                 <MudText>@_errorMessage</MudText>
+                 <MudButton Variant="Variant.Outlined" Color="Color.Primary" Href="/user-bonix/company-checks">@Loc["QuickCheck_TryAgain"]</MudButton>
+            }
+        </MudStack>
+    </MudPaper>
+</MudContainer>

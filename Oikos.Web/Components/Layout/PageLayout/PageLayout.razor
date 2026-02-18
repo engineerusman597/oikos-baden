@@ -1,0 +1,27 @@
+@namespace Oikos.Web.Components.Layout.PageLayout
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-4">
+    <MudStack Spacing="3">
+        @if (HeaderContent is not null)
+        {
+            <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Spacing="2" Class="flex-wrap">
+                @HeaderContent
+            </MudStack>
+        }
+        <div>
+            @ChildContent
+        </div>
+        @if (FooterContent is not null)
+        {
+            <div>
+                @FooterContent
+            </div>
+        }
+    </MudStack>
+</MudContainer>
+
+@code {
+    [Parameter] public RenderFragment? HeaderContent { get; set; }
+    [Parameter] public RenderFragment? FooterContent { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+}
