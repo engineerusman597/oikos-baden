@@ -144,24 +144,25 @@
                                       Label="@Loc["Register_CompanyLabel"]"
                                       For="@(() => _model.Company)" />
 
-                        <MudSelect T="string" @bind-Value="_model.Gender"
-                                   Variant="Variant.Filled" Margin="Margin.Dense"
-                                   Label="@Loc["Register_GenderLabel"]"
-                                   Placeholder="@Loc["Register_GenderPlaceholder"]"
-                                   For="@(() => _model.Gender)">
-                            <MudSelectItem Value="@("m")">@Loc["Register_GenderOptionMale"]</MudSelectItem>
-                            <MudSelectItem Value="@("f")">@Loc["Register_GenderOptionFemale"]</MudSelectItem>
-                            <MudSelectItem Value="@("d")">@Loc["Register_GenderOptionDiverse"]</MudSelectItem>
-                        </MudSelect>
+                        <div class="register-page__native-select-wrap">
+                            <label class="register-page__native-label">@Loc["Register_GenderLabel"]</label>
+                            <select class="register-page__native-select" @bind="_model.Gender">
+                                <option value="">@Loc["Register_GenderPlaceholder"]</option>
+                                <option value="m">@Loc["Register_GenderOptionMale"]</option>
+                                <option value="f">@Loc["Register_GenderOptionFemale"]</option>
+                                <option value="d">@Loc["Register_GenderOptionDiverse"]</option>
+                            </select>
+                        </div>
 
-                        <MudSelect T="string" @bind-Value="_model.Title"
-                                   Variant="Variant.Filled" Margin="Margin.Dense"
-                                   Label="@Loc["Register_TitleLabel"]"
-                                   Placeholder="@Loc["Register_TitlePlaceholder"]">
-                            <MudSelectItem Value="@("Dr.")">@Loc["Register_TitleOptionDr"]</MudSelectItem>
-                            <MudSelectItem Value="@("Prof.")">@Loc["Register_TitleOptionProf"]</MudSelectItem>
-                            <MudSelectItem Value="@("Prof. Dr.")">@Loc["Register_TitleOptionProfDr"]</MudSelectItem>
-                        </MudSelect>
+                        <div class="register-page__native-select-wrap">
+                            <label class="register-page__native-label">@Loc["Register_TitleLabel"]</label>
+                            <select class="register-page__native-select" @bind="_model.Title">
+                                <option value="">@Loc["Register_TitlePlaceholder"]</option>
+                                <option value="Dr.">@Loc["Register_TitleOptionDr"]</option>
+                                <option value="Prof.">@Loc["Register_TitleOptionProf"]</option>
+                                <option value="Prof. Dr.">@Loc["Register_TitleOptionProfDr"]</option>
+                            </select>
+                        </div>
 
                         <MudTextField @bind-Value="_model.FirstName"
                                       Variant="Variant.Filled" Margin="Margin.Dense"
@@ -233,23 +234,24 @@
             @if (_step == 3)
             {
             <!-- Step 3: Plan selection (Mitgliedschaft wählen) -->
-            <div class="register-page__body">
+            <div class="register-page__body register-page__body--plan">
                 <div class="register-page__plan-shell">
-                    <MudText Typo="Typo.h5" Class="register-page__plan-title">Wählen Sie Ihre Mitgliedschaft</MudText>
 
-                    <!-- Billing toggle -->
-                    <div class="register-page__billing-toggle">
-                        <MudButton Variant="@(_billingInterval == "monthly" ? Variant.Filled : Variant.Outlined)"
-                                   Color="Color.Primary" Size="Size.Small"
-                                   OnClick="@(() => { _billingInterval = "monthly"; _selectedPlanId = null; })">
-                            Monatlich
-                        </MudButton>
-                        <MudButton Variant="@(_billingInterval == "yearly" ? Variant.Filled : Variant.Outlined)"
-                                   Color="Color.Primary" Size="Size.Small"
-                                   OnClick="@(() => { _billingInterval = "yearly"; _selectedPlanId = null; })">
-                            Jährlich
-                            <MudChip T="string" Size="Size.Small" Class="register-page__save-badge">2 Monate sparen</MudChip>
-                        </MudButton>
+                    <!-- Title + toggle + subtitle -->
+                    <div class="register-page__plan-heading">
+                        <h1 class="register-page__plan-title">Wählen Sie Ihre Mitgliedschaft</h1>
+                        <div class="register-page__billing-toggle">
+                            <button class="register-page__toggle-btn @(_billingInterval == "monthly" ? "register-page__toggle-btn--active" : "")"
+                                    @onclick="@(() => { _billingInterval = "monthly"; _selectedPlanId = null; })">
+                                Monatlich
+                            </button>
+                            <button class="register-page__toggle-btn @(_billingInterval == "yearly" ? "register-page__toggle-btn--active" : "")"
+                                    @onclick="@(() => { _billingInterval = "yearly"; _selectedPlanId = null; })">
+                                Jährlich
+                                <span class="register-page__save-badge">2 Monate sparen</span>
+                            </button>
+                        </div>
+                        <p class="register-page__plan-subtitle">Alle Mitgliedschaften haben eine Laufzeit von 12 Monaten</p>
                     </div>
 
                     <!-- Plan cards -->
@@ -259,6 +261,7 @@
                             var isSelected = _selectedPlanId == plan.Id;
                             var displayPrice = _billingInterval == "yearly" ? plan.YearlyPrice : plan.MonthlyPrice;
                             var isPopular = plan.Slug.ToLower() == "standard";
+                            var periodLabel = _billingInterval == "yearly" ? "Jahr" : "Monat";
 
                             <div class="register-page__plan-card @(isSelected ? "register-page__plan-card--selected" : "") @(isPopular ? "register-page__plan-card--popular" : "")"
                                  @onclick="@(() => _selectedPlanId = plan.Id)">
@@ -267,33 +270,48 @@
                                     <div class="register-page__plan-badge">Beliebteste Wahl</div>
                                 }
                                 <div class="register-page__plan-card-header">
-                                    <MudText Typo="Typo.h6" Class="register-page__plan-name">@plan.Name</MudText>
+                                    <span class="register-page__plan-name">@plan.Name</span>
                                     @if (isSelected)
                                     {
-                                        <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Primary" Size="Size.Small" />
+                                        <MudIcon Icon="@Icons.Material.Filled.Check" Style="color:var(--mud-palette-primary);font-size:20px;" />
                                     }
                                 </div>
-                                <MudText Typo="Typo.caption" Class="register-page__plan-desc">@plan.Description</MudText>
-                                <div class="register-page__plan-price">
-                                    <span class="register-page__plan-amount">€@displayPrice.ToString("0")</span>
-                                    <span class="register-page__plan-period"> / @(_billingInterval == "yearly" ? "Jahr" : "Monat")</span>
+                                <p class="register-page__plan-desc">@plan.Description</p>
+                                <div class="register-page__plan-price-block">
+                                    <div class="register-page__plan-price">
+                                        <span class="register-page__plan-amount">€@displayPrice.ToString("0")</span>
+                                        <span class="register-page__plan-period"> / @periodLabel</span>
+                                    </div>
+                                    <p class="register-page__plan-price-note">Jahrespreis monatlich zahlbar</p>
                                 </div>
                                 <ul class="register-page__plan-features">
                                     @if (plan.MonthlyClaimLimit.HasValue)
                                     {
-                                        <li><MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Primary" />@plan.MonthlyClaimLimit Forderungsfälle/Monat</li>
+                                        <li>
+                                            <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Primary" />
+                                            <span>@plan.MonthlyClaimLimit Forderungsfälle/Monat</span>
+                                        </li>
                                     }
                                     @if (plan.MonthlyBionicCheckLimit.HasValue && plan.MonthlyBionicCheckLimit > 0)
                                     {
-                                        <li><MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Primary" />@plan.MonthlyBionicCheckLimit Bonix-Checks/Monat</li>
+                                        <li>
+                                            <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Primary" />
+                                            <span>@plan.MonthlyBionicCheckLimit Bonix-Checks/Monat</span>
+                                        </li>
                                     }
                                     @if (plan.TeamSeatLimit.HasValue)
                                     {
-                                        <li><MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Primary" />@plan.TeamSeatLimit Teamzugänge</li>
+                                        <li>
+                                            <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Primary" />
+                                            <span>@plan.TeamSeatLimit Teamzugänge</span>
+                                        </li>
                                     }
                                     else
                                     {
-                                        <li><MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Primary" />Unbegrenzte Teamzugänge</li>
+                                        <li>
+                                            <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" Color="Color.Primary" />
+                                            <span>Unbegrenzte Teamzugänge</span>
+                                        </li>
                                     }
                                 </ul>
                             </div>
@@ -302,10 +320,12 @@
 
                     <!-- Actions -->
                     <div class="register-page__plan-actions">
-                        <MudButton Variant="Variant.Outlined" OnClick="SkipPlanSelection">
-                            Überspringen
+                        <MudButton Variant="Variant.Outlined" Size="Size.Large"
+                                   StartIcon="@Icons.Material.Filled.ArrowBack"
+                                   OnClick="@(() => _step = 2)">
+                            Zurück
                         </MudButton>
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large"
                                    Disabled="@(_selectedPlanId == null || _isActivatingPlan)"
                                    OnClick="ActivateAndProceed">
                             @if (_isActivatingPlan)
@@ -554,62 +574,122 @@
     }
 
     /* ── Step 3: Plan selection ── */
+    .register-page__body--plan {
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+
     .register-page__plan-shell {
         width: 100%;
-        max-width: 860px;
+        max-width: 960px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 1.5rem;
+        gap: 1.75rem;
     }
 
-    .register-page__plan-title {
-        font-weight: 700;
+    .register-page__plan-heading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
         text-align: center;
     }
 
+    .register-page__plan-title {
+        font-family: 'Georgia', serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: #111827;
+        margin: 0;
+    }
+
+    .register-page__plan-subtitle {
+        font-size: 0.8125rem;
+        color: #6b7280;
+        margin: 0;
+    }
+
+    /* Billing toggle */
     .register-page__billing-toggle {
-        display: flex;
-        gap: 0.5rem;
+        display: inline-flex;
         align-items: center;
         background: #f3f4f6;
-        padding: 0.25rem;
-        border-radius: 8px;
+        padding: 4px;
+        border-radius: 10px;
+        gap: 2px;
+    }
+
+    .register-page__toggle-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 16px;
+        border-radius: 7px;
+        border: none;
+        background: transparent;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #374151;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+        white-space: nowrap;
+    }
+
+    .register-page__toggle-btn--active {
+        background: var(--mud-palette-primary);
+        color: white;
     }
 
     .register-page__save-badge {
-        font-size: 0.65rem !important;
-        height: 18px !important;
-        margin-left: 4px;
+        background: #e5e7eb;
+        color: #374151;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 999px;
+        white-space: nowrap;
     }
 
+    .register-page__toggle-btn--active .register-page__save-badge {
+        background: rgba(255,255,255,0.25);
+        color: white;
+    }
+
+    /* Plan grid */
     .register-page__plan-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.25rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
         width: 100%;
     }
 
+    @@media (max-width: 768px) {
+        .register-page__plan-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* Plan cards */
     .register-page__plan-card {
         position: relative;
-        background: white;
-        border: 2px solid #e5e7eb;
-        border-radius: 12px;
+        background: #ffffff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 14px;
         padding: 1.5rem;
         cursor: pointer;
         transition: border-color 0.15s, box-shadow 0.15s;
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.875rem;
     }
 
     .register-page__plan-card:hover {
         border-color: var(--mud-palette-primary);
-        box-shadow: 0 0 0 1px var(--mud-palette-primary);
     }
 
     .register-page__plan-card--selected {
-        border-color: var(--mud-palette-primary);
+        border-color: var(--mud-palette-primary) !important;
         box-shadow: 0 0 0 2px var(--mud-palette-primary);
     }
 
@@ -619,14 +699,14 @@
 
     .register-page__plan-badge {
         position: absolute;
-        top: -12px;
+        top: -13px;
         left: 50%;
         transform: translateX(-50%);
         background: var(--mud-palette-primary);
         color: white;
         font-size: 0.7rem;
         font-weight: 600;
-        padding: 2px 12px;
+        padding: 3px 14px;
         border-radius: 999px;
         white-space: nowrap;
     }
@@ -638,50 +718,78 @@
     }
 
     .register-page__plan-name {
+        font-size: 1.125rem;
         font-weight: 700;
+        color: #111827;
     }
 
     .register-page__plan-desc {
-        color: var(--mud-palette-text-secondary);
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin: 0;
+        line-height: 1.4;
+    }
+
+    /* Price block */
+    .register-page__plan-price-block {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
     }
 
     .register-page__plan-price {
         display: flex;
         align-items: baseline;
-        gap: 0.1rem;
+        gap: 2px;
     }
 
     .register-page__plan-amount {
-        font-size: 1.875rem;
-        font-weight: 700;
+        font-size: 2rem;
+        font-weight: 800;
+        color: #111827;
+        line-height: 1;
     }
 
     .register-page__plan-period {
-        font-size: 0.875rem;
-        color: var(--mud-palette-text-secondary);
+        font-size: 0.9rem;
+        color: #6b7280;
+        margin-left: 2px;
     }
 
+    .register-page__plan-price-note {
+        font-size: 0.8125rem;
+        color: #6b7280;
+        margin: 0;
+    }
+
+    /* Features */
     .register-page__plan-features {
         list-style: none;
         padding: 0;
         margin: 0;
         display: flex;
         flex-direction: column;
-        gap: 0.4rem;
+        gap: 0.5rem;
     }
 
     .register-page__plan-features li {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 0.4rem;
         font-size: 0.875rem;
+        color: #374151;
     }
 
+    .register-page__plan-features li span {
+        color: #374151;
+    }
+
+    /* Actions */
     .register-page__plan-actions {
         display: flex;
         gap: 1rem;
         justify-content: center;
-        padding-top: 0.5rem;
+        padding-top: 0.25rem;
     }
 
     /* Stepper: done step */
@@ -692,5 +800,46 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+
+    /* Native select replacement for MudSelect (no popover provider needed) */
+    .register-page__native-select-wrap {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .register-page__native-label {
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.6);
+        margin-bottom: 2px;
+        padding-left: 12px;
+    }
+
+    .register-page__native-select {
+        width: 100%;
+        height: 48px;
+        padding: 8px 12px;
+        background: rgba(0, 0, 0, 0.06);
+        border: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+        border-radius: 4px 4px 0 0;
+        font-size: 1rem;
+        font-family: inherit;
+        color: rgba(0, 0, 0, 0.87);
+        cursor: pointer;
+        appearance: auto;
+        outline: none;
+        transition: border-bottom-color 0.2s;
+    }
+
+    .register-page__native-select:focus {
+        border-bottom: 2px solid var(--mud-palette-primary);
+        background: rgba(0, 0, 0, 0.09);
+    }
+
+    .register-page__native-select:hover {
+        background: rgba(0, 0, 0, 0.09);
     }
 </style>

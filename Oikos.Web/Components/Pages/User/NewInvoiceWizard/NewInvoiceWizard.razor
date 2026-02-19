@@ -235,15 +235,25 @@
                                                                             <MudTextField @bind-Value="draft.Details.VatAmount" Label="@Loc["WizardInvoiceVat"]" Adornment="Adornment.End" AdornmentText="@draft.Details.Currency" Immediate="true" />
                                                                         </MudItem>
                                                                         <MudItem xs="12" sm="6">
-                                                                            <MudSelect @bind-Value="draft.Details.Currency" Label="@Loc["WizardInvoiceCurrency"]" Required="true">
-                                                                                @foreach (var currency in _currencies)
-                                                                                {
-                                                                                    <MudSelectItem Value="@currency">@currency</MudSelectItem>
-                                                                                }
-                                                                            </MudSelect>
+                                                                            <div class="wizard-native-select-wrap">
+                                                                                <label class="wizard-native-label">@Loc["WizardInvoiceCurrency"]</label>
+                                                                                <select class="wizard-native-select"
+                                                                                        value="@draft.Details.Currency"
+                                                                                        @onchange="@(e => draft.Details.Currency = e.Value?.ToString() ?? "EUR")">
+                                                                                    @foreach (var currency in _currencies)
+                                                                                    {
+                                                                                        <option value="@currency">@currency</option>
+                                                                                    }
+                                                                                </select>
+                                                                            </div>
                                                                         </MudItem>
                                                                         <MudItem xs="12">
-                                                                            <MudDatePicker @bind-Date="draft.Details.InvoiceDate" Label="@Loc["WizardInvoiceDate"]" Required="true" DateFormat="dd.MM.yyyy" MaxDate="@DateTime.Today" />
+                                                                            <MudTextField T="string"
+                                                                                          InputType="InputType.Date"
+                                                                                          Label="@Loc["WizardInvoiceDate"]"
+                                                                                          Required="true"
+                                                                                          Value="@(draft.Details.InvoiceDate?.ToString("yyyy-MM-dd") ?? "")"
+                                                                                          ValueChanged="@(v => { if (!string.IsNullOrEmpty(v) && DateTime.TryParse(v, out var d)) draft.Details.InvoiceDate = d; else draft.Details.InvoiceDate = null; })" />
                                                                         </MudItem>
                                                                     </MudGrid>
                                                                     <MudTextField @bind-Value="draft.Details.Description" Label="@Loc["WizardInvoiceDescription"]" Lines="3" />
@@ -308,11 +318,11 @@
                                                         <LabelContent>
                                                             <div class="start-option-date-row">
                                                                 <MudText>@Loc["WizardStartOptionAfterReminder"]</MudText>
-                                                                <MudDatePicker @bind-Date="_preferences.StartAfterReminderAt"
-                                                                               DateFormat="dd.MM.yyyy"
-                                                                               Dense="true"
-                                                                               MinDate="@DateTime.Today"
-                                                                               Class="start-option-date-picker" />
+                                                                <input type="date"
+                                                                       class="start-option-date-picker start-option-date-input"
+                                                                       min="@DateTime.Today.ToString("yyyy-MM-dd")"
+                                                                       value="@(_preferences.StartAfterReminderAt?.ToString("yyyy-MM-dd") ?? "")"
+                                                                       @onchange="@(e => { if (DateTime.TryParse(e.Value?.ToString(), out var d)) _preferences.StartAfterReminderAt = d; })" />
                                                             </div>
                                                         </LabelContent>
                                                     </MudRadio>

@@ -391,6 +391,63 @@
     max-width: 180px;
 }
 
+.start-option-date-input {
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.875rem;
+    font-family: inherit;
+    color: inherit;
+    background: transparent;
+    height: 32px;
+    cursor: pointer;
+}
+
+.start-option-date-input:focus {
+    outline: none;
+    border-color: var(--mud-palette-primary);
+    border-width: 2px;
+}
+
+/* Native select replacement for MudSelect (avoids popover JS cleanup crash) */
+.wizard-native-select-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.wizard-native-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 2px;
+    padding-left: 2px;
+}
+
+.wizard-native-select {
+    width: 100%;
+    height: 40px;
+    padding: 6px 8px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.23);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: rgba(0, 0, 0, 0.87);
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.wizard-native-select:focus {
+    border-color: var(--mud-palette-primary);
+    border-width: 2px;
+}
+
+.wizard-native-select:hover {
+    border-color: rgba(0, 0, 0, 0.6);
+}
+
 .start-option-date-row {
     display: inline-flex;
     align-items: center;
