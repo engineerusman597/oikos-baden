@@ -26,6 +26,7 @@ public partial class UserMenuAvatar
     private string? _customerNumber;
     private string? _avatar = string.Empty;
     private bool _isBonixUser = false;
+    private bool _isAdmin = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -47,6 +48,7 @@ public partial class UserMenuAvatar
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
         _isBonixUser = user.IsInRole(RoleNames.User_Bonix.ToRoleName());
+        _isAdmin = user.IsInRole(RoleNames.Admin.ToRoleName());
     }
 
     private async Task ShowUserSettings()

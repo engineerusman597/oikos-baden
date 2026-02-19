@@ -16,7 +16,7 @@
                         <img src="images/rechtfix-logo.svg" alt="Rechtfix Logo" />
                     </div>
                     <MudButton Variant="Variant.Text" Color="Color.Primary" Class="login-panel__register"
-                               OnClick="OpenRegisterDialog">
+                               Href="/register">
                         @Loc["Login_RegisterButton"]
                     </MudButton>
                 </div>
@@ -47,9 +47,7 @@
                 <MudLink Class="login-panel__support" Href="/forgot-password">@Loc["Login_ForgotPassword"]</MudLink>
                 <div class="login-panel__membership">
                     <MudText Typo="Typo.body2">@Loc["Login_MembershipPrompt"]</MudText>
-                    <MudLink Class="login-panel__membership-link"
-                             Href="https://www.online-mahnantraege.de/#pricing"
-                             Target="_blank" Rel="noopener noreferrer">
+                    <MudLink Class="login-panel__membership-link" Href="/register">
                         @Loc["Login_MembershipLink"]
                     </MudLink>
                 </div>

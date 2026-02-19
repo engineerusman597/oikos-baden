@@ -1,7 +1,6 @@
 using Oikos.Application.Services.Authentication.Models;
 using Oikos.Common.Resources;
 using Oikos.Application.Services.Newsletter.Models;
-using Oikos.Web.Components.Dialogs;
 using Microsoft.JSInterop;
 using MudBlazor;
 using System.ComponentModel.DataAnnotations;
@@ -31,12 +30,9 @@ public partial class Login
     [SupplyParameterFromQuery(Name = "register")]
     public string? Register { get; set; }
 
-    private bool _registerDialogOpened;
-
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
     }
 
     protected override async Task OnInitializedAsync()
@@ -49,29 +45,15 @@ public partial class Login
         else
         {
             ShowContent = true;
+
+            // ?register=1 or ?register=true → redirect to dedicated register page
+            if (!string.IsNullOrWhiteSpace(Register) &&
+                (string.Equals(Register, "1", StringComparison.OrdinalIgnoreCase) ||
+                 string.Equals(Register, "true", StringComparison.OrdinalIgnoreCase)))
+            {
+                _navManager.NavigateTo("/register");
+            }
         }
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-
-        if (!_registerDialogOpened && ShouldOpenRegisterDialog() && ShowContent)
-        {
-            _registerDialogOpened = true;
-            await OpenRegisterDialog();
-        }
-    }
-
-    private bool ShouldOpenRegisterDialog()
-    {
-        if (string.IsNullOrWhiteSpace(Register))
-        {
-            return false;
-        }
-
-        return string.Equals(Register, "1", StringComparison.OrdinalIgnoreCase)
-            || string.Equals(Register, "true", StringComparison.OrdinalIgnoreCase);
     }
 
     private async Task LoginSubmit()
@@ -196,53 +178,4 @@ public partial class Login
         public string? Email { get; set; }
     }
 
-    private async Task OpenRegisterDialog()
-    {
-        // Extract partner code from returnUrl if present
-        string? partnerCode = null;
-        var uri = new Uri(_navManager.Uri);
-        var query = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
-        
-        if (query.TryGetValue("returnUrl", out var returnUrlValues))
-        {
-            var returnUrl = returnUrlValues.FirstOrDefault();
-            if (!string.IsNullOrWhiteSpace(returnUrl))
-            {
-                try
-                {
-                    var returnUri = new Uri(returnUrl, UriKind.RelativeOrAbsolute);
-                    if (!returnUri.IsAbsoluteUri)
-                    {
-                        returnUri = new Uri(_navManager.BaseUri.TrimEnd('/') + returnUrl);
-                    }
-                    var returnQuery = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(returnUri.Query);
-                    if (returnQuery.TryGetValue("partner", out var partnerValues) || 
-                        returnQuery.TryGetValue("partnerCode", out partnerValues))
-                    {
-                        partnerCode = partnerValues.FirstOrDefault();
-                    }
-                }
-                catch
-                {
-                    // If parsing fails, continue without partner code
-                }
-            }
-        }
-
-        var parameters = new DialogParameters<RegisterDialog>();
-        if (!string.IsNullOrWhiteSpace(partnerCode))
-        {
-            parameters.Add(nameof(RegisterDialog.PartnerCode), partnerCode);
-        }
-
-        var options = new DialogOptions { CloseButton = true, MaxWidth = MaxWidth.Small };
-        var dialog = await _dialogService.ShowAsync<RegisterDialog>(Loc["Login_CreateAccountDialogTitle"], parameters, options);
-        var result = await dialog.Result;
-        if (!result.Canceled && result.Data is RegisterDialog.RegisterResult rr)
-        {
-            _loginModel.UserName = rr.UserName;
-            _loginModel.Password = rr.Password;
-            await LoginSubmit();
-        }
-    }
 }

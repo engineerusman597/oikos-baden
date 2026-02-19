@@ -1,0 +1,90 @@
+@page "/register/success"
+@rendermode InteractiveServer
+@attribute [AllowAnonymous]
+@layout EmptyLayout
+@using Oikos.Web.Components.Layout
+
+<div class="register-success-page">
+    @if (_isLoading)
+    {
+        <div class="register-success-page__spinner">
+            <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
+            <MudText Typo="Typo.body1" Class="mt-4">Ihre Mitgliedschaft wird aktiviert...</MudText>
+        </div>
+    }
+    else if (_success)
+    {
+        <div class="register-success-page__content">
+            <MudIcon Icon="@Icons.Material.Filled.CheckCircle" Color="Color.Success" Style="font-size: 72px;" />
+            <MudText Typo="Typo.h5" Class="register-success-page__title">Willkommen bei RECHTFIX!</MudText>
+            <MudText Typo="Typo.body1" Class="register-success-page__subtitle">
+                Ihre Mitgliedschaft wurde erfolgreich aktiviert. Sie können jetzt alle Funktionen nutzen.
+            </MudText>
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       Class="register-success-page__btn"
+                       OnClick="@(() => _navManager.NavigateTo("/"))">
+                Zum Dashboard
+            </MudButton>
+        </div>
+    }
+    else
+    {
+        <div class="register-success-page__content">
+            <MudIcon Icon="@Icons.Material.Filled.ErrorOutline" Color="Color.Error" Style="font-size: 72px;" />
+            <MudText Typo="Typo.h6" Class="register-success-page__title">Ein Fehler ist aufgetreten</MudText>
+            <MudText Typo="Typo.body2" Class="register-success-page__subtitle">@_errorMessage</MudText>
+            <MudButton Variant="Variant.Outlined"
+                       Class="register-success-page__btn"
+                       OnClick="@(() => _navManager.NavigateTo("/register"))">
+                Zurück zur Registrierung
+            </MudButton>
+        </div>
+    }
+</div>
+
+<style>
+    .register-success-page {
+        min-height: 100vh;
+        background: #f9fafb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .register-success-page__spinner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .register-success-page__content {
+        background: white;
+        border-radius: 16px;
+        border: 1px solid #e5e7eb;
+        padding: 3rem 2.5rem;
+        max-width: 480px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .register-success-page__title {
+        font-weight: 700;
+        margin-top: 0.5rem;
+    }
+
+    .register-success-page__subtitle {
+        color: var(--mud-palette-text-secondary);
+        max-width: 360px;
+    }
+
+    .register-success-page__btn {
+        margin-top: 1rem;
+        padding: 0.6rem 2rem;
+    }
+</style>

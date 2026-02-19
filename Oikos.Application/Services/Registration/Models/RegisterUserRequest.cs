@@ -12,4 +12,5 @@ public class RegisterUserRequest
     public string? PartnerCode { get; set; }
     public bool AcceptedPrivacy { get; set; }
     public bool IsBonixUser { get; set; }
+    public bool SkipSubscriptionCheck { get; set; }
 }

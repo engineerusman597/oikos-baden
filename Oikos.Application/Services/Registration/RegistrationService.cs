@@ -86,7 +86,7 @@ public class RegistrationService : IRegistrationService
             SubscriptionPlanDetail? planToActivate = null;
             string? billingInterval = null;
 
-            if (!request.IsBonixUser)
+            if (!request.IsBonixUser && !request.SkipSubscriptionCheck)
             {
                 var purchases = await context.StripePayments
                     .Include(u => u.Subscriptions!)
@@ -103,10 +103,10 @@ public class RegistrationService : IRegistrationService
 
                 if (latestSubscription == null)
                 {
-                    return new RegistrationResult 
-                    { 
-                        Success = false, 
-                        ErrorMessage = SharedResource.ResourceManager.GetString("Register_ActiveSubscriptionRequired") ?? "Active subscription required" 
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = SharedResource.ResourceManager.GetString("Register_ActiveSubscriptionRequired") ?? "Active subscription required"
                     };
                 }
 
@@ -117,10 +117,10 @@ public class RegistrationService : IRegistrationService
 
                 if (planToActivate?.Id == null)
                 {
-                    return new RegistrationResult 
-                    { 
-                        Success = false, 
-                        ErrorMessage = SharedResource.ResourceManager.GetString("Register_SubscriptionPlanNotFound") ?? "Subscription plan not found" 
+                    return new RegistrationResult
+                    {
+                        Success = false,
+                        ErrorMessage = SharedResource.ResourceManager.GetString("Register_SubscriptionPlanNotFound") ?? "Subscription plan not found"
                     };
                 }
 

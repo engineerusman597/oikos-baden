@@ -12,7 +12,7 @@ public class ThemeState
     private readonly IJSRuntime _jsRuntime;
 
     // Original Palette
-    private static readonly MudColor DefaultPrimaryColor = new("#ff5722");
+    private static readonly MudColor DefaultPrimaryColor = new("#2563eb");
     private static readonly MudColor DefaultSecondaryColor = new("#1668dc");
 
     private bool _shouldResetDarkCookie;
