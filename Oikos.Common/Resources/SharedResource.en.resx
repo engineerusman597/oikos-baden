@@ -3067,6 +3067,30 @@
   <data name="InvoicePrimaryStatus_Completed" xml:space="preserve">
     <value>Completed</value>
   </data>
+  <data name="InvoicePrimaryStatus_CourtPrep" xml:space="preserve">
+    <value>Court Prep</value>
+  </data>
+  <data name="InvoicePrimaryStatus_WaitingCourt" xml:space="preserve">
+    <value>Waiting for Court</value>
+  </data>
+  <data name="InvoicePrimaryStatus_DeadlineRunning" xml:space="preserve">
+    <value>Deadline Running</value>
+  </data>
+  <data name="InvoicePrimaryStatus_CourtResponse" xml:space="preserve">
+    <value>Court Response</value>
+  </data>
+  <data name="InvoicePrimaryStatus_EnforcementReady" xml:space="preserve">
+    <value>Enforcement Ready</value>
+  </data>
+  <data name="InvoicePrimaryStatus_EnforcementInProgress" xml:space="preserve">
+    <value>Enforcement In Progress</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
   <data name="AdminDashboard_CaseManagementTitle" xml:space="preserve">
     <value>Case Management</value>
   </data>
@@ -3099,6 +3123,12 @@
   </data>
   <data name="AdminDashboard_Status_Completed" xml:space="preserve">
     <value>Completed</value>
+  </data>
+  <data name="AdminDashboard_Status_Fristen" xml:space="preserve">
+    <value>Deadlines</value>
+  </data>
+  <data name="AdminDashboard_Status_Vollstreckung" xml:space="preserve">
+    <value>Enforcement</value>
   </data>
   <data name="InvoiceDetail_StatusManagementTitle" xml:space="preserve">
     <value>Status Management</value>

@@ -46,8 +46,13 @@ public class InvoiceManagementService : IInvoiceManagementService
             query = query.Where(x => x.Invoice.StageId == stageId);
         }
 
-        // Apply primary status filter
-        if (request.PrimaryStatus.HasValue)
+        // Apply primary status filter — multi-value takes precedence over single-value
+        if (request.PrimaryStatuses is { Count: > 0 })
+        {
+            var statuses = request.PrimaryStatuses;
+            query = query.Where(x => statuses.Contains(x.Invoice.PrimaryStatus));
+        }
+        else if (request.PrimaryStatus.HasValue)
         {
             var primaryStatus = request.PrimaryStatus.Value;
             query = query.Where(x => x.Invoice.PrimaryStatus == primaryStatus);

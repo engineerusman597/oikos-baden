@@ -205,20 +205,26 @@ public partial class Invoices
     private string FormatCreatedAt(InvoiceListItemDto invoice)
         => invoice.CreatedAt.ToLocalTime().ToString("d", CultureInfo.CurrentUICulture);
 
-    private Color GetPrimaryStatusColor(InvoicePrimaryStatus status)
-    {
-        return status switch
+    private static Color GetPrimaryStatusColor(InvoicePrimaryStatus status) =>
+        status switch
         {
-            InvoicePrimaryStatus.Draft => Color.Default,
-            InvoicePrimaryStatus.Submitted => Color.Info,
-            InvoicePrimaryStatus.InReview => Color.Warning,
-            InvoicePrimaryStatus.Inquiry => Color.Error,
-            InvoicePrimaryStatus.Accepted => Color.Success,
-            InvoicePrimaryStatus.Court => Color.Secondary,
-            InvoicePrimaryStatus.Completed => Color.Dark,
-            _ => Color.Default
+            InvoicePrimaryStatus.Draft                  => Color.Default,
+            InvoicePrimaryStatus.Submitted              => Color.Info,
+            InvoicePrimaryStatus.InReview               => Color.Warning,
+            InvoicePrimaryStatus.Inquiry                => Color.Error,
+            InvoicePrimaryStatus.Accepted               => Color.Success,
+            InvoicePrimaryStatus.CourtPrep              => Color.Secondary,
+            InvoicePrimaryStatus.Court                  => Color.Secondary,
+            InvoicePrimaryStatus.WaitingCourt           => Color.Secondary,
+            InvoicePrimaryStatus.DeadlineRunning        => Color.Error,
+            InvoicePrimaryStatus.CourtResponse          => Color.Info,
+            InvoicePrimaryStatus.EnforcementReady       => Color.Success,
+            InvoicePrimaryStatus.EnforcementInProgress  => Color.Success,
+            InvoicePrimaryStatus.Completed              => Color.Dark,
+            InvoicePrimaryStatus.Cancelled              => Color.Default,
+            InvoicePrimaryStatus.Rejected               => Color.Error,
+            _                                           => Color.Default
         };
-    }
 
     private string GetStorageRoot()
     {

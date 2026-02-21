@@ -9,6 +9,8 @@ using Oikos.Domain.Enums;
 using Oikos.Application.Services.Dashboard.Models;
 using Oikos.Web.Constants;
 using Oikos.Common.Helpers;
+using Oikos.Application.Services.Invoice;
+using Oikos.Application.Services.Invoice.Models;
 
 namespace Oikos.Web.Components.Pages.Admin;
 
@@ -32,6 +34,9 @@ public partial class Dashboard
     
     [Inject]
     private ISettingService SettingService { get; set; } = null!;
+
+    [Inject]
+    private IInvoiceManagementService InvoiceManagementService { get; set; } = null!;
 
     private static readonly IReadOnlyDictionary<string, string> StageColorMap =
         new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
@@ -85,10 +90,12 @@ public partial class Dashboard
         else
         {
             // Defensive fallback
-             await LoadDashboardDataAsync(0, true);
-             await LoadNewsAsync();
+            await LoadDashboardDataAsync(0, true);
+            await LoadNewsAsync();
             _greetingText = GreetingHelper.BuildGreeting(null, Loc);
         }
+
+        await LoadTabInvoicesAsync();
     }
 
     private async Task LoadNewsAsync()
@@ -110,30 +117,36 @@ public partial class Dashboard
 
         _statusSummaries.Clear();
 
-        // 1. Neu (Draft + Submitted)
-        var draftCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.Draft)?.Count ?? 0;
-        var submittedCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.Submitted)?.Count ?? 0;
-        AddSummary(Loc["AdminDashboard_Status_Neu"], draftCount + submittedCount, Icons.Material.Filled.Description, "/admin/invoices?primaryStatus=Submitted", "Primary");
+        int Count(params InvoicePrimaryStatus[] statuses) =>
+            statuses.Sum(s => summaries.FirstOrDefault(x => x.PrimaryStatus == s)?.Count ?? 0);
 
-        // 2. In Prüfung (InReview)
-        var inReviewCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.InReview)?.Count ?? 0;
-        AddSummary(Loc["AdminDashboard_Status_InPruefung"], inReviewCount, Icons.Material.Filled.AccessTime, "/admin/invoices?primaryStatus=InReview", "Warning");
+        // 1. Neu
+        AddSummary(Loc["AdminDashboard_Status_Neu"],          Count(InvoicePrimaryStatus.Submitted),
+            Icons.Material.Filled.Description,       "/admin/invoices?primaryStatus=Submitted", "Primary");
 
-        // 3. Rückfragen (Inquiry)
-        var inquiryCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.Inquiry)?.Count ?? 0;
-        AddSummary(Loc["AdminDashboard_Status_Rueckfragen"], inquiryCount, Icons.Material.Filled.ErrorOutline, "/admin/invoices?primaryStatus=Inquiry", "Error");
+        // 2. In Prüfung
+        AddSummary(Loc["AdminDashboard_Status_InPruefung"],   Count(InvoicePrimaryStatus.InReview),
+            Icons.Material.Filled.AccessTime,         "/admin/invoices?primaryStatus=InReview",  "Warning");
 
-        // 4. Akzeptiert (Accepted)
-        var acceptedCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.Accepted)?.Count ?? 0;
-        AddSummary(Loc["AdminDashboard_Status_Akzeptiert"], acceptedCount, Icons.Material.Filled.CheckCircleOutline, "/admin/invoices?primaryStatus=Accepted", "Success");
+        // 3. Rückfragen
+        AddSummary(Loc["AdminDashboard_Status_Rueckfragen"],  Count(InvoicePrimaryStatus.Inquiry),
+            Icons.Material.Filled.ErrorOutline,       "/admin/invoices?primaryStatus=Inquiry",   "Error");
 
-        // 5. Gericht (Court)
-        var courtCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.Court)?.Count ?? 0;
-        AddSummary(Loc["AdminDashboard_Status_Gericht"], courtCount, Icons.Material.Filled.Gavel, "/admin/invoices?primaryStatus=Court", "Error");
+        // 4. Akzeptiert (Accepted + CourtPrep)
+        AddSummary(Loc["AdminDashboard_Status_Akzeptiert"],   Count(InvoicePrimaryStatus.Accepted, InvoicePrimaryStatus.CourtPrep),
+            Icons.Material.Filled.CheckCircleOutline, "/admin/invoices?primaryStatus=Accepted",  "Success");
 
-        // 6. Abgeschlossen (Completed)
-        var completedCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.Completed)?.Count ?? 0;
-        AddSummary(Loc["AdminDashboard_Status_Completed"], completedCount, Icons.Material.Filled.CheckCircle, "/admin/invoices?primaryStatus=Completed", "Success");
+        // 5. Gericht (Court + WaitingCourt + CourtResponse)
+        AddSummary(Loc["AdminDashboard_Status_Gericht"],      Count(InvoicePrimaryStatus.Court, InvoicePrimaryStatus.WaitingCourt, InvoicePrimaryStatus.CourtResponse),
+            Icons.Material.Filled.Gavel,              "/admin/invoices?primaryStatus=Court",     "Secondary");
+
+        // 6. Fristen (DeadlineRunning)
+        AddSummary(Loc["AdminDashboard_Status_Fristen"],      Count(InvoicePrimaryStatus.DeadlineRunning),
+            Icons.Material.Filled.Timer,              "/admin/invoices?primaryStatus=DeadlineRunning", "Error");
+
+        // 7. Vollstreckung (EnforcementReady + EnforcementInProgress)
+        AddSummary(Loc["AdminDashboard_Status_Vollstreckung"], Count(InvoicePrimaryStatus.EnforcementReady, InvoicePrimaryStatus.EnforcementInProgress),
+            Icons.Material.Filled.Scale,              "/admin/invoices?primaryStatus=EnforcementReady", "Success");
     }
 
     private void AddSummary(string label, int count, string icon, string targetUri, string color)
@@ -337,6 +350,117 @@ public partial class Dashboard
         return uri.StartsWith("/invoice/new", StringComparison.OrdinalIgnoreCase)
             || uri.StartsWith("/company-checks", StringComparison.OrdinalIgnoreCase);
     }
+
+    // ── Queue / tab state ─────────────────────────────────────────────────────
+
+    private MudTabs? _tabs;
+    private int _activeTabIndex;
+    private bool _loadingInvoices;
+    private readonly List<InvoiceListItemDto> _tabInvoices = new();
+    private int _tabTotalCount;
+    private const int TabPageSize = 20;
+
+    private static readonly IReadOnlyList<QueueDefinition> Queues = new List<QueueDefinition>
+    {
+        new("AdminDashboard_Status_Neu",          Icons.Material.Filled.Description,
+            new[] { InvoicePrimaryStatus.Submitted }),
+
+        new("AdminDashboard_Status_InPruefung",   Icons.Material.Filled.AccessTime,
+            new[] { InvoicePrimaryStatus.InReview }),
+
+        new("AdminDashboard_Status_Rueckfragen",  Icons.Material.Filled.ErrorOutline,
+            new[] { InvoicePrimaryStatus.Inquiry }),
+
+        new("AdminDashboard_Status_Akzeptiert",   Icons.Material.Filled.CheckCircleOutline,
+            new[] { InvoicePrimaryStatus.Accepted, InvoicePrimaryStatus.CourtPrep }),
+
+        new("AdminDashboard_Status_Gericht",      Icons.Material.Filled.Gavel,
+            new[] { InvoicePrimaryStatus.Court, InvoicePrimaryStatus.WaitingCourt, InvoicePrimaryStatus.CourtResponse }),
+
+        new("AdminDashboard_Status_Fristen",      Icons.Material.Filled.Timer,
+            new[] { InvoicePrimaryStatus.DeadlineRunning }),
+
+        new("AdminDashboard_Status_Vollstreckung",Icons.Material.Filled.Scale,
+            new[] { InvoicePrimaryStatus.EnforcementReady, InvoicePrimaryStatus.EnforcementInProgress }),
+    };
+
+    private void SelectTab(int index) => _tabs?.ActivatePanel(index);
+
+    private async Task OnTabChangedAsync(int index)
+    {
+        _activeTabIndex = index;
+        await LoadTabInvoicesAsync();
+    }
+
+    private async Task LoadTabInvoicesAsync()
+    {
+        _loadingInvoices = true;
+        StateHasChanged();
+
+        var queue = Queues[_activeTabIndex];
+        var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var request = new InvoiceSearchRequest(
+            SearchText: null,
+            StageId: null,
+            PrimaryStatus: null,
+            Page: 1,
+            PageSize: TabPageSize,
+            PrimaryStatuses: queue.Statuses);
+
+        var result = await InvoiceManagementService.SearchInvoicesAsync(request, culture);
+        _tabTotalCount = result.TotalCount;
+        _tabInvoices.Clear();
+        _tabInvoices.AddRange(result.Items);
+
+        _loadingInvoices = false;
+        StateHasChanged();
+    }
+
+    private string FormatAmount(InvoiceListItemDto invoice)
+    {
+        var amount = string.IsNullOrWhiteSpace(invoice.Amount)
+            ? Loc["TableValueUnknown"].ToString()
+            : invoice.Amount.Trim();
+
+        if (string.IsNullOrWhiteSpace(invoice.Currency)) return amount;
+
+        return string.IsNullOrWhiteSpace(invoice.Amount)
+            ? invoice.Currency
+            : $"{amount} {invoice.Currency}";
+    }
+
+    private string FormatCreatedAt(InvoiceListItemDto invoice)
+        => invoice.CreatedAt.ToLocalTime().ToString("d", CultureInfo.CurrentUICulture);
+
+    private static Color GetPrimaryStatusColor(InvoicePrimaryStatus status) =>
+        status switch
+        {
+            InvoicePrimaryStatus.Draft                  => Color.Default,
+            InvoicePrimaryStatus.Submitted              => Color.Info,
+            InvoicePrimaryStatus.InReview               => Color.Warning,
+            InvoicePrimaryStatus.Inquiry                => Color.Error,
+            InvoicePrimaryStatus.Accepted               => Color.Success,
+            InvoicePrimaryStatus.CourtPrep              => Color.Secondary,
+            InvoicePrimaryStatus.Court                  => Color.Secondary,
+            InvoicePrimaryStatus.WaitingCourt           => Color.Secondary,
+            InvoicePrimaryStatus.DeadlineRunning        => Color.Error,
+            InvoicePrimaryStatus.CourtResponse          => Color.Info,
+            InvoicePrimaryStatus.EnforcementReady       => Color.Success,
+            InvoicePrimaryStatus.EnforcementInProgress  => Color.Success,
+            InvoicePrimaryStatus.Completed              => Color.Dark,
+            InvoicePrimaryStatus.Cancelled              => Color.Default,
+            InvoicePrimaryStatus.Rejected               => Color.Error,
+            _                                           => Color.Default
+        };
+
+    private sealed record QueueDefinition(string LocalizationKey, string Icon, IReadOnlyList<InvoicePrimaryStatus> Statuses)
+    {
+        public string ViewAllUri => Statuses.Count == 1
+            ? $"/admin/invoices?primaryStatus={Statuses[0]}"
+            : "/admin/invoices";
+    }
+
+    // ── Existing inner types ───────────────────────────────────────────────────
 
     private sealed class StatusSummary(
         int StageId,

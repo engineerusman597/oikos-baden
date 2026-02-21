@@ -7,4 +7,5 @@ public sealed record InvoiceSearchRequest(
     int? StageId,
     InvoicePrimaryStatus? PrimaryStatus,
     int Page,
-    int PageSize);
+    int PageSize,
+    IReadOnlyList<InvoicePrimaryStatus>? PrimaryStatuses = null);

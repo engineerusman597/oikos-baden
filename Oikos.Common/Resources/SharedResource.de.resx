@@ -193,6 +193,12 @@
   <data name="AdminDashboard_Status_Completed" xml:space="preserve">
     <value>Abgeschlossen</value>
   </data>
+  <data name="AdminDashboard_Status_Fristen" xml:space="preserve">
+    <value>Fristen</value>
+  </data>
+  <data name="AdminDashboard_Status_Vollstreckung" xml:space="preserve">
+    <value>Vollstreckung</value>
+  </data>
   <data name="InvoiceDetail_StatusManagementTitle" xml:space="preserve">
     <value>Statusverwaltung</value>
   </data>
@@ -270,6 +276,30 @@
   </data>
   <data name="InvoicePrimaryStatus_Completed" xml:space="preserve">
     <value>Abgeschlossen</value>
+  </data>
+  <data name="InvoicePrimaryStatus_CourtPrep" xml:space="preserve">
+    <value>Gericht vorbereiten</value>
+  </data>
+  <data name="InvoicePrimaryStatus_WaitingCourt" xml:space="preserve">
+    <value>Warten auf Gericht</value>
+  </data>
+  <data name="InvoicePrimaryStatus_DeadlineRunning" xml:space="preserve">
+    <value>Frist läuft</value>
+  </data>
+  <data name="InvoicePrimaryStatus_CourtResponse" xml:space="preserve">
+    <value>Gerichtsantwort</value>
+  </data>
+  <data name="InvoicePrimaryStatus_EnforcementReady" xml:space="preserve">
+    <value>Vollstreckung möglich</value>
+  </data>
+  <data name="InvoicePrimaryStatus_EnforcementInProgress" xml:space="preserve">
+    <value>Vollstreckung läuft</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Cancelled" xml:space="preserve">
+    <value>Storniert</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
   </data>
   <data name="SearchPurposeDescription" xml:space="preserve">
     <value>Bitte geben Sie Ihr berechtigtes Interesse im Sinne der EU-DSGVO wahrheitsgemäß an.</value>
