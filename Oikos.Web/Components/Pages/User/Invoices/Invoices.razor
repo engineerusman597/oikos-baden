@@ -103,10 +103,10 @@
                             </MudTd>
                             <MudTd DataLabel='@Loc["TableHeaderUpdated"]'>@FormatDateTime(invoice.UpdatedAt)</MudTd>
                             <MudTd Class="text-right" DataLabel='@Loc["AdminTableHeaderActions"]'>
-                                <MudTooltip Text="@Loc["AdminViewDetails"]" Color="Color.Primary">
+                                <MudTooltip Text="@Loc["AdminViewDetails"]">
                                     <span @onclick:stopPropagation="true">
                                         <MudIconButton Icon="@Icons.Material.Outlined.Visibility"
-                                                       Color="Color.Primary"
+                                                       Color="Color.Default"
                                                        Size="Size.Small"
                                                        OnClick="@(() => NavigateToInvoiceDetail(invoice))" />
                                     </span>

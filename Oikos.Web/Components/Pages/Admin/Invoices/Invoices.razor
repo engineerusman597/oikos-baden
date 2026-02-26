@@ -116,14 +116,14 @@
                     <MudTd Class="text-right" DataLabel='@Loc["AdminTableHeaderActions"]'>
                         @if (_canViewDetails)
                         {
-                            <MudTooltip Text="@Loc["AdminViewDetails"]" Color="Color.Primary">
-                                <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Color="Color.Primary"
+                            <MudTooltip Text="@Loc["AdminViewDetails"]">
+                                <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Color="Color.Default" Size="Size.Small"
                                                OnClick="@(() => NavigateToDetails(context.Id))" />
                             </MudTooltip>
                         }
-                        <MudTooltip Text="@Loc["InvoiceDeleteAction"]" Color="Color.Error">
+                        <MudTooltip Text="@Loc["InvoiceDeleteAction"]">
                             <MudIconButton Icon="@Icons.Material.Filled.Delete"
-                                           Color="Color.Error"
+                                           Color="Color.Error" Size="Size.Small"
                                            OnClick="@(() => DeleteInvoiceAsync(context))" />
                         </MudTooltip>
                     </MudTd>

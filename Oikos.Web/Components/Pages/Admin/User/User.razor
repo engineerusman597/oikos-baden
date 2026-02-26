@@ -71,22 +71,14 @@
         }
         else
         {
-            <MudTable Items="_users" Hover="true" Dense="true" Class="table-fixed" style="width:100%;">
-                <ColGroup>
-                    <col style="width:30%;" />
-                    <col style="width:10%;" />
-                    <col style="width:22%;" />
-                    <col style="width:13%;" />
-                    <col style="width:8%;" />
-                    <col style="width:17%;" />
-                </ColGroup>
+            <MudTable Items="_users" Hover="true" Dense="true" style="width:100%;" HorizontalScrollbar="true">
                 <HeaderContent>
-                    <MudTh Style="width:30%">@Loc["UserPage_TableH3"]</MudTh>
-                    <MudTh Style="width:10%">@Loc["UserPage_TableH7"]</MudTh>
-                    <MudTh Style="width:22%">@Loc["UserPage_TableCompany"]</MudTh>
-                    <MudTh Style="width:13%">@Loc["UserPage_TablePhone"]</MudTh>
-                    <MudTh Style="width:8%">@Loc["UserPage_TableH4"]</MudTh>
-                    <MudTh Style="width:17%" class="text-right">@Loc["UserPage_TableH5"]</MudTh>
+                    <MudTh>@Loc["UserPage_TableH3"]</MudTh>
+                    <MudTh>@Loc["UserPage_TableH7"]</MudTh>
+                    <MudTh>@Loc["UserPage_TableCompany"]</MudTh>
+                    <MudTh>@Loc["UserPage_TablePhone"]</MudTh>
+                    <MudTh>@Loc["UserPage_TableH4"]</MudTh>
+                    <MudTh class="text-right">@Loc["UserPage_TableH5"]</MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel='@Loc["UserPage_TableH3"]' Style="overflow:hidden;">

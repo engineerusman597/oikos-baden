@@ -70,32 +70,19 @@
         }
         else
         {
-            <MudTable Items="_users" Hover="true" Dense="true" Class="table-fixed" style="width:100%;">
-                <ColGroup>
-                    <col style="width:20%;" />
-                    <col style="width:5%;" />
-                    <col style="width:11%;" />
-                    <col style="width:8%;" />
-                    <col style="width:11%;" />
-                    <col style="width:8%;" />
-                    <col style="width:9%;" />
-                    <col style="width:6%;" />
-                    <col style="width:8%;" />
-                    <col style="width:5%;" />
-                    <col style="width:9%;" />
-                </ColGroup>
+            <MudTable Items="_users" Hover="true" Dense="true"  style="width:100%;" HorizontalScrollbar="true">
                 <HeaderContent>
-                    <MudTh Style="width:20%">@Loc["UserPage_TableH3"]</MudTh>
-                    <MudTh Style="width:5%">@Loc["UserPage_TableH7"]</MudTh>
-                    <MudTh Style="width:11%">@Loc["UserPage_TableCompany"]</MudTh>
-                    <MudTh Style="width:8%">@Loc["UserPage_TablePartner"]</MudTh>
-                    <MudTh Style="width:11%">@Loc["UserPage_TablePlan"]</MudTh>
-                    <MudTh Style="width:8%">@Loc["UserPage_TableStatus"]</MudTh>
-                    <MudTh Style="width:9%">@Loc["UserPage_TableZahlung"]</MudTh>
-                    <MudTh Style="width:6%">@Loc["UserPage_TableRechnungen"]</MudTh>
-                    <MudTh Style="width:8%">@Loc["UserPage_TableLogin"]</MudTh>
-                    <MudTh Style="width:5%">@Loc["UserPage_TableH4"]</MudTh>
-                    <MudTh Style="width:9%" class="text-right">@Loc["UserPage_TableH5"]</MudTh>
+                    <MudTh >@Loc["UserPage_TableH3"]</MudTh>
+                    <MudTh >@Loc["UserPage_TableH7"]</MudTh>
+                    <MudTh >@Loc["UserPage_TableCompany"]</MudTh>
+                    <MudTh >@Loc["UserPage_TablePartner"]</MudTh>
+                    <MudTh >@Loc["UserPage_TablePlan"]</MudTh>
+                    <MudTh >@Loc["UserPage_TableStatus"]</MudTh>
+                    <MudTh >@Loc["UserPage_TableZahlung"]</MudTh>
+                    <MudTh >@Loc["UserPage_TableRechnungen"]</MudTh>
+                    <MudTh >@Loc["UserPage_TableLogin"]</MudTh>
+                    <MudTh >@Loc["UserPage_TableH4"]</MudTh>
+                    <MudTh class="text-right">@Loc["UserPage_TableH5"]</MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel='@Loc["UserPage_TableH3"]' Style="overflow:hidden;">
