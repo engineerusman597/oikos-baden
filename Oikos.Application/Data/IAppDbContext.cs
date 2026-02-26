@@ -30,6 +30,7 @@ public interface IAppDbContext : IDisposable, IAsyncDisposable
     DbSet<Invoice> Invoices { get; set; }
     DbSet<InvoiceStage> InvoiceStages { get; set; }
     DbSet<InvoiceStageHistory> InvoiceStageHistories { get; set; }
+    DbSet<InvoiceClientDocument> InvoiceClientDocuments { get; set; }
 
     // Company Check
     DbSet<CompanyCheckRequest> CompanyCheckRequests { get; set; }

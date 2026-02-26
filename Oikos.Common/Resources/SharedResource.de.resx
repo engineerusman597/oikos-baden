@@ -2782,6 +2782,12 @@
   <data name="UserPage_TablePartnerCode" xml:space="preserve">
     <value>Partnercode</value>
   </data>
+  <data name="UserPage_TablePhone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="UserPage_TablePlan" xml:space="preserve">
+    <value>Tarif</value>
+  </data>
   <data name="UserPage_TablePrivacy" xml:space="preserve">
     <value>Datenschutz akzeptiert</value>
   </data>
@@ -3706,5 +3712,47 @@
   </data>
   <data name="Login_ForgotPassword" xml:space="preserve">
     <value>Passwort vergessen?</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsSectionTitle" xml:space="preserve">
+    <value>Ihre Dokumente</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsEmpty" xml:space="preserve">
+    <value>Noch keine Dokumente hochgeladen.</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsUploadButton" xml:space="preserve">
+    <value>Dokument hochladen</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsUploadSuccess" xml:space="preserve">
+    <value>Dokument erfolgreich hochgeladen.</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsUploadError" xml:space="preserve">
+    <value>Fehler beim Hochladen. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsUploadSizeError" xml:space="preserve">
+    <value>Die Datei ist zu groß (max. 15 MB).</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDownload" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+  <data name="AdminInvoiceDetail_ClientDocsSectionTitle" xml:space="preserve">
+    <value>Dokumente vom Mandanten</value>
+  </data>
+  <data name="AdminInvoiceDetail_ClientDocsEmpty" xml:space="preserve">
+    <value>Keine Dokumente vom Mandanten vorhanden.</value>
+  </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDeleteConfirmTitle" xml:space="preserve">
+    <value>Dokument löschen</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDeleteConfirmMessage" xml:space="preserve">
+    <value>Möchten Sie dieses Dokument wirklich löschen?</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDeleteSuccess" xml:space="preserve">
+    <value>Dokument erfolgreich gelöscht.</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDeleteError" xml:space="preserve">
+    <value>Fehler beim Löschen. Bitte versuchen Sie es erneut.</value>
   </data>
 </root>

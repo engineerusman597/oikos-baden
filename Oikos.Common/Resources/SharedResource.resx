@@ -2542,6 +2542,12 @@
 	<data name="UserPage_TablePartnerCode" xml:space="preserve">
     <value>Partner code</value>
   </data>
+	<data name="UserPage_TablePhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+	<data name="UserPage_TablePlan" xml:space="preserve">
+    <value>Plan</value>
+  </data>
 	<data name="UserPage_Filters" xml:space="preserve">
     <value>Filters</value>
   </data>

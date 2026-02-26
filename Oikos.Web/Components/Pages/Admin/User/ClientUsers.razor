@@ -70,14 +70,15 @@
         }
         else
         {
-            <MudTable Items="_users" Hover="true" Dense="true">
+            <MudTable Items="_users" Hover="true" Dense="true" style="width:100%">
                 <HeaderContent>
                     <MudTh>#</MudTh>
                     <MudTh>@Loc["UserPage_TableH3"]</MudTh>
                     <MudTh>@Loc["UserPage_TableH7"]</MudTh>
-
                     <MudTh>@Loc["UserPage_TableCompany"]</MudTh>
                     <MudTh>@Loc["UserPage_TablePartner"]</MudTh>
+                    <MudTh>@Loc["UserPage_TablePhone"]</MudTh>
+                    <MudTh>@Loc["UserPage_TablePlan"]</MudTh>
                     <MudTh>@Loc["UserPage_TableH4"]</MudTh>
                     <MudTh class="text-right">@Loc["UserPage_TableH5"]</MudTh>
                 </HeaderContent>
@@ -129,7 +130,6 @@
                             }
                         </MudStack>
                     </MudTd>
-
                     <MudTd DataLabel='@Loc["UserPage_TableCompany"]'>
                         <MudText Typo="Typo.body2">@context.Company</MudText>
                         @if (!string.IsNullOrWhiteSpace(context.CustomerNumber))
@@ -151,6 +151,30 @@
                             <MudText Typo="Typo.caption" Class="mud-text-secondary">-</MudText>
                         }
                     </MudTd>
+                    <MudTd DataLabel='@Loc["UserPage_TablePhone"]'>
+                        @if (!string.IsNullOrWhiteSpace(context.PhoneNumber))
+                        {
+                            <MudText Typo="Typo.body2">@context.PhoneNumber</MudText>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">-</MudText>
+                        }
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["UserPage_TablePlan"]'>
+                        @if (!string.IsNullOrWhiteSpace(context.PlanName))
+                        {
+                            <MudText Typo="Typo.body2">@context.PlanName</MudText>
+                            @if (!string.IsNullOrWhiteSpace(context.PlanExpirationDisplay))
+                            {
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.PlanExpirationDisplay</MudText>
+                            }
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">-</MudText>
+                        }
+                    </MudTd>
                     <MudTd DataLabel='@Loc["UserPage_TableH4"]'>
                         <MudSwitch Value="@context.IsEnabled" T="bool"
                                    ValueChanged="@(async v => await ChangeUserActive(context.Id, v))" Color="Color.Primary">
@@ -158,16 +182,16 @@
                     </MudTd>
                     <MudTd Class="text-right" DataLabel='@Loc["UserPage_TableH5"]'>
                         <MudTooltip Text='@Loc["UserPage_Details"]'>
-                            <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Color="Color.Primary"
+                            <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Color="Color.Primary" Size="Size.Small"
                                            OnClick="@(() => _navManager.NavigateTo($"/admin/clients/{context.Id}"))" />
                         </MudTooltip>
-                        <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Primary"
+                        <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Primary" Size="Size.Small"
                                        OnClick="() => EditUserClick(context.Id)" />
 
-                        <MudIconButton Icon="@Icons.Material.Outlined.Key" Color="Color.Secondary"
+                        <MudIconButton Icon="@Icons.Material.Outlined.Key" Color="Color.Secondary" Size="Size.Small"
                                        OnClick="() => ChangePasswordClick(context.Id)" />
 
-                        <MudIconButton Icon="@Icons.Material.Outlined.Delete" Color="Color.Error"
+                        <MudIconButton Icon="@Icons.Material.Outlined.Delete" Color="Color.Error" Size="Size.Small"
                                        OnClick="() => DeleteUserClick(context.Id)" />
                     </MudTd>
                 </RowTemplate>

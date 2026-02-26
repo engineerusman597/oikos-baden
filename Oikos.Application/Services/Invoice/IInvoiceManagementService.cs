@@ -9,6 +9,10 @@ public interface IInvoiceManagementService
     Task<bool> ChangeInvoiceStageAsync(int invoiceId, int stageId, int userId, string userName, string? note = null);
     Task<bool> AddInvoiceNoteAsync(int invoiceId, int userId, string userName, string note);
     Task<bool> DeleteInvoiceAsync(int invoiceId, string storageRoot);
+
+    // Client Documents
+    Task<InvoiceClientDocumentDto?> UploadClientDocumentAsync(int invoiceId, int userId, string fileName, Stream stream, string storageRoot);
+    Task<bool> DeleteClientDocumentAsync(int documentId, int userId, string storageRoot);
     
     // Stage Management
     Task<List<InvoiceStageListDto>> GetStageListAsync();

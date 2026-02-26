@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Oikos.Application.Common.Storage;
 using Oikos.Application.Data;
 using Oikos.Application.Services.Invoice.Models;
 using Oikos.Common.Helpers;
@@ -168,6 +169,69 @@ public class InvoiceManagementService : IInvoiceManagementService
         return true;
     }
 
+    public async Task<InvoiceClientDocumentDto?> UploadClientDocumentAsync(
+        int invoiceId, int userId, string fileName, Stream stream, string storageRoot)
+    {
+        using var context = await _dbFactory.CreateDbContextAsync();
+
+        var invoice = await context.Invoices.FirstOrDefaultAsync(x => x.Id == invoiceId);
+        if (invoice is null) return null;
+
+        var directoryRelative = UserStoragePath.GetRelativePath(userId, "invoices", "client-docs");
+        var directoryAbsolute = Path.Combine(storageRoot, directoryRelative);
+        Directory.CreateDirectory(directoryAbsolute);
+
+        var ext = Path.GetExtension(fileName);
+        if (string.IsNullOrWhiteSpace(ext)) ext = ".pdf";
+        var storedName = $"{Guid.NewGuid()}{ext}";
+        var absoluteFilePath = Path.Combine(directoryAbsolute, storedName);
+        var relativeFilePath = Path.Combine(directoryRelative, storedName).Replace(Path.DirectorySeparatorChar, '/');
+
+        await using (var fs = new FileStream(absoluteFilePath, FileMode.Create, FileAccess.Write, FileShare.Read, 81920, useAsync: true))
+        {
+            await stream.CopyToAsync(fs);
+        }
+
+        var entity = new InvoiceClientDocument
+        {
+            InvoiceId = invoiceId,
+            UploadedByUserId = userId,
+            FileName = Path.GetFileName(fileName),
+            FilePath = relativeFilePath,
+            UploadedAt = DateTime.Now
+        };
+
+        context.InvoiceClientDocuments.Add(entity);
+        await context.SaveChangesAsync();
+
+        return new InvoiceClientDocumentDto(entity.Id, entity.FileName, entity.FilePath, entity.UploadedAt);
+    }
+
+    public async Task<bool> DeleteClientDocumentAsync(int documentId, int userId, string storageRoot)
+    {
+        using var context = await _dbFactory.CreateDbContextAsync();
+
+        var doc = await context.InvoiceClientDocuments
+            .FirstOrDefaultAsync(d => d.Id == documentId);
+
+        if (doc is null) return false;
+
+        // Security: only the uploader can delete their own document
+        if (doc.UploadedByUserId != userId) return false;
+
+        var filePath = doc.FilePath;
+        context.InvoiceClientDocuments.Remove(doc);
+        await context.SaveChangesAsync();
+
+        if (!string.IsNullOrWhiteSpace(filePath))
+        {
+            var absolutePath = Path.Combine(storageRoot, filePath.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+            FileHelper.TryDeleteFile(absolutePath);
+        }
+
+        return true;
+    }
+
     public async Task<bool> DeleteInvoiceAsync(int invoiceId, string storageRoot)
     {
         using var context = await _dbFactory.CreateDbContextAsync();
@@ -178,13 +242,15 @@ public class InvoiceManagementService : IInvoiceManagementService
             return false;
         }
 
-        var filePath = entity.FilePath;
-        var powerOfAttorneyPath = entity.PowerOfAttorneyPath;
+        var clientDocs = await context.InvoiceClientDocuments
+            .Where(d => d.InvoiceId == entity.Id)
+            .ToListAsync();
 
         var histories = context.InvoiceStageHistories.Where(h => h.InvoiceId == entity.Id);
         context.InvoiceStageHistories.RemoveRange(histories);
+        context.InvoiceClientDocuments.RemoveRange(clientDocs);
         context.Invoices.Remove(entity);
-        
+
         await context.SaveChangesAsync();
 
         // Delete physical files
@@ -193,11 +259,17 @@ public class InvoiceManagementService : IInvoiceManagementService
              var absolutePath = Path.Combine(storageRoot, entity.FilePath.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
              FileHelper.TryDeleteFile(absolutePath);
         }
-        
+
         if (!string.IsNullOrWhiteSpace(entity.PowerOfAttorneyPath))
         {
              var absolutePath = Path.Combine(storageRoot, entity.PowerOfAttorneyPath.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
              FileHelper.TryDeleteFile(absolutePath);
+        }
+
+        foreach (var doc in clientDocs)
+        {
+            var absolutePath = Path.Combine(storageRoot, doc.FilePath.TrimStart('/').Replace('/', Path.DirectorySeparatorChar));
+            FileHelper.TryDeleteFile(absolutePath);
         }
 
         return true;
@@ -340,6 +412,13 @@ public class InvoiceManagementService : IInvoiceManagementService
                 h.Note))
             .ToListAsync();
 
+        // Get client-uploaded documents
+        var clientDocuments = await context.InvoiceClientDocuments
+            .Where(d => d.InvoiceId == invoiceId)
+            .OrderByDescending(d => d.UploadedAt)
+            .Select(d => new InvoiceClientDocumentDto(d.Id, d.FileName, d.FilePath, d.UploadedAt))
+            .ToListAsync();
+
         var stage = invoice.Stage;
         var filePath = invoice.Invoice.FilePath;
         var powerOfAttorneyPath = invoice.Invoice.PowerOfAttorneyPath;
@@ -369,7 +448,8 @@ public class InvoiceManagementService : IInvoiceManagementService
             PowerOfAttorneyFileName: powerOfAttorneyPath == null ? null : Path.GetFileName(powerOfAttorneyPath),
             CreatedAt: invoice.Invoice.CreatedAt,
             UpdatedAt: invoice.Invoice.UpdatedAt,
-            History: history);
+            History: history,
+            ClientDocuments: clientDocuments);
     }
 
     public async Task<MyInvoicesDto> GetMyInvoicesAsync(int userId, string culture)

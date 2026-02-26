@@ -161,7 +161,9 @@
 
                             @* ── Tab 2: Dokumente ── *@
                             <MudTabPanel Text="@Loc["InvoiceDetail_TabDocuments"]" Icon="@Icons.Material.Outlined.UploadFile">
-                                <MudStack Spacing="3">
+                                <MudStack Spacing="4">
+
+                                    @* ── Invoice + POA downloads ── *@
                                     <MudStack Spacing="1">
                                         <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderFile"]</MudText>
                                         @if (!string.IsNullOrWhiteSpace(_invoice.FilePath))
@@ -200,6 +202,41 @@
                                             <MudText Typo="Typo.body1">-</MudText>
                                         }
                                     </MudStack>
+
+                                    <MudDivider />
+
+                                    @* ── Client-uploaded documents ── *@
+                                    <MudStack Spacing="2">
+                                        <MudText Typo="Typo.subtitle2">@Loc["AdminInvoiceDetail_ClientDocsSectionTitle"]</MudText>
+                                        @if (_invoice.ClientDocuments.Count == 0)
+                                        {
+                                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["AdminInvoiceDetail_ClientDocsEmpty"]</MudText>
+                                        }
+                                        else
+                                        {
+                                            @foreach (var doc in _invoice.ClientDocuments)
+                                            {
+                                                <MudPaper Elevation="0" Class="pa-2" Style="border: 1px solid var(--mud-palette-lines-default);">
+                                                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                                                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                                            <MudIcon Icon="@Icons.Material.Outlined.InsertDriveFile" Size="Size.Small" Class="mud-text-secondary" />
+                                                            <MudStack Spacing="0">
+                                                                <MudText Typo="Typo.body2">@doc.FileName</MudText>
+                                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@FormatDateTime(doc.UploadedAt)</MudText>
+                                                            </MudStack>
+                                                        </MudStack>
+                                                        <MudIconButton Icon="@Icons.Material.Filled.Download"
+                                                                       Size="Size.Small"
+                                                                       Color="Color.Primary"
+                                                                       Href="@GetFileUrl(doc.FilePath)"
+                                                                       Target="_blank"
+                                                                       Title="@Loc["InvoiceDetail_ClientDocsDownload"]" />
+                                                    </MudStack>
+                                                </MudPaper>
+                                            }
+                                        }
+                                    </MudStack>
+
                                 </MudStack>
                             </MudTabPanel>
 

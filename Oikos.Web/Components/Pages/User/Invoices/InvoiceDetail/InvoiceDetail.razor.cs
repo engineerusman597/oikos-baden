@@ -1,10 +1,13 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Hosting;
 using MudBlazor;
 using Oikos.Application.Services.Invoice;
 using Oikos.Application.Services.Invoice.Models;
 using Oikos.Application.Services.Authentication;
 using Oikos.Domain.Enums;
+using Oikos.Web.Constants;
 
 namespace Oikos.Web.Components.Pages.User.Invoices.InvoiceDetail;
 
@@ -15,14 +18,15 @@ public partial class InvoiceDetail
 
     [Inject] private IInvoiceManagementService InvoiceService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
+    [Inject] private IDialogService DialogService { get; set; } = null!;
+    [Inject] private IWebHostEnvironment Env { get; set; } = null!;
 
     private InvoiceDetailDto? _invoice;
     private List<InvoiceHistoryDto> _history = new();
     private List<InvoiceHistoryDto> _notes = new();
     private bool _isLoading = true;
     private int? _currentUserId;
-    private string _replyText = string.Empty;
-    private bool _isSending = false;
+    private bool _isUploading = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -40,29 +44,69 @@ public partial class InvoiceDetail
         _notes = _history.Where(h => !string.IsNullOrWhiteSpace(h.Note)).ToList();
     }
 
-    private async Task SendReplyAsync()
+    private async Task UploadDocumentAsync(IBrowserFile file)
     {
-        if (string.IsNullOrWhiteSpace(_replyText) || _currentUserId is null) return;
+        if (_currentUserId is null) return;
 
-        _isSending = true;
+        if (file.Size > UploadConstants.MaxUploadSizeBytes)
+        {
+            SnackbarService.Add(Loc["InvoiceDetail_ClientDocsUploadSizeError"], Severity.Warning);
+            return;
+        }
+
+        _isUploading = true;
         StateHasChanged();
 
-        var userName = await _authenticationService.GetUserNameAsync();
-        var success = await InvoiceService.AddInvoiceNoteAsync(
-            InvoiceId, _currentUserId.Value, userName, _replyText);
+        try
+        {
+            await using var stream = file.OpenReadStream(UploadConstants.MaxUploadSizeBytes);
+            var result = await InvoiceService.UploadClientDocumentAsync(
+                InvoiceId, _currentUserId.Value, file.Name, stream, GetStorageRoot());
+
+            if (result is not null)
+            {
+                SnackbarService.Add(Loc["InvoiceDetail_ClientDocsUploadSuccess"], Severity.Success);
+                await LoadInvoiceAsync();
+            }
+            else
+            {
+                SnackbarService.Add(Loc["InvoiceDetail_ClientDocsUploadError"], Severity.Error);
+            }
+        }
+        catch
+        {
+            SnackbarService.Add(Loc["InvoiceDetail_ClientDocsUploadError"], Severity.Error);
+        }
+        finally
+        {
+            _isUploading = false;
+        }
+    }
+
+    private async Task DeleteDocumentAsync(int documentId)
+    {
+        if (_currentUserId is null) return;
+
+        var confirmed = await DialogService.ShowMessageBox(
+            Loc["InvoiceDetail_ClientDocsDeleteConfirmTitle"].Value,
+            Loc["InvoiceDetail_ClientDocsDeleteConfirmMessage"].Value,
+            yesText: Loc["DeleteButton"].Value,
+            cancelText: Loc["Cancel"].Value);
+
+        if (confirmed != true) return;
+
+        var success = await InvoiceService.DeleteClientDocumentAsync(
+            documentId, _currentUserId.Value, GetStorageRoot());
 
         if (success)
         {
-            SnackbarService.Add(Loc["UserInvoice_KommunikationSendSuccess"], Severity.Success);
-            _replyText = string.Empty;
+            SnackbarService.Add(Loc["InvoiceDetail_ClientDocsDeleteSuccess"], Severity.Success);
             await LoadInvoiceAsync();
         }
         else
         {
-            SnackbarService.Add(Loc["UserInvoice_KommunikationSendError"], Severity.Error);
+            SnackbarService.Add(Loc["InvoiceDetail_ClientDocsDeleteError"], Severity.Error);
         }
-
-        _isSending = false;
     }
 
     private void NavigateBack()
@@ -97,6 +141,9 @@ public partial class InvoiceDetail
 
         _navManager.NavigateTo("/invoices");
     }
+
+    private string GetStorageRoot()
+        => !string.IsNullOrWhiteSpace(Env.WebRootPath) ? Env.WebRootPath : Directory.GetCurrentDirectory();
 
     private Color ResolveColor(string? colorName, Color fallback)
     {

@@ -27,4 +27,5 @@ public sealed record InvoiceDetailDto(
     string? PowerOfAttorneyFileName,
     DateTime CreatedAt,
     DateTime UpdatedAt,
-    List<InvoiceHistoryDto> History);
+    List<InvoiceHistoryDto> History,
+    List<InvoiceClientDocumentDto> ClientDocuments);

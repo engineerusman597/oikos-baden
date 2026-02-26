@@ -53,6 +53,8 @@ public class OikosDbContext : DbContext, IAppDbContext
 
     public DbSet<Domain.Entities.Invoice.InvoiceStageHistory> InvoiceStageHistories { get; set; }
 
+    public DbSet<Domain.Entities.Invoice.InvoiceClientDocument> InvoiceClientDocuments { get; set; }
+
     #endregion
 
     #region Company Check
