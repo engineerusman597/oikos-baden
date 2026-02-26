@@ -65,90 +65,167 @@
 
             <MudGrid Spacing="3" Class="invoice-detail-grid mt-3">
                 <MudItem xs="12" md="8">
-                    <MudStack Spacing="3">
-                        <MudPaper Class="invoice-detail-card pa-4" Elevation="0" Outlined="true">
-                            <MudText Typo="Typo.subtitle1" Class="invoice-detail-section-title">@Loc["InvoiceDetailSectionInvoice"]</MudText>
-                            <MudGrid Spacing="2" Class="mt-2">
-                                <MudItem xs="6">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderTicketNumber"]</MudText>
-                                    <MudText Typo="Typo.body1">@FormatValue(_invoice.TicketNumber)</MudText>
-                                </MudItem>
-                                <MudItem xs="6">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderCompany"]</MudText>
-                                    <MudText Typo="Typo.body1">@FormatCompany(_invoice)</MudText>
-                                </MudItem>
-                                <MudItem xs="6">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderAmount"]</MudText>
-                                    <MudText Typo="Typo.body1">@FormatAmount(_invoice)</MudText>
-                                </MudItem>
-                                <MudItem xs="6">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderInvoiceDate"]</MudText>
-                                    <MudText Typo="Typo.body1">@FormatDate(_invoice.InvoiceDate)</MudText>
-                                </MudItem>
-                                <MudItem xs="12">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoicePrimaryStatusLabel"]</MudText>
-                                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
-                                         <MudText Typo="Typo.body1" Color="@GetPrimaryStatusColor(_invoice.PrimaryStatus)">@Loc[$"InvoicePrimaryStatus_{_invoice.PrimaryStatus}"]</MudText>
-                                         <MudText Typo="Typo.caption" Class="mud-text-secondary">(@_invoice.StageName)</MudText>
-                                    </MudStack>
-                                </MudItem>
-                                <MudItem xs="6">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailCreatedLabel"]</MudText>
-                                    <MudText Typo="Typo.body1">@FormatDateTime(_invoice.CreatedAt)</MudText>
-                                </MudItem>
-                                <MudItem xs="6">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailUpdatedLabel"]</MudText>
-                                    <MudText Typo="Typo.body1">@FormatDateTime(_invoice.UpdatedAt)</MudText>
-                                </MudItem>
-                            </MudGrid>
-                        </MudPaper>
+                    <MudPaper Elevation="0" Outlined="true">
+                        <MudTabs Elevation="0" Rounded="false" ApplyEffectsToContainer="true" PanelClass="pa-4">
 
-                        <MudPaper Class="invoice-detail-card pa-4" Elevation="0" Outlined="true">
-                            <MudText Typo="Typo.subtitle1" Class="invoice-detail-section-title">@Loc["InvoiceDetailSectionDocuments"]</MudText>
-                            <MudStack Spacing="2" Class="mt-2">
-                                <MudStack Spacing="1">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderFile"]</MudText>
-                                    @if (!string.IsNullOrWhiteSpace(_invoice.FilePath))
+                            @* ── Tab 1: Übersicht ── *@
+                            <MudTabPanel Text="@Loc["InvoiceDetail_TabOverview"]" Icon="@Icons.Material.Outlined.Info">
+                                <MudStack Spacing="4">
+                                    <div>
+                                        <MudText Typo="Typo.subtitle2" Class="invoice-detail-section-title mb-3">@Loc["InvoiceDetailSectionInvoice"]</MudText>
+                                        <MudGrid Spacing="2">
+                                            <MudItem xs="6">
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderTicketNumber"]</MudText>
+                                                <MudText Typo="Typo.body1">@FormatValue(_invoice.TicketNumber)</MudText>
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderCompany"]</MudText>
+                                                <MudText Typo="Typo.body1">@FormatCompany(_invoice)</MudText>
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderAmount"]</MudText>
+                                                <MudText Typo="Typo.body1">@FormatAmount(_invoice)</MudText>
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TableHeaderInvoiceDate"]</MudText>
+                                                <MudText Typo="Typo.body1">@FormatDate(_invoice.InvoiceDate)</MudText>
+                                            </MudItem>
+                                            <MudItem xs="12">
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoicePrimaryStatusLabel"]</MudText>
+                                                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                                                    <MudText Typo="Typo.body1" Color="@GetPrimaryStatusColor(_invoice.PrimaryStatus)">@Loc[$"InvoicePrimaryStatus_{_invoice.PrimaryStatus}"]</MudText>
+                                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">(@_invoice.StageName)</MudText>
+                                                </MudStack>
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailCreatedLabel"]</MudText>
+                                                <MudText Typo="Typo.body1">@FormatDateTime(_invoice.CreatedAt)</MudText>
+                                            </MudItem>
+                                            <MudItem xs="6">
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailUpdatedLabel"]</MudText>
+                                                <MudText Typo="Typo.body1">@FormatDateTime(_invoice.UpdatedAt)</MudText>
+                                            </MudItem>
+                                        </MudGrid>
+                                    </div>
+                                </MudStack>
+                            </MudTabPanel>
+
+                            @* ── Tab 2: Dokumente ── *@
+                            <MudTabPanel Text="@Loc["InvoiceDetail_TabDocuments"]" Icon="@Icons.Material.Outlined.UploadFile">
+                                <MudStack Spacing="3">
+                                    <MudStack Spacing="1">
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderFile"]</MudText>
+                                        @if (!string.IsNullOrWhiteSpace(_invoice.FilePath))
+                                        {
+                                            <MudButton Variant="Variant.Outlined"
+                                                       Color="Color.Primary"
+                                                       Size="Size.Small"
+                                                       DisableElevation="true"
+                                                       StartIcon="@Icons.Material.Filled.PictureAsPdf"
+                                                       Href="@GetFileUrl(_invoice.FilePath)"
+                                                       Target="_blank">
+                                                @Loc["InvoiceDetailDownloadPdf"]
+                                            </MudButton>
+                                        }
+                                        else
+                                        {
+                                            <MudText Typo="Typo.body1">-</MudText>
+                                        }
+                                    </MudStack>
+                                    <MudStack Spacing="1">
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderPowerOfAttorney"]</MudText>
+                                        @if (!string.IsNullOrWhiteSpace(_invoice.PowerOfAttorneyPath))
+                                        {
+                                            <MudButton Variant="Variant.Outlined"
+                                                       Color="Color.Primary"
+                                                       Size="Size.Small"
+                                                       DisableElevation="true"
+                                                       StartIcon="@Icons.Material.Filled.PictureAsPdf"
+                                                       Href="@GetFileUrl(_invoice.PowerOfAttorneyPath)"
+                                                       Target="_blank">
+                                                @Loc["InvoiceDetailDownloadPdf"]
+                                            </MudButton>
+                                        }
+                                        else
+                                        {
+                                            <MudText Typo="Typo.body1">-</MudText>
+                                        }
+                                    </MudStack>
+                                </MudStack>
+                            </MudTabPanel>
+
+                            @* ── Tab 3: Nachrichten (with message count badge) ── *@
+                            <MudTabPanel Icon="@Icons.Material.Outlined.Chat">
+                                <TabContent>
+                                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                                        <span>@Loc["InvoiceDetail_TabCommunication"]</span>
+                                        @if (_notes.Count > 0)
+                                        {
+                                            <MudChip T="string" Size="Size.Small" Color="Color.Primary" Variant="Variant.Filled" Class="ml-1" Style="height:18px;min-width:18px;padding:0 5px;font-size:11px;">@_notes.Count</MudChip>
+                                        }
+                                    </MudStack>
+                                </TabContent>
+                                <ChildContent>
+                                    @if (_notes.Count == 0)
                                     {
-                                        <MudButton Variant="Variant.Outlined"
-                                                   Color="Color.Primary"
-                                                   Size="Size.Small"
-                                                   Dense="true"
-                                                   DisableElevation="true"
-                                                   StartIcon="@Icons.Material.Filled.PictureAsPdf"
-                                                   Href="@GetFileUrl(_invoice.FilePath)"
-                                                   Target="_blank">
-                                            @Loc["InvoiceDetailDownloadPdf"]
-                                        </MudButton>
+                                        <MudStack AlignItems="AlignItems.Center" Class="py-8">
+                                            <MudIcon Icon="@Icons.Material.Outlined.ChatBubbleOutline" Size="Size.Large" Class="mud-text-secondary" />
+                                            <MudText Typo="Typo.body2" Class="mud-text-secondary mt-2">@Loc["UserInvoice_KommunikationEmpty"]</MudText>
+                                        </MudStack>
                                     }
                                     else
                                     {
-                                        <MudText Typo="Typo.body1">-</MudText>
+                                        <MudStack Spacing="2">
+                                            @foreach (var note in _notes)
+                                            {
+                                                var isClient = note.ChangedByUserId == _currentUserId;
+                                                <MudPaper Elevation="0" Class="pa-3"
+                                                          Style="@(isClient
+                                                              ? "border-left:3px solid var(--mud-palette-success); background:var(--mud-palette-background-grey);"
+                                                              : "border-left:3px solid var(--mud-palette-primary); background:var(--mud-palette-background-grey);")">
+                                                    <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2" Class="mb-1">
+                                                        <MudChip T="string" Size="Size.Small"
+                                                                 Color="@(isClient ? Color.Success : Color.Primary)"
+                                                                 Variant="Variant.Filled"
+                                                                 Style="height:20px;padding:0 6px;font-size:11px;">
+                                                            @(isClient ? Loc["UserInvoice_KommunikationLabelSie"] : Loc["UserInvoice_KommunikationLabelKanzlei"])
+                                                        </MudChip>
+                                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                                                            @FormatDateTime(note.ChangedAt)
+                                                        </MudText>
+                                                    </MudStack>
+                                                    <MudText Typo="Typo.body2">@note.Note</MudText>
+                                                </MudPaper>
+                                            }
+                                        </MudStack>
                                     }
-                                </MudStack>
-                                <MudStack Spacing="1">
-                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["AdminTableHeaderPowerOfAttorney"]</MudText>
-                                    @if (!string.IsNullOrWhiteSpace(_invoice.PowerOfAttorneyPath))
+
+                                    @if (_invoice!.PrimaryStatus == InvoicePrimaryStatus.Inquiry)
                                     {
-                                        <MudButton Variant="Variant.Outlined"
-                                                   Color="Color.Primary"
-                                                   Size="Size.Small"
-                                                   Dense="true"
-                                                   DisableElevation="true"
-                                                   StartIcon="@Icons.Material.Filled.PictureAsPdf"
-                                                   Href="@GetFileUrl(_invoice.PowerOfAttorneyPath)"
-                                                   Target="_blank">
-                                            @Loc["InvoiceDetailDownloadPdf"]
-                                        </MudButton>
+                                        <MudDivider Class="my-4" />
+                                        <MudTextField T="string"
+                                                      @bind-Value="_replyText"
+                                                      Label="@Loc["UserInvoice_KommunikationReplyPlaceholder"]"
+                                                      Variant="Variant.Outlined"
+                                                      Lines="3"
+                                                      MaxLength="500"
+                                                      Disabled="@_isSending"
+                                                      Class="mb-3" />
+                                        <MudStack Row="true" Justify="Justify.FlexEnd">
+                                            <MudButton Variant="Variant.Filled"
+                                                       Color="Color.Primary"
+                                                       StartIcon="@Icons.Material.Filled.Send"
+                                                       OnClick="SendReplyAsync"
+                                                       Disabled="@(_isSending || string.IsNullOrWhiteSpace(_replyText))">
+                                                @Loc["UserInvoice_KommunikationSendButton"]
+                                            </MudButton>
+                                        </MudStack>
                                     }
-                                    else
-                                    {
-                                        <MudText Typo="Typo.body1">-</MudText>
-                                    }
-                                </MudStack>
-                            </MudStack>
-                        </MudPaper>
-                    </MudStack>
+                                </ChildContent>
+                            </MudTabPanel>
+
+                        </MudTabs>
+                    </MudPaper>
                 </MudItem>
 
                 <MudItem xs="12" md="4">

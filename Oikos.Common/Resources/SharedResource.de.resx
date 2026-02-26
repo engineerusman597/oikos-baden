@@ -214,6 +214,51 @@
   <data name="InvoiceDetail_SaveStatus" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="InvoiceDetail_ChangeStatusButton" xml:space="preserve">
+    <value>Status ändern</value>
+  </data>
+  <data name="InvoiceDetail_RueckfrageButton" xml:space="preserve">
+    <value>Rückfrage</value>
+  </data>
+  <data name="RueckfrageDialog_Title" xml:space="preserve">
+    <value>Rückfrage senden</value>
+  </data>
+  <data name="RueckfrageDialog_Subtitle" xml:space="preserve">
+    <value>Senden Sie eine Rückfrage mit einer Nachricht an den Mandanten.</value>
+  </data>
+  <data name="RueckfrageDialog_MessageLabel" xml:space="preserve">
+    <value>Nachricht *</value>
+  </data>
+  <data name="RueckfrageDialog_MessagePlaceholder" xml:space="preserve">
+    <value>Welche Informationen oder Unterlagen fehlen?</value>
+  </data>
+  <data name="RueckfrageDialog_SendButton" xml:space="preserve">
+    <value>Rückfrage senden</value>
+  </data>
+  <data name="StatusChangeDialog_Title" xml:space="preserve">
+    <value>Status ändern</value>
+  </data>
+  <data name="StatusChangeDialog_Subtitle" xml:space="preserve">
+    <value>Wählen Sie den neuen Status für diesen Fall.</value>
+  </data>
+  <data name="StatusChangeDialog_SelectLabel" xml:space="preserve">
+    <value>Neuer Status</value>
+  </data>
+  <data name="StatusChangeDialog_SelectPlaceholder" xml:space="preserve">
+    <value>Status wählen...</value>
+  </data>
+  <data name="StatusChangeDialog_NoTransitions" xml:space="preserve">
+    <value>Keine weiteren Status-Übergänge möglich.</value>
+  </data>
+  <data name="StatusChangeDialog_NoteLabel" xml:space="preserve">
+    <value>Nachricht (optional)</value>
+  </data>
+  <data name="StatusChangeDialog_NotePlaceholder" xml:space="preserve">
+    <value>Optionale Nachricht an den Mandanten...</value>
+  </data>
+  <data name="CommonCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
   <data name="SearchStatusLabel" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -1332,6 +1377,45 @@
   </data>
   <data name="InvoiceDetailSectionDocuments" xml:space="preserve">
     <value>Dokumente</value>
+  </data>
+  <data name="InvoiceDetail_TabOverview" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="InvoiceDetail_TabDocuments" xml:space="preserve">
+    <value>Dokumente</value>
+  </data>
+  <data name="InvoiceDetail_TabCommunication" xml:space="preserve">
+    <value>Kommunikation</value>
+  </data>
+  <data name="InvoiceDetail_TabCommunicationEmpty" xml:space="preserve">
+    <value>Keine Nachrichten vorhanden.</value>
+  </data>
+  <data name="InvoiceDetail_NoteFrom" xml:space="preserve">
+    <value>Kanzlei</value>
+  </data>
+  <data name="UserInvoice_KommunikationTitle" xml:space="preserve">
+    <value>Nachrichten</value>
+  </data>
+  <data name="UserInvoice_KommunikationEmpty" xml:space="preserve">
+    <value>Noch keine Nachrichten vorhanden.</value>
+  </data>
+  <data name="UserInvoice_KommunikationLabelKanzlei" xml:space="preserve">
+    <value>Kanzlei</value>
+  </data>
+  <data name="UserInvoice_KommunikationLabelSie" xml:space="preserve">
+    <value>Sie</value>
+  </data>
+  <data name="UserInvoice_KommunikationReplyPlaceholder" xml:space="preserve">
+    <value>Ihre Antwort...</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendButton" xml:space="preserve">
+    <value>Antwort senden</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendSuccess" xml:space="preserve">
+    <value>Nachricht gesendet.</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendError" xml:space="preserve">
+    <value>Nachricht konnte nicht gesendet werden.</value>
   </data>
   <data name="InvoiceDetailDownloadPdf" xml:space="preserve">
     <value>PDF herunterladen</value>

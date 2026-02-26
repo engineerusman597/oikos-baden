@@ -14,11 +14,15 @@ public partial class InvoiceDetail
     [Parameter] public string? ReturnUrl { get; set; }
 
     [Inject] private IInvoiceManagementService InvoiceService { get; set; } = null!;
+    [Inject] private ISnackbar SnackbarService { get; set; } = null!;
 
     private InvoiceDetailDto? _invoice;
     private List<InvoiceHistoryDto> _history = new();
+    private List<InvoiceHistoryDto> _notes = new();
     private bool _isLoading = true;
     private int? _currentUserId;
+    private string _replyText = string.Empty;
+    private bool _isSending = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -33,6 +37,32 @@ public partial class InvoiceDetail
         var culture = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
         _invoice = await InvoiceService.GetInvoiceDetailAsync(InvoiceId, culture);
         _history = _invoice?.History ?? new List<InvoiceHistoryDto>();
+        _notes = _history.Where(h => !string.IsNullOrWhiteSpace(h.Note)).ToList();
+    }
+
+    private async Task SendReplyAsync()
+    {
+        if (string.IsNullOrWhiteSpace(_replyText) || _currentUserId is null) return;
+
+        _isSending = true;
+        StateHasChanged();
+
+        var userName = await _authenticationService.GetUserNameAsync();
+        var success = await InvoiceService.AddInvoiceNoteAsync(
+            InvoiceId, _currentUserId.Value, userName, _replyText);
+
+        if (success)
+        {
+            SnackbarService.Add(Loc["UserInvoice_KommunikationSendSuccess"], Severity.Success);
+            _replyText = string.Empty;
+            await LoadInvoiceAsync();
+        }
+        else
+        {
+            SnackbarService.Add(Loc["UserInvoice_KommunikationSendError"], Severity.Error);
+        }
+
+        _isSending = false;
     }
 
     private void NavigateBack()

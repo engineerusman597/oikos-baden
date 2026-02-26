@@ -1,0 +1,100 @@
+@using Oikos.Application.Services.Invoice.Models
+@using Oikos.Common.Resources
+@using Oikos.Domain.Enums
+@inject IStringLocalizer<SharedResource> Loc
+
+<MudDialog MaxWidth="MaxWidth.Small" FullWidth="true">
+    <TitleContent>
+        <MudText Typo="Typo.h6">@Loc["StatusChangeDialog_Title"]</MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.body2" Class="mud-text-secondary mb-4">@Loc["StatusChangeDialog_Subtitle"]</MudText>
+        @if (_filteredStages.Count == 0)
+        {
+            <MudAlert Severity="Severity.Info" Dense="true">@Loc["StatusChangeDialog_NoTransitions"]</MudAlert>
+        }
+        else
+        {
+            <MudSelect T="int?"
+                       Label="@Loc["StatusChangeDialog_SelectLabel"]"
+                       @bind-Value="_selectedStageId"
+                       Variant="Variant.Outlined"
+                       Margin="Margin.Dense"
+                       Placeholder="@Loc["StatusChangeDialog_SelectPlaceholder"]"
+                       Class="mt-2">
+                @foreach (var stage in _filteredStages)
+                {
+                    <MudSelectItem T="int?" Value="@((int?)stage.Id)">@stage.Name</MudSelectItem>
+                }
+            </MudSelect>
+            <MudTextField T="string"
+                          Label="@Loc["StatusChangeDialog_NoteLabel"]"
+                          @bind-Value="_note"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Dense"
+                          Lines="3"
+                          MaxLength="500"
+                          Placeholder="@Loc["StatusChangeDialog_NotePlaceholder"]"
+                          Class="mt-4" />
+        }
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" OnClick="Cancel">@Loc["CommonCancel"]</MudButton>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   OnClick="Confirm"
+                   Disabled="@(!_selectedStageId.HasValue || _selectedStageId == CurrentStageId || _filteredStages.Count == 0)">
+            @Loc["InvoiceDetail_SaveStatus"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter] public List<InvoiceStageDto> Stages { get; set; } = new();
+    [Parameter] public int? CurrentStageId { get; set; }
+    [Parameter] public InvoicePrimaryStatus CurrentPrimaryStatus { get; set; }
+
+    private int? _selectedStageId;
+    private string? _note;
+    private List<InvoiceStageDto> _filteredStages = new();
+
+    // Mirrors Replit's validStatusTransitions state machine
+    private static readonly IReadOnlyDictionary<InvoicePrimaryStatus, IReadOnlyList<InvoicePrimaryStatus>> ValidTransitions =
+        new Dictionary<InvoicePrimaryStatus, IReadOnlyList<InvoicePrimaryStatus>>
+        {
+            [InvoicePrimaryStatus.Draft]                = new[] { InvoicePrimaryStatus.Submitted, InvoicePrimaryStatus.Cancelled },
+            [InvoicePrimaryStatus.Submitted]            = new[] { InvoicePrimaryStatus.InReview, InvoicePrimaryStatus.Inquiry, InvoicePrimaryStatus.Rejected },
+            [InvoicePrimaryStatus.InReview]             = new[] { InvoicePrimaryStatus.Inquiry, InvoicePrimaryStatus.Rejected, InvoicePrimaryStatus.Accepted },
+            [InvoicePrimaryStatus.Inquiry]              = new[] { InvoicePrimaryStatus.Submitted, InvoicePrimaryStatus.InReview, InvoicePrimaryStatus.Rejected },
+            [InvoicePrimaryStatus.Accepted]             = new[] { InvoicePrimaryStatus.CourtPrep, InvoicePrimaryStatus.Court, InvoicePrimaryStatus.Cancelled },
+            [InvoicePrimaryStatus.CourtPrep]            = new[] { InvoicePrimaryStatus.Court, InvoicePrimaryStatus.Cancelled },
+            [InvoicePrimaryStatus.Court]                = new[] { InvoicePrimaryStatus.WaitingCourt, InvoicePrimaryStatus.DeadlineRunning, InvoicePrimaryStatus.CourtResponse },
+            [InvoicePrimaryStatus.WaitingCourt]         = new[] { InvoicePrimaryStatus.DeadlineRunning, InvoicePrimaryStatus.CourtResponse },
+            [InvoicePrimaryStatus.DeadlineRunning]      = new[] { InvoicePrimaryStatus.CourtResponse, InvoicePrimaryStatus.Completed },
+            [InvoicePrimaryStatus.CourtResponse]        = new[] { InvoicePrimaryStatus.EnforcementReady, InvoicePrimaryStatus.Completed, InvoicePrimaryStatus.DeadlineRunning },
+            [InvoicePrimaryStatus.EnforcementReady]     = new[] { InvoicePrimaryStatus.EnforcementInProgress, InvoicePrimaryStatus.Completed },
+            [InvoicePrimaryStatus.EnforcementInProgress]= new[] { InvoicePrimaryStatus.Completed },
+            [InvoicePrimaryStatus.Completed]            = Array.Empty<InvoicePrimaryStatus>(),
+            [InvoicePrimaryStatus.Cancelled]            = Array.Empty<InvoicePrimaryStatus>(),
+            [InvoicePrimaryStatus.Rejected]             = Array.Empty<InvoicePrimaryStatus>(),
+        };
+
+    protected override void OnInitialized()
+    {
+        var allowed = ValidTransitions.TryGetValue(CurrentPrimaryStatus, out var next)
+            ? next
+            : Array.Empty<InvoicePrimaryStatus>();
+
+        _filteredStages = Stages
+            .Where(s => allowed.Contains(s.PrimaryStatus))
+            .ToList();
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private void Confirm() => MudDialog.Close(DialogResult.Ok(new StatusChangeDialogResult(_selectedStageId!.Value, _note)));
+
+    public record StatusChangeDialogResult(int StageId, string? Note);
+}

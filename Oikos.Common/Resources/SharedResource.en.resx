@@ -1054,6 +1054,45 @@
   <data name="InvoiceDetailSectionDocuments" xml:space="preserve">
     <value>Documents</value>
   </data>
+  <data name="InvoiceDetail_TabOverview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="InvoiceDetail_TabDocuments" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="InvoiceDetail_TabCommunication" xml:space="preserve">
+    <value>Communication</value>
+  </data>
+  <data name="InvoiceDetail_TabCommunicationEmpty" xml:space="preserve">
+    <value>No messages available.</value>
+  </data>
+  <data name="InvoiceDetail_NoteFrom" xml:space="preserve">
+    <value>Kanzlei</value>
+  </data>
+  <data name="UserInvoice_KommunikationTitle" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="UserInvoice_KommunikationEmpty" xml:space="preserve">
+    <value>No messages yet.</value>
+  </data>
+  <data name="UserInvoice_KommunikationLabelKanzlei" xml:space="preserve">
+    <value>Law firm</value>
+  </data>
+  <data name="UserInvoice_KommunikationLabelSie" xml:space="preserve">
+    <value>You</value>
+  </data>
+  <data name="UserInvoice_KommunikationReplyPlaceholder" xml:space="preserve">
+    <value>Your reply...</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendButton" xml:space="preserve">
+    <value>Send reply</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendSuccess" xml:space="preserve">
+    <value>Message sent.</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendError" xml:space="preserve">
+    <value>Message could not be sent.</value>
+  </data>
   <data name="InvoiceDetailDownloadPdf" xml:space="preserve">
     <value>Download PDF</value>
   </data>
@@ -3144,6 +3183,51 @@
   </data>
   <data name="InvoiceDetail_SaveStatus" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="InvoiceDetail_ChangeStatusButton" xml:space="preserve">
+    <value>Change Status</value>
+  </data>
+  <data name="InvoiceDetail_RueckfrageButton" xml:space="preserve">
+    <value>Inquiry</value>
+  </data>
+  <data name="RueckfrageDialog_Title" xml:space="preserve">
+    <value>Send Inquiry</value>
+  </data>
+  <data name="RueckfrageDialog_Subtitle" xml:space="preserve">
+    <value>Send an inquiry with a message to the client.</value>
+  </data>
+  <data name="RueckfrageDialog_MessageLabel" xml:space="preserve">
+    <value>Message *</value>
+  </data>
+  <data name="RueckfrageDialog_MessagePlaceholder" xml:space="preserve">
+    <value>What information or documents are missing?</value>
+  </data>
+  <data name="RueckfrageDialog_SendButton" xml:space="preserve">
+    <value>Send inquiry</value>
+  </data>
+  <data name="StatusChangeDialog_Title" xml:space="preserve">
+    <value>Change Status</value>
+  </data>
+  <data name="StatusChangeDialog_Subtitle" xml:space="preserve">
+    <value>Select the new status for this case.</value>
+  </data>
+  <data name="StatusChangeDialog_SelectLabel" xml:space="preserve">
+    <value>New Status</value>
+  </data>
+  <data name="StatusChangeDialog_SelectPlaceholder" xml:space="preserve">
+    <value>Select status...</value>
+  </data>
+  <data name="StatusChangeDialog_NoTransitions" xml:space="preserve">
+    <value>No further status transitions are possible.</value>
+  </data>
+  <data name="StatusChangeDialog_NoteLabel" xml:space="preserve">
+    <value>Message (optional)</value>
+  </data>
+  <data name="StatusChangeDialog_NotePlaceholder" xml:space="preserve">
+    <value>Optional message for the client...</value>
+  </data>
+  <data name="CommonCancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="HistoryPageSubtitle" xml:space="preserve">
     <value>Your company research at a glance.</value>

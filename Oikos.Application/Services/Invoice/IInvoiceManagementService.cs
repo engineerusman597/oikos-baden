@@ -6,7 +6,8 @@ public interface IInvoiceManagementService
 {
     Task<PagedResult<InvoiceListItemDto>> SearchInvoicesAsync(InvoiceSearchRequest request, string culture);
     Task<List<InvoiceStageDto>> GetInvoiceStagesAsync(string culture);
-    Task<bool> ChangeInvoiceStageAsync(int invoiceId, int stageId, int userId, string userName);
+    Task<bool> ChangeInvoiceStageAsync(int invoiceId, int stageId, int userId, string userName, string? note = null);
+    Task<bool> AddInvoiceNoteAsync(int invoiceId, int userId, string userName, string note);
     Task<bool> DeleteInvoiceAsync(int invoiceId, string storageRoot);
     
     // Stage Management

@@ -113,10 +113,10 @@ public class InvoiceManagementService : IInvoiceManagementService
         return stages;
     }
 
-    public async Task<bool> ChangeInvoiceStageAsync(int invoiceId, int stageId, int userId, string userName)
+    public async Task<bool> ChangeInvoiceStageAsync(int invoiceId, int stageId, int userId, string userName, string? note = null)
     {
         using var context = await _dbFactory.CreateDbContextAsync();
-        
+
         var entity = await context.Invoices.FirstOrDefaultAsync(x => x.Id == invoiceId);
         if (entity is null)
         {
@@ -139,7 +139,29 @@ public class InvoiceManagementService : IInvoiceManagementService
             StageId = stageId,
             ChangedAt = DateTime.Now,
             ChangedByUserId = userId,
-            ChangedByUserName = userName
+            ChangedByUserName = userName,
+            Note = string.IsNullOrWhiteSpace(note) ? null : note.Trim()
+        });
+
+        await context.SaveChangesAsync();
+        return true;
+    }
+
+    public async Task<bool> AddInvoiceNoteAsync(int invoiceId, int userId, string userName, string note)
+    {
+        using var context = await _dbFactory.CreateDbContextAsync();
+
+        var entity = await context.Invoices.FirstOrDefaultAsync(x => x.Id == invoiceId);
+        if (entity is null) return false;
+
+        context.InvoiceStageHistories.Add(new InvoiceStageHistory
+        {
+            InvoiceId = invoiceId,
+            StageId = entity.StageId,
+            ChangedAt = DateTime.Now,
+            ChangedByUserId = userId,
+            ChangedByUserName = userName,
+            Note = note.Trim()
         });
 
         await context.SaveChangesAsync();
@@ -314,6 +336,7 @@ public class InvoiceManagementService : IInvoiceManagementService
                 string.IsNullOrWhiteSpace(h.Stage.Icon) ? "flag" : h.Stage.Icon!,
                 h.ChangedAt,
                 h.ChangedByUserName,
+                h.ChangedByUserId,
                 h.Note))
             .ToListAsync();
 

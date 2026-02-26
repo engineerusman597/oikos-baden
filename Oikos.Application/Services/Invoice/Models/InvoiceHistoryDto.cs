@@ -7,4 +7,5 @@ public sealed record InvoiceHistoryDto(
     string StageIcon,
     DateTime ChangedAt,
     string? ChangedBy,
+    int? ChangedByUserId = null,
     string? Note = null);

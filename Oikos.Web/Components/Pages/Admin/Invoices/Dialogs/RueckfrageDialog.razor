@@ -1,0 +1,71 @@
+@using Oikos.Application.Services.Invoice.Models
+@using Oikos.Common.Resources
+@using Oikos.Domain.Enums
+@inject IStringLocalizer<SharedResource> Loc
+
+<MudDialog MaxWidth="MaxWidth.Small" FullWidth="true">
+    <TitleContent>
+        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+            <MudIcon Icon="@Icons.Material.Filled.QuestionAnswer" Color="Color.Warning" />
+            <MudText Typo="Typo.h6">@Loc["RueckfrageDialog_Title"]</MudText>
+        </MudStack>
+    </TitleContent>
+    <DialogContent>
+        <MudText Typo="Typo.body2" Class="mud-text-secondary mb-4">@Loc["RueckfrageDialog_Subtitle"]</MudText>
+
+        @if (InquiryStages.Count > 1)
+        {
+            <MudSelect T="int?"
+                       Label="@Loc["StatusChangeDialog_SelectLabel"]"
+                       @bind-Value="_selectedStageId"
+                       Variant="Variant.Outlined"
+                       Margin="Margin.Dense"
+                       Class="mb-4">
+                @foreach (var stage in InquiryStages)
+                {
+                    <MudSelectItem T="int?" Value="@((int?)stage.Id)">@stage.Name</MudSelectItem>
+                }
+            </MudSelect>
+        }
+
+        <MudTextField T="string"
+                      Label="@Loc["RueckfrageDialog_MessageLabel"]"
+                      @bind-Value="_message"
+                      Variant="Variant.Outlined"
+                      Lines="4"
+                      MaxLength="500"
+                      Placeholder="@Loc["RueckfrageDialog_MessagePlaceholder"]"
+                      Class="mt-2" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" OnClick="Cancel">@Loc["CommonCancel"]</MudButton>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Warning"
+                   StartIcon="@Icons.Material.Filled.QuestionAnswer"
+                   OnClick="Confirm"
+                   Disabled="@(string.IsNullOrWhiteSpace(_message) || !_selectedStageId.HasValue)">
+            @Loc["RueckfrageDialog_SendButton"]
+        </MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] private IMudDialogInstance MudDialog { get; set; } = null!;
+
+    [Parameter] public List<InvoiceStageDto> InquiryStages { get; set; } = new();
+
+    private int? _selectedStageId;
+    private string _message = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Auto-select when only one Inquiry stage exists
+        if (InquiryStages.Count == 1)
+            _selectedStageId = InquiryStages[0].Id;
+    }
+
+    private void Cancel() => MudDialog.Cancel();
+
+    private void Confirm() => MudDialog.Close(
+        DialogResult.Ok(new StatusChangeDialog.StatusChangeDialogResult(_selectedStageId!.Value, _message)));
+}
