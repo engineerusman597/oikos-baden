@@ -28,5 +28,8 @@ public class UserDto
     public bool IsEnabled { get; set; }
     public List<string> Roles { get; set; } = new();
     public bool HasActiveSubscription { get; set; }
+    public int InvoiceCount { get; set; }
+    public string? SubscriptionPaymentMethod { get; set; }
+    public DateTime? LastLoginAt { get; set; }
 
 }

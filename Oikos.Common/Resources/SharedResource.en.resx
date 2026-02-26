@@ -2554,6 +2554,27 @@
   <data name="UserPage_TablePlan" xml:space="preserve">
     <value>Plan</value>
   </data>
+  <data name="UserPage_TableRechnungen" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="UserPage_PlanStatusActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="UserPage_PlanStatusInactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="UserPage_TableStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="UserPage_TableZahlung" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="UserPage_TableLogin" xml:space="preserve">
+    <value>Last Login</value>
+  </data>
+  <data name="UserPage_LoginNever" xml:space="preserve">
+    <value>Never</value>
+  </data>
   <data name="UserPage_Filters" xml:space="preserve">
     <value>Filters</value>
   </data>

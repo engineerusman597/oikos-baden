@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Oikos.Domain.Entities.Rbac;
 
@@ -38,6 +39,10 @@ public class UserSubscription
 
     [Comment("Auto renew flag")]
     public bool AutoRenew { get; set; }
+
+    [MaxLength(50)]
+    [Comment("Payment method: Stripe, SEPA, Manuell, etc.")]
+    public string? PaymentMethod { get; set; }
 
     [Comment("Creation timestamp")]
     public DateTime CreatedAt { get; set; }

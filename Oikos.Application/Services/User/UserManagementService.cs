@@ -88,7 +88,7 @@ public class UserManagementService : IUserManagementService
         }
 
         var activeSubscriptionUserIds = context.UserSubscriptions
-            .Where(us => us.Status == SubscriptionStatusConstants.Active)
+            .Where(us => us.Status.ToLower() == "active")
             .Select(us => us.UserId);
 
         if (criteria.HasActiveSubscription.HasValue)
@@ -132,17 +132,38 @@ public class UserManagementService : IUserManagementService
                           join ur in context.UserRoles on r.Id equals ur.RoleId
                           select new { r.Id, r.Name, ur.UserId }).ToListAsync();
 
-        // Load subscriptions
+        // Load subscriptions — select plan fields directly (Include is ignored by EF Core with GroupBy/Select)
         var planLookups = await context.UserSubscriptions
-            .Include(us => us.SubscriptionPlan)
-            .Where(us => us.Status == SubscriptionStatusConstants.Active)
+            .Where(us => us.Status.ToLower() == "active")
             .GroupBy(us => us.UserId)
             .Select(g => new
             {
                 UserId = g.Key,
-                Subscription = g.OrderByDescending(x => x.ActivationDate).FirstOrDefault()
+                PlanName = g.OrderByDescending(x => x.ActivationDate)
+                            .Select(x => x.SubscriptionPlan.Name)
+                            .FirstOrDefault(),
+                ExpirationDate = g.OrderByDescending(x => x.ActivationDate)
+                                  .Select(x => x.ExpirationDate)
+                                  .FirstOrDefault(),
+                PaymentMethod = g.OrderByDescending(x => x.ActivationDate)
+                                 .Select(x => x.PaymentMethod)
+                                 .FirstOrDefault()
             })
-            .ToDictionaryAsync(x => x.UserId, x => x.Subscription);
+            .ToDictionaryAsync(x => x.UserId, x => new { x.PlanName, x.ExpirationDate, x.PaymentMethod });
+
+        var userIds = users.Select(u => u.Id).ToList();
+        var invoiceCounts = await context.Invoices
+            .Where(i => userIds.Contains(i.UserId))
+            .GroupBy(i => i.UserId)
+            .Select(g => new { UserId = g.Key, Count = g.Count() })
+            .ToDictionaryAsync(x => x.UserId, x => x.Count);
+
+        var userNames = users.Select(u => u.Name).ToList();
+        var lastLogins = await context.LoginLogs
+            .Where(l => l.IsSuccessd && userNames.Contains(l.UserName))
+            .GroupBy(l => l.UserName)
+            .Select(g => new { UserName = g.Key, LastLogin = g.Max(l => l.Time) })
+            .ToDictionaryAsync(x => x.UserName, x => x.LastLogin);
 
         var result = new List<UserDto>();
         for (var index = 0; index < users.Count; index++)
@@ -162,16 +183,10 @@ public class UserManagementService : IUserManagementService
 
             var userRoles = roles.Where(r => r.UserId == user.Id).Select(r => r.Name).ToList();
 
-            string planName = "-";
-            string planExpirationDisplay = "-";
-            bool hasActiveSubscription = false;
-
-            if (planLookups.TryGetValue(user.Id, out var subscription) && subscription?.SubscriptionPlan != null)
-            {
-                planName = subscription.SubscriptionPlan.Name;
-                planExpirationDisplay = subscription.ExpirationDate?.ToLocalTime().ToString("g") ?? "-";
-                hasActiveSubscription = true;
-            }
+            planLookups.TryGetValue(user.Id, out var planInfo);
+            string planName = planInfo?.PlanName ?? "-";
+            string planExpirationDisplay = planInfo?.ExpirationDate?.ToLocalTime().ToString("d", System.Globalization.CultureInfo.CurrentUICulture) ?? "-";
+            bool hasActiveSubscription = planInfo?.PlanName != null;
 
             result.Add(new UserDto
             {
@@ -199,7 +214,9 @@ public class UserManagementService : IUserManagementService
                 IsEnabled = user.IsEnabled,
                 Roles = userRoles,
                 HasActiveSubscription = hasActiveSubscription,
-    
+                InvoiceCount = invoiceCounts.TryGetValue(user.Id, out var invoiceCount) ? invoiceCount : 0,
+                SubscriptionPaymentMethod = planInfo?.PaymentMethod,
+                LastLoginAt = lastLogins.TryGetValue(user.Name, out var lastLogin) ? lastLogin : (DateTime?)null,
             });
         }
 
@@ -230,7 +247,7 @@ public class UserManagementService : IUserManagementService
 
         var subscriptions = await context.UserSubscriptions
             .Include(us => us.SubscriptionPlan)
-            .Where(us => us.UserId == userId && us.Status == SubscriptionStatusConstants.Active)
+            .Where(us => us.UserId == userId && us.Status.ToLower() == "active")
             .OrderByDescending(us => us.ActivationDate)
             .Select(us => new SubscriptionInfo
             {

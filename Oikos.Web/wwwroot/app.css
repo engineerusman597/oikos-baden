@@ -100,6 +100,12 @@ h1:focus {
     min-width: 100%;
 }
 
+/* Force fixed table layout on the actual <table> element for column width alignment */
+.table-fixed .mud-table-root {
+    table-layout: fixed;
+    width: 100%;
+}
+
 .dense-badge .mud-badge {
     inset: auto auto calc(100% - 24px) calc(100% - 24px) !important;
 }
@@ -367,5 +373,6 @@ h1:focus {
 
 .content-scroll-container {
     height: 100%;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
 }

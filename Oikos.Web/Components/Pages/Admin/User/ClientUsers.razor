@@ -70,41 +70,55 @@
         }
         else
         {
-            <MudTable Items="_users" Hover="true" Dense="true" style="width:100%">
+            <MudTable Items="_users" Hover="true" Dense="true" Class="table-fixed" style="width:100%;">
+                <ColGroup>
+                    <col style="width:20%;" />
+                    <col style="width:5%;" />
+                    <col style="width:11%;" />
+                    <col style="width:8%;" />
+                    <col style="width:11%;" />
+                    <col style="width:8%;" />
+                    <col style="width:9%;" />
+                    <col style="width:6%;" />
+                    <col style="width:8%;" />
+                    <col style="width:5%;" />
+                    <col style="width:9%;" />
+                </ColGroup>
                 <HeaderContent>
-                    <MudTh>#</MudTh>
-                    <MudTh>@Loc["UserPage_TableH3"]</MudTh>
-                    <MudTh>@Loc["UserPage_TableH7"]</MudTh>
-                    <MudTh>@Loc["UserPage_TableCompany"]</MudTh>
-                    <MudTh>@Loc["UserPage_TablePartner"]</MudTh>
-                    <MudTh>@Loc["UserPage_TablePhone"]</MudTh>
-                    <MudTh>@Loc["UserPage_TablePlan"]</MudTh>
-                    <MudTh>@Loc["UserPage_TableH4"]</MudTh>
-                    <MudTh class="text-right">@Loc["UserPage_TableH5"]</MudTh>
+                    <MudTh Style="width:20%">@Loc["UserPage_TableH3"]</MudTh>
+                    <MudTh Style="width:5%">@Loc["UserPage_TableH7"]</MudTh>
+                    <MudTh Style="width:11%">@Loc["UserPage_TableCompany"]</MudTh>
+                    <MudTh Style="width:8%">@Loc["UserPage_TablePartner"]</MudTh>
+                    <MudTh Style="width:11%">@Loc["UserPage_TablePlan"]</MudTh>
+                    <MudTh Style="width:8%">@Loc["UserPage_TableStatus"]</MudTh>
+                    <MudTh Style="width:9%">@Loc["UserPage_TableZahlung"]</MudTh>
+                    <MudTh Style="width:6%">@Loc["UserPage_TableRechnungen"]</MudTh>
+                    <MudTh Style="width:8%">@Loc["UserPage_TableLogin"]</MudTh>
+                    <MudTh Style="width:5%">@Loc["UserPage_TableH4"]</MudTh>
+                    <MudTh Style="width:9%" class="text-right">@Loc["UserPage_TableH5"]</MudTh>
                 </HeaderContent>
                 <RowTemplate>
-                    <MudTd DataLabel="#">@context.Number</MudTd>
-                    <MudTd DataLabel='@Loc["UserPage_TableH3"]'>
-                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                    <MudTd DataLabel='@Loc["UserPage_TableH3"]' Style="overflow:hidden;">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
                             <MudLink Href="@($"/admin/clients/{context.Id}")" Underline="Underline.None">
                                 @if (string.IsNullOrEmpty(context.Avatar))
                                 {
-                                    <MudAvatar Color="Color.Primary">
+                                    <MudAvatar Color="Color.Primary" Size="Size.Small">
                                         @((string.IsNullOrWhiteSpace(context.FirstName) ? context.RealName : context.FirstName)?.FirstOrDefault())
                                     </MudAvatar>
                                 }
                                 else
                                 {
-                                    <MudAvatar>
+                                    <MudAvatar Size="Size.Small">
                                         <MudImage Src="@("Avatars/" + context.Avatar)">
                                         </MudImage>
                                     </MudAvatar>
                                 }
                             </MudLink>
-                            <MudStack Spacing="0">
+                            <MudStack Spacing="0" Style="overflow:hidden; min-width:0;">
                                 <MudLink Href="@($"/admin/clients/{context.Id}")" Underline="Underline.None">
                                     <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
-                                        <MudText Typo="Typo.subtitle2">@context.RealName</MudText>
+                                        <MudText Typo="Typo.subtitle2" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@context.RealName</MudText>
                                         @if (context.HasActiveSubscription)
                                         {
                                             <MudTooltip Text="@Loc["UserPage_ActivePlanIndicator"]" Color="Color.Success">
@@ -116,34 +130,34 @@
                                 @if (!string.IsNullOrWhiteSpace(context.Email))
                                 {
                                     <MudLink Href="@($"/admin/clients/{context.Id}")" Underline="Underline.None">
-                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.Email</MudText>
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@context.Email</MudText>
                                     </MudLink>
                                 }
                             </MudStack>
                         </MudStack>
                     </MudTd>
-                    <MudTd DataLabel='@Loc["UserPage_TableH7"]'>
+                    <MudTd DataLabel='@Loc["UserPage_TableH7"]' Style="overflow:hidden; padding-right:10px;">
                         <MudStack Row="true" Spacing="1" Class="flex-wrap">
                             @foreach (var role in context.Roles)
                             {
-                                <MudChip T="string" Size="MudBlazor.Size.Small" Color="Color.Primary" Variant="Variant.Outlined">@role</MudChip>
+                                <MudChip T="string" Size="MudBlazor.Size.Small" Color="Color.Primary" Variant="Variant.Outlined" Style="margin:0;">@role</MudChip>
                             }
                         </MudStack>
                     </MudTd>
-                    <MudTd DataLabel='@Loc["UserPage_TableCompany"]'>
-                        <MudText Typo="Typo.body2">@context.Company</MudText>
+                    <MudTd DataLabel='@Loc["UserPage_TableCompany"]' Style="overflow:hidden;">
+                        <MudText Typo="Typo.body2" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@context.Company</MudText>
                         @if (!string.IsNullOrWhiteSpace(context.CustomerNumber))
                         {
-                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.CustomerNumber</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@context.CustomerNumber</MudText>
                         }
                     </MudTd>
-                    <MudTd DataLabel='@Loc["UserPage_TablePartner"]'>
+                    <MudTd DataLabel='@Loc["UserPage_TablePartner"]' Style="overflow:hidden;">
                         @if (!string.IsNullOrWhiteSpace(context.PartnerName))
                         {
-                            <MudText Typo="Typo.body2">@context.PartnerName</MudText>
+                            <MudText Typo="Typo.body2" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@context.PartnerName</MudText>
                             @if (!string.IsNullOrWhiteSpace(context.PartnerCode))
                             {
-                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.PartnerCode</MudText>
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@context.PartnerCode</MudText>
                             }
                         }
                         else
@@ -151,28 +165,68 @@
                             <MudText Typo="Typo.caption" Class="mud-text-secondary">-</MudText>
                         }
                     </MudTd>
-                    <MudTd DataLabel='@Loc["UserPage_TablePhone"]'>
-                        @if (!string.IsNullOrWhiteSpace(context.PhoneNumber))
+                    <MudTd DataLabel='@Loc["UserPage_TablePlan"]' Style="overflow:hidden;">
+                        @if (!string.IsNullOrWhiteSpace(context.PlanName) && context.PlanName != "-")
                         {
-                            <MudText Typo="Typo.body2">@context.PhoneNumber</MudText>
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1" Style="overflow:hidden;">
+                                <MudIcon Icon="@Icons.Material.Outlined.Inventory2" Size="Size.Small" Class="mud-text-secondary" Style="flex-shrink:0;" />
+                                <MudText Typo="Typo.body2" Style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">@context.PlanName</MudText>
+                            </MudStack>
                         }
                         else
                         {
                             <MudText Typo="Typo.caption" Class="mud-text-secondary">-</MudText>
                         }
                     </MudTd>
-                    <MudTd DataLabel='@Loc["UserPage_TablePlan"]'>
-                        @if (!string.IsNullOrWhiteSpace(context.PlanName))
+                    <MudTd DataLabel='@Loc["UserPage_TableStatus"]' Style="padding-right:10px;">
+                        @if (context.IsEnabled)
                         {
-                            <MudText Typo="Typo.body2">@context.PlanName</MudText>
-                            @if (!string.IsNullOrWhiteSpace(context.PlanExpirationDisplay))
+                            <MudChip T="string" Size="Size.Small" Color="Color.Success" Variant="Variant.Filled" Style="margin:0;">
+                                @Loc["UserPage_PlanStatusActive"]
+                            </MudChip>
+                        }
+                        else
+                        {
+                            <MudChip T="string" Size="Size.Small" Color="Color.Default" Variant="Variant.Outlined" Style="margin:0;">
+                                @Loc["UserPage_PlanStatusInactive"]
+                            </MudChip>
+                        }
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["UserPage_TableZahlung"]'>
+                        @if (context.HasActiveSubscription)
+                        {
+                            var pm = string.IsNullOrWhiteSpace(context.SubscriptionPaymentMethod) ? "Stripe" : context.SubscriptionPaymentMethod;
+                            var pmIcon = pm.ToLower() switch
                             {
-                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.PlanExpirationDisplay</MudText>
-                            }
+                                "stripe" => Icons.Material.Outlined.CreditCard,
+                                "sepa"   => Icons.Material.Outlined.AccountBalance,
+                                _        => Icons.Material.Outlined.Payments
+                            };
+                            <MudChip T="string" Size="Size.Small" Color="Color.Info" Variant="Variant.Outlined" Style="margin:0;">
+                                <MudIcon Icon="@pmIcon" Size="Size.Small" Style="font-size:1rem; margin-right:2px; vertical-align:middle;" />@pm
+                            </MudChip>
                         }
                         else
                         {
                             <MudText Typo="Typo.caption" Class="mud-text-secondary">-</MudText>
+                        }
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["UserPage_TableRechnungen"]'>
+                        <MudChip T="string" Size="Size.Small"
+                                 Color="@(context.InvoiceCount > 0 ? Color.Primary : Color.Default)"
+                                 Variant="@(context.InvoiceCount > 0 ? Variant.Outlined : Variant.Outlined)">
+                            @context.InvoiceCount
+                        </MudChip>
+                    </MudTd>
+                    <MudTd DataLabel='@Loc["UserPage_TableLogin"]'>
+                        @if (context.LastLoginAt.HasValue)
+                        {
+                            <MudText Typo="Typo.body2">@context.LastLoginAt.Value.ToLocalTime().ToString("d", System.Globalization.CultureInfo.CurrentUICulture)</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@context.LastLoginAt.Value.ToLocalTime().ToString("t", System.Globalization.CultureInfo.CurrentUICulture)</MudText>
+                        }
+                        else
+                        {
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_LoginNever"]</MudText>
                         }
                     </MudTd>
                     <MudTd DataLabel='@Loc["UserPage_TableH4"]'>
@@ -181,18 +235,24 @@
                         </MudSwitch>
                     </MudTd>
                     <MudTd Class="text-right" DataLabel='@Loc["UserPage_TableH5"]'>
-                        <MudTooltip Text='@Loc["UserPage_Details"]'>
-                            <MudIconButton Icon="@Icons.Material.Outlined.Visibility" Color="Color.Primary" Size="Size.Small"
-                                           OnClick="@(() => _navManager.NavigateTo($"/admin/clients/{context.Id}"))" />
-                        </MudTooltip>
-                        <MudIconButton Icon="@Icons.Material.Outlined.Edit" Color="Color.Primary" Size="Size.Small"
-                                       OnClick="() => EditUserClick(context.Id)" />
-
-                        <MudIconButton Icon="@Icons.Material.Outlined.Key" Color="Color.Secondary" Size="Size.Small"
-                                       OnClick="() => ChangePasswordClick(context.Id)" />
-
-                        <MudIconButton Icon="@Icons.Material.Outlined.Delete" Color="Color.Error" Size="Size.Small"
-                                       OnClick="() => DeleteUserClick(context.Id)" />
+                        <MudStack Row="true" Spacing="0" Justify="Justify.FlexEnd" AlignItems="AlignItems.Center">
+                            <MudTooltip Text='@Loc["UserPage_Details"]'>
+                                <MudIconButton Icon="@Icons.Material.Outlined.RemoveRedEye" Color="Color.Default" Size="Size.Small"
+                                               OnClick="@(() => _navManager.NavigateTo($"/admin/clients/{context.Id}"))" />
+                            </MudTooltip>
+                            <MudTooltip Text='@Loc["UserPage_EditTitle"]'>
+                                <MudIconButton Icon="@Icons.Material.Outlined.DriveFileRenameOutline" Color="Color.Default" Size="Size.Small"
+                                               OnClick="() => EditUserClick(context.Id)" />
+                            </MudTooltip>
+                            <MudTooltip Text='@Loc["UserPage_ModifyPasswordTitle"]'>
+                                <MudIconButton Icon="@Icons.Material.Outlined.Password" Color="Color.Default" Size="Size.Small"
+                                               OnClick="() => ChangePasswordClick(context.Id)" />
+                            </MudTooltip>
+                            <MudTooltip Text='@Loc["UserPage_DeleteTitle"]'>
+                                <MudIconButton Icon="@Icons.Material.Outlined.DeleteOutline" Color="Color.Error" Size="Size.Small"
+                                               OnClick="() => DeleteUserClick(context.Id)" />
+                            </MudTooltip>
+                        </MudStack>
                     </MudTd>
                 </RowTemplate>
             </MudTable>
