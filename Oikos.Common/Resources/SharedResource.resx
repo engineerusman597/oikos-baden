@@ -865,6 +865,42 @@
 	<data name="AdminDashboard_Status_Completed" xml:space="preserve">
     <value>Completed</value>
   </data>
+	<data name="Dashboard_MobileApp_Title" xml:space="preserve">
+    <value>Mobile App</value>
+  </data>
+	<data name="Dashboard_MobileApp_Description" xml:space="preserve">
+    <value>Upload invoices and check status – even on the go</value>
+  </data>
+	<data name="Dashboard_MobileApp_OpenButton" xml:space="preserve">
+    <value>Open Now</value>
+  </data>
+	<data name="Dashboard_RecentCases_Title" xml:space="preserve">
+    <value>Recent Cases</value>
+  </data>
+	<data name="Dashboard_RecentCases_Subtitle" xml:space="preserve">
+    <value>Your recently active cases</value>
+  </data>
+	<data name="Dashboard_RecentCases_ShowAll" xml:space="preserve">
+    <value>Show all</value>
+  </data>
+	<data name="Dashboard_RecentCases_Empty" xml:space="preserve">
+    <value>No cases available.</value>
+  </data>
+	<data name="Dashboard_RecentActivities_Title" xml:space="preserve">
+    <value>Recent Activities</value>
+  </data>
+	<data name="Dashboard_RecentActivities_Subtitle" xml:space="preserve">
+    <value>Latest events in your cases</value>
+  </data>
+	<data name="Dashboard_RecentActivities_Empty" xml:space="preserve">
+    <value>No activities available.</value>
+  </data>
+	<data name="Dashboard_Status_Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+	<data name="Dashboard_Status_Rejected" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
 	<data name="UploadFileTooLarge" xml:space="preserve">
     <value>The selected file exceeds the 15 MB limit.</value>
   </data>

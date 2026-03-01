@@ -193,6 +193,42 @@
   <data name="AdminDashboard_Status_Completed" xml:space="preserve">
     <value>Abgeschlossen</value>
   </data>
+  <data name="Dashboard_MobileApp_Title" xml:space="preserve">
+    <value>Mobile App</value>
+  </data>
+  <data name="Dashboard_MobileApp_Description" xml:space="preserve">
+    <value>Rechnungen hochladen und Status prüfen – auch von unterwegs</value>
+  </data>
+  <data name="Dashboard_MobileApp_OpenButton" xml:space="preserve">
+    <value>Jetzt öffnen</value>
+  </data>
+  <data name="Dashboard_RecentCases_Title" xml:space="preserve">
+    <value>Aktuelle Fälle</value>
+  </data>
+  <data name="Dashboard_RecentCases_Subtitle" xml:space="preserve">
+    <value>Ihre zuletzt aktiven Fälle</value>
+  </data>
+  <data name="Dashboard_RecentCases_ShowAll" xml:space="preserve">
+    <value>Alle anzeigen</value>
+  </data>
+  <data name="Dashboard_RecentCases_Empty" xml:space="preserve">
+    <value>Keine Fälle vorhanden.</value>
+  </data>
+  <data name="Dashboard_RecentActivities_Title" xml:space="preserve">
+    <value>Letzte Aktivitäten</value>
+  </data>
+  <data name="Dashboard_RecentActivities_Subtitle" xml:space="preserve">
+    <value>Neueste Ereignisse in Ihren Fällen</value>
+  </data>
+  <data name="Dashboard_RecentActivities_Empty" xml:space="preserve">
+    <value>Keine Aktivitäten vorhanden.</value>
+  </data>
+  <data name="Dashboard_Status_Cancelled" xml:space="preserve">
+    <value>Abgebrochen</value>
+  </data>
+  <data name="Dashboard_Status_Rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
+  </data>
   <data name="AdminDashboard_Status_Fristen" xml:space="preserve">
     <value>Fristen</value>
   </data>

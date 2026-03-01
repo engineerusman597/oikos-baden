@@ -1,6 +1,4 @@
 .oikos-dashboard {
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 2rem;
 }
 
@@ -144,6 +142,61 @@
 .oikos-status-card.status-card--completed {
     background-color: #f0fdf4;
     border-color: #dcfce7;
+}
+
+.oikos-mobile-app-card {
+    background-color: #f8faff;
+    border: 1px solid #e2e8f0;
+}
+
+.oikos-mobile-app-icon {
+    width: 52px;
+    height: 52px;
+    background-color: #2563eb;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.oikos-case-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+    gap: 8px;
+}
+
+.oikos-case-row:last-child {
+    border-bottom: none;
+}
+
+.oikos-activity-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.oikos-activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.oikos-activity-item:last-child {
+    border-bottom: none;
+}
+
+.oikos-activity-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #2563eb;
+    flex-shrink: 0;
+    margin-top: 4px;
 }
 
 @media (max-width: 600px) {

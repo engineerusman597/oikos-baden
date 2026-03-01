@@ -32,4 +32,20 @@ public class DashboardService : IDashboardService
 
         return results;
     }
+
+    public async Task<List<DashboardRecentActivityDto>> GetRecentActivitiesAsync(int userId, int count)
+    {
+        using var context = await _dbFactory.CreateDbContextAsync();
+
+        return await context.InvoiceStageHistories
+            .AsNoTracking()
+            .Where(h => h.Invoice.UserId == userId)
+            .OrderByDescending(h => h.ChangedAt)
+            .Take(count)
+            .Select(h => new DashboardRecentActivityDto(
+                h.Stage.NameDe ?? h.Stage.Name,
+                h.Note,
+                h.ChangedAt))
+            .ToListAsync();
+    }
 }

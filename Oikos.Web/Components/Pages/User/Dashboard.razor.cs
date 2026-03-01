@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Components;
 using Oikos.Application.Services.Subscription;
 using Oikos.Application.Services.Subscription.Models;
 using Oikos.Application.Services.Dashboard;
+using Oikos.Application.Services.Dashboard.Models;
+using Oikos.Application.Services.Invoice;
+using Oikos.Application.Services.Invoice.Models;
 using Oikos.Application.Services.Setting;
 using MudBlazor;
 using Oikos.Domain.Enums;
-using Oikos.Application.Services.Dashboard.Models;
 using Oikos.Web.Constants;
 using Oikos.Common.Helpers;
 using Oikos.Web.Components.Pages.User.Models;
@@ -28,12 +30,18 @@ public partial class Dashboard
     private int _remainingClaims;
     private string _planName = string.Empty;
 
+    private List<MyInvoiceItemDto> _recentInvoices = new();
+    private List<DashboardRecentActivityDto> _recentActivities = new();
+
     [Inject]
     private ISubscriptionPlanService SubscriptionPlanService { get; set; } = null!;
-    
+
     [Inject]
     private IDashboardService DashboardService { get; set; } = null!;
-    
+
+    [Inject]
+    private IInvoiceManagementService InvoiceManagementService { get; set; } = null!;
+
     [Inject]
     private ISettingService SettingService { get; set; } = null!;
 
@@ -83,14 +91,15 @@ public partial class Dashboard
         {
             await LoadDashboardDataAsync(userInfo.Id, false);
             await LoadNewsAsync();
+            await LoadRecentDataAsync(userInfo.Id);
             _greetingText = GreetingHelper.BuildGreeting(userInfo.RealName, Loc);
             await EvaluateSubscriptionAsync(userInfo.Id);
         }
         else
         {
             // Fallback for unauthenticated access if needed (usually protected by routing)
-             await LoadDashboardDataAsync(0, false);
-             await LoadNewsAsync();
+            await LoadDashboardDataAsync(0, false);
+            await LoadNewsAsync();
             _greetingText = GreetingHelper.BuildGreeting(null, Loc);
         }
     }
@@ -134,9 +143,25 @@ public partial class Dashboard
         var courtCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.Court)?.Count ?? 0;
         AddSummary(Loc["AdminDashboard_Status_Gericht"], courtCount, Icons.Material.Filled.Gavel, "/invoices?primaryStatus=Court", "Error");
 
-        // 6. Abgeschlossen (Completed)
+        // 6. Fristen (DeadlineRunning)
+        var fristenCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.DeadlineRunning)?.Count ?? 0;
+        AddSummary(Loc["AdminDashboard_Status_Fristen"], fristenCount, Icons.Material.Filled.Timer, "/invoices?primaryStatus=DeadlineRunning", "Warning");
+
+        // 7. Abgeschlossen (Completed)
         var completedCount = summaries.FirstOrDefault(s => s.PrimaryStatus == InvoicePrimaryStatus.Completed)?.Count ?? 0;
         AddSummary(Loc["AdminDashboard_Status_Completed"], completedCount, Icons.Material.Filled.CheckCircle, "/invoices?primaryStatus=Completed", "Success");
+    }
+
+    private async Task LoadRecentDataAsync(int userId)
+    {
+        var culture = CultureInfo.CurrentUICulture.Name;
+        var myInvoices = await InvoiceManagementService.GetMyInvoicesAsync(userId, culture);
+        _recentInvoices = myInvoices.Invoices
+            .OrderByDescending(i => i.UpdatedAt)
+            .Take(5)
+            .ToList();
+
+        _recentActivities = await DashboardService.GetRecentActivitiesAsync(userId, 5);
     }
 
     private void AddSummary(string name, int count, string icon, string targetUri, string color)
@@ -350,6 +375,34 @@ public partial class Dashboard
         return subscription.UserSubscriptionId.HasValue
             && (!subscription.ExpirationDate.HasValue || subscription.ExpirationDate.Value > DateTime.UtcNow);
     }
+
+    private string GetStatusLabel(InvoicePrimaryStatus status) => status switch
+    {
+        InvoicePrimaryStatus.Submitted       => Loc["AdminDashboard_Status_Neu"],
+        InvoicePrimaryStatus.InReview        => Loc["AdminDashboard_Status_InPruefung"],
+        InvoicePrimaryStatus.Inquiry         => Loc["AdminDashboard_Status_Rueckfragen"],
+        InvoicePrimaryStatus.Accepted        => Loc["AdminDashboard_Status_Akzeptiert"],
+        InvoicePrimaryStatus.CourtPrep       => Loc["AdminDashboard_Status_Akzeptiert"],
+        InvoicePrimaryStatus.Court           => Loc["AdminDashboard_Status_Gericht"],
+        InvoicePrimaryStatus.DeadlineRunning => Loc["AdminDashboard_Status_Fristen"],
+        InvoicePrimaryStatus.Completed       => Loc["AdminDashboard_Status_Completed"],
+        InvoicePrimaryStatus.Cancelled       => Loc["Dashboard_Status_Cancelled"],
+        InvoicePrimaryStatus.Rejected        => Loc["Dashboard_Status_Rejected"],
+        _                                    => status.ToString()
+    };
+
+    private static Color GetStatusColor(InvoicePrimaryStatus status) => status switch
+    {
+        InvoicePrimaryStatus.Submitted       => Color.Primary,
+        InvoicePrimaryStatus.InReview        => Color.Warning,
+        InvoicePrimaryStatus.Inquiry         => Color.Error,
+        InvoicePrimaryStatus.Accepted        => Color.Success,
+        InvoicePrimaryStatus.CourtPrep       => Color.Success,
+        InvoicePrimaryStatus.Court           => Color.Error,
+        InvoicePrimaryStatus.DeadlineRunning => Color.Warning,
+        InvoicePrimaryStatus.Completed       => Color.Success,
+        _                                    => Color.Default
+    };
 
     private static bool RequiresSubscription(string uri)
     {
