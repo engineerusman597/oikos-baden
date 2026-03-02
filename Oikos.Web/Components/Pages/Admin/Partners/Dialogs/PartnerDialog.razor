@@ -8,15 +8,105 @@
         <EditForm Model="_model" OnValidSubmit="SaveAsync">
             <DataAnnotationsValidator />
             <MudStack Spacing="2">
-                <MudTextField @bind-Value="_model.Name" Label="@Loc["PartnerDialog_NameLabel"]" Variant="Variant.Outlined"
-                              For="@(() => _model.Name)" Required="true" Disabled="_isSaving" />
-                <MudTextField @bind-Value="_model.Code" Label="@Loc["PartnerDialog_CodeLabel"]" Variant="Variant.Outlined"
-                              For="@(() => _model.Code)" Required="true" HelperText="@Loc["PartnerDialog_CodeHelper"]"
-                              Disabled="_isSaving" />
-                <MudTextField @bind-Value="_model.ContactEmail" Label="@Loc["PartnerDialog_ContactLabel"]" Variant="Variant.Outlined"
-                              For="@(() => _model.ContactEmail)" Disabled="_isSaving" />
-                <MudTextField @bind-Value="_model.Notes" Label="@Loc["PartnerDialog_NotesLabel"]" Variant="Variant.Outlined"
-                              For="@(() => _model.Notes)" Disabled="_isSaving" Lines="3" />
+
+                @* Row 1: Name + Typ *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="6">
+                        <MudTextField @bind-Value="_model.Name" Label="@(Loc["PartnerDialog_NameLabel"] + " *")"
+                                      For="@(() => _model.Name)" Variant="Variant.Outlined" Required="true" Disabled="_isSaving" />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSelect @bind-Value="_model.PartnerType" Label="@(Loc["PartnerDialog_TypeLabel"] + " *")"
+                                   Variant="Variant.Outlined" Disabled="_isSaving">
+                            <MudSelectItem Value="@("Rechtsanwalt")">@Loc["PartnerDialog_TypeRechtsanwalt"]</MudSelectItem>
+                            <MudSelectItem Value="@("Steuerberater")">@Loc["PartnerDialog_TypeSteuerberater"]</MudSelectItem>
+                            <MudSelectItem Value="@("Notar")">@Loc["PartnerDialog_TypeNotar"]</MudSelectItem>
+                            <MudSelectItem Value="@("Unternehmensberater")">@Loc["PartnerDialog_TypeUnternehmensberater"]</MudSelectItem>
+                            <MudSelectItem Value="@("Sonstige")">@Loc["PartnerDialog_TypeSonstige"]</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+
+                @* Row 2: Firmenname *@
+                <MudTextField @bind-Value="_model.BusinessName" Label="@Loc["PartnerDialog_BusinessNameLabel"]"
+                              Variant="Variant.Outlined" Disabled="_isSaving" />
+
+                @* Row 3: E-Mail + Telefon *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="6">
+                        <MudTextField @bind-Value="_model.ContactEmail" Label="@(Loc["PartnerDialog_ContactLabel"] + " *")"
+                                      For="@(() => _model.ContactEmail)" Variant="Variant.Outlined"
+                                      InputType="InputType.Email" Required="true" Disabled="_isSaving" />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudTextField @bind-Value="_model.PhoneNumber" Label="@Loc["PartnerDialog_PhoneLabel"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                </MudGrid>
+
+                @* Row 4: Ansprechpartner *@
+                <MudTextField @bind-Value="_model.ContactPerson" Label="@Loc["PartnerDialog_ContactPersonLabel"]"
+                              Variant="Variant.Outlined" Disabled="_isSaving" />
+
+                @* Row 5: Adresse *@
+                <MudTextField @bind-Value="_model.Address" Label="@Loc["PartnerDialog_AddressLabel"]"
+                              Variant="Variant.Outlined" Disabled="_isSaving" />
+
+                @* Row 6: Notizen *@
+                <MudTextField @bind-Value="_model.Notes" Label="@Loc["PartnerDialog_NotesLabel"]"
+                              For="@(() => _model.Notes)" Variant="Variant.Outlined" Disabled="_isSaving" Lines="3" />
+
+                @* Row 7: Provisionsart + Provisionssatz *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="6">
+                        <MudSelect @bind-Value="_model.CommissionType" Label="@Loc["PartnerDialog_CommissionTypeLabel"]"
+                                   Variant="Variant.Outlined" Disabled="_isSaving" Clearable="true">
+                            <MudSelectItem Value="@("Monthly")">@Loc["PartnerDialog_CommissionMonthly"]</MudSelectItem>
+                            <MudSelectItem Value="@("Yearly")">@Loc["PartnerDialog_CommissionYearly"]</MudSelectItem>
+                            <MudSelectItem Value="@("OneTime")">@Loc["PartnerDialog_CommissionOneTime"]</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudNumericField @bind-Value="_model.CommissionRate" Label="@Loc["PartnerDialog_CommissionRateLabel"]"
+                                         Variant="Variant.Outlined" Min="0" Max="100" Format="N2"
+                                         Adornment="Adornment.End" AdornmentText="%" Disabled="_isSaving" />
+                    </MudItem>
+                </MudGrid>
+
+                @* Row 8: Provisionszeitraum *@
+                <MudSelect @bind-Value="_model.CommissionPeriodMonths" Label="@Loc["PartnerDialog_CommissionPeriodLabel"]"
+                           Variant="Variant.Outlined" Disabled="_isSaving" Clearable="true"
+                           HelperText="@Loc["PartnerDialog_CommissionPeriodHelper"]">
+                    <MudSelectItem Value="@((int?)12)">12 @Loc["PartnerDialog_Months"]</MudSelectItem>
+                    <MudSelectItem Value="@((int?)24)">24 @Loc["PartnerDialog_Months"]</MudSelectItem>
+                    <MudSelectItem Value="@((int?)36)">36 @Loc["PartnerDialog_Months"]</MudSelectItem>
+                    <MudSelectItem Value="@((int?)60)">60 @Loc["PartnerDialog_Months"]</MudSelectItem>
+                </MudSelect>
+
+                @* Row 9: Status *@
+                <MudSelect @bind-Value="_model.IsActive" Label="@Loc["PartnerDialog_StatusLabel"]"
+                           Variant="Variant.Outlined" Disabled="_isSaving">
+                    <MudSelectItem Value="true">@Loc["PartnerDialog_StatusActive"]</MudSelectItem>
+                    <MudSelectItem Value="false">@Loc["PartnerDialog_StatusInactive"]</MudSelectItem>
+                </MudSelect>
+
+                @* Row 10: Passwort (nur bei Neuanlage) *@
+                @if (Partner == null)
+                {
+                    <MudGrid Spacing="2">
+                        <MudItem xs="6">
+                            <MudTextField @bind-Value="_model.Password" Label="@(Loc["PartnerDialog_PasswordLabel"] + " *")"
+                                          For="@(() => _model.Password)" Variant="Variant.Outlined"
+                                          InputType="InputType.Password" Disabled="_isSaving" />
+                        </MudItem>
+                        <MudItem xs="6">
+                            <MudTextField @bind-Value="_model.ConfirmPassword" Label="@(Loc["PartnerDialog_ConfirmPasswordLabel"] + " *")"
+                                          For="@(() => _model.ConfirmPassword)" Variant="Variant.Outlined"
+                                          InputType="InputType.Password" Disabled="_isSaving" />
+                        </MudItem>
+                    </MudGrid>
+                }
+
             </MudStack>
             <DialogActions>
                 <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="Cancel" ButtonType="ButtonType.Button" Disabled="_isSaving">
@@ -52,9 +142,17 @@
             _model = new PartnerEditModel
             {
                 Name = Partner.Name,
-                Code = Partner.Code,
+                PartnerType = Partner.PartnerType ?? "Sonstige",
+                BusinessName = Partner.BusinessName,
                 ContactEmail = Partner.ContactEmail,
-                Notes = Partner.Notes
+                PhoneNumber = Partner.PhoneNumber,
+                ContactPerson = Partner.ContactPerson,
+                Address = Partner.Address,
+                Notes = Partner.Notes,
+                CommissionType = Partner.CommissionType,
+                CommissionRate = Partner.CommissionRate,
+                CommissionPeriodMonths = Partner.CommissionPeriodMonths,
+                IsActive = Partner.IsActive
             };
         }
     }
@@ -64,12 +162,27 @@
         _isSaving = true;
         try
         {
+            if (Partner == null && _model.Password != _model.ConfirmPassword)
+            {
+                _snackbarService.Add(Loc["PartnerDialog_PasswordMismatch"].Value, Severity.Error);
+                return;
+            }
+
             var request = new PartnerRequest
             {
                 Name = _model.Name,
-                Code = _model.Code,
+                PartnerType = _model.PartnerType,
+                BusinessName = _model.BusinessName,
                 ContactEmail = _model.ContactEmail,
-                Notes = _model.Notes
+                PhoneNumber = _model.PhoneNumber,
+                ContactPerson = _model.ContactPerson,
+                Address = _model.Address,
+                Notes = _model.Notes,
+                CommissionType = _model.CommissionType,
+                CommissionRate = _model.CommissionRate,
+                CommissionPeriodMonths = _model.CommissionPeriodMonths,
+                IsActive = _model.IsActive,
+                Password = _model.Password
             };
 
             PartnerDetail result;
@@ -96,10 +209,7 @@
         }
     }
 
-    private void Cancel()
-    {
-        MudDialog?.Cancel();
-    }
+    private void Cancel() => MudDialog?.Cancel();
 
     private class PartnerEditModel
     {
@@ -107,15 +217,39 @@
         [MaxLength(200)]
         public string Name { get; set; } = string.Empty;
 
-        [Required]
-        [MaxLength(50)]
-        public string Code { get; set; } = string.Empty;
+        public string? PartnerType { get; set; } = "Sonstige";
 
+        [MaxLength(200)]
+        public string? BusinessName { get; set; }
+
+        [Required]
         [EmailAddress]
         [MaxLength(200)]
         public string? ContactEmail { get; set; }
 
+        [MaxLength(100)]
+        public string? PhoneNumber { get; set; }
+
+        [MaxLength(200)]
+        public string? ContactPerson { get; set; }
+
+        [MaxLength(500)]
+        public string? Address { get; set; }
+
         [MaxLength(500)]
         public string? Notes { get; set; }
+
+        public string? CommissionType { get; set; }
+
+        public decimal? CommissionRate { get; set; } = 10m;
+
+        public int? CommissionPeriodMonths { get; set; } = 24;
+
+        public bool IsActive { get; set; } = true;
+
+        [MinLength(6)]
+        public string? Password { get; set; }
+
+        public string? ConfirmPassword { get; set; }
     }
 }

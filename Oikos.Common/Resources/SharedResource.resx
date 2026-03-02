@@ -2299,6 +2299,78 @@
 	<data name="PartnerDialog_NameLabel" xml:space="preserve">
     <value>Partner name</value>
   </data>
+  <data name="PartnerDialog_TypeLabel" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="PartnerDialog_TypeRechtsanwalt" xml:space="preserve">
+    <value>Lawyer</value>
+  </data>
+  <data name="PartnerDialog_TypeSteuerberater" xml:space="preserve">
+    <value>Tax advisor</value>
+  </data>
+  <data name="PartnerDialog_TypeNotar" xml:space="preserve">
+    <value>Notary</value>
+  </data>
+  <data name="PartnerDialog_TypeUnternehmensberater" xml:space="preserve">
+    <value>Business consultant</value>
+  </data>
+  <data name="PartnerDialog_TypeSonstige" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="PartnerDialog_BusinessNameLabel" xml:space="preserve">
+    <value>Company name</value>
+  </data>
+  <data name="PartnerDialog_PhoneLabel" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PartnerDialog_ContactPersonLabel" xml:space="preserve">
+    <value>Contact person</value>
+  </data>
+  <data name="PartnerDialog_AddressLabel" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="PartnerDialog_CommissionTypeLabel" xml:space="preserve">
+    <value>Commission type</value>
+  </data>
+  <data name="PartnerDialog_CommissionRateLabel" xml:space="preserve">
+    <value>Commission rate (%)</value>
+  </data>
+  <data name="PartnerDialog_CommissionMonthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="PartnerDialog_CommissionYearly" xml:space="preserve">
+    <value>Yearly</value>
+  </data>
+  <data name="PartnerDialog_CommissionOneTime" xml:space="preserve">
+    <value>One-time</value>
+  </data>
+  <data name="PartnerDialog_CommissionPeriodLabel" xml:space="preserve">
+    <value>Commission period</value>
+  </data>
+  <data name="PartnerDialog_CommissionPeriodHelper" xml:space="preserve">
+    <value>Period from membership start in which commissions are paid</value>
+  </data>
+  <data name="PartnerDialog_Months" xml:space="preserve">
+    <value>months</value>
+  </data>
+  <data name="PartnerDialog_StatusLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="PartnerDialog_StatusActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="PartnerDialog_StatusInactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="PartnerDialog_PasswordLabel" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PartnerDialog_ConfirmPasswordLabel" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="PartnerDialog_PasswordMismatch" xml:space="preserve">
+    <value>The passwords do not match.</value>
+  </data>
 	<data name="PartnerDialog_NotesLabel" xml:space="preserve">
     <value>Notes</value>
   </data>
@@ -3624,5 +3696,233 @@
   </data>
 	<data name="Login_ForgotPassword" xml:space="preserve">
     <value>Forgot Password?</value>
+  </data>
+  <data name="PartnerNav_Partner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="PartnerNav_Recommendations" xml:space="preserve">
+    <value>Meine Empfehlungen</value>
+  </data>
+  <data name="PartnerNav_AffiliateLinks" xml:space="preserve">
+    <value>Affiliate-Links</value>
+  </data>
+  <data name="PartnerNav_Commissions" xml:space="preserve">
+    <value>Provisionen</value>
+  </data>
+  <data name="PartnerNav_SubPartners" xml:space="preserve">
+    <value>Sub-Partner</value>
+  </data>
+  <data name="PartnerDashboard_Welcome" xml:space="preserve">
+    <value>Willkommen, {0}</value>
+  </data>
+  <data name="PartnerDashboard_Subtitle" xml:space="preserve">
+    <value>Ihre Partnerübersicht auf einen Blick</value>
+  </data>
+  <data name="PartnerDashboard_NoPartner" xml:space="preserve">
+    <value>Kein Partner-Konto gefunden. Bitte wenden Sie sich an den Administrator.</value>
+  </data>
+  <data name="PartnerDashboard_Recommendations" xml:space="preserve">
+    <value>Empfehlungen</value>
+  </data>
+  <data name="PartnerDashboard_CustomersReferred" xml:space="preserve">
+    <value>Geworbene Kunden</value>
+  </data>
+  <data name="PartnerDashboard_CommissionPaid" xml:space="preserve">
+    <value>Erhaltene Provision</value>
+  </data>
+  <data name="PartnerDashboard_TotalReceived" xml:space="preserve">
+    <value>Gesamt erhalten</value>
+  </data>
+  <data name="PartnerDashboard_OpenCommission" xml:space="preserve">
+    <value>Offene Provision</value>
+  </data>
+  <data name="PartnerDashboard_PendingInProgress" xml:space="preserve">
+    <value>Ausstehend / In Bearbeitung</value>
+  </data>
+  <data name="PartnerDashboard_SubPartners" xml:space="preserve">
+    <value>Sub-Partner</value>
+  </data>
+  <data name="PartnerDashboard_OwnPartners" xml:space="preserve">
+    <value>Eigene Partner</value>
+  </data>
+  <data name="PartnerDashboard_ReferralCode_Title" xml:space="preserve">
+    <value>Ihr Empfehlungscode</value>
+  </data>
+  <data name="PartnerDashboard_ReferralCode_Subtitle" xml:space="preserve">
+    <value>Teilen Sie diesen Code mit potenziellen Kunden</value>
+  </data>
+  <data name="PartnerDashboard_ReferralCode_Copy" xml:space="preserve">
+    <value>Kopieren</value>
+  </data>
+  <data name="PartnerDashboard_ReferralCode_Copied" xml:space="preserve">
+    <value>Code kopiert!</value>
+  </data>
+  <data name="PartnerDashboard_ReferralCode_Hint" xml:space="preserve">
+    <value>Kunden geben diesen Code bei der Registrierung an, um Ihrer Partnerschaft zugeordnet zu werden.</value>
+  </data>
+  <data name="PartnerDashboard_Commission_Title" xml:space="preserve">
+    <value>Ihre Provision</value>
+  </data>
+  <data name="PartnerDashboard_Commission_Subtitle" xml:space="preserve">
+    <value>Aktuelle Provisionskonditionen</value>
+  </data>
+  <data name="PartnerDashboard_Commission_Type" xml:space="preserve">
+    <value>Provisionsart</value>
+  </data>
+  <data name="PartnerDashboard_Commission_TypeValue" xml:space="preserve">
+    <value>Monatlich (Abonnement)</value>
+  </data>
+  <data name="PartnerDashboard_Commission_Rate" xml:space="preserve">
+    <value>Provisionssatz</value>
+  </data>
+  <data name="PartnerDashboard_Commission_RateValue" xml:space="preserve">
+    <value>Auf Anfrage</value>
+  </data>
+  <data name="PartnerRec_Title" xml:space="preserve">
+    <value>Meine Empfehlungen</value>
+  </data>
+  <data name="PartnerRec_Subtitle" xml:space="preserve">
+    <value>Alle Kunden, die Sie empfohlen haben</value>
+  </data>
+  <data name="PartnerRec_SectionTitle" xml:space="preserve">
+    <value>Geworbene Kunden</value>
+  </data>
+  <data name="PartnerRec_SectionCount" xml:space="preserve">
+    <value>{0} Empfehlungen insgesamt</value>
+  </data>
+  <data name="PartnerRec_Empty" xml:space="preserve">
+    <value>Noch keine Empfehlungen vorhanden.</value>
+  </data>
+  <data name="PartnerRec_CustomerNo" xml:space="preserve">
+    <value>Kundennr.</value>
+  </data>
+  <data name="PartnerRec_StatusActive" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="PartnerRec_StatusCancelled" xml:space="preserve">
+    <value>Gekündigt</value>
+  </data>
+  <data name="PartnerRec_StatusExpired" xml:space="preserve">
+    <value>Abgelaufen</value>
+  </data>
+  <data name="PartnerRec_BillingYearly" xml:space="preserve">
+    <value>Jährlich</value>
+  </data>
+  <data name="PartnerRec_BillingMonthly" xml:space="preserve">
+    <value>Monatlich</value>
+  </data>
+  <data name="PartnerComm_Title" xml:space="preserve">
+    <value>Meine Provisionen</value>
+  </data>
+  <data name="PartnerComm_Subtitle" xml:space="preserve">
+    <value>Übersicht aller Ihrer Provisionsabrechnungen</value>
+  </data>
+  <data name="PartnerComm_PaidOut" xml:space="preserve">
+    <value>Ausgezahlt</value>
+  </data>
+  <data name="PartnerComm_Withdrawals" xml:space="preserve">
+    <value>{0} Auszahlungen</value>
+  </data>
+  <data name="PartnerComm_Pending" xml:space="preserve">
+    <value>Ausstehend</value>
+  </data>
+  <data name="PartnerComm_InProgress" xml:space="preserve">
+    <value>{0} in Bearbeitung</value>
+  </data>
+  <data name="PartnerComm_HistoryTitle" xml:space="preserve">
+    <value>Provisionshistorie</value>
+  </data>
+  <data name="PartnerComm_HistorySubtitle" xml:space="preserve">
+    <value>Alle Provisionsabrechnungen</value>
+  </data>
+  <data name="PartnerComm_Empty" xml:space="preserve">
+    <value>Noch keine Provisionseinträge vorhanden.</value>
+  </data>
+  <data name="PartnerComm_Approved" xml:space="preserve">
+    <value>Genehmigt</value>
+  </data>
+  <data name="PartnerComm_StatusApproved" xml:space="preserve">
+    <value>Genehmigt</value>
+  </data>
+  <data name="PartnerComm_StatusPending" xml:space="preserve">
+    <value>Ausstehend</value>
+  </data>
+  <data name="PartnerSub_Title" xml:space="preserve">
+    <value>Meine Sub-Partner</value>
+  </data>
+  <data name="PartnerSub_Subtitle" xml:space="preserve">
+    <value>Verwalten Sie Ihre eigenen Partner und deren Provisionen</value>
+  </data>
+  <data name="PartnerSub_NewButton" xml:space="preserve">
+    <value>+ Neuer Sub-Partner</value>
+  </data>
+  <data name="PartnerSub_Count" xml:space="preserve">
+    <value>{0} Partner erstellt</value>
+  </data>
+  <data name="PartnerSub_Empty" xml:space="preserve">
+    <value>Noch keine Sub-Partner vorhanden.</value>
+  </data>
+  <data name="PartnerSub_CopyCode" xml:space="preserve">
+    <value>Code kopieren</value>
+  </data>
+  <data name="PartnerSub_Inactive" xml:space="preserve">
+    <value>Inaktiv</value>
+  </data>
+  <data name="PartnerSub_DialogTitle" xml:space="preserve">
+    <value>Neuen Sub-Partner erstellen</value>
+  </data>
+  <data name="PartnerSub_DialogSubtitle" xml:space="preserve">
+    <value>Erstellen Sie einen neuen Partner mit eigenem Zugang</value>
+  </data>
+  <data name="PartnerSub_FieldName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="PartnerSub_FieldBusiness" xml:space="preserve">
+    <value>Unternehmen</value>
+  </data>
+  <data name="PartnerSub_FieldEmail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="PartnerSub_FieldPhone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="PartnerSub_FieldCommissionType" xml:space="preserve">
+    <value>Provisionsart</value>
+  </data>
+  <data name="PartnerSub_FieldCommissionRate" xml:space="preserve">
+    <value>Provision</value>
+  </data>
+  <data name="PartnerSub_FieldPassword" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="PartnerSub_ValidationRequired" xml:space="preserve">
+    <value>Name, E-Mail und Passwort sind erforderlich.</value>
+  </data>
+  <data name="PartnerSub_CreateButton" xml:space="preserve">
+    <value>Partner erstellen</value>
+  </data>
+  <data name="PartnerSub_CreateSuccess" xml:space="preserve">
+    <value>Sub-Partner erfolgreich erstellt.</value>
+  </data>
+  <data name="PartnerSub_CreateError" xml:space="preserve">
+    <value>Fehler beim Erstellen des Sub-Partners.</value>
+  </data>
+  <data name="PartnerAffiliate_Title" xml:space="preserve">
+    <value>Affiliate-Links</value>
+  </data>
+  <data name="PartnerAffiliate_Subtitle" xml:space="preserve">
+    <value>Ihre persönlichen Affiliate-Links zur Weiterleitung</value>
+  </data>
+  <data name="PartnerAffiliate_LinkTitle" xml:space="preserve">
+    <value>Ihr Empfehlungslink</value>
+  </data>
+  <data name="PartnerAffiliate_CopyLink" xml:space="preserve">
+    <value>Link kopieren</value>
+  </data>
+  <data name="PartnerAffiliate_Copied" xml:space="preserve">
+    <value>Link kopiert!</value>
+  </data>
+  <data name="PartnerAffiliate_Hint" xml:space="preserve">
+    <value>Teilen Sie diesen Link mit potenziellen Kunden. Bei Registrierung werden diese automatisch Ihrer Partnerschaft zugeordnet.</value>
   </data>
 </root>

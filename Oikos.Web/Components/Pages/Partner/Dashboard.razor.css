@@ -1,0 +1,80 @@
+.partner-dashboard {
+    padding: 2rem;
+}
+
+.partner-dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.partner-dashboard-header .fw-bold {
+    font-weight: 800;
+}
+
+.partner-stat-card {
+    background-color: #fff;
+    border: 1px solid #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+.partner-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+}
+
+.partner-stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.partner-stat-icon--primary {
+    background-color: rgba(37, 99, 235, 0.1);
+    color: #2563eb;
+}
+
+.partner-stat-icon--success {
+    background-color: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+}
+
+.partner-stat-icon--warning {
+    background-color: rgba(202, 138, 4, 0.1);
+    color: #ca8a04;
+}
+
+.partner-stat-icon--info {
+    background-color: rgba(2, 132, 199, 0.1);
+    color: #0284c7;
+}
+
+.partner-code-box {
+    background-color: #f8faff;
+    border: 1.5px dashed #c7d7f8;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+}
+
+.partner-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+@media (max-width: 600px) {
+    .partner-dashboard {
+        padding: 1rem;
+    }
+
+    .partner-dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}

@@ -1,0 +1,93 @@
+@page "/partner-portal/commissions"
+@rendermode InteractiveServer
+@using Oikos.Common.Resources
+@using Oikos.Application.Services.Partner.Models
+
+<div class="partner-dashboard pb-10">
+
+    <div class="partner-dashboard-header mb-6">
+        <div>
+            <MudText Typo="Typo.h4" Class="fw-bold">@Loc["PartnerComm_Title"]</MudText>
+            <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["PartnerComm_Subtitle"]</MudText>
+        </div>
+    </div>
+
+    @if (_isLoading)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mb-4" />
+    }
+    else
+    {
+        @* Summary cards *@
+        <MudGrid Spacing="4" Class="mb-6">
+            <MudItem xs="12" md="6">
+                <MudPaper Elevation="0" Outlined="true" Class="rounded-xl pa-5">
+                    <MudStack Spacing="1">
+                        <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerComm_PaidOut"]</MudText>
+                        <MudText Typo="Typo.h4" Style="font-weight:700; color: var(--mud-palette-success);">
+                            @_commissionPaid.ToString("N2") €
+                        </MudText>
+                        <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                            @string.Format(Loc["PartnerComm_Withdrawals"], _paidCount)
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudPaper Elevation="0" Outlined="true" Class="rounded-xl pa-5">
+                    <MudStack Spacing="1">
+                        <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerComm_Pending"]</MudText>
+                        <MudText Typo="Typo.h4" Style="font-weight:700;">
+                            @_openCommission.ToString("N2") €
+                        </MudText>
+                        <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                            @string.Format(Loc["PartnerComm_InProgress"], _openCount)
+                        </MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
+
+        @* History *@
+        <MudPaper Elevation="0" Outlined="true" Class="rounded-xl pa-4">
+            <MudStack Spacing="0" Class="mb-3">
+                <MudText Typo="Typo.h6" Style="font-weight:600;">@Loc["PartnerComm_HistoryTitle"]</MudText>
+                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerComm_HistorySubtitle"]</MudText>
+            </MudStack>
+
+            @if (_statements.Count == 0)
+            {
+                <MudText Typo="Typo.body2" Class="mud-text-secondary pa-2">@Loc["PartnerComm_Empty"]</MudText>
+            }
+            else
+            {
+                @foreach (var stmt in _statements)
+                {
+                    <div class="partner-comm-row">
+                        <MudStack Spacing="0">
+                            <MudText Typo="Typo.body2" Style="font-weight:600;">@stmt.Amount.ToString("N2") €</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                                @stmt.PeriodStart.ToString("dd.MM.yyyy") – @stmt.PeriodEnd.ToString("dd.MM.yyyy")
+                            </MudText>
+                        </MudStack>
+                        <MudStack AlignItems="AlignItems.End" Spacing="0">
+                            <MudChip T="string"
+                                     Size="Size.Small"
+                                     Color="@GetStatementColor(stmt.Status)"
+                                     Variant="Variant.Filled"
+                                     Style="margin:0; height:22px;">
+                                @GetStatementLabel(stmt.Status)
+                            </MudChip>
+                            @if (stmt.Status == "Approved")
+                            {
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                                    @Loc["PartnerComm_Approved"]: @stmt.PeriodEnd.ToString("dd.MM.yyyy")
+                                </MudText>
+                            }
+                        </MudStack>
+                    </div>
+                }
+            }
+        </MudPaper>
+    }
+</div>

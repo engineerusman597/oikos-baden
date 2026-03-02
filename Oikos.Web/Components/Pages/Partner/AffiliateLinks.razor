@@ -1,0 +1,43 @@
+@page "/partner-portal/affiliate-links"
+@rendermode InteractiveServer
+@using Oikos.Common.Resources
+
+<div class="partner-dashboard pb-10">
+
+    <div class="partner-dashboard-header mb-6">
+        <div>
+            <MudText Typo="Typo.h4" Class="fw-bold">@Loc["PartnerAffiliate_Title"]</MudText>
+            <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["PartnerAffiliate_Subtitle"]</MudText>
+        </div>
+    </div>
+
+    @if (_isLoading)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mb-4" />
+    }
+    else if (!string.IsNullOrWhiteSpace(_referralCode))
+    {
+        <MudPaper Elevation="0" Outlined="true" Class="rounded-xl pa-5">
+            <MudStack Spacing="3">
+                <MudText Typo="Typo.h6" Style="font-weight:600;">@Loc["PartnerAffiliate_LinkTitle"]</MudText>
+
+                <div class="partner-code-box">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                        <MudText Typo="Typo.body2" Style="font-family:monospace; word-break:break-all;">@_affiliateUrl</MudText>
+                        <MudIconButton Icon="@Icons.Material.Filled.ContentCopy"
+                                       Size="Size.Small"
+                                       Variant="Variant.Outlined"
+                                       OnClick="@CopyLinkAsync"
+                                       Title="@Loc["PartnerAffiliate_CopyLink"]" />
+                    </MudStack>
+                </div>
+
+                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerAffiliate_Hint"]</MudText>
+            </MudStack>
+        </MudPaper>
+    }
+    else
+    {
+        <MudAlert Severity="Severity.Warning">@Loc["PartnerDashboard_NoPartner"]</MudAlert>
+    }
+</div>

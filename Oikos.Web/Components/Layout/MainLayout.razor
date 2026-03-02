@@ -36,6 +36,15 @@
     </Authorized>
 </AuthorizeView>
 
+<AuthorizeView Roles="Partner">
+    <Authorized>
+        <PageTitle>Partner-Portal</PageTitle>
+        <HeadContent>
+            <link rel="icon" type="image/png" href="favicon.png" />
+        </HeadContent>
+    </Authorized>
+</AuthorizeView>
+
 <AuthorizeView>
     <NotAuthorized>
         <PageTitle>Oikos Portal</PageTitle>
@@ -99,6 +108,12 @@
                     <AuthorizeView Roles="Admin" Context="adminNavContext">
                         <Authorized>
                             <AdminNavMenu />
+                        </Authorized>
+                    </AuthorizeView>
+
+                    <AuthorizeView Roles="Partner" Context="partnerNavContext">
+                        <Authorized>
+                            <PartnerNavMenu />
                         </Authorized>
                     </AuthorizeView>
 

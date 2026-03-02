@@ -1,0 +1,80 @@
+@page "/partner-portal/recommendations"
+@rendermode InteractiveServer
+@using Oikos.Common.Resources
+@using Oikos.Application.Services.Partner.Models
+
+<div class="partner-dashboard pb-10">
+
+    <div class="partner-dashboard-header mb-6">
+        <div>
+            <MudText Typo="Typo.h4" Class="fw-bold">@Loc["PartnerRec_Title"]</MudText>
+            <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["PartnerRec_Subtitle"]</MudText>
+        </div>
+    </div>
+
+    @if (_isLoading)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mb-4" />
+    }
+    else
+    {
+        <MudPaper Elevation="0" Outlined="true" Class="rounded-xl pa-4">
+            <MudStack Spacing="0" Class="mb-3">
+                <MudText Typo="Typo.h6" Style="font-weight:600;">@Loc["PartnerRec_SectionTitle"]</MudText>
+                <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                    @string.Format(Loc["PartnerRec_SectionCount"], _recommendations.Count)
+                </MudText>
+            </MudStack>
+
+            @if (_recommendations.Count == 0)
+            {
+                <MudText Typo="Typo.body2" Class="mud-text-secondary pa-2">@Loc["PartnerRec_Empty"]</MudText>
+            }
+            else
+            {
+                @foreach (var rec in _recommendations)
+                {
+                    <div class="partner-rec-row">
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="3" Style="flex:1; min-width:0;">
+                            <div class="partner-rec-avatar">
+                                <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Small" />
+                            </div>
+                            <MudStack Spacing="0" Style="min-width:0;">
+                                <MudText Typo="Typo.body2" Style="font-weight:600;">@rec.Name</MudText>
+                                <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                    @if (!string.IsNullOrWhiteSpace(rec.CustomerNumber))
+                                    {
+                                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerRec_CustomerNo"]: @rec.CustomerNumber</MudText>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(rec.PlanName))
+                                    {
+                                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Style="margin:0; height:18px; font-size:0.65rem;">@rec.PlanName</MudChip>
+                                    }
+                                </MudStack>
+                            </MudStack>
+                        </MudStack>
+                        <MudStack AlignItems="AlignItems.End" Spacing="0">
+                            <MudChip T="string"
+                                     Size="Size.Small"
+                                     Color="@GetStatusColor(rec.SubscriptionStatus)"
+                                     Variant="Variant.Filled"
+                                     Style="margin:0; height:22px;">
+                                @GetStatusLabel(rec.SubscriptionStatus)
+                            </MudChip>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                                @GetBillingLabel(rec.BillingInterval)
+                            </MudText>
+                            @if (rec.ExpirationDate.HasValue)
+                            {
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                                    <MudIcon Icon="@Icons.Material.Filled.CalendarToday" Size="Size.Small" Style="font-size:0.75rem; vertical-align:middle;" />
+                                    @rec.ExpirationDate.Value.ToString("dd.MM.yyyy")
+                                </MudText>
+                            }
+                        </MudStack>
+                    </div>
+                }
+            }
+        </MudPaper>
+    }
+</div>

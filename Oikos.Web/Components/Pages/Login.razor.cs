@@ -105,7 +105,15 @@ public partial class Login
             _authService.SetCurrentUser(result.Token!);
             
             var state = await _stateProvider.GetAuthenticationStateAsync();
-            if (state.User.IsInRole(RoleNames.User_Bonix.ToRoleName()))
+            if (state.User.IsInRole(RoleNames.Admin.ToRoleName()))
+            {
+                _navManager.NavigateTo("/admin/dashboard");
+            }
+            else if (state.User.IsInRole(RoleNames.Partner.ToRoleName()))
+            {
+                _navManager.NavigateTo("/partner-portal/dashboard");
+            }
+            else if (state.User.IsInRole(RoleNames.User_Bonix.ToRoleName()))
             {
                 _navManager.NavigateTo("/user-bonix/dashboard");
             }

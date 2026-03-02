@@ -1,0 +1,47 @@
+@using Oikos.Web.States
+@using Oikos.Web.Components.Layout.States
+@using MudBlazor
+@using Oikos.Common.Resources
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResource> Loc
+@rendermode InteractiveServer
+
+<MudDrawer @bind-Open="LayoutState.NavIsOpen" ClipMode="DrawerClipMode.Never" Elevation="0" Style="z-index:1350; background-color: #fafbfc; border-right: 1px solid #e0e0e0;" Width="280px" Class="navmenu__drawer">
+
+	<div class="d-flex flex-column" style="height: 100vh;">
+
+		@* --- HEADER: Logo --- *@
+		<div class="navmenu__logo pa-4 pb-3">
+			<MudLink Href="/partner-portal/dashboard" Match="NavLinkMatch.All" Class="navmenu__logo-link">
+				<MudText Typo="Typo.h6" Style="font-weight:700; color:#1e293b;">Partner-Portal</MudText>
+			</MudLink>
+		</div>
+
+		@* --- HEADER: Partner Info --- *@
+		@if (!string.IsNullOrEmpty(_partnerName))
+		{
+			<div class="px-4 pb-3 pt-0">
+				<MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerNav_Partner"]</MudText>
+				<div>
+					<MudText Typo="Typo.caption" Class="mud-text-secondary" Style="letter-spacing: 0.5px;">@_partnerName</MudText>
+				</div>
+			</div>
+		}
+
+		<div class="navmenu__scrollable flex-grow-1 px-3">
+
+			@* --- SECTION: NAVIGATION --- *@
+			<MudText Typo="Typo.caption" Class="mud-text-secondary px-3 py-2 d-block">@Loc["NavMenu_Overview"]</MudText>
+			<MudNavMenu Margin="Margin.None" Color="Color.Primary" Rounded="true" Class="navmenu__list mb-6">
+				<MudNavLink Href="/partner-portal/dashboard" Icon="@Icons.Material.Filled.Dashboard" Match="NavLinkMatch.All" IconColor="Color.Default">@Loc["NavMenu_Dashboard"]</MudNavLink>
+				<MudNavLink Href="/partner-portal/recommendations" Icon="@Icons.Material.Filled.People" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["PartnerNav_Recommendations"]</MudNavLink>
+				<MudNavLink Href="/partner-portal/affiliate-links" Icon="@Icons.Material.Filled.Link" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["PartnerNav_AffiliateLinks"]</MudNavLink>
+				<MudNavLink Href="/partner-portal/commissions" Icon="@Icons.Material.Filled.Euro" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["PartnerNav_Commissions"]</MudNavLink>
+				<MudNavLink Href="/partner-portal/sub-partners" Icon="@Icons.Material.Filled.FolderShared" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["PartnerNav_SubPartners"]</MudNavLink>
+			</MudNavMenu>
+
+		</div>
+	</div>
+</MudDrawer>
+
+@implements IDisposable

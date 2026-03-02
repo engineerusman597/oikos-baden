@@ -1,0 +1,147 @@
+@page "/partner-portal/dashboard"
+@rendermode InteractiveServer
+@using Oikos.Common.Resources
+@using Oikos.Application.Services.Partner.Models
+
+<div class="partner-dashboard pb-10">
+
+    @* Header *@
+    <div class="partner-dashboard-header mb-6">
+        <div>
+            <MudText Typo="Typo.h4" Class="fw-bold">@Loc["PartnerDashboard_Welcome", _dashboard?.PartnerName ?? ""]</MudText>
+            <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["PartnerDashboard_Subtitle"]</MudText>
+        </div>
+    </div>
+
+    @if (_isLoading)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mb-4" />
+    }
+    else if (_dashboard is null)
+    {
+        <MudAlert Severity="Severity.Warning">@Loc["PartnerDashboard_NoPartner"]</MudAlert>
+    }
+    else
+    {
+        @* Stat Cards *@
+        <MudGrid Spacing="4" Class="mb-6">
+
+            @* Recommendations *@
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="0" Outlined="true" Class="partner-stat-card rounded-xl pa-5">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_Recommendations"]</MudText>
+                            <MudText Typo="Typo.h4" Class="fw-bold">@_dashboard.RecommendationsCount</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerDashboard_CustomersReferred"]</MudText>
+                        </MudStack>
+                        <div class="partner-stat-icon partner-stat-icon--primary">
+                            <MudIcon Icon="@Icons.Material.Filled.People" />
+                        </div>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            @* Commission paid *@
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="0" Outlined="true" Class="partner-stat-card rounded-xl pa-5">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_CommissionPaid"]</MudText>
+                            <MudText Typo="Typo.h4" Class="fw-bold">@_dashboard.CommissionPaid.ToString("N2") €</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerDashboard_TotalReceived"]</MudText>
+                        </MudStack>
+                        <div class="partner-stat-icon partner-stat-icon--success">
+                            <MudIcon Icon="@Icons.Material.Filled.TrendingUp" />
+                        </div>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            @* Open commission *@
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="0" Outlined="true" Class="partner-stat-card rounded-xl pa-5">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_OpenCommission"]</MudText>
+                            <MudText Typo="Typo.h4" Class="fw-bold">@_dashboard.OpenCommission.ToString("N2") €</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerDashboard_PendingInProgress"]</MudText>
+                        </MudStack>
+                        <div class="partner-stat-icon partner-stat-icon--warning">
+                            <MudIcon Icon="@Icons.Material.Filled.AccessTime" />
+                        </div>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            @* Sub-partners *@
+            <MudItem xs="12" sm="6" md="3">
+                <MudPaper Elevation="0" Outlined="true" Class="partner-stat-card rounded-xl pa-5">
+                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                        <MudStack Spacing="1">
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_SubPartners"]</MudText>
+                            <MudText Typo="Typo.h4" Class="fw-bold">@_dashboard.SubPartnerCount</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerDashboard_OwnPartners"]</MudText>
+                        </MudStack>
+                        <div class="partner-stat-icon partner-stat-icon--info">
+                            <MudIcon Icon="@Icons.Material.Filled.FolderShared" />
+                        </div>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+        </MudGrid>
+
+        @* Bottom Two-Column: Referral code + Commission info *@
+        <MudGrid Spacing="4">
+
+            @* Referral Code Card *@
+            <MudItem xs="12" md="7">
+                <MudPaper Elevation="0" Outlined="true" Class="rounded-xl pa-5">
+                    <MudStack Spacing="3">
+                        <MudStack Spacing="0">
+                            <MudText Typo="Typo.h6" Style="font-weight:600;">@Loc["PartnerDashboard_ReferralCode_Title"]</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerDashboard_ReferralCode_Subtitle"]</MudText>
+                        </MudStack>
+
+                        <div class="partner-code-box">
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
+                                <MudText Typo="Typo.h5" Style="font-weight:700; letter-spacing:0.15em; font-family:monospace;">@_dashboard.ReferralCode</MudText>
+                                <MudIconButton Icon="@Icons.Material.Filled.ContentCopy"
+                                               Size="Size.Small"
+                                               Variant="Variant.Outlined"
+                                               OnClick="@CopyReferralCodeAsync"
+                                               Title="@Loc["PartnerDashboard_ReferralCode_Copy"]" />
+                            </MudStack>
+                        </div>
+
+                        <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_ReferralCode_Hint"]</MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+            @* Commission Info Card *@
+            <MudItem xs="12" md="5">
+                <MudPaper Elevation="0" Outlined="true" Class="rounded-xl pa-5">
+                    <MudStack Spacing="3">
+                        <MudStack Spacing="0">
+                            <MudText Typo="Typo.h6" Style="font-weight:600;">@Loc["PartnerDashboard_Commission_Title"]</MudText>
+                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerDashboard_Commission_Subtitle"]</MudText>
+                        </MudStack>
+
+                        <div class="partner-info-row">
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_Commission_Type"]</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight:600;">@Loc["PartnerDashboard_Commission_TypeValue"]</MudText>
+                        </div>
+                        <MudDivider />
+                        <div class="partner-info-row">
+                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_Commission_Rate"]</MudText>
+                            <MudText Typo="Typo.body2" Style="font-weight:600;">@Loc["PartnerDashboard_Commission_RateValue"]</MudText>
+                        </div>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+
+        </MudGrid>
+    }
+</div>

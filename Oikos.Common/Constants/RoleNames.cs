@@ -4,7 +4,8 @@ public enum RoleNames
 {
     Admin,
     User,
-    User_Bonix
+    User_Bonix,
+    Partner
 }
 
 public static class RoleNamesExtensions
@@ -19,23 +20,25 @@ public static class RoleNamesExtensions
             RoleNames.Admin => "Admin",
             RoleNames.User => "User",
             RoleNames.User_Bonix => "User_Bonix",
+            RoleNames.Partner => "Partner",
             _ => throw new ArgumentOutOfRangeException(nameof(role), $"Unknown role: {role}")
         };
     }
-    
+
     /// <summary>
     /// Converts a role name string to its corresponding RoleNames enum value
     /// </summary>
     public static RoleNames? FromRoleName(string? roleName)
     {
-        if (string.IsNullOrWhiteSpace(roleName)) 
+        if (string.IsNullOrWhiteSpace(roleName))
             return null;
-        
+
         return roleName switch
         {
             "Admin" => RoleNames.Admin,
             "User" => RoleNames.User,
             "User_Bonix" => RoleNames.User_Bonix,
+            "Partner" => RoleNames.Partner,
             _ => null
         };
     }
