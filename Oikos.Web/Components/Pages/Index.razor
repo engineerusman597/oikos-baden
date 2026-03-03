@@ -43,6 +43,10 @@
             {
                 NavigationManager.NavigateTo("/admin/dashboard");
             }
+            else if (user.IsInRole("Partner"))
+            {
+                NavigationManager.NavigateTo("/partner-portal/dashboard");
+            }
             else if (user.IsInRole("User"))
             {
                 NavigationManager.NavigateTo("/dashboard");

@@ -1,19 +1,66 @@
-.partner-rec-row {
+/* Page layout */
+.partner-recommendations {
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+}
+
+.rec-page-title {
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* Card */
+.rec-card {
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+.rec-card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.rec-card-title {
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 2px;
+}
+
+.rec-empty {
+    padding: 24px;
+}
+
+/* Row */
+.rec-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 0;
+    padding: 16px 24px;
     border-bottom: 1px solid #f1f5f9;
-    gap: 8px;
+    gap: 12px;
 }
 
-.partner-rec-row:last-child {
+.rec-row:last-child {
     border-bottom: none;
 }
 
-.partner-rec-avatar {
-    width: 36px;
-    height: 36px;
+.rec-row:hover {
+    background-color: #f8fafc;
+}
+
+/* Left side */
+.rec-row-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    flex: 1;
+}
+
+.rec-avatar {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: #f1f5f9;
     display: flex;
@@ -21,4 +68,84 @@
     justify-content: center;
     flex-shrink: 0;
     color: #64748b;
+}
+
+.rec-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.rec-name {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.rec-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.rec-customer-no {
+    font-size: 0.8125rem;
+    color: #64748b;
+}
+
+.rec-plan-chip {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: #475569;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 1px 8px;
+    font-weight: 500;
+}
+
+/* Right side */
+.rec-row-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    flex-shrink: 0;
+}
+
+.rec-status-chip {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 2px 10px;
+    color: #fff;
+}
+
+.rec-status-active {
+    background-color: #3b82f6;
+}
+
+.rec-status-cancelled {
+    background-color: #ef4444;
+}
+
+.rec-status-expired {
+    background-color: #94a3b8;
+}
+
+.rec-billing {
+    font-size: 0.8125rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.rec-date {
+    font-size: 0.8125rem;
+    color: #94a3b8;
 }

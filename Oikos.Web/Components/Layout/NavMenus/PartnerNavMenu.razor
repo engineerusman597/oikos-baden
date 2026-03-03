@@ -1,5 +1,6 @@
 @using Oikos.Web.States
 @using Oikos.Web.Components.Layout.States
+@using Oikos.Web.Components.Layout.Culture
 @using MudBlazor
 @using Oikos.Common.Resources
 @using Microsoft.Extensions.Localization
@@ -10,11 +11,12 @@
 
 	<div class="d-flex flex-column" style="height: 100vh;">
 
-		@* --- HEADER: Logo --- *@
-		<div class="navmenu__logo pa-4 pb-3">
+		@* --- HEADER: Logo + Language toggle --- *@
+		<div class="navmenu__logo pa-4 pb-3 d-flex align-center justify-space-between">
 			<MudLink Href="/partner-portal/dashboard" Match="NavLinkMatch.All" Class="navmenu__logo-link">
 				<MudText Typo="Typo.h6" Style="font-weight:700; color:#1e293b;">Partner-Portal</MudText>
 			</MudLink>
+			<CultureIcon />
 		</div>
 
 		@* --- HEADER: Partner Info --- *@

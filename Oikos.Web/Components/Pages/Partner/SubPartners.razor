@@ -3,18 +3,18 @@
 @using Oikos.Common.Resources
 @using Oikos.Application.Services.Partner.Models
 
-<div class="partner-dashboard pb-10">
+<div class="partner-subpartners pb-10">
 
-    <div class="partner-dashboard-header mb-6">
+    <div class="sp-page-header mb-6">
         <div>
-            <MudText Typo="Typo.h4" Class="fw-bold">@Loc["PartnerSub_Title"]</MudText>
+            <MudText Typo="Typo.h4" Class="sp-page-title">@Loc["PartnerSub_Title"]</MudText>
             <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["PartnerSub_Subtitle"]</MudText>
         </div>
         <MudButton Variant="Variant.Filled"
                    Color="Color.Primary"
                    StartIcon="@Icons.Material.Filled.Add"
                    OnClick="@OpenCreateDialog"
-                   Class="rounded-lg px-6 py-2">
+                   Class="sp-add-btn">
             @Loc["PartnerSub_NewButton"]
         </MudButton>
     </div>
@@ -25,51 +25,58 @@
     }
     else
     {
-        <MudPaper Elevation="0" Outlined="true" Class="rounded-xl pa-4">
-            <MudStack Spacing="0" Class="mb-3">
-                <MudText Typo="Typo.h6" Style="font-weight:600;">Sub-Partner</MudText>
-                <MudText Typo="Typo.caption" Class="mud-text-secondary">
+        <MudPaper Elevation="0" Class="sp-card rounded-xl">
+            <div class="sp-card-header">
+                <MudText Typo="Typo.h6" Class="sp-card-title">Sub-Partner</MudText>
+                <MudText Typo="Typo.body2" Class="mud-text-secondary">
                     @string.Format(Loc["PartnerSub_Count"], _subPartners.Count)
                 </MudText>
-            </MudStack>
+            </div>
 
             @if (_subPartners.Count == 0)
             {
-                <MudText Typo="Typo.body2" Class="mud-text-secondary pa-2">@Loc["PartnerSub_Empty"]</MudText>
+                <div class="sp-empty">
+                    <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerSub_Empty"]</MudText>
+                </div>
             }
             else
             {
                 @foreach (var sp in _subPartners)
                 {
-                    <div class="partner-sub-row">
-                        <MudStack Spacing="0" Style="flex:1; min-width:0;">
-                            <MudText Typo="Typo.body2" Style="font-weight:600;">@sp.Name</MudText>
-                            @if (!string.IsNullOrWhiteSpace(sp.Notes))
-                            {
-                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@sp.Notes</MudText>
-                            }
-                            @if (!string.IsNullOrWhiteSpace(sp.ContactEmail))
-                            {
-                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@sp.ContactEmail</MudText>
-                            }
-                        </MudStack>
-                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
-                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Style="margin:0; height:22px; font-family:monospace; font-size:0.7rem;">
-                                @sp.Code
-                            </MudChip>
-                            <MudIconButton Icon="@Icons.Material.Filled.ContentCopy"
-                                           Size="Size.Small"
-                                           OnClick="@(() => CopyCodeAsync(sp.Code))"
-                                           Title="@Loc["PartnerSub_CopyCode"]" />
-                            <MudChip T="string"
-                                     Size="Size.Small"
-                                     Color="@(sp.IsActive ? Color.Success : Color.Default)"
-                                     Variant="Variant.Filled"
-                                     Style="margin:0; height:22px;">
+                    <div class="sp-row">
+                        <div class="sp-row-left">
+                            <div class="sp-avatar">
+                                <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Small" />
+                            </div>
+                            <div class="sp-info">
+                                <span class="sp-name">@sp.Name</span>
+                                <div class="sp-meta">
+                                    @if (!string.IsNullOrWhiteSpace(sp.ContactEmail))
+                                    {
+                                        <span class="sp-email">@sp.ContactEmail</span>
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(sp.Notes))
+                                    {
+                                        <span class="sp-notes">@sp.Notes</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sp-row-right">
+                            <div class="sp-code-row">
+                                <span class="sp-code">@sp.Code</span>
+                                <MudIconButton Icon="@Icons.Material.Filled.ContentCopy"
+                                               Size="Size.Small"
+                                               Class="sp-copy-btn"
+                                               OnClick="@(() => CopyCodeAsync(sp.Code))"
+                                               Title="@Loc["PartnerSub_CopyCode"]" />
+                            </div>
+                            <span class="sp-status @(sp.IsActive ? "sp-status-active" : "sp-status-inactive")">
                                 @(sp.IsActive ? Loc["PartnerRec_StatusActive"] : Loc["PartnerSub_Inactive"])
-                            </MudChip>
-                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@sp.CreatedAt.ToString("dd.MM.yyyy")</MudText>
-                        </MudStack>
+                            </span>
+                            <span class="sp-date">@sp.CreatedAt.ToString("dd.MM.yyyy")</span>
+                        </div>
                     </div>
                 }
             }
@@ -84,7 +91,7 @@
         <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerSub_DialogSubtitle"]</MudText>
     </TitleContent>
     <DialogContent>
-        <MudStack Spacing="3">
+        <MudStack Spacing="3" Class="pt-1">
             <MudTextField @bind-Value="_form.Name"
                           Label="@(Loc["PartnerSub_FieldName"] + " *")"
                           Placeholder="Max Mustermann"
@@ -108,14 +115,14 @@
                           Placeholder="+49 123 456789"
                           Variant="Variant.Outlined" />
 
-            <MudGrid Spacing="3">
+            <MudGrid Spacing="2">
                 <MudItem xs="6">
                     <MudSelect @bind-Value="_form.CommissionType"
                                Label="@Loc["PartnerSub_FieldCommissionType"]"
                                Variant="Variant.Outlined">
-                        <MudSelectItem Value="@("Monthly")">Monthly</MudSelectItem>
-                        <MudSelectItem Value="@("Yearly")">Yearly</MudSelectItem>
-                        <MudSelectItem Value="@("OneTime")">One-time</MudSelectItem>
+                        <MudSelectItem Value="@("Monthly")">@Loc["PartnerDialog_CommissionMonthly"]</MudSelectItem>
+                        <MudSelectItem Value="@("Yearly")">@Loc["PartnerDialog_CommissionYearly"]</MudSelectItem>
+                        <MudSelectItem Value="@("OneTime")">@Loc["PartnerDialog_CommissionOneTime"]</MudSelectItem>
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="6">
@@ -138,12 +145,12 @@
 
             @if (!string.IsNullOrWhiteSpace(_createError))
             {
-                <MudAlert Severity="Severity.Error">@_createError</MudAlert>
+                <MudAlert Severity="Severity.Error" Dense="true">@_createError</MudAlert>
             }
         </MudStack>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="@CloseDialog" Variant="Variant.Text">@Loc["Cancel"]</MudButton>
+        <MudButton OnClick="@CloseDialog" Variant="Variant.Text" Color="Color.Secondary">@Loc["Cancel"]</MudButton>
         <MudButton OnClick="@CreateSubPartnerAsync"
                    Variant="Variant.Filled"
                    Color="Color.Primary"
