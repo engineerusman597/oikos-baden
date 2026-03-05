@@ -12,7 +12,7 @@
                 @* Row 1: Name + Typ *@
                 <MudGrid Spacing="2">
                     <MudItem xs="6">
-                        <MudTextField @bind-Value="_model.Name" Label="@(Loc["PartnerDialog_NameLabel"] + " *")"
+                        <MudTextField @bind-Value="_model.Name" Label="@Loc["PartnerDialog_NameLabel"]"
                                       For="@(() => _model.Name)" Variant="Variant.Outlined" Required="true" Disabled="_isSaving" />
                     </MudItem>
                     <MudItem xs="6">
@@ -34,7 +34,7 @@
                 @* Row 3: E-Mail + Telefon *@
                 <MudGrid Spacing="2">
                     <MudItem xs="6">
-                        <MudTextField @bind-Value="_model.ContactEmail" Label="@(Loc["PartnerDialog_ContactLabel"] + " *")"
+                        <MudTextField @bind-Value="_model.ContactEmail" Label="@Loc["PartnerDialog_ContactLabel"]"
                                       For="@(() => _model.ContactEmail)" Variant="Variant.Outlined"
                                       InputType="InputType.Email" Required="true" Disabled="_isSaving" />
                     </MudItem>
@@ -95,14 +95,14 @@
                 {
                     <MudGrid Spacing="2">
                         <MudItem xs="6">
-                            <MudTextField @bind-Value="_model.Password" Label="@(Loc["PartnerDialog_PasswordLabel"] + " *")"
+                            <MudTextField @bind-Value="_model.Password" Label="@Loc["PartnerDialog_PasswordLabel"]"
                                           For="@(() => _model.Password)" Variant="Variant.Outlined"
-                                          InputType="InputType.Password" Disabled="_isSaving" />
+                                          InputType="InputType.Password" Required="true" Disabled="_isSaving" />
                         </MudItem>
                         <MudItem xs="6">
-                            <MudTextField @bind-Value="_model.ConfirmPassword" Label="@(Loc["PartnerDialog_ConfirmPasswordLabel"] + " *")"
+                            <MudTextField @bind-Value="_model.ConfirmPassword" Label="@Loc["PartnerDialog_ConfirmPasswordLabel"]"
                                           For="@(() => _model.ConfirmPassword)" Variant="Variant.Outlined"
-                                          InputType="InputType.Password" Disabled="_isSaving" />
+                                          InputType="InputType.Password" Required="true" Disabled="_isSaving" />
                         </MudItem>
                     </MudGrid>
                 }
