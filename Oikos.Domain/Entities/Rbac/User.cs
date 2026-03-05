@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PartnerEntity = Oikos.Domain.Entities.Partner.Partner;
+using TaxOfficeEntity = Oikos.Domain.Entities.TaxOffice.TaxOffice;
 
 namespace Oikos.Domain.Entities.Rbac;
 
@@ -67,6 +68,11 @@ public class User
     public int? PartnerId { get; set; }
 
     public PartnerEntity? Partner { get; set; }
+
+    [Comment("Linked tax office id")]
+    public int? TaxOfficeId { get; set; }
+
+    public TaxOfficeEntity? TaxOffice { get; set; }
 
     public ICollection<Subscription.UserSubscription>? Subscriptions { get; set; }
 

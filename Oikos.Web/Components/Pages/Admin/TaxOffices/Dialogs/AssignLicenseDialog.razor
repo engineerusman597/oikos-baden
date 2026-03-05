@@ -1,0 +1,207 @@
+@using System.ComponentModel.DataAnnotations
+@using Oikos.Application.Services.TaxOffice
+@using Oikos.Application.Services.Subscription
+@using Oikos.Application.Services.Subscription.Models
+@namespace Oikos.Web.Components.Pages.Admin.TaxOffices.Dialogs
+
+<MudDialog>
+    <DialogContent>
+        <EditForm Model="_model" OnValidSubmit="SaveAsync">
+            <DataAnnotationsValidator />
+            <MudStack Spacing="3">
+
+                @* Firmenname *@
+                <MudTextField @bind-Value="_model.CompanyName" Label="@Loc["TaxOffice_LicenseCompany"]"
+                              For="@(() => _model.CompanyName)" Variant="Variant.Outlined"
+                              Required="true" Disabled="_isSaving" />
+
+                @* E-Mail + Telefon *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="6">
+                        <MudTextField @bind-Value="_model.Email" Label="@Loc["TaxOffice_LicenseEmail"]"
+                                      For="@(() => _model.Email)" Variant="Variant.Outlined"
+                                      InputType="InputType.Email" Disabled="_isSaving" />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudTextField @bind-Value="_model.PhoneNumber" Label="@Loc["TaxOffice_LicensePhone"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                </MudGrid>
+
+                @* Ansprechpartner *@
+                <MudTextField @bind-Value="_model.ContactPerson" Label="@Loc["TaxOffice_LicenseContactPerson"]"
+                              Variant="Variant.Outlined" Disabled="_isSaving" />
+
+                @* Straße + Nr. *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="8">
+                        <MudTextField @bind-Value="_model.Street" Label="@Loc["TaxOffice_LicenseStreet"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudTextField @bind-Value="_model.StreetNumber" Label="@Loc["TaxOffice_LicenseStreetNumber"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                </MudGrid>
+
+                @* PLZ + Ort *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="4">
+                        <MudTextField @bind-Value="_model.PostalCode" Label="@Loc["TaxOffice_LicensePostalCode"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                    <MudItem xs="8">
+                        <MudTextField @bind-Value="_model.City" Label="@Loc["TaxOffice_LicenseCity"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                </MudGrid>
+
+                @* Lizenzoptionen *@
+                <MudText Typo="Typo.subtitle2" Style="font-weight:600; margin-top:4px;">
+                    @Loc["TaxOffice_LicenseOptions"]
+                </MudText>
+
+                @* Paket *@
+                <MudSelect @bind-Value="_model.PlanId" Label="@Loc["TaxOffice_LicensePlan"]"
+                           Variant="Variant.Outlined" Required="true" Disabled="_isSaving || _isLoadingPlans"
+                           For="@(() => _model.PlanId)">
+                    @foreach (var plan in _plans)
+                    {
+                        <MudSelectItem Value="plan.Id">@plan.Name</MudSelectItem>
+                    }
+                </MudSelect>
+
+                @* Zahlungsintervall + Abrechnungsstatus *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="6">
+                        <MudSelect @bind-Value="_model.BillingInterval" Label="@Loc["TaxOffice_LicenseInterval"]"
+                                   Variant="Variant.Outlined" Required="true" Disabled="_isSaving">
+                            <MudSelectItem Value="@("monthly")">@Loc["TaxOffice_LicenseIntervalMonthly"]</MudSelectItem>
+                            <MudSelectItem Value="@("yearly")">@Loc["TaxOffice_LicenseIntervalYearly"]</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudSelect @bind-Value="_model.PaymentMethod" Label="@Loc["TaxOffice_LicenseBillingStatus"]"
+                                   Variant="Variant.Outlined" Disabled="_isSaving">
+                            <MudSelectItem Value="@((string?)null)">@Loc["TaxOffice_LicenseBillingStatusNone"]</MudSelectItem>
+                            <MudSelectItem Value="@("SEPA")">SEPA</MudSelectItem>
+                            <MudSelectItem Value="@("Stripe")">Stripe</MudSelectItem>
+                            <MudSelectItem Value="@("Manuell")">@Loc["TaxOffice_LicenseBillingStatusManual"]</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+
+            </MudStack>
+            <MudDivider Class="my-4" />
+            <div class="d-flex justify-end gap-2">
+                <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="Cancel"
+                           ButtonType="ButtonType.Button" Disabled="_isSaving">
+                    @Loc["Cancel"]
+                </MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                           ButtonType="ButtonType.Submit" Disabled="_isSaving || _isLoadingPlans">
+                    @if (_isSaving)
+                    {
+                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                    }
+                    @Loc["TaxOffice_LicenseCreate"]
+                </MudButton>
+            </div>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [Parameter]
+    public int TaxOfficeId { get; set; }
+
+    [CascadingParameter]
+    public IMudDialogInstance? MudDialog { get; set; }
+
+    [Inject]
+    private ITaxOfficeService TaxOfficeService { get; set; } = null!;
+
+    [Inject]
+    private ISubscriptionPlanService SubscriptionPlanService { get; set; } = null!;
+
+    private AssignLicenseModel _model = new();
+    private List<SubscriptionPlanSummary> _plans = new();
+    private bool _isSaving;
+    private bool _isLoadingPlans = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        _plans = (await SubscriptionPlanService.GetPlansAsync()).ToList();
+        if (_plans.Count > 0)
+            _model.PlanId = _plans[0].Id;
+        _isLoadingPlans = false;
+    }
+
+    private async Task SaveAsync()
+    {
+        _isSaving = true;
+        try
+        {
+            await TaxOfficeService.AssignLicenseAsync(
+                TaxOfficeId,
+                _model.CompanyName,
+                _model.ContactPerson,
+                _model.Email,
+                _model.PhoneNumber,
+                _model.PlanId,
+                _model.BillingInterval,
+                _model.PaymentMethod);
+
+            _snackbarService.Add(Loc["TaxOffice_LicenseAssignSuccess"].Value, Severity.Success);
+            MudDialog?.Close(DialogResult.Ok(true));
+        }
+        catch (Exception ex)
+        {
+            _snackbarService.Add(ex.Message, Severity.Error);
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    private void Cancel() => MudDialog?.Cancel();
+
+    private class AssignLicenseModel
+    {
+        [Required]
+        [MaxLength(200)]
+        public string CompanyName { get; set; } = string.Empty;
+
+        [EmailAddress]
+        [MaxLength(200)]
+        public string? Email { get; set; }
+
+        [MaxLength(100)]
+        public string? PhoneNumber { get; set; }
+
+        [MaxLength(200)]
+        public string? ContactPerson { get; set; }
+
+        [MaxLength(200)]
+        public string? Street { get; set; }
+
+        [MaxLength(20)]
+        public string? StreetNumber { get; set; }
+
+        [MaxLength(20)]
+        public string? PostalCode { get; set; }
+
+        [MaxLength(100)]
+        public string? City { get; set; }
+
+        [Required]
+        public int PlanId { get; set; }
+
+        [Required]
+        public string BillingInterval { get; set; } = "monthly";
+
+        public string? PaymentMethod { get; set; }
+    }
+}

@@ -1,0 +1,201 @@
+@using System.ComponentModel.DataAnnotations
+@using Oikos.Application.Services.TaxOffice
+@using Oikos.Application.Services.TaxOffice.Models
+@namespace Oikos.Web.Components.Pages.Admin.TaxOffices.Dialogs
+
+<MudDialog>
+    <DialogContent>
+        <EditForm Model="_model" OnValidSubmit="SaveAsync">
+            <DataAnnotationsValidator />
+            <MudStack Spacing="2">
+
+                @* Name *@
+                <MudTextField @bind-Value="_model.Name" Label="@Loc["TaxOffice_FieldName"]"
+                              For="@(() => _model.Name)" Variant="Variant.Outlined"
+                              Required="true" Disabled="_isSaving" />
+
+                @* Firma *@
+                <MudTextField @bind-Value="_model.BusinessName" Label="@Loc["TaxOffice_FieldBusiness"]"
+                              Variant="Variant.Outlined" Disabled="_isSaving" />
+
+                @* E-Mail + Telefon *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="6">
+                        <MudTextField @bind-Value="_model.Email" Label="@Loc["TaxOffice_FieldEmail"]"
+                                      For="@(() => _model.Email)" Variant="Variant.Outlined"
+                                      InputType="InputType.Email" Required="true" Disabled="_isSaving" />
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudTextField @bind-Value="_model.PhoneNumber" Label="@Loc["TaxOffice_FieldPhone"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                </MudGrid>
+
+                @* Ansprechpartner *@
+                <MudTextField @bind-Value="_model.ContactPerson" Label="@Loc["TaxOffice_FieldContact"]"
+                              Variant="Variant.Outlined" Disabled="_isSaving" />
+
+                @* Adresse *@
+                <MudTextField @bind-Value="_model.Address" Label="@Loc["TaxOffice_FieldAddress"]"
+                              Variant="Variant.Outlined" Disabled="_isSaving" />
+
+                @* PLZ + Ort *@
+                <MudGrid Spacing="2">
+                    <MudItem xs="4">
+                        <MudTextField @bind-Value="_model.PostalCode" Label="@Loc["TaxOffice_FieldPostalCode"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                    <MudItem xs="8">
+                        <MudTextField @bind-Value="_model.City" Label="@Loc["TaxOffice_FieldCity"]"
+                                      Variant="Variant.Outlined" Disabled="_isSaving" />
+                    </MudItem>
+                </MudGrid>
+
+                @* Notizen *@
+                <MudTextField @bind-Value="_model.Notes" Label="@Loc["TaxOffice_FieldNotes"]"
+                              Variant="Variant.Outlined" Disabled="_isSaving" Lines="3" />
+
+                @* Status (only in edit mode) *@
+                @if (TaxOffice != null)
+                {
+                    <MudSelect @bind-Value="_model.IsActive" Label="@Loc["TaxOffice_FieldActive"]"
+                               Variant="Variant.Outlined" Disabled="_isSaving">
+                        <MudSelectItem Value="true">@Loc["TaxOffice_StatusActive"]</MudSelectItem>
+                        <MudSelectItem Value="false">@Loc["TaxOffice_StatusInactive"]</MudSelectItem>
+                    </MudSelect>
+                }
+
+            </MudStack>
+            <DialogActions>
+                <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="Cancel"
+                           ButtonType="ButtonType.Button" Disabled="_isSaving">
+                    @Loc["Cancel"]
+                </MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary"
+                           ButtonType="ButtonType.Submit" Disabled="_isSaving">
+                    @if (_isSaving)
+                    {
+                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                    }
+                    @Loc["Save"]
+                </MudButton>
+            </DialogActions>
+        </EditForm>
+    </DialogContent>
+</MudDialog>
+
+@code {
+    [Parameter]
+    public TaxOfficeDetail? TaxOffice { get; set; }
+
+    [CascadingParameter]
+    public IMudDialogInstance? MudDialog { get; set; }
+
+    [Inject]
+    private ITaxOfficeService TaxOfficeService { get; set; } = null!;
+
+    private TaxOfficeEditModel _model = new();
+    private bool _isSaving;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        if (TaxOffice != null)
+        {
+            _model = new TaxOfficeEditModel
+            {
+                Name = TaxOffice.Name,
+                BusinessName = TaxOffice.BusinessName,
+                Email = TaxOffice.Email,
+                PhoneNumber = TaxOffice.PhoneNumber,
+                ContactPerson = TaxOffice.ContactPerson,
+                Address = TaxOffice.Address,
+                PostalCode = TaxOffice.PostalCode,
+                City = TaxOffice.City,
+                Notes = TaxOffice.Notes,
+                IsActive = TaxOffice.IsActive
+            };
+        }
+    }
+
+    private async Task SaveAsync()
+    {
+        _isSaving = true;
+        try
+        {
+            var request = new TaxOfficeRequest
+            {
+                Name = _model.Name,
+                BusinessName = _model.BusinessName,
+                Email = _model.Email,
+                PhoneNumber = _model.PhoneNumber,
+                ContactPerson = _model.ContactPerson,
+                Address = _model.Address,
+                PostalCode = _model.PostalCode,
+                City = _model.City,
+                Notes = _model.Notes,
+                IsActive = _model.IsActive
+            };
+
+            TaxOfficeDetail result;
+            if (TaxOffice == null)
+            {
+                result = await TaxOfficeService.CreateAsync(request);
+                _snackbarService.Add(Loc["TaxOffice_CreateSuccess"].Value, Severity.Success);
+            }
+            else
+            {
+                result = await TaxOfficeService.UpdateAsync(TaxOffice.Id, request);
+                _snackbarService.Add(Loc["TaxOffice_UpdateSuccess"].Value, Severity.Success);
+            }
+
+            MudDialog?.Close(DialogResult.Ok(result));
+        }
+        catch (Exception ex)
+        {
+            _snackbarService.Add(ex.Message, Severity.Error);
+        }
+        finally
+        {
+            _isSaving = false;
+        }
+    }
+
+    private void Cancel() => MudDialog?.Cancel();
+
+    private class TaxOfficeEditModel
+    {
+        [Required]
+        [MaxLength(200)]
+        public string Name { get; set; } = string.Empty;
+
+        [MaxLength(200)]
+        public string? BusinessName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [MaxLength(200)]
+        public string? Email { get; set; }
+
+        [MaxLength(100)]
+        public string? PhoneNumber { get; set; }
+
+        [MaxLength(200)]
+        public string? ContactPerson { get; set; }
+
+        [MaxLength(500)]
+        public string? Address { get; set; }
+
+        [MaxLength(20)]
+        public string? PostalCode { get; set; }
+
+        [MaxLength(200)]
+        public string? City { get; set; }
+
+        [MaxLength(500)]
+        public string? Notes { get; set; }
+
+        public bool IsActive { get; set; } = true;
+    }
+}

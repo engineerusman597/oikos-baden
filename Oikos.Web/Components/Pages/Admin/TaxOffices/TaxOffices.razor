@@ -1,0 +1,108 @@
+@page "/admin/tax-offices"
+@using Oikos.Web.Components.Layout.PageLayout
+@using Oikos.Application.Services.TaxOffice.Models
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        <StandardPageHeader Title="@Loc["TaxOffice_Title"]">
+            <ChildContent>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add"
+                           OnClick="CreateClickAsync" Disabled="_isLoading">
+                    @Loc["TaxOffice_NewButton"]
+                </MudButton>
+            </ChildContent>
+        </StandardPageHeader>
+    </HeaderContent>
+    <ChildContent>
+        <MudStack Spacing="3">
+            <MudText Typo="Typo.subtitle1" Class="mud-text-secondary">@Loc["TaxOffice_Subtitle"]</MudText>
+
+            @if (_isLoading)
+            {
+                <MudPaper Elevation="0" Class="d-flex justify-center pa-6">
+                    <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                </MudPaper>
+            }
+            else if (_taxOffices.Count == 0)
+            {
+                <MudPaper Elevation="1" Class="pa-8 rounded-xl d-flex flex-column align-center gap-3">
+                    <MudIcon Icon="@Icons.Material.Filled.AccountBalance" Size="Size.Large" Color="Color.Default" />
+                    <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["TaxOffice_Empty"]</MudText>
+                </MudPaper>
+            }
+            else
+            {
+                <MudGrid Spacing="3">
+                    @foreach (var office in _taxOffices)
+                    {
+                        <MudItem xs="12" sm="6" md="4">
+                            <MudPaper Elevation="1" Class="pa-4 rounded-xl taxoffice-card">
+                                <div class="d-flex align-start justify-space-between mb-3">
+                                    <div class="d-flex align-center gap-2">
+                                        <MudAvatar Color="Color.Primary" Size="Size.Medium">
+                                            <MudIcon Icon="@Icons.Material.Filled.AccountBalance" />
+                                        </MudAvatar>
+                                        <div>
+                                            <MudText Typo="Typo.subtitle1" Style="font-weight:600;">@office.Name</MudText>
+                                            @if (!string.IsNullOrWhiteSpace(office.BusinessName))
+                                            {
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@office.BusinessName</MudText>
+                                            }
+                                        </div>
+                                    </div>
+                                    <MudChip T="string" Size="Size.Small"
+                                             Color="@(office.IsActive ? Color.Success : Color.Default)"
+                                             Variant="Variant.Filled">
+                                        @(office.IsActive ? Loc["TaxOffice_StatusActive"] : Loc["TaxOffice_StatusInactive"])
+                                    </MudChip>
+                                </div>
+
+                                @if (!string.IsNullOrWhiteSpace(office.Email))
+                                {
+                                    <div class="d-flex align-center gap-1 mb-1">
+                                        <MudIcon Icon="@Icons.Material.Filled.Email" Size="Size.Small" Color="Color.Primary" />
+                                        <MudText Typo="Typo.body2" Color="Color.Primary">@office.Email</MudText>
+                                    </div>
+                                }
+
+                                @if (!string.IsNullOrWhiteSpace(office.PhoneNumber))
+                                {
+                                    <div class="d-flex align-center gap-1 mb-1">
+                                        <MudIcon Icon="@Icons.Material.Filled.Phone" Size="Size.Small" Color="Color.Default" />
+                                        <MudText Typo="Typo.body2">@office.PhoneNumber</MudText>
+                                    </div>
+                                }
+
+                                <div class="d-flex align-center gap-1 mt-2 mb-3">
+                                    <MudIcon Icon="@Icons.Material.Filled.Tag" Size="Size.Small" Color="Color.Default" />
+                                    <MudText Typo="Typo.body2" Style="font-family:monospace; font-weight:600;">@office.Code</MudText>
+                                </div>
+
+                                <MudDivider Class="mb-3" />
+
+                                <div class="d-flex gap-2 justify-end">
+                                    <MudButton Variant="Variant.Text" Size="Size.Small" Color="Color.Default"
+                                               StartIcon="@Icons.Material.Filled.Visibility"
+                                               Href="@($"/admin/tax-offices/{office.Id}")">
+                                        @Loc["TaxOffice_Details"]
+                                    </MudButton>
+                                    <MudButton Variant="Variant.Outlined" Size="Size.Small" Color="Color.Primary"
+                                               StartIcon="@Icons.Material.Filled.Edit"
+                                               OnClick="@(() => EditClickAsync(office))">
+                                        @Loc["TaxOffice_Edit"]
+                                    </MudButton>
+                                    <MudButton Variant="Variant.Outlined" Size="Size.Small" Color="Color.Error"
+                                               StartIcon="@Icons.Material.Filled.Delete"
+                                               OnClick="@(() => DeleteClickAsync(office))">
+                                        @Loc["TaxOffice_Delete"]
+                                    </MudButton>
+                                </div>
+                            </MudPaper>
+                        </MudItem>
+                    }
+                </MudGrid>
+            }
+        </MudStack>
+    </ChildContent>
+</PageLayout>

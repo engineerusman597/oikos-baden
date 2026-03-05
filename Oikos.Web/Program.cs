@@ -101,6 +101,7 @@ builder.Services.AddScoped<ISubscriptionReportService, SubscriptionReportService
 builder.Services.AddScoped<IPartnerService, PartnerService>();
 builder.Services.AddScoped<IPartnerContentService, PartnerContentService>();
 builder.Services.AddScoped<Oikos.Application.Services.Partner.IPartnerPortalService, Oikos.Application.Services.Partner.PartnerPortalService>();
+builder.Services.AddScoped<Oikos.Application.Services.TaxOffice.ITaxOfficeService, Oikos.Application.Services.TaxOffice.TaxOfficeService>();
 builder.Services.Configure<StripeOptions>(builder.Configuration.GetSection("Stripe"));
 builder.Services.Configure<StripeOptions>("StripeTest", builder.Configuration.GetSection("Stripe_Test"));
 builder.Services.Configure<StripeOptions>("StripeBonix", builder.Configuration.GetSection("Stripe_Bonix"));

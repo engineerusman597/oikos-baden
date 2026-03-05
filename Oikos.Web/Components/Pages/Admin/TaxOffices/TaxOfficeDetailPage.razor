@@ -1,0 +1,217 @@
+@page "/admin/tax-offices/{Id:int}"
+@using Oikos.Web.Components.Layout.PageLayout
+@rendermode RenderMode.InteractiveServer
+
+<PageLayout>
+    <HeaderContent>
+        @if (_isLoading)
+        {
+            <div class="d-flex align-center gap-2">
+                <MudProgressCircular Color="Color.Primary" Size="Size.Small" Indeterminate="true" />
+            </div>
+        }
+        else if (_taxOffice is not null)
+        {
+            <div class="d-flex align-center gap-3">
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Color="Color.Default"
+                               Href="/admin/tax-offices" />
+                <div>
+                    <div class="d-flex align-center gap-2">
+                        <MudText Typo="Typo.h5" Style="font-weight:600;">@_taxOffice.Name</MudText>
+                        <MudChip T="string" Size="Size.Small"
+                                 Color="@(_taxOffice.IsActive ? Color.Success : Color.Default)"
+                                 Variant="Variant.Filled">
+                            @(_taxOffice.IsActive ? Loc["TaxOffice_StatusActive"] : Loc["TaxOffice_StatusInactive"])
+                        </MudChip>
+                    </div>
+                    @if (!string.IsNullOrWhiteSpace(_taxOffice.BusinessName))
+                    {
+                        <MudText Typo="Typo.caption" Class="mud-text-secondary">@_taxOffice.BusinessName</MudText>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="d-flex align-center gap-2">
+                <MudIconButton Icon="@Icons.Material.Filled.ArrowBack" Color="Color.Default"
+                               Href="/admin/tax-offices" />
+                <MudText Typo="Typo.h5">@Loc["TaxOffice_DetailNotFound"]</MudText>
+            </div>
+        }
+    </HeaderContent>
+    <ChildContent>
+        @if (_isLoading)
+        {
+            <MudPaper Elevation="0" Class="d-flex justify-center pa-6">
+                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+            </MudPaper>
+        }
+        else if (_taxOffice is null)
+        {
+            <MudPaper Elevation="1" Class="pa-8 rounded-xl d-flex flex-column align-center gap-3">
+                <MudIcon Icon="@Icons.Material.Filled.SearchOff" Size="Size.Large" Color="Color.Default" />
+                <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["TaxOffice_DetailNotFound"]</MudText>
+                <MudButton Href="/admin/tax-offices" Variant="Variant.Outlined" Color="Color.Primary">
+                    @Loc["TaxOffice_BackToList"]
+                </MudButton>
+            </MudPaper>
+        }
+        else
+        {
+            <MudGrid Spacing="3">
+                @* Left: Kontaktdaten *@
+                <MudItem xs="12" md="7">
+                    <MudPaper Elevation="1" Class="pa-5 rounded-xl">
+                        <MudText Typo="Typo.h6" Class="mb-4" Style="font-weight:600;">
+                            @Loc["TaxOffice_DetailKontaktdaten"]
+                        </MudText>
+
+                        @if (!string.IsNullOrWhiteSpace(_taxOffice.ContactPerson))
+                        {
+                            <div class="d-flex align-center gap-2 mb-3">
+                                <MudIcon Icon="@Icons.Material.Filled.Person" Size="Size.Small" Color="Color.Default" />
+                                <div>
+                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TaxOffice_DetailAnsprechpartner"]</MudText>
+                                    <MudText Typo="Typo.body2" Style="font-weight:500;">@_taxOffice.ContactPerson</MudText>
+                                </div>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(_taxOffice.Email))
+                        {
+                            <div class="d-flex align-center gap-2 mb-3">
+                                <MudIcon Icon="@Icons.Material.Filled.Email" Size="Size.Small" Color="Color.Primary" />
+                                <div>
+                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TaxOffice_FieldEmail"]</MudText>
+                                    <MudText Typo="Typo.body2" Color="Color.Primary">@_taxOffice.Email</MudText>
+                                </div>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(_taxOffice.PhoneNumber))
+                        {
+                            <div class="d-flex align-center gap-2 mb-3">
+                                <MudIcon Icon="@Icons.Material.Filled.Phone" Size="Size.Small" Color="Color.Default" />
+                                <div>
+                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TaxOffice_FieldPhone"]</MudText>
+                                    <MudText Typo="Typo.body2">@_taxOffice.PhoneNumber</MudText>
+                                </div>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(_taxOffice.Address) || !string.IsNullOrWhiteSpace(_taxOffice.City))
+                        {
+                            <div class="d-flex align-center gap-2 mb-3">
+                                <MudIcon Icon="@Icons.Material.Filled.LocationOn" Size="Size.Small" Color="Color.Default" />
+                                <div>
+                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TaxOffice_FieldAddress"]</MudText>
+                                    @if (!string.IsNullOrWhiteSpace(_taxOffice.Address))
+                                    {
+                                        <MudText Typo="Typo.body2">@_taxOffice.Address</MudText>
+                                    }
+                                    @{
+                                        var cityLine = string.Join(" ", new[] { _taxOffice.PostalCode, _taxOffice.City }.Where(s => !string.IsNullOrWhiteSpace(s)));
+                                    }
+                                    @if (!string.IsNullOrWhiteSpace(cityLine))
+                                    {
+                                        <MudText Typo="Typo.body2">@cityLine</MudText>
+                                    }
+                                </div>
+                            </div>
+                        }
+
+                        @if (!string.IsNullOrWhiteSpace(_taxOffice.Notes))
+                        {
+                            <div class="d-flex align-start gap-2 mb-3">
+                                <MudIcon Icon="@Icons.Material.Filled.Notes" Size="Size.Small" Color="Color.Default" Class="mt-1" />
+                                <div>
+                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TaxOffice_FieldNotes"]</MudText>
+                                    <MudText Typo="Typo.body2">@_taxOffice.Notes</MudText>
+                                </div>
+                            </div>
+                        }
+
+                        <MudDivider Class="my-3" />
+
+                        <div class="d-flex align-center gap-2 mb-2">
+                            <MudIcon Icon="@Icons.Material.Filled.Tag" Size="Size.Small" Color="Color.Default" />
+                            <div>
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TaxOffice_DetailEmpfehlungscode"]</MudText>
+                                <MudText Typo="Typo.body1" Style="font-family:monospace; font-weight:700; letter-spacing:1px;">
+                                    @_taxOffice.Code
+                                </MudText>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-center gap-2">
+                            <MudIcon Icon="@Icons.Material.Filled.CalendarToday" Size="Size.Small" Color="Color.Default" />
+                            <div>
+                                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["TaxOffice_DetailErstelltAm"]</MudText>
+                                <MudText Typo="Typo.body2">@_taxOffice.CreatedAt.ToString("dd.MM.yyyy")</MudText>
+                            </div>
+                        </div>
+                    </MudPaper>
+                </MudItem>
+
+                @* Right: Lizenzen *@
+                <MudItem xs="12" md="5">
+                    <MudPaper Elevation="1" Class="pa-5 rounded-xl">
+                        <div class="d-flex align-center justify-space-between mb-3">
+                            <MudText Typo="Typo.h6" Style="font-weight:600;">
+                                @Loc["TaxOffice_DetailLizenzen"] (@_licenses.Count)
+                            </MudText>
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small"
+                                       StartIcon="@Icons.Material.Filled.Add" OnClick="OpenAssignLicenseAsync">
+                                @Loc["TaxOffice_DetailLizenzVergeben"]
+                            </MudButton>
+                        </div>
+
+                        <MudDivider Class="mb-4" />
+
+                        @if (_licenses.Count == 0)
+                        {
+                            <div class="d-flex flex-column align-center gap-2 py-4">
+                                <MudIcon Icon="@Icons.Material.Filled.AssignmentLate" Size="Size.Large" Color="Color.Default" />
+                                <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["TaxOffice_DetailLizenzenEmpty"]</MudText>
+                            </div>
+                        }
+                        else
+                        {
+                            <MudStack Spacing="2">
+                                @foreach (var license in _licenses)
+                                {
+                                    <MudPaper Elevation="0" Class="pa-3 rounded-lg mud-background-gray">
+                                        <div class="d-flex align-center justify-space-between mb-1">
+                                            <MudText Typo="Typo.body2" Style="font-weight:600;">@license.Name</MudText>
+                                            <MudChip T="string" Size="Size.Small"
+                                                     Color="@(license.IsActive ? Color.Success : Color.Default)"
+                                                     Variant="Variant.Filled">
+                                                @(license.IsActive ? Loc["TaxOffice_StatusActive"] : Loc["TaxOffice_StatusInactive"])
+                                            </MudChip>
+                                        </div>
+                                        @if (!string.IsNullOrWhiteSpace(license.Email))
+                                        {
+                                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@license.Email</MudText>
+                                        }
+                                        <div class="d-flex align-center gap-2 mt-1">
+                                            <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined" Color="Color.Primary">
+                                                @license.PlanName
+                                            </MudChip>
+                                            @if (license.ExpirationDate.HasValue)
+                                            {
+                                                <MudText Typo="Typo.caption" Class="mud-text-secondary">
+                                                    @Loc["TaxOffice_LicenseExpiresOn"]: @license.ExpirationDate.Value.ToString("dd.MM.yyyy")
+                                                </MudText>
+                                            }
+                                        </div>
+                                    </MudPaper>
+                                }
+                            </MudStack>
+                        }
+                    </MudPaper>
+                </MudItem>
+            </MudGrid>
+        }
+    </ChildContent>
+</PageLayout>
