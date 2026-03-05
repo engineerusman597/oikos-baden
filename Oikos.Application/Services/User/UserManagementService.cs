@@ -72,11 +72,11 @@ public class UserManagementService : IUserManagementService
             query = query.Where(u => searchedUserIdList.Contains(u.Id));
         }
 
-        // Exclude users with specific role (e.g., Admin)
-        if (criteria.ExcludeRoleId.HasValue)
+        // Exclude users with specific roles (e.g., Admin, Partner)
+        if (criteria.ExcludeRoleIds is { Count: > 0 })
         {
             var excludedUserIds = await context.UserRoles
-                .Where(ur => ur.RoleId == criteria.ExcludeRoleId.Value)
+                .Where(ur => criteria.ExcludeRoleIds.Contains(ur.RoleId))
                 .Select(ur => ur.UserId)
                 .ToListAsync();
             query = query.Where(u => !excludedUserIds.Contains(u.Id));
@@ -292,6 +292,7 @@ public class UserManagementService : IUserManagementService
             PrivacyAcceptedAt = user.PrivacyAcceptedAt,
             SepaMandatePath = user.SepaMandatePath,
             SepaMandateGeneratedAt = user.SepaMandateGeneratedAt,
+            PartnerId = user.PartnerId,
             PartnerName = user.Partner?.Name,
             PartnerCode = user.Partner?.Code,
             Avatar = user.Avatar,

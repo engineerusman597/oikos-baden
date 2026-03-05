@@ -28,9 +28,16 @@ public class PartnerPortalService : IPartnerPortalService
         var partner = await GetPartnerForUserAsync(context, userId);
         if (partner is null) return null;
 
+        var partnerRoleNameDash = RoleNames.Partner.ToRoleName();
+        var partnerUserIdsDash = await context.UserRoles
+            .AsNoTracking()
+            .Where(ur => context.Roles.Any(r => r.Id == ur.RoleId && r.Name == partnerRoleNameDash))
+            .Select(ur => ur.UserId)
+            .ToListAsync();
+
         var recommendationsCount = await context.Users
             .AsNoTracking()
-            .CountAsync(u => u.PartnerId == partner.Id);
+            .CountAsync(u => u.PartnerId == partner.Id && !partnerUserIdsDash.Contains(u.Id));
 
         var subPartnerCount = await context.Partners
             .AsNoTracking()
@@ -54,9 +61,16 @@ public class PartnerPortalService : IPartnerPortalService
         var partner = await GetPartnerForUserAsync(context, userId);
         if (partner is null) return new List<PartnerRecommendationDto>();
 
+        var partnerRoleName = RoleNames.Partner.ToRoleName();
+        var partnerUserIds = await context.UserRoles
+            .AsNoTracking()
+            .Where(ur => context.Roles.Any(r => r.Id == ur.RoleId && r.Name == partnerRoleName))
+            .Select(ur => ur.UserId)
+            .ToListAsync();
+
         var users = await context.Users
             .AsNoTracking()
-            .Where(u => u.PartnerId == partner.Id)
+            .Where(u => u.PartnerId == partner.Id && !partnerUserIds.Contains(u.Id))
             .ToListAsync();
 
         var userIds = users.Select(u => u.Id).ToList();

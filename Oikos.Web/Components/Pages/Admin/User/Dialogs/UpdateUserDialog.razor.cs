@@ -47,7 +47,7 @@ public partial class UpdateUserDialog
                 PhoneNumber = userDetail.PhoneNumber,
                 Company = userDetail.Company,
                 CustomerNumber = userDetail.CustomerNumber,
-                PartnerId = null, // Will be set from userDetail if available
+                PartnerId = userDetail.PartnerId,
                 RoleId = currentRole?.Id
             };
         }

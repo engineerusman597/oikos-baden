@@ -64,6 +64,23 @@ public class PartnerService : IPartnerService
 
         if (string.IsNullOrWhiteSpace(request.Name))
             throw new ArgumentException("Partner name is required.", nameof(request));
+
+        // Check email uniqueness across partners and users
+        if (!string.IsNullOrWhiteSpace(request.ContactEmail))
+        {
+            var normalizedEmail = request.ContactEmail.Trim().ToLowerInvariant();
+
+            var partnerEmailExists = await context.Partners
+                .AnyAsync(p => p.ContactEmail != null && p.ContactEmail.ToLower() == normalizedEmail, cancellationToken);
+            if (partnerEmailExists)
+                throw new InvalidOperationException($"A partner with email '{normalizedEmail}' already exists.");
+
+            var userEmailExists = await context.Users
+                .AnyAsync(u => (u.Email != null && u.Email.ToLower() == normalizedEmail) || u.Name.ToLower() == normalizedEmail, cancellationToken);
+            if (userEmailExists)
+                throw new InvalidOperationException($"A user account with email '{normalizedEmail}' already exists.");
+        }
+
         var code = string.IsNullOrWhiteSpace(request.Code)
             ? await GenerateUniqueCodeAsync(context, cancellationToken)
             : NormalizeCode(request.Code)!;
