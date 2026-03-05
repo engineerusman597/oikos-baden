@@ -5,6 +5,7 @@ using Oikos.Domain.Entities.Partner;
 using Oikos.Domain.Entities.Rbac;
 using Oikos.Domain.Entities.Setting;
 using Oikos.Domain.Entities.Subscription;
+using Oikos.Domain.Entities.TaxOffice;
 using Microsoft.EntityFrameworkCore;
 
 namespace Oikos.Application.Data;
@@ -37,6 +38,9 @@ public interface IAppDbContext : IDisposable, IAsyncDisposable
 
     // Partners
     DbSet<Partner> Partners { get; set; }
+
+    // Tax Offices
+    DbSet<TaxOffice> TaxOffices { get; set; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 

@@ -29,7 +29,7 @@ public partial class ClientUsers
     private bool _filtersOpen;
     private List<RoleDto> _roleList = new();
     private List<PartnerListItem> _partnerList = new();
-    private int? _adminRoleId;
+    private List<int> _excludeRoleIds = new();
     private bool _canChangeRole;
 
     protected override async Task OnInitializedAsync()
@@ -42,14 +42,13 @@ public partial class ClientUsers
             _canChangeRole = sysValue == "1";
         }
 
-        // Load roles to find Admin role ID
+        // Load roles to find Admin and Partner role IDs to exclude
         var rolesResult = await RoleManagementService.GetRolesAsync(new RoleSearchCriteria { PageSize = 1000 });
         _roleList = rolesResult.Items;
-        var adminRole = _roleList.FirstOrDefault(r => r.Name == RoleNames.Admin.ToRoleName());
-        if (adminRole != null)
-        {
-            _adminRoleId = adminRole.Id;
-        }
+        _excludeRoleIds = _roleList
+            .Where(r => r.Name == RoleNames.Admin.ToRoleName() || r.Name == RoleNames.Partner.ToRoleName())
+            .Select(r => r.Id)
+            .ToList();
 
         var partners = await PartnerService.GetPartnersAsync();
         _partnerList = partners.Select(p => new PartnerListItem { Id = p.Id, Name = p.Name }).OrderBy(p => p.Name).ToList();
@@ -66,7 +65,7 @@ public partial class ClientUsers
         {
             SearchText = _searchObject.SearchText,
             SearchRealName = _searchObject.SearchRealName,
-            ExcludeRoleId = _adminRoleId, // Exclude Admin role
+            ExcludeRoleIds = _excludeRoleIds, // Exclude Admin and Partner roles
             PartnerId = _searchObject.PartnerId,
             HasActiveSubscription = _searchObject.HasActiveSubscription,
             Page = _searchObject.Page,

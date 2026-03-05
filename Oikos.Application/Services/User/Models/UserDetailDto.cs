@@ -16,6 +16,7 @@ public class UserDetailDto
     public DateTime? PrivacyAcceptedAt { get; set; }
     public string? SepaMandatePath { get; set; }
     public DateTime? SepaMandateGeneratedAt { get; set; }
+    public int? PartnerId { get; set; }
     public string? PartnerName { get; set; }
     public string? PartnerCode { get; set; }
     public string? Avatar { get; set; }

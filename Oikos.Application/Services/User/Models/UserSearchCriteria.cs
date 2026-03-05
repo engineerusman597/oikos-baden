@@ -6,7 +6,7 @@ public class UserSearchCriteria
     public string? SearchRealName { get; set; }
     public int? RoleId { get; set; }
     public List<int>? RoleIds { get; set; }
-    public int? ExcludeRoleId { get; set; }
+    public List<int>? ExcludeRoleIds { get; set; }
     public int? PartnerId { get; set; }
     public bool? HasActiveSubscription { get; set; }
     public int Page { get; set; } = 1;

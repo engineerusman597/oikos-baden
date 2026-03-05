@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oikos.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using Oikos.Infrastructure.Data;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(OikosDbContext))]
-    partial class OikosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260305120532_AddTaxOffices")]
+    partial class AddTaxOffices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -649,15 +652,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("TEXT")
                         .HasComment("Relative path to the latest generated SEPA mandate for the user");
 
-                    b.Property<int?>("TaxOfficeId")
-                        .HasColumnType("INTEGER")
-                        .HasComment("Linked tax office id");
-
                     b.HasKey("Id");
 
                     b.HasIndex("PartnerId");
-
-                    b.HasIndex("TaxOfficeId");
 
                     b.ToTable("Users", t =>
                         {
@@ -1130,13 +1127,7 @@ namespace Infrastructure.Migrations
                         .WithMany("Users")
                         .HasForeignKey("PartnerId");
 
-                    b.HasOne("Oikos.Domain.Entities.TaxOffice.TaxOffice", "TaxOffice")
-                        .WithMany()
-                        .HasForeignKey("TaxOfficeId");
-
                     b.Navigation("Partner");
-
-                    b.Navigation("TaxOffice");
                 });
 
             modelBuilder.Entity("Oikos.Domain.Entities.Subscription.Subscription", b =>

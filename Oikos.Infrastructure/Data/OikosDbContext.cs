@@ -4,6 +4,7 @@ using Oikos.Domain.Entities.Partner;
 using Oikos.Domain.Entities.Rbac;
 using Oikos.Domain.Entities.Setting;
 using Oikos.Domain.Entities.Subscription;
+using Oikos.Domain.Entities.TaxOffice;
 using Microsoft.EntityFrameworkCore;
 using Oikos.Application.Data;
 
@@ -66,6 +67,12 @@ public class OikosDbContext : DbContext, IAppDbContext
     #region Partners
 
     public DbSet<Partner> Partners { get; set; }
+
+    #endregion
+
+    #region Tax Offices
+
+    public DbSet<TaxOffice> TaxOffices { get; set; }
 
     #endregion
 

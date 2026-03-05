@@ -4116,4 +4116,175 @@
   <data name="PartnerAffiliate_Hint" xml:space="preserve">
     <value>Teilen Sie diesen Link mit potenziellen Kunden. Bei Registrierung werden diese automatisch Ihrer Partnerschaft zugeordnet.</value>
   </data>
+  <data name="AdminNavMenu_TaxOffices" xml:space="preserve">
+    <value>Steuerberaterbüros</value>
+  </data>
+  <data name="TaxOffice_Title" xml:space="preserve">
+    <value>Steuerberaterbüros</value>
+  </data>
+  <data name="TaxOffice_Subtitle" xml:space="preserve">
+    <value>Verwalten Sie Steuerberaterbüros und ihre Empfehlungscodes</value>
+  </data>
+  <data name="TaxOffice_NewButton" xml:space="preserve">
+    <value>Neues Steuerberaterbüro</value>
+  </data>
+  <data name="TaxOffice_Empty" xml:space="preserve">
+    <value>Keine Steuerberaterbüros vorhanden</value>
+  </data>
+  <data name="TaxOffice_StatusActive" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="TaxOffice_StatusInactive" xml:space="preserve">
+    <value>Inaktiv</value>
+  </data>
+  <data name="TaxOffice_Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="TaxOffice_Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="TaxOffice_DeleteTitle" xml:space="preserve">
+    <value>Steuerberaterbüro löschen</value>
+  </data>
+  <data name="TaxOffice_DeleteSuccess" xml:space="preserve">
+    <value>Steuerberaterbüro wurde gelöscht</value>
+  </data>
+  <data name="TaxOffice_DialogTitleCreate" xml:space="preserve">
+    <value>Neues Steuerberaterbüro</value>
+  </data>
+  <data name="TaxOffice_DialogTitleEdit" xml:space="preserve">
+    <value>Steuerberaterbüro bearbeiten</value>
+  </data>
+  <data name="TaxOffice_FieldName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TaxOffice_FieldBusiness" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="TaxOffice_FieldEmail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="TaxOffice_FieldPhone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="TaxOffice_FieldContact" xml:space="preserve">
+    <value>Ansprechpartner</value>
+  </data>
+  <data name="TaxOffice_FieldAddress" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="TaxOffice_FieldPostalCode" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="TaxOffice_FieldCity" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="TaxOffice_FieldNotes" xml:space="preserve">
+    <value>Notizen</value>
+  </data>
+  <data name="TaxOffice_FieldActive" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="TaxOffice_CreateSuccess" xml:space="preserve">
+    <value>Steuerberaterbüro erstellt</value>
+  </data>
+  <data name="TaxOffice_UpdateSuccess" xml:space="preserve">
+    <value>Steuerberaterbüro aktualisiert</value>
+  </data>
+  <data name="TaxOffice_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="TaxOffice_DetailKontaktdaten" xml:space="preserve">
+    <value>Kontaktdaten</value>
+  </data>
+  <data name="TaxOffice_DetailAnsprechpartner" xml:space="preserve">
+    <value>Ansprechpartner</value>
+  </data>
+  <data name="TaxOffice_DetailLizenzen" xml:space="preserve">
+    <value>Lizenzen</value>
+  </data>
+  <data name="TaxOffice_DetailLizenzenEmpty" xml:space="preserve">
+    <value>Noch keine Lizenzen vorhanden</value>
+  </data>
+  <data name="TaxOffice_DetailLizenzVergeben" xml:space="preserve">
+    <value>Lizenz vergeben</value>
+  </data>
+  <data name="TaxOffice_DetailEmpfehlungscode" xml:space="preserve">
+    <value>Empfehlungscode</value>
+  </data>
+  <data name="TaxOffice_DetailErstelltAm" xml:space="preserve">
+    <value>Erstellt am</value>
+  </data>
+  <data name="TaxOffice_DetailNotFound" xml:space="preserve">
+    <value>Steuerberaterbüro nicht gefunden</value>
+  </data>
+  <data name="TaxOffice_BackToList" xml:space="preserve">
+    <value>Zurück zur Übersicht</value>
+  </data>
+  <data name="TaxOffice_LicenseName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="TaxOffice_LicenseCompany" xml:space="preserve">
+    <value>Firmenname</value>
+  </data>
+  <data name="TaxOffice_LicenseEmail" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="TaxOffice_LicensePhone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="TaxOffice_LicenseContactPerson" xml:space="preserve">
+    <value>Ansprechpartner</value>
+  </data>
+  <data name="TaxOffice_LicenseStreet" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="TaxOffice_LicenseStreetNumber" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="TaxOffice_LicensePostalCode" xml:space="preserve">
+    <value>PLZ</value>
+  </data>
+  <data name="TaxOffice_LicenseCity" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="TaxOffice_LicenseOptions" xml:space="preserve">
+    <value>Lizenzoptionen</value>
+  </data>
+  <data name="TaxOffice_LicensePlan" xml:space="preserve">
+    <value>Paket</value>
+  </data>
+  <data name="TaxOffice_LicenseInterval" xml:space="preserve">
+    <value>Zahlungsintervall</value>
+  </data>
+  <data name="TaxOffice_LicenseIntervalMonthly" xml:space="preserve">
+    <value>Monatlich</value>
+  </data>
+  <data name="TaxOffice_LicenseIntervalYearly" xml:space="preserve">
+    <value>Jährlich</value>
+  </data>
+  <data name="TaxOffice_LicenseBillingStatus" xml:space="preserve">
+    <value>Abrechnungsstatus</value>
+  </data>
+  <data name="TaxOffice_LicenseBillingStatusNone" xml:space="preserve">
+    <value>Nicht abgerechnet</value>
+  </data>
+  <data name="TaxOffice_LicenseBillingStatusManual" xml:space="preserve">
+    <value>Manuell</value>
+  </data>
+  <data name="TaxOffice_LicensePassword" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="TaxOffice_LicenseCreate" xml:space="preserve">
+    <value>Anlegen</value>
+  </data>
+  <data name="TaxOffice_LicenseAssignSuccess" xml:space="preserve">
+    <value>Lizenz wurde vergeben</value>
+  </data>
+  <data name="TaxOffice_LicenseAssignError" xml:space="preserve">
+    <value>Fehler beim Vergeben der Lizenz</value>
+  </data>
+  <data name="TaxOffice_LicenseExpiresOn" xml:space="preserve">
+    <value>Gültig bis</value>
+  </data>
 </root>
