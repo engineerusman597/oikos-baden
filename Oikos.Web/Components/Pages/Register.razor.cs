@@ -65,7 +65,9 @@ public partial class Register
         var uri = new Uri(_navManager.Uri);
         var query = QueryHelpers.ParseQuery(uri.Query);
 
-        if (query.TryGetValue("partner", out var partnerValues) || query.TryGetValue("partnerCode", out partnerValues))
+        if (query.TryGetValue("partner", out var partnerValues) || 
+            query.TryGetValue("partnerCode", out partnerValues) ||
+            query.TryGetValue("ref", out partnerValues))
         {
             var code = partnerValues.FirstOrDefault();
             if (!string.IsNullOrWhiteSpace(code))
