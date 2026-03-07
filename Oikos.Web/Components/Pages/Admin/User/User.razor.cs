@@ -101,7 +101,7 @@ public partial class User
     private async Task AddUserClick()
     {
         var parameters = new DialogParameters { };
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge };
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<CreateUserDialog>(Loc["UserPage_CreateNewTitle"], parameters, options);
 
         var result = await dialog.Result;
@@ -145,7 +145,7 @@ public partial class User
         {
             {"UserId", userId }
         };
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge };
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<UpdateUserDialog>(Loc["UserPage_EditTitle"], parameters, options);
         var result = await dialog.Result;
         if (!result.Canceled)
@@ -160,7 +160,7 @@ public partial class User
         {
             {"UserId", userId }
         };
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge };
+        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<ChangePasswordDialog>(Loc["UserPage_ModifyPasswordTitle"], parameters, options);
         await dialog.Result;
     }

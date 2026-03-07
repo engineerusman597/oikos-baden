@@ -17,6 +17,7 @@ public partial class CreateUserDialog
     [Inject] private IUserManagementService UserManagementService { get; set; } = null!;
     [Inject] private IPartnerService PartnerService { get; set; } = null!;
     [Inject] private IUserRoleService UserRoleService { get; set; } = null!;
+    [Inject] private IUserPermissionService UserPermissionService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
 
     private CreateUserModel _model = new();
@@ -24,18 +25,38 @@ public partial class CreateUserDialog
     private List<Application.Services.Role.Models.RoleDto> _roles = new();
     private bool _processing;
 
+    private int? _employeeRoleId;
+    private bool _isEmployeeRole => _model.RoleId.HasValue && _model.RoleId == _employeeRoleId;
+    private readonly HashSet<string> _selectedPermissions = new();
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         _partners = (await PartnerService.GetPartnersAsync()).ToList();
         _roles = await UserRoleService.GetAvailableRolesAsync();
-        
+
+        var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
+        _employeeRoleId = employeeRole?.Id;
+
         // Set default role to "User"
         var defaultRole = _roles.FirstOrDefault(r => r.Name == RoleNames.User.ToRoleName());
         if (defaultRole != null)
         {
             _model.RoleId = defaultRole.Id;
         }
+    }
+
+    private void OnRoleChanged(int? roleId)
+    {
+        _model.RoleId = roleId;
+        if (!_isEmployeeRole)
+            _selectedPermissions.Clear();
+    }
+
+    private void OnPermissionToggled(string permission, bool value)
+    {
+        if (value) _selectedPermissions.Add(permission);
+        else _selectedPermissions.Remove(permission);
     }
 
     private async Task Submit()
@@ -56,11 +77,20 @@ public partial class CreateUserDialog
             CustomerNumber = _model.CustomerNumber,
             PartnerId = _model.PartnerId,
             IsEnabled = _model.IsEnabled,
-            Name = _model.Email!, // Using email as username
+            Name = _model.Email!,
             RoleId = _model.RoleId
         };
 
         var success = await UserManagementService.CreateUserAsync(request);
+
+        if (success && _isEmployeeRole && _selectedPermissions.Count > 0)
+        {
+            var criteria = new UserSearchCriteria { SearchText = _model.Email, Page = 1, PageSize = 1 };
+            var users = await UserManagementService.GetUsersAsync(criteria);
+            var newUser = users.Items.FirstOrDefault();
+            if (newUser != null)
+                await UserPermissionService.SetUserPermissionsAsync(newUser.Id, _selectedPermissions.ToList());
+        }
 
         _processing = false;
 
@@ -92,17 +122,17 @@ public partial class CreateUserDialog
 
         [Required(ErrorMessageResourceName = "Validation_Required", ErrorMessageResourceType = typeof(SharedResource))]
         public string? RealName { get; set; }
-        
+
         public string? AcademicTitle { get; set; }
-        
+
         [Required(ErrorMessageResourceName = "Validation_Required", ErrorMessageResourceType = typeof(SharedResource))]
         public string? Gender { get; set; }
-        
+
         public string? PhoneNumber { get; set; }
-        
+
         [Required(ErrorMessageResourceName = "Validation_Required", ErrorMessageResourceType = typeof(SharedResource))]
         public string? Company { get; set; }
-        
+
         public string? CustomerNumber { get; set; }
         public int? PartnerId { get; set; }
         public bool IsEnabled { get; set; } = true;

@@ -123,6 +123,12 @@
                         </Authorized>
                     </AuthorizeView>
 
+                    <AuthorizeView Roles="Employee" Context="employeeNavContext">
+                        <Authorized>
+                            <EmployeeNavMenu />
+                        </Authorized>
+                    </AuthorizeView>
+
                     <MudMainContent Class="main-content">
                         <div class="pa-2 d-flex flex-column content-scroll-container">
                             @Body

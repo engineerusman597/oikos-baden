@@ -76,5 +76,5 @@ public class User
 
     public ICollection<Subscription.UserSubscription>? Subscriptions { get; set; }
 
-
+    public ICollection<UserPermission>? Permissions { get; set; }
 }

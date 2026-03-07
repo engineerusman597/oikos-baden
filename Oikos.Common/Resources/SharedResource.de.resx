@@ -4287,4 +4287,70 @@
   <data name="TaxOffice_LicenseExpiresOn" xml:space="preserve">
     <value>Gültig bis</value>
   </data>
+  <data name="UserPage_EmployeePermissions" xml:space="preserve">
+    <value>Berechtigungen</value>
+  </data>
+  <data name="Permission_dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Permission_invoices" xml:space="preserve">
+    <value>Rechnungen (Forderungscenter)</value>
+  </data>
+  <data name="Permission_new_case" xml:space="preserve">
+    <value>Neuer Fall</value>
+  </data>
+  <data name="Permission_credit_check" xml:space="preserve">
+    <value>Bonix – Bonitätsprüfung</value>
+  </data>
+  <data name="Permission_history" xml:space="preserve">
+    <value>Bonix – Verlauf</value>
+  </data>
+  <data name="UserPage_PermGroupUserPortal" xml:space="preserve">
+    <value>Benutzerportal</value>
+  </data>
+  <data name="UserPage_PermGroupSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Permission_admin_home" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Permission_admin_invoices" xml:space="preserve">
+    <value>Forderungen</value>
+  </data>
+  <data name="Permission_admin_users" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="Permission_admin_clients" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
+  <data name="Permission_admin_subscription_payments" xml:space="preserve">
+    <value>Abonnementzahlungen</value>
+  </data>
+  <data name="Permission_admin_credit_check" xml:space="preserve">
+    <value>Bonix – Bonitätsprüfung (Admin)</value>
+  </data>
+  <data name="Permission_admin_history" xml:space="preserve">
+    <value>Bonix – Verlauf (Admin)</value>
+  </data>
+  <data name="Permission_admin_subscriptions" xml:space="preserve">
+    <value>Abonnements</value>
+  </data>
+  <data name="Permission_admin_invoice_stages" xml:space="preserve">
+    <value>Rechnungsstufen</value>
+  </data>
+  <data name="Permission_admin_settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Permission_admin_partners" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="Permission_admin_insurance_partners" xml:space="preserve">
+    <value>Versicherungspartner</value>
+  </data>
+  <data name="Permission_admin_partner_banks" xml:space="preserve">
+    <value>Partnerbanken</value>
+  </data>
+  <data name="Permission_admin_tax_offices" xml:space="preserve">
+    <value>Steuerbüros</value>
+  </data>
 </root>

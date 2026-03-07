@@ -4,6 +4,7 @@ using Oikos.Application.Services.User;
 using Oikos.Application.Services.User.Models;
 using Oikos.Application.Services.Partner;
 using Oikos.Application.Common;
+using Oikos.Common.Constants;
 using Oikos.Common.Helpers;
 
 namespace Oikos.Web.Components.Pages.Admin.User.Dialogs;
@@ -12,10 +13,11 @@ public partial class UpdateUserDialog
 {
     [CascadingParameter] IMudDialogInstance MudDialog { get; set; } = null!;
     [Parameter] public int UserId { get; set; }
-    
+
     [Inject] private IUserManagementService UserManagementService { get; set; } = null!;
     [Inject] private IPartnerService PartnerService { get; set; } = null!;
     [Inject] private IUserRoleService UserRoleService { get; set; } = null!;
+    [Inject] private IUserPermissionService UserPermissionService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
 
     private UpdateUserModel _model = new();
@@ -24,20 +26,26 @@ public partial class UpdateUserDialog
     private bool _processing;
     private bool _loading = true;
 
+    private int? _employeeRoleId;
+    private bool _isEmployeeRole => _model.RoleId.HasValue && _model.RoleId == _employeeRoleId;
+    private readonly HashSet<string> _selectedPermissions = new();
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
 
         _partners = (await PartnerService.GetPartnersAsync()).ToList();
         _roles = await UserRoleService.GetAvailableRolesAsync();
-        
+
+        var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
+        _employeeRoleId = employeeRole?.Id;
+
         var userDetail = await UserManagementService.GetUserDetailAsync(UserId);
         if (userDetail != null)
         {
-            // Get user's current role
             var userRoles = await UserRoleService.GetUserRolesAsync(UserId);
             var currentRole = userRoles.FirstOrDefault();
-            
+
             _model = new UpdateUserModel
             {
                 Email = userDetail.Email,
@@ -50,6 +58,12 @@ public partial class UpdateUserDialog
                 PartnerId = userDetail.PartnerId,
                 RoleId = currentRole?.Id
             };
+
+            if (_isEmployeeRole)
+            {
+                var existing = await UserPermissionService.GetUserPermissionsAsync(UserId);
+                foreach (var p in existing) _selectedPermissions.Add(p);
+            }
         }
         else
         {
@@ -58,6 +72,23 @@ public partial class UpdateUserDialog
         }
 
         _loading = false;
+    }
+
+    private async Task OnRoleChanged(int? roleId)
+    {
+        _model.RoleId = roleId;
+        _selectedPermissions.Clear();
+        if (_isEmployeeRole)
+        {
+            var existing = await UserPermissionService.GetUserPermissionsAsync(UserId);
+            foreach (var p in existing) _selectedPermissions.Add(p);
+        }
+    }
+
+    private void OnPermissionToggled(string permission, bool value)
+    {
+        if (value) _selectedPermissions.Add(permission);
+        else _selectedPermissions.Remove(permission);
     }
 
     private async Task Submit()
@@ -80,6 +111,12 @@ public partial class UpdateUserDialog
         };
 
         var success = await UserManagementService.UpdateUserAsync(UserId, request);
+
+        if (success)
+        {
+            await UserPermissionService.SetUserPermissionsAsync(UserId,
+                _isEmployeeRole ? _selectedPermissions.ToList() : new List<string>());
+        }
 
         _processing = false;
 

@@ -31,6 +31,8 @@ public class OikosDbContext : DbContext, IAppDbContext
 
     public DbSet<UserRole> UserRoles { get; set; }
 
+    public DbSet<UserPermission> UserPermissions { get; set; }
+
     public DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
     public DbSet<LoginLog> LoginLogs { get; set; }
 
