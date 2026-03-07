@@ -137,6 +137,7 @@ builder.Services.AddScoped<Oikos.Application.Services.User.IAvatarStorageService
 builder.Services.AddScoped<Oikos.Application.Services.Role.IRoleManagementService, Oikos.Application.Services.Role.RoleManagementService>();
 builder.Services.AddScoped<Oikos.Application.Services.User.IUserRoleService, Oikos.Application.Services.User.UserRoleService>();
 builder.Services.AddScoped<Oikos.Application.Services.User.IUserSettingService, Oikos.Application.Services.User.UserSettingService>();
+builder.Services.AddScoped<Oikos.Application.Services.User.IUserPermissionService, Oikos.Application.Services.User.UserPermissionService>();
 
 
 

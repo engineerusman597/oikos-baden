@@ -11,4 +11,5 @@ public class UpdateUserRequest
     public string? Gender { get; set; }
     public int? PartnerId { get; set; }
     public int? RoleId { get; set; }
+    public int? AssignedEmployeeId { get; set; }
 }

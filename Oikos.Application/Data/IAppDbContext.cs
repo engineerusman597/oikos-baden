@@ -17,6 +17,7 @@ public interface IAppDbContext : IDisposable, IAsyncDisposable
     DbSet<User> Users { get; set; }
     DbSet<Role> Roles { get; set; }
     DbSet<UserRole> UserRoles { get; set; }
+    DbSet<UserPermission> UserPermissions { get; set; }
 
     DbSet<PasswordResetToken> PasswordResetTokens { get; set; }
     DbSet<LoginLog> LoginLogs { get; set; }

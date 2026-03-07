@@ -14,4 +14,5 @@ public class CreateUserRequest
     public int? PartnerId { get; set; }
     public bool IsEnabled { get; set; } = true;
     public int? RoleId { get; set; }
+    public int? AssignedEmployeeId { get; set; }
 }

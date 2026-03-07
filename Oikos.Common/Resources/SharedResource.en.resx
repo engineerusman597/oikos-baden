@@ -2593,6 +2593,15 @@
   <data name="UserPage_NoPartnerOption" xml:space="preserve">
     <value>No partner</value>
   </data>
+  <data name="UserPage_AssignedEmployee" xml:space="preserve">
+    <value>Assigned Employee</value>
+  </data>
+  <data name="UserPage_AssignedEmployeePlaceholder" xml:space="preserve">
+    <value>Select an employee (optional)</value>
+  </data>
+  <data name="UserPage_NoEmployeeOption" xml:space="preserve">
+    <value>No employee</value>
+  </data>
   <data name="UserPage_RoleLabel" xml:space="preserve">
     <value>Role</value>
   </data>
@@ -4254,5 +4263,71 @@
   </data>
   <data name="TaxOffice_LicenseExpiresOn" xml:space="preserve">
     <value>Valid until</value>
+  </data>
+  <data name="UserPage_EmployeePermissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="Permission_dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="Permission_invoices" xml:space="preserve">
+    <value>Invoices (Claims Center)</value>
+  </data>
+  <data name="Permission_new_case" xml:space="preserve">
+    <value>New Case</value>
+  </data>
+  <data name="Permission_credit_check" xml:space="preserve">
+    <value>Bonix – Credit Check</value>
+  </data>
+  <data name="Permission_history" xml:space="preserve">
+    <value>Bonix – History</value>
+  </data>
+  <data name="UserPage_PermGroupUserPortal" xml:space="preserve">
+    <value>User Portal</value>
+  </data>
+  <data name="UserPage_PermGroupSystem" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="Permission_admin_home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Permission_admin_invoices" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="Permission_admin_users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="Permission_admin_clients" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="Permission_admin_subscription_payments" xml:space="preserve">
+    <value>Subscription Payments</value>
+  </data>
+  <data name="Permission_admin_credit_check" xml:space="preserve">
+    <value>Bonix – Credit Check (Admin)</value>
+  </data>
+  <data name="Permission_admin_history" xml:space="preserve">
+    <value>Bonix – History (Admin)</value>
+  </data>
+  <data name="Permission_admin_subscriptions" xml:space="preserve">
+    <value>Subscriptions</value>
+  </data>
+  <data name="Permission_admin_invoice_stages" xml:space="preserve">
+    <value>Invoice Stages</value>
+  </data>
+  <data name="Permission_admin_settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Permission_admin_partners" xml:space="preserve">
+    <value>Partners</value>
+  </data>
+  <data name="Permission_admin_insurance_partners" xml:space="preserve">
+    <value>Insurance Partners</value>
+  </data>
+  <data name="Permission_admin_partner_banks" xml:space="preserve">
+    <value>Partner Banks</value>
+  </data>
+  <data name="Permission_admin_tax_offices" xml:space="preserve">
+    <value>Tax Offices</value>
   </data>
 </root>

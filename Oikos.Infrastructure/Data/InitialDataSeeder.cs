@@ -79,7 +79,7 @@ public static class InitialDataSeeder
 
     private static void EnsureRoles(OikosDbContext dbContext)
     {
-        var rolesToCheck = new[] { RoleNames.Admin.ToRoleName(), RoleNames.User.ToRoleName(), RoleNames.User_Bonix.ToRoleName(), RoleNames.Partner.ToRoleName() };
+        var rolesToCheck = new[] { RoleNames.Admin.ToRoleName(), RoleNames.User.ToRoleName(), RoleNames.User_Bonix.ToRoleName(), RoleNames.Partner.ToRoleName(), RoleNames.Employee.ToRoleName() };
 
         foreach (var roleName in rolesToCheck)
         {

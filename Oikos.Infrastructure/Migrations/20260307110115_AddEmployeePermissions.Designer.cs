@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Oikos.Infrastructure.Data;
 
@@ -10,9 +11,11 @@ using Oikos.Infrastructure.Data;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(OikosDbContext))]
-    partial class OikosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260307110115_AddEmployeePermissions")]
+    partial class AddEmployeePermissions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");
@@ -577,10 +580,6 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("AcceptedPrivacyPolicy")
                         .HasColumnType("INTEGER")
                         .HasComment("Privacy policy accepted");
-
-                    b.Property<int?>("AssignedEmployeeId")
-                        .HasColumnType("INTEGER")
-                        .HasComment("Assigned employee user id");
 
                     b.Property<string>("Avatar")
                         .HasColumnType("TEXT")

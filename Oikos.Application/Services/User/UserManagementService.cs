@@ -295,6 +295,7 @@ public class UserManagementService : IUserManagementService
             PartnerId = user.PartnerId,
             PartnerName = user.Partner?.Name,
             PartnerCode = user.Partner?.Code,
+            AssignedEmployeeId = user.AssignedEmployeeId,
             Avatar = user.Avatar,
             Roles = roles,
             Subscriptions = subscriptions,
@@ -347,7 +348,8 @@ public class UserManagementService : IUserManagementService
             PhoneNumber = request.PhoneNumber?.Trim(),
             Company = request.Company?.Trim(),
             CustomerNumber = customerNumber,
-            PartnerId = request.PartnerId
+            PartnerId = request.PartnerId,
+            AssignedEmployeeId = request.AssignedEmployeeId
         };
 
         context.Users.Add(user);
@@ -414,6 +416,7 @@ public class UserManagementService : IUserManagementService
         user.AcademicTitle = string.IsNullOrWhiteSpace(request.AcademicTitle) ? null : request.AcademicTitle.Trim();
         user.Gender = NameHelper.NormalizeGender(request.Gender);
         user.PartnerId = request.PartnerId;
+        user.AssignedEmployeeId = request.AssignedEmployeeId;
 
         await context.SaveChangesAsync();
 

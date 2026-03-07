@@ -5,7 +5,8 @@ public enum RoleNames
     Admin,
     User,
     User_Bonix,
-    Partner
+    Partner,
+    Employee
 }
 
 public static class RoleNamesExtensions
@@ -21,6 +22,7 @@ public static class RoleNamesExtensions
             RoleNames.User => "User",
             RoleNames.User_Bonix => "User_Bonix",
             RoleNames.Partner => "Partner",
+            RoleNames.Employee => "Employee",
             _ => throw new ArgumentOutOfRangeException(nameof(role), $"Unknown role: {role}")
         };
     }
@@ -39,6 +41,7 @@ public static class RoleNamesExtensions
             "User" => RoleNames.User,
             "User_Bonix" => RoleNames.User_Bonix,
             "Partner" => RoleNames.Partner,
+            "Employee" => RoleNames.Employee,
             _ => null
         };
     }

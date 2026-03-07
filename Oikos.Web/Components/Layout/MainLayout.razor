@@ -96,6 +96,14 @@
                             </Authorized>
                         </AuthorizeView>
 
+                        <AuthorizeView Roles="Employee" Context="employeeContext1">
+                            <Authorized>
+                                <div class="d-none d-md-flex align-center gap-2">
+                                    <CultureIcon />
+                                </div>
+                            </Authorized>
+                        </AuthorizeView>
+
                         <UserMenuAvatar />
                     </MudAppBar>
 
@@ -120,6 +128,12 @@
                     <AuthorizeView Roles="Partner" Context="partnerNavContext">
                         <Authorized>
                             <PartnerNavMenu />
+                        </Authorized>
+                    </AuthorizeView>
+
+                    <AuthorizeView Roles="Employee" Context="employeeNavContext">
+                        <Authorized>
+                            <EmployeeNavMenu />
                         </Authorized>
                     </AuthorizeView>
 
