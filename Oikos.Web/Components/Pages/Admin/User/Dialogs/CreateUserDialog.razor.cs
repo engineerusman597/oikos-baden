@@ -23,6 +23,7 @@ public partial class CreateUserDialog
     private CreateUserModel _model = new();
     private List<Application.Services.Partner.Models.PartnerDetail> _partners = new();
     private List<Application.Services.Role.Models.RoleDto> _roles = new();
+    private List<EmployeeItem> _employees = new();
     private bool _processing;
 
     private int? _employeeRoleId;
@@ -38,6 +39,16 @@ public partial class CreateUserDialog
         var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
         _employeeRoleId = employeeRole?.Id;
 
+        if (_employeeRoleId.HasValue)
+        {
+            var employeeCriteria = new UserSearchCriteria { RoleId = _employeeRoleId, PageSize = 1000, Page = 1 };
+            var employeeResult = await UserManagementService.GetUsersAsync(employeeCriteria);
+            _employees = employeeResult.Items
+                .Select(u => new EmployeeItem { Id = u.Id, Name = u.RealName ?? u.Name })
+                .OrderBy(e => e.Name)
+                .ToList();
+        }
+
         // Set default role to "User"
         var defaultRole = _roles.FirstOrDefault(r => r.Name == RoleNames.User.ToRoleName());
         if (defaultRole != null)
@@ -49,8 +60,14 @@ public partial class CreateUserDialog
     private void OnRoleChanged(int? roleId)
     {
         _model.RoleId = roleId;
-        if (!_isEmployeeRole)
+        if (_isEmployeeRole)
+        {
+            _model.AssignedEmployeeId = null;
+        }
+        else
+        {
             _selectedPermissions.Clear();
+        }
     }
 
     private void OnPermissionToggled(string permission, bool value)
@@ -78,7 +95,8 @@ public partial class CreateUserDialog
             PartnerId = _model.PartnerId,
             IsEnabled = _model.IsEnabled,
             Name = _model.Email!,
-            RoleId = _model.RoleId
+            RoleId = _model.RoleId,
+            AssignedEmployeeId = _isEmployeeRole ? null : _model.AssignedEmployeeId
         };
 
         var success = await UserManagementService.CreateUserAsync(request);
@@ -137,5 +155,12 @@ public partial class CreateUserDialog
         public int? PartnerId { get; set; }
         public bool IsEnabled { get; set; } = true;
         public int? RoleId { get; set; }
+        public int? AssignedEmployeeId { get; set; }
+    }
+
+    private class EmployeeItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }

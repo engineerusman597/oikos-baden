@@ -2995,6 +2995,15 @@
   <data name="UserPage_NoPartnerOption" xml:space="preserve">
     <value>Kein Partner</value>
   </data>
+  <data name="UserPage_AssignedEmployee" xml:space="preserve">
+    <value>Zugewiesener Mitarbeiter</value>
+  </data>
+  <data name="UserPage_AssignedEmployeePlaceholder" xml:space="preserve">
+    <value>Mitarbeiter auswählen (optional)</value>
+  </data>
+  <data name="UserPage_NoEmployeeOption" xml:space="preserve">
+    <value>Kein Mitarbeiter</value>
+  </data>
   <data name="UserPage_RoleLabel" xml:space="preserve">
     <value>Rolle</value>
   </data>

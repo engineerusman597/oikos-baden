@@ -74,6 +74,9 @@ public class User
 
     public TaxOfficeEntity? TaxOffice { get; set; }
 
+    [Comment("Assigned employee user id")]
+    public int? AssignedEmployeeId { get; set; }
+
     public ICollection<Subscription.UserSubscription>? Subscriptions { get; set; }
 
     public ICollection<UserPermission>? Permissions { get; set; }

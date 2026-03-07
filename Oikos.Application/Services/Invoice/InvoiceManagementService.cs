@@ -47,6 +47,13 @@ public class InvoiceManagementService : IInvoiceManagementService
             query = query.Where(x => x.Invoice.StageId == stageId);
         }
 
+        // Apply assigned employee filter — only show invoices for clients assigned to this employee
+        if (request.AssignedEmployeeId.HasValue)
+        {
+            var employeeId = request.AssignedEmployeeId.Value;
+            query = query.Where(x => x.User.AssignedEmployeeId == employeeId);
+        }
+
         // Apply primary status filter — multi-value takes precedence over single-value
         if (request.PrimaryStatuses is { Count: > 0 })
         {

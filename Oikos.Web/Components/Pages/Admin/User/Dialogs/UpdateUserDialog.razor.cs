@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Oikos.Application.Services.User;
 using Oikos.Application.Services.User.Models;
+using Oikos.Application.Common;
 using Oikos.Application.Services.Partner;
 using Oikos.Application.Common;
 using Oikos.Common.Constants;
@@ -23,6 +24,7 @@ public partial class UpdateUserDialog
     private UpdateUserModel _model = new();
     private List<Application.Services.Partner.Models.PartnerDetail> _partners = new();
     private List<Application.Services.Role.Models.RoleDto> _roles = new();
+    private List<EmployeeItem> _employees = new();
     private bool _processing;
     private bool _loading = true;
 
@@ -40,6 +42,16 @@ public partial class UpdateUserDialog
         var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
         _employeeRoleId = employeeRole?.Id;
 
+        if (_employeeRoleId.HasValue)
+        {
+            var employeeCriteria = new UserSearchCriteria { RoleId = _employeeRoleId, PageSize = 1000, Page = 1 };
+            var employeeResult = await UserManagementService.GetUsersAsync(employeeCriteria);
+            _employees = employeeResult.Items
+                .Select(u => new EmployeeItem { Id = u.Id, Name = u.RealName ?? u.Name })
+                .OrderBy(e => e.Name)
+                .ToList();
+        }
+
         var userDetail = await UserManagementService.GetUserDetailAsync(UserId);
         if (userDetail != null)
         {
@@ -56,7 +68,8 @@ public partial class UpdateUserDialog
                 Company = userDetail.Company,
                 CustomerNumber = userDetail.CustomerNumber,
                 PartnerId = userDetail.PartnerId,
-                RoleId = currentRole?.Id
+                RoleId = currentRole?.Id,
+                AssignedEmployeeId = userDetail.AssignedEmployeeId
             };
 
             if (_isEmployeeRole)
@@ -107,7 +120,8 @@ public partial class UpdateUserDialog
             Company = _model.Company,
             CustomerNumber = _model.CustomerNumber,
             PartnerId = _model.PartnerId,
-            RoleId = _model.RoleId
+            RoleId = _model.RoleId,
+            AssignedEmployeeId = _model.AssignedEmployeeId
         };
 
         var success = await UserManagementService.UpdateUserAsync(UserId, request);
@@ -147,5 +161,12 @@ public partial class UpdateUserDialog
         public string? CustomerNumber { get; set; }
         public int? PartnerId { get; set; }
         public int? RoleId { get; set; }
+        public int? AssignedEmployeeId { get; set; }
+    }
+
+    private class EmployeeItem
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }

@@ -8,4 +8,5 @@ public sealed record InvoiceSearchRequest(
     InvoicePrimaryStatus? PrimaryStatus,
     int Page,
     int PageSize,
-    IReadOnlyList<InvoicePrimaryStatus>? PrimaryStatuses = null);
+    IReadOnlyList<InvoicePrimaryStatus>? PrimaryStatuses = null,
+    int? AssignedEmployeeId = null);

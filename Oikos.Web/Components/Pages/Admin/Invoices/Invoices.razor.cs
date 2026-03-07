@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Oikos.Application.Services.Invoice;
 using Oikos.Application.Services.Invoice.Models;
+using Oikos.Common.Constants;
 using Oikos.Domain.Enums;
 using static Oikos.Web.Components.Shared.Pages.PagePagination;
 
@@ -23,6 +24,7 @@ public partial class Invoices
     private readonly List<InvoiceListItemDto> _invoices = new();
     private List<InvoiceStageDto> _stageOptions = new();
     private SearchObject _searchObject = new();
+    private int? _employeeFilterId;
 
     private bool _canRefresh = true;
     private bool _canChangeStatus = true;
@@ -33,7 +35,11 @@ public partial class Invoices
     {
         await base.OnInitializedAsync();
 
-
+        var authState = await _stateProvider.GetAuthenticationStateAsync();
+        if (authState.User.IsInRole(RoleNames.Employee.ToRoleName()))
+        {
+            _employeeFilterId = await _authenticationService.GetUserIdAsync();
+        }
 
         if (StageIdQuery.HasValue)
         {
@@ -66,7 +72,8 @@ public partial class Invoices
             StageId: _searchObject.StageId,
             PrimaryStatus: _searchObject.PrimaryStatus,
             Page: _searchObject.Page,
-            PageSize: _searchObject.Size);
+            PageSize: _searchObject.Size,
+            AssignedEmployeeId: _employeeFilterId);
 
         var result = await InvoiceService.SearchInvoicesAsync(request, culture);
 

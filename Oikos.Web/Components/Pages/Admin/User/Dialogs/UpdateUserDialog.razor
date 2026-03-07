@@ -73,6 +73,21 @@
                         </MudSelect>
                     </MudItem>
 
+                    @* Employee dropdown — shown only when a non-employee role is selected *@
+                    @if (!_isEmployeeRole && _employees.Count > 0)
+                    {
+                        <MudItem xs="12">
+                            <MudSelect T="int?" @bind-Value="_model.AssignedEmployeeId" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["UserPage_AssignedEmployee"]" Placeholder="@Loc["UserPage_AssignedEmployeePlaceholder"]" Clearable="true">
+                                <MudSelectItem Value="@((int?)null)">@Loc["UserPage_NoEmployeeOption"]</MudSelectItem>
+                                @foreach (var employee in _employees)
+                                {
+                                    <MudSelectItem Value="@((int?)employee.Id)">@employee.Name</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                    }
+
                     @* Employee Permissions — shown only when Employee role is selected *@
                     @if (_isEmployeeRole)
                     {

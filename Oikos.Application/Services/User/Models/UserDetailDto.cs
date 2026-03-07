@@ -19,6 +19,7 @@ public class UserDetailDto
     public int? PartnerId { get; set; }
     public string? PartnerName { get; set; }
     public string? PartnerCode { get; set; }
+    public int? AssignedEmployeeId { get; set; }
     public string? Avatar { get; set; }
     public List<string> Roles { get; set; } = new();
     public List<SubscriptionInfo> Subscriptions { get; set; } = new();
