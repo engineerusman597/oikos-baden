@@ -29,8 +29,13 @@ public partial class UpdateUserDialog
     private bool _loading = true;
 
     private int? _employeeRoleId;
+    private int? _adminRoleId;
+    private int? _partnerRoleId;
     private bool _isEmployeeRole => _model.RoleId.HasValue && _model.RoleId == _employeeRoleId;
+    private bool _isAdminRole => _model.RoleId.HasValue && _model.RoleId == _adminRoleId;
+    private bool _isPartnerRole => _model.RoleId.HasValue && _model.RoleId == _partnerRoleId;
     private readonly HashSet<string> _selectedPermissions = new();
+    [Parameter] public bool IsFromEmployees { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,16 +45,19 @@ public partial class UpdateUserDialog
         _roles = await UserRoleService.GetAvailableRolesAsync();
 
         var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
+        var adminRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Admin.ToRoleName());
+        var partnerRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Partner.ToRoleName());
         _employeeRoleId = employeeRole?.Id;
+        _adminRoleId = adminRole?.Id;
+        _partnerRoleId = partnerRole?.Id;
 
         if (_employeeRoleId.HasValue)
         {
             var employeeCriteria = new UserSearchCriteria { RoleId = _employeeRoleId, PageSize = 1000, Page = 1 };
             var employeeResult = await UserManagementService.GetUsersAsync(employeeCriteria);
-            _employees = employeeResult.Items
+            _employees = [.. employeeResult.Items
                 .Select(u => new EmployeeItem { Id = u.Id, Name = u.RealName ?? u.Name })
-                .OrderBy(e => e.Name)
-                .ToList();
+                .OrderBy(e => e.Name)];
         }
 
         var userDetail = await UserManagementService.GetUserDetailAsync(UserId);
@@ -83,7 +91,11 @@ public partial class UpdateUserDialog
             SnackbarService.Add(Loc["UserPage_UserNotFound"], Severity.Error);
             MudDialog.Cancel();
         }
-
+        if (IsFromEmployees)
+        {
+            _model.RoleId = _employeeRoleId;
+        }
+      
         _loading = false;
     }
 

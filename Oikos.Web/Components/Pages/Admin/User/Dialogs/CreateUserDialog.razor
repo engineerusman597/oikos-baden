@@ -57,7 +57,7 @@
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudSelect T="int?" Value="_model.RoleId" Variant="Variant.Outlined" Margin="Margin.Dense"
+                    <MudSelect T="int?" Value="_model.RoleId" Variant="Variant.Outlined" Margin="Margin.Dense" Disabled="_isEmployeeRole"
                               Label="@Loc["UserPage_RoleLabel"]" Placeholder="@Loc["UserPage_RolePlaceholder"]"
                               ValueChanged="OnRoleChanged">
                         @foreach (var role in _roles)
@@ -169,22 +169,33 @@
                 }
 
                 @* Row: Customer Number + Phone *@
-                <MudItem xs="6">
-                    <MudTextField T="string" @bind-Value="_model.CustomerNumber" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                  Label="@Loc["UserPage_CustomerNumberLabel"]" For="@(() => _model.CustomerNumber)"
-                                  HelperText="@Loc["UserPage_CustomerNumberHelper"]" />
-                </MudItem>
+                @if (!(_isEmployeeRole || _isAdminRole || _isPartnerRole))
+                {
+                    <MudItem xs="6">
+                        <MudTextField T="string" @bind-Value="_model.CustomerNumber" Variant="Variant.Outlined" Margin="Margin.Dense"
+                        Label="@Loc["UserPage_CustomerNumberLabel"]" For="@(() => _model.CustomerNumber)"
+                        HelperText="@Loc["UserPage_CustomerNumberHelper"]" />
+                    </MudItem>
+                }
                 <MudItem xs="6">
                     <MudTextField T="string" @bind-Value="_model.PhoneNumber" Variant="Variant.Outlined" Margin="Margin.Dense"
                                   Label="@Loc["UserPage_Phone"]" For="@(() => _model.PhoneNumber)" />
                 </MudItem>
 
-                @* Row: Password (full width) *@
-                <MudItem xs="12">
-                    <MudTextField T="string" @bind-Value="_model.Password" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                  Label="@Loc["UserPage_Password"]" For="@(() => _model.Password)" InputType="InputType.Password" />
-                </MudItem>
-
+                @if (!IsFromEmployees)
+                {
+                    <MudItem xs="12">
+                        <MudTextField T="string" @bind-Value="_model.Password" Variant="Variant.Outlined" Margin="Margin.Dense"
+                        Label="@Loc["UserPage_Password"]" For="@(() => _model.Password)" InputType="InputType.Password" />
+                    </MudItem>
+                }
+                else
+                {
+                    <MudItem xs="6">
+                        <MudTextField T="string" @bind-Value="_model.Password" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                      Label="@Loc["UserPage_Password"]" For="@(() => _model.Password)" InputType="InputType.Password" />
+                    </MudItem>
+                }
                 @* Submit *@
                 <MudItem xs="12">
                     <div class="d-flex justify-end">

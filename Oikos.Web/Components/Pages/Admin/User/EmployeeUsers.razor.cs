@@ -12,7 +12,7 @@ using static Oikos.Web.Components.Shared.Pages.PagePagination;
 
 namespace Oikos.Web.Components.Pages.Admin.User;
 
-public partial class ClientUsers
+public partial class EmployeeUsers
 {
     [Inject] private IUserManagementService UserManagementService { get; set; } = null!;
     [Inject] private IRoleManagementService RoleManagementService { get; set; } = null!;
@@ -22,13 +22,13 @@ public partial class ClientUsers
     [Inject] private NavigationManager NavigationManager { get; set; } = null!;
 
 
-    private List<UserDto> _users = [];
+    private List<UserDto> _users = new();
     private SearchObject _searchObject = new();
     private bool _isLoading = true;
     private bool _filtersOpen;
-    private List<RoleDto> _roleList = [];
-    private List<PartnerListItem> _partnerList = [];
-    private List<int> _excludeRoleIds = [];
+    private List<RoleDto> _roleList = new();
+    private List<PartnerListItem> _partnerList = new();
+    private List<int> _excludeRoleIds = new();
     private bool _canChangeRole;
 
     protected override async Task OnInitializedAsync()
@@ -45,7 +45,7 @@ public partial class ClientUsers
         var rolesResult = await RoleManagementService.GetRolesAsync(new RoleSearchCriteria { PageSize = 1000 });
         _roleList = rolesResult.Items;
         _excludeRoleIds = [.. _roleList
-            .Where(r => r.Name == RoleNames.Admin.ToRoleName() || r.Name == RoleNames.Partner.ToRoleName() || r.Name == RoleNames.Employee.ToRoleName())
+            .Where(r => r.Name == RoleNames.Admin.ToRoleName() || r.Name == RoleNames.Partner.ToRoleName() || r.Name == RoleNames.User.ToRoleName())
             .Select(r => r.Id)];
 
         var partners = await PartnerService.GetPartnersAsync();
@@ -97,7 +97,10 @@ public partial class ClientUsers
 
     private async Task AddUserClick()
     {
-        var parameters = new DialogParameters { };
+        var parameters = new DialogParameters
+        {
+            { "IsFromEmployees", true }
+        };
         var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<CreateUserDialog>(Loc["UserPage_CreateNewTitle"], parameters, options);
 
@@ -140,7 +143,8 @@ public partial class ClientUsers
     {
         var parameters = new DialogParameters
         {
-            {"UserId", userId }
+            {"UserId", userId },
+            { "IsFromEmployees", true }
         };
         var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<UpdateUserDialog>(Loc["UserPage_EditTitle"], parameters, options);

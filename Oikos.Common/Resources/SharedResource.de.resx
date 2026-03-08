@@ -1,14 +1,106 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata" />
-          <xsd:element name="assembly" />
-          <xsd:element name="data" />
-          <xsd:element name="resheader" />
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
         </xsd:choice>
       </xsd:complexType>
     </xsd:element>
@@ -25,6 +117,78 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CommonDeleteDialogConfirmButtonText" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="CommonDeleteDialogTitle" xml:space="preserve">
+    <value>Löschen bestätigen</value>
+  </data>
+  <data name="ConfirmInputPassword" xml:space="preserve">
+    <value>Bitte geben Sie Ihr Passwort ein.</value>
+  </data>
+  <data name="ConfirmInputPasswordButtonText" xml:space="preserve">
+    <value>Bestätigen</value>
+  </data>
+  <data name="NotFindUser" xml:space="preserve">
+    <value>Benutzerinformationen nicht gefunden!</value>
+  </data>
+  <data name="OrganizationTreeSelect_ClearBtnText" xml:space="preserve">
+    <value>Auswahl entfernen</value>
+  </data>
+  <data name="OrganizationTreeSelect_Title" xml:space="preserve">
+    <value>Bitte Organisation wählen</value>
+  </data>
+  <data name="OrganizationTreeSelect_TitleText" xml:space="preserve">
+    <value>Bitte wählen</value>
+  </data>
+  <data name="PasswordHelpText" xml:space="preserve">
+    <value>Bitte Passwort eingeben</value>
+  </data>
+  <data name="PasswordValidFail" xml:space="preserve">
+    <value>Passwort-Validierung fehlgeschlagen!</value>
+  </data>
+  <data name="HomePage_Title" xml:space="preserve">
+    <value>Systemübersicht</value>
+  </data>
+  <data name="HomePage_UserCount" xml:space="preserve">
+    <value>Gesamte Benutzer</value>
+  </data>
+  <data name="HomePage_OrgCount" xml:space="preserve">
+    <value>Organisationen</value>
+  </data>
+  <data name="HomePage_TodayLogin" xml:space="preserve">
+    <value>Heutige Anmeldungen</value>
+  </data>
+  <data name="HomePage_TodayOperation" xml:space="preserve">
+    <value>Heutige Aktionen</value>
+  </data>
+  <data name="HomePage_SystemNotification" xml:space="preserve">
+    <value>Systembenachrichtigungen</value>
+  </data>
+  <data name="HomePage_RecentLogin" xml:space="preserve">
+    <value>Neueste Anmeldungen</value>
+  </data>
+  <data name="HomePage_RecentAudit" xml:space="preserve">
+    <value>Letzte Aktivitäten</value>
+  </data>
+  <data name="HomePage_OperationType" xml:space="preserve">
+    <value>Vorgangstyp</value>
+  </data>
+  <data name="HomePage_Entity" xml:space="preserve">
+    <value>Entität</value>
+  </data>
+  <data name="HomePage_Time" xml:space="preserve">
+    <value>Zeit</value>
+  </data>
+  <data name="HomePage_Operation_Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="HomePage_Operation_Modify" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="HomePage_Operation_Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
   <data name="HomePage_GreetingMorningWithName" xml:space="preserve">
     <value>Guten Morgen, {0}</value>
   </data>
@@ -88,29 +252,8 @@
   <data name="SubscriptionRequiredMessage" xml:space="preserve">
     <value>Für diese Funktion wird ein aktiver Plan benötigt.</value>
   </data>
-  <data name="HomePage_Title" xml:space="preserve">
-    <value>Systemübersicht</value>
-  </data>
-  <data name="HomePage_UserCount" xml:space="preserve">
-    <value>Gesamte Benutzer</value>
-  </data>
-  <data name="HomePage_OrgCount" xml:space="preserve">
-    <value>Organisationen</value>
-  </data>
-  <data name="HomePage_TodayLogin" xml:space="preserve">
-    <value>Heutige Anmeldungen</value>
-  </data>
-  <data name="HomePage_TodayOperation" xml:space="preserve">
-    <value>Heutige Aktionen</value>
-  </data>
-  <data name="HomePage_SystemNotification" xml:space="preserve">
-    <value>Systembenachrichtigungen</value>
-  </data>
-  <data name="HomePage_RecentLogin" xml:space="preserve">
-    <value>Neueste Anmeldungen</value>
-  </data>
   <data name="ModuleTitle" xml:space="preserve">
-    <value>Bonix – Digitale Bonität auf Abruf</value>
+    <value>Bonix Auskunft</value>
   </data>
   <data name="WizardStepSearch" xml:space="preserve">
     <value>Suche</value>
@@ -131,7 +274,7 @@
     <value>Geben Sie den Firmennamen ein, um in der Bonix-Datenbank zu suchen.</value>
   </data>
   <data name="SearchPlaceholder" xml:space="preserve">
-    <value>Unternehmensname</value>
+    <value>Fall-ID oder Schuldner suchen...</value>
   </data>
   <data name="SearchShowAdvanced" xml:space="preserve">
     <value>Erweiterte Filter anzeigen</value>
@@ -160,141 +303,6 @@
   <data name="SearchPostCodeLabel" xml:space="preserve">
     <value>Postleitzahl</value>
   </data>
-  <data name="AdminDashboard_CaseManagementTitle" xml:space="preserve">
-    <value>Fallverwaltung</value>
-  </data>
-  <data name="AdminDashboard_CaseManagementSubtitle" xml:space="preserve">
-    <value>Verwalten Sie alle eingehenden Fälle.</value>
-  </data>
-  <data name="AdminDashboard_MandantenButton" xml:space="preserve">
-    <value>Mandanten</value>
-  </data>
-  <data name="AdminDashboard_Status_Neu" xml:space="preserve">
-    <value>Neu</value>
-  </data>
-  <data name="AdminDashboard_Status_InPruefung" xml:space="preserve">
-    <value>In Prüfung</value>
-  </data>
-  <data name="AdminDashboard_Status_Rueckfragen" xml:space="preserve">
-    <value>Rückfragen</value>
-  </data>
-  <data name="AdminDashboard_Status_Akzeptiert" xml:space="preserve">
-    <value>Akzeptiert</value>
-  </data>
-  <data name="AdminDashboard_Status_Gericht" xml:space="preserve">
-    <value>Gericht</value>
-  </data>
-  <data name="AdminDashboard_Status_Fristen" xml:space="preserve">
-    <value>Fristen</value>
-  </data>
-  <data name="AdminDashboard_Status_Vollstreckung" xml:space="preserve">
-    <value>Vollstreckung</value>
-  </data>
-  <data name="AdminDashboard_Status_Completed" xml:space="preserve">
-    <value>Abgeschlossen</value>
-  </data>
-  <data name="Dashboard_MobileApp_Title" xml:space="preserve">
-    <value>Mobile App</value>
-  </data>
-  <data name="Dashboard_MobileApp_Description" xml:space="preserve">
-    <value>Rechnungen hochladen und Status prüfen – auch von unterwegs</value>
-  </data>
-  <data name="Dashboard_MobileApp_OpenButton" xml:space="preserve">
-    <value>Jetzt öffnen</value>
-  </data>
-  <data name="Dashboard_RecentCases_Title" xml:space="preserve">
-    <value>Aktuelle Fälle</value>
-  </data>
-  <data name="Dashboard_RecentCases_Subtitle" xml:space="preserve">
-    <value>Ihre zuletzt aktiven Fälle</value>
-  </data>
-  <data name="Dashboard_RecentCases_ShowAll" xml:space="preserve">
-    <value>Alle anzeigen</value>
-  </data>
-  <data name="Dashboard_RecentCases_Empty" xml:space="preserve">
-    <value>Keine Fälle vorhanden.</value>
-  </data>
-  <data name="Dashboard_RecentActivities_Title" xml:space="preserve">
-    <value>Letzte Aktivitäten</value>
-  </data>
-  <data name="Dashboard_RecentActivities_Subtitle" xml:space="preserve">
-    <value>Neueste Ereignisse in Ihren Fällen</value>
-  </data>
-  <data name="Dashboard_RecentActivities_Empty" xml:space="preserve">
-    <value>Keine Aktivitäten vorhanden.</value>
-  </data>
-  <data name="Dashboard_Status_Cancelled" xml:space="preserve">
-    <value>Abgebrochen</value>
-  </data>
-  <data name="Dashboard_Status_Rejected" xml:space="preserve">
-    <value>Abgelehnt</value>
-  </data>
-  <data name="AdminDashboard_Status_Fristen" xml:space="preserve">
-    <value>Fristen</value>
-  </data>
-  <data name="AdminDashboard_Status_Vollstreckung" xml:space="preserve">
-    <value>Vollstreckung</value>
-  </data>
-  <data name="InvoiceDetail_StatusManagementTitle" xml:space="preserve">
-    <value>Statusverwaltung</value>
-  </data>
-  <data name="InvoiceDetail_StatusUpdateSuccess" xml:space="preserve">
-    <value>Status wurde erfolgreich aktualisiert.</value>
-  </data>
-  <data name="InvoiceDetail_StatusUpdateError" xml:space="preserve">
-    <value>Fehler beim Aktualisieren des Status.</value>
-  </data>
-  <data name="InvoiceDetail_ActionLabel" xml:space="preserve">
-    <value>Aktion / Status</value>
-  </data>
-  <data name="InvoiceDetail_SaveStatus" xml:space="preserve">
-    <value>Speichern</value>
-  </data>
-  <data name="InvoiceDetail_ChangeStatusButton" xml:space="preserve">
-    <value>Status ändern</value>
-  </data>
-  <data name="InvoiceDetail_RueckfrageButton" xml:space="preserve">
-    <value>Rückfrage</value>
-  </data>
-  <data name="RueckfrageDialog_Title" xml:space="preserve">
-    <value>Rückfrage senden</value>
-  </data>
-  <data name="RueckfrageDialog_Subtitle" xml:space="preserve">
-    <value>Senden Sie eine Rückfrage mit einer Nachricht an den Mandanten.</value>
-  </data>
-  <data name="RueckfrageDialog_MessageLabel" xml:space="preserve">
-    <value>Nachricht *</value>
-  </data>
-  <data name="RueckfrageDialog_MessagePlaceholder" xml:space="preserve">
-    <value>Welche Informationen oder Unterlagen fehlen?</value>
-  </data>
-  <data name="RueckfrageDialog_SendButton" xml:space="preserve">
-    <value>Rückfrage senden</value>
-  </data>
-  <data name="StatusChangeDialog_Title" xml:space="preserve">
-    <value>Status ändern</value>
-  </data>
-  <data name="StatusChangeDialog_Subtitle" xml:space="preserve">
-    <value>Wählen Sie den neuen Status für diesen Fall.</value>
-  </data>
-  <data name="StatusChangeDialog_SelectLabel" xml:space="preserve">
-    <value>Neuer Status</value>
-  </data>
-  <data name="StatusChangeDialog_SelectPlaceholder" xml:space="preserve">
-    <value>Status wählen...</value>
-  </data>
-  <data name="StatusChangeDialog_NoTransitions" xml:space="preserve">
-    <value>Keine weiteren Status-Übergänge möglich.</value>
-  </data>
-  <data name="StatusChangeDialog_NoteLabel" xml:space="preserve">
-    <value>Nachricht (optional)</value>
-  </data>
-  <data name="StatusChangeDialog_NotePlaceholder" xml:space="preserve">
-    <value>Optionale Nachricht an den Mandanten...</value>
-  </data>
-  <data name="CommonCancel" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
   <data name="SearchStatusLabel" xml:space="preserve">
     <value>Status</value>
   </data>
@@ -316,9 +324,6 @@
   <data name="SearchStatusActive" xml:space="preserve">
     <value>Aktiv</value>
   </data>
-  <data name="ModuleTitle" xml:space="preserve">
-    <value>Bonix Auskunft</value>
-  </data>
   <data name="SearchStatusNonActive" xml:space="preserve">
     <value>Nicht aktiv</value>
   </data>
@@ -336,51 +341,6 @@
   </data>
   <data name="SearchPurposeConfirm" xml:space="preserve">
     <value>Bestätigen</value>
-  </data>
-  <data name="InvoicePrimaryStatus_Draft" xml:space="preserve">
-    <value>Entwurf</value>
-  </data>
-  <data name="InvoicePrimaryStatus_Submitted" xml:space="preserve">
-    <value>Eingereicht</value>
-  </data>
-  <data name="InvoicePrimaryStatus_InReview" xml:space="preserve">
-    <value>In Prüfung</value>
-  </data>
-  <data name="InvoicePrimaryStatus_Inquiry" xml:space="preserve">
-    <value>Rückfrage</value>
-  </data>
-  <data name="InvoicePrimaryStatus_Accepted" xml:space="preserve">
-    <value>Akzeptiert</value>
-  </data>
-  <data name="InvoicePrimaryStatus_Court" xml:space="preserve">
-    <value>Gericht</value>
-  </data>
-  <data name="InvoicePrimaryStatus_Completed" xml:space="preserve">
-    <value>Abgeschlossen</value>
-  </data>
-  <data name="InvoicePrimaryStatus_CourtPrep" xml:space="preserve">
-    <value>Gericht vorbereiten</value>
-  </data>
-  <data name="InvoicePrimaryStatus_WaitingCourt" xml:space="preserve">
-    <value>Warten auf Gericht</value>
-  </data>
-  <data name="InvoicePrimaryStatus_DeadlineRunning" xml:space="preserve">
-    <value>Frist läuft</value>
-  </data>
-  <data name="InvoicePrimaryStatus_CourtResponse" xml:space="preserve">
-    <value>Gerichtsantwort</value>
-  </data>
-  <data name="InvoicePrimaryStatus_EnforcementReady" xml:space="preserve">
-    <value>Vollstreckung möglich</value>
-  </data>
-  <data name="InvoicePrimaryStatus_EnforcementInProgress" xml:space="preserve">
-    <value>Vollstreckung läuft</value>
-  </data>
-  <data name="InvoicePrimaryStatus_Cancelled" xml:space="preserve">
-    <value>Storniert</value>
-  </data>
-  <data name="InvoicePrimaryStatus_Rejected" xml:space="preserve">
-    <value>Abgelehnt</value>
   </data>
   <data name="SearchPurposeDescription" xml:space="preserve">
     <value>Bitte geben Sie Ihr berechtigtes Interesse im Sinne der EU-DSGVO wahrheitsgemäß an.</value>
@@ -718,17 +678,62 @@
   <data name="PdfDownloadError" xml:space="preserve">
     <value>PDF-Erstellung fehlgeschlagen</value>
   </data>
+  <data name="AuditLogDetailDialog_TableH1" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="AuditLogDetailDialog_TableH2" xml:space="preserve">
+    <value>Eigenschaft</value>
+  </data>
+  <data name="AuditLogDetailDialog_TableH3" xml:space="preserve">
+    <value>Alter Wert</value>
+  </data>
+  <data name="AuditLogDetailDialog_TableH4" xml:space="preserve">
+    <value>Neuer Wert</value>
+  </data>
+  <data name="AuditLogPage_OperationCreate" xml:space="preserve">
+    <value>Erstellen</value>
+  </data>
+  <data name="AuditLogPage_OperationDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="AuditLogPage_OperationModify" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
+  <data name="AuditLogPage_TableH1" xml:space="preserve">
+    <value>Nr.</value>
+  </data>
+  <data name="AuditLogPage_TableH2" xml:space="preserve">
+    <value>Transaktions-ID</value>
+  </data>
+  <data name="AuditLogPage_TableH3" xml:space="preserve">
+    <value>Benutzer</value>
+  </data>
+  <data name="AuditLogPage_TableH4" xml:space="preserve">
+    <value>Ziel</value>
+  </data>
+  <data name="AuditLogPage_TableH5" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="AuditLogPage_TableH6" xml:space="preserve">
+    <value>Zeit</value>
+  </data>
+  <data name="AuditLogPage_TableH7" xml:space="preserve">
+    <value>Wert</value>
+  </data>
+  <data name="AuditLogPage_Title" xml:space="preserve">
+    <value>Audit-Log</value>
+  </data>
   <data name="AuthorizedLayout_ColorPickerTitle" xml:space="preserve">
     <value>Primärfarbe auswählen</value>
   </data>
   <data name="AuthorizedLayout_Language" xml:space="preserve">
     <value>Sprache</value>
   </data>
-  <data name="AuthorizedLayout_Language_dede" xml:space="preserve">
-    <value>Deutsch</value>
-  </data>
   <data name="AuthorizedLayout_Language_enus" xml:space="preserve">
     <value>Englisch</value>
+  </data>
+  <data name="AuthorizedLayout_Language_dede" xml:space="preserve">
+    <value>Deutsch</value>
   </data>
   <data name="AuthorizedLayout_Logout" xml:space="preserve">
     <value>Abmelden</value>
@@ -793,287 +798,20 @@
   <data name="Login_PasswordHelpText" xml:space="preserve">
     <value>Bitte Passwort eingeben</value>
   </data>
-  <data name="Login_EmailLabel" xml:space="preserve">
-    <value>E-Mail-Adresse oder Benutzername</value>
-  </data>
-  <data name="Login_ForgotPassword" xml:space="preserve">
-    <value>Passwort vergessen?</value>
-  </data>
-  <data name="Login_InvalidCredentials" xml:space="preserve">
-    <value>Benutzername oder Passwort ist falsch!</value>
-  </data>
-  <data name="Login_MembershipLink" xml:space="preserve">
-    <value>Mitglied werden</value>
-  </data>
-  <data name="Login_MembershipPrompt" xml:space="preserve">
-    <value>Noch kein Mitglied?</value>
-  </data>
-  <data name="Login_NewsletterBenefit2" xml:space="preserve">
-    <value>Einladungslink ganz einfach weiterleiten.</value>
-  </data>
-  <data name="Login_NewsletterBenefit3" xml:space="preserve">
-    <value>Erhalten Sie exklusive Rechtstipps direkt in Ihr Postfach.</value>
-  </data>
-  <data name="Login_NewsletterEmailInvalid" xml:space="preserve">
-    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
-  </data>
-  <data name="Login_NewsletterEmailLabel" xml:space="preserve">
-    <value>E-Mail-Adresse</value>
-  </data>
-  <data name="Login_NewsletterEmailPlaceholder" xml:space="preserve">
-    <value>name@unternehmen.de</value>
-  </data>
-  <data name="Login_NewsletterEmailRequired" xml:space="preserve">
-    <value>Bitte geben Sie eine E-Mail-Adresse an.</value>
-  </data>
-  <data name="Login_NewsletterHighlight" xml:space="preserve">
-    <value>Bleiben Sie informiert</value>
-  </data>
-  <data name="Login_NewsletterHint" xml:space="preserve">
-    <value>Sie können sich jederzeit wieder abmelden.</value>
-  </data>
-  <data name="Login_NewsletterReopenPrompt" xml:space="preserve">
-    <value>Newsletter verpasst? Hier erneut öffnen.</value>
-  </data>
-  <data name="Login_NewsletterReopenButton" xml:space="preserve">
-    <value>Newsletter anzeigen</value>
-  </data>
-  <data name="Login_NewsletterTabLabel" xml:space="preserve">
-    <value>Newsletter</value>
-  </data>
-  <data name="Login_NewsletterStatus" xml:space="preserve">
-    <value>Newsletter AKTIV / inaktiv schaltbar</value>
-  </data>
-  <data name="Login_NewsletterSubscribe" xml:space="preserve">
-    <value>Jetzt abonnieren</value>
-  </data>
-  <data name="Login_NewsletterSuccess" xml:space="preserve">
-    <value>Vielen Dank! Wir haben Ihre Newsletter-Anmeldung erhalten.</value>
-  </data>
-  <data name="Login_NewsletterWelcomeSubject" xml:space="preserve">
-    <value>Willkommen im Rechtfix-Newsletter</value>
-  </data>
-  <data name="Login_NewsletterWelcomeBody" xml:space="preserve">
-    <value>Schön, dass Sie dabei sind. Ab sofort erhalten Sie Neuigkeiten, Tipps und Angebote rund um Rechtfix.</value>
-  </data>
-  <data name="Login_NewsletterTitle" xml:space="preserve">
-    <value>Rechtfix Newsletter</value>
-  </data>
-  <data name="Login_PasswordLabel" xml:space="preserve">
-    <value>Passwort</value>
-  </data>
-  <data name="Login_RegisterButton" xml:space="preserve">
-    <value>Jetzt registrieren</value>
-  </data>
-  <data name="Login_SubmitButton" xml:space="preserve">
-    <value>Anmelden</value>
-  </data>
-  <data name="Login_Subtitle" xml:space="preserve">
-    <value>Melden Sie sich mit Ihren Zugangsdaten an, um das Rechtfix Portal zu nutzen.</value>
-  </data>
-  <data name="Login_Title" xml:space="preserve">
-    <value>Anmelden</value>
-  </data>
-  <data name="Login_TooManyAttempts" xml:space="preserve">
-    <value>Zu viele Anmeldeversuche. Bitte versuchen Sie es in {0} Minuten erneut!</value>
-  </data>
   <data name="Login_UserNameHelpText" xml:space="preserve">
     <value>E-Mail oder Benutzername</value>
   </data>
-  <data name="Login_WelcomeBack" xml:space="preserve">
-    <value>Willkommen zurück, {0}!</value>
+  <data name="NoAuhtorized_ChangeUserText" xml:space="preserve">
+    <value>Benutzer wechseln</value>
   </data>
-  <data name="Register_CompanyLabel" xml:space="preserve">
-    <value>Firma</value>
+  <data name="NoAuhtorized_Text" xml:space="preserve">
+    <value>Keine Berechtigung...</value>
   </data>
-  <data name="Register_CompanyRequired" xml:space="preserve">
-    <value>Firma ist erforderlich.</value>
+  <data name="NotFound_Text" xml:space="preserve">
+    <value>Seite nicht gefunden</value>
   </data>
-  <data name="Register_ConfirmPasswordLabel" xml:space="preserve">
-    <value>Passwort bestätigen</value>
-  </data>
-  <data name="Register_ConfirmPasswordRequired" xml:space="preserve">
-    <value>Bestätigung des Passworts ist erforderlich.</value>
-  </data>
-  <data name="Register_InvalidPartnerCode" xml:space="preserve">
-    <value>Der Partnercode wurde nicht gefunden.</value>
-  </data>
-  <data name="Register_EmailInvalid" xml:space="preserve">
-    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
-  </data>
-  <data name="Register_EmailLabel" xml:space="preserve">
-    <value>E-Mail-Adresse</value>
-  </data>
-  <data name="Register_EmailRequired" xml:space="preserve">
-    <value>E-Mail ist erforderlich.</value>
-  </data>
-  <data name="Register_GenderLabel" xml:space="preserve">
-    <value>Geschlecht</value>
-  </data>
-  <data name="Register_GenderPlaceholder" xml:space="preserve">
-    <value>Wählen Sie ein Geschlecht</value>
-  </data>
-  <data name="Register_GenderOptionFemale" xml:space="preserve">
-    <value>Weiblich</value>
-  </data>
-  <data name="Register_GenderOptionMale" xml:space="preserve">
-    <value>Männlich</value>
-  </data>
-  <data name="Register_GenderOptionDiverse" xml:space="preserve">
-    <value>Divers</value>
-  </data>
-  <data name="Register_GenderRequired" xml:space="preserve">
-    <value>Geschlecht ist erforderlich.</value>
-  </data>
-  <data name="Register_TitleLabel" xml:space="preserve">
-    <value>Akademischer Titel</value>
-  </data>
-  <data name="Register_TitlePlaceholder" xml:space="preserve">
-    <value>Titel wählen (optional)</value>
-  </data>
-  <data name="Register_TitleOptionDr" xml:space="preserve">
-    <value>Dr.</value>
-  </data>
-  <data name="Register_TitleOptionProf" xml:space="preserve">
-    <value>Prof.</value>
-  </data>
-  <data name="Register_TitleOptionProfDr" xml:space="preserve">
-    <value>Prof. Dr.</value>
-  </data>
-  <data name="Register_NameLabel" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Register_FirstNameLabel" xml:space="preserve">
-    <value>Vorname</value>
-  </data>
-  <data name="Register_FirstNameRequired" xml:space="preserve">
-    <value>Vorname ist erforderlich.</value>
-  </data>
-  <data name="Register_LastNameLabel" xml:space="preserve">
-    <value>Nachname</value>
-  </data>
-  <data name="Register_LastNameRequired" xml:space="preserve">
-    <value>Nachname ist erforderlich.</value>
-  </data>
-  <data name="Register_PartnerCodeHelper" xml:space="preserve">
-    <value>Optional. Partnercode des Vermittlers eintragen.</value>
-  </data>
-  <data name="Register_PartnerCodeLabel" xml:space="preserve">
-    <value>Partnercode</value>
-  </data>
-  <data name="Register_NameRequired" xml:space="preserve">
-    <value>Name ist erforderlich.</value>
-  </data>
-  <data name="Register_PasswordLabel" xml:space="preserve">
-    <value>Passwort</value>
-  </data>
-  <data name="Register_PasswordMinLength" xml:space="preserve">
-    <value>Das Passwort muss mindestens 6 Zeichen lang sein.</value>
-  </data>
-  <data name="Register_PasswordMismatch" xml:space="preserve">
-    <value>Die Passwörter stimmen nicht überein.</value>
-  </data>
-  <data name="Register_PasswordRequired" xml:space="preserve">
-    <value>Passwort ist erforderlich.</value>
-  </data>
-  <data name="Register_PrivacyLinkText" xml:space="preserve">
-    <value>Datenschutzerklärung</value>
-  </data>
-  <data name="Register_PrivacyPrefix" xml:space="preserve">
-    <value>Ich habe die</value>
-  </data>
-  <data name="Register_PrivacyRequired" xml:space="preserve">
-    <value>Die Datenschutzerklärung muss akzeptiert werden.</value>
-  </data>
-  <data name="Register_PrivacySuffix" xml:space="preserve">
-    <value> gelesen.</value>
-  </data>
-  <data name="Register_SubmitButton" xml:space="preserve">
-    <value>Absenden</value>
-  </data>
-  <data name="Register_Subtitle" xml:space="preserve">
-    <value>Bereits Mitglied?</value>
-  </data>
-  <data name="Register_SubtitleLink" xml:space="preserve">
-    <value>Anmelden</value>
-  </data>
-  <data name="Register_Success" xml:space="preserve">
-    <value>Konto erfolgreich erstellt.</value>
-  </data>
-  <data name="Register_Title" xml:space="preserve">
-    <value>Registrierung</value>
-  </data>
-  <data name="Register_UserExists" xml:space="preserve">
-    <value>Ein Konto mit dieser E-Mail-Adresse existiert bereits.</value>
-  </data>
-  <data name="Register_NotMemberButton" xml:space="preserve">
-    <value>Noch kein Mitglied?</value>
-  </data>
-  <data name="ForgotPassword_Title" xml:space="preserve">
-    <value>Passwort vergessen?</value>
-  </data>
-  <data name="ForgotPassword_Subtitle" xml:space="preserve">
-    <value>Geben Sie die E-Mail-Adresse Ihres Kontos ein und wir senden Ihnen einen Link zum Zurücksetzen.</value>
-  </data>
-  <data name="ForgotPassword_Success" xml:space="preserve">
-    <value>Wenn ein Konto mit dieser E-Mail-Adresse existiert, haben wir einen Link zum Zurücksetzen des Passworts gesendet.</value>
-  </data>
-  <data name="ForgotPassword_EmailLabel" xml:space="preserve">
-    <value>E-Mail-Adresse</value>
-  </data>
-  <data name="ForgotPassword_EmailRequired" xml:space="preserve">
-    <value>Die E-Mail-Adresse ist erforderlich.</value>
-  </data>
-  <data name="ForgotPassword_EmailInvalid" xml:space="preserve">
-    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
-  </data>
-  <data name="ForgotPassword_BackToLogin" xml:space="preserve">
-    <value>Zurück zum Login</value>
-  </data>
-  <data name="ForgotPassword_Submit" xml:space="preserve">
-    <value>Link senden</value>
-  </data>
-  <data name="ForgotPassword_EmailSettingsMissing" xml:space="preserve">
-    <value>Die E-Mail-Einstellungen sind nicht konfiguriert. Bitte wenden Sie sich an einen Administrator.</value>
-  </data>
-  <data name="ForgotPassword_EmailSendFailed" xml:space="preserve">
-    <value>Der Reset-Link konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.</value>
-  </data>
-  <data name="ResetPassword_Title" xml:space="preserve">
-    <value>Passwort zurücksetzen</value>
-  </data>
-  <data name="ResetPassword_Subtitle" xml:space="preserve">
-    <value>Erstellen Sie ein neues Passwort für Ihr Konto.</value>
-  </data>
-  <data name="ResetPassword_Success" xml:space="preserve">
-    <value>Ihr Passwort wurde erfolgreich aktualisiert.</value>
-  </data>
-  <data name="ResetPassword_InvalidToken" xml:space="preserve">
-    <value>Dieser Link zum Zurücksetzen ist ungültig oder abgelaufen.</value>
-  </data>
-  <data name="ResetPassword_RequestNew" xml:space="preserve">
-    <value>Neuen Link anfordern</value>
-  </data>
-  <data name="ResetPassword_NewPasswordLabel" xml:space="preserve">
-    <value>Neues Passwort</value>
-  </data>
-  <data name="ResetPassword_ConfirmPasswordLabel" xml:space="preserve">
-    <value>Neues Passwort bestätigen</value>
-  </data>
-  <data name="ResetPassword_Submit" xml:space="preserve">
-    <value>Passwort aktualisieren</value>
-  </data>
-  <data name="ResetPassword_PasswordRequired" xml:space="preserve">
-    <value>Ein Passwort ist erforderlich.</value>
-  </data>
-  <data name="ResetPassword_ConfirmPasswordRequired" xml:space="preserve">
-    <value>Die Bestätigung des Passworts ist erforderlich.</value>
-  </data>
-  <data name="ResetPassword_PasswordMismatch" xml:space="preserve">
-    <value>Die Passwörter stimmen nicht überein.</value>
-  </data>
-  <data name="ResetPassword_UpdateFailed" xml:space="preserve">
-    <value>Das Passwort konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.</value>
+  <data name="Search_Text" xml:space="preserve">
+    <value>Suchen</value>
   </data>
   <data name="Register_SubscriptionHint" xml:space="preserve">
     <value>Verwenden Sie die E-Mail-Adresse aus dem Kauf, damit Ihr Paket automatisch freigeschaltet wird.</value>
@@ -1083,6 +821,15 @@
   </data>
   <data name="Register_SubscriptionLookupFailed" xml:space="preserve">
     <value>Ihr Kauf konnte keinem Paket zugeordnet werden. Bitte kontaktieren Sie den Support.</value>
+  </data>
+  <data name="Register_PartnerCodeLabel" xml:space="preserve">
+    <value>Partnercode</value>
+  </data>
+  <data name="Register_PartnerCodeHelper" xml:space="preserve">
+    <value>Optional. Partnercode des Vermittlers eintragen.</value>
+  </data>
+  <data name="Register_InvalidPartnerCode" xml:space="preserve">
+    <value>Der Partnercode wurde nicht gefunden.</value>
   </data>
   <data name="ChangePassword_Title" xml:space="preserve">
     <value>Passwort ändern</value>
@@ -1138,14 +885,8 @@
   <data name="NewCaseButton" xml:space="preserve">
     <value>Neuer Fall</value>
   </data>
-  <data name="SearchPlaceholder" xml:space="preserve">
-    <value>Fall-ID oder Schuldner suchen...</value>
-  </data>
-  <data name="StatusFilterLabel" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="StatusFilterAll" xml:space="preserve">
-    <value>Alle Status</value>
+  <data name="ClaimsQuotaActivationLabel" xml:space="preserve">
+    <value>Aktiv seit {0} • Abgerechnet {1}</value>
   </data>
   <data name="NavigationAllInvoices" xml:space="preserve">
     <value>Forderungscenter</value>
@@ -1179,6 +920,75 @@
   </data>
   <data name="UploadPdfOnly" xml:space="preserve">
     <value>Bitte laden Sie eine PDF-Datei hoch.</value>
+  </data>
+  <data name="AdminDashboard_CaseManagementTitle" xml:space="preserve">
+    <value>Fallverwaltung</value>
+  </data>
+  <data name="AdminDashboard_CaseManagementSubtitle" xml:space="preserve">
+    <value>Verwalten Sie alle eingehenden Fälle.</value>
+  </data>
+  <data name="AdminDashboard_MandantenButton" xml:space="preserve">
+    <value>Mandanten</value>
+  </data>
+  <data name="AdminDashboard_Status_Neu" xml:space="preserve">
+    <value>Neu</value>
+  </data>
+  <data name="AdminDashboard_Status_InPruefung" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="AdminDashboard_Status_Rueckfragen" xml:space="preserve">
+    <value>Rückfragen</value>
+  </data>
+  <data name="AdminDashboard_Status_Akzeptiert" xml:space="preserve">
+    <value>Akzeptiert</value>
+  </data>
+  <data name="AdminDashboard_Status_Gericht" xml:space="preserve">
+    <value>Gericht</value>
+  </data>
+  <data name="AdminDashboard_Status_Fristen" xml:space="preserve">
+    <value>Fristen</value>
+  </data>
+  <data name="AdminDashboard_Status_Vollstreckung" xml:space="preserve">
+    <value>Vollstreckung</value>
+  </data>
+  <data name="AdminDashboard_Status_Completed" xml:space="preserve">
+    <value>Abgeschlossen</value>
+  </data>
+  <data name="Dashboard_MobileApp_Title" xml:space="preserve">
+    <value>Mobile App</value>
+  </data>
+  <data name="Dashboard_MobileApp_Description" xml:space="preserve">
+    <value>Rechnungen hochladen und Status prüfen – auch von unterwegs</value>
+  </data>
+  <data name="Dashboard_MobileApp_OpenButton" xml:space="preserve">
+    <value>Jetzt öffnen</value>
+  </data>
+  <data name="Dashboard_RecentCases_Title" xml:space="preserve">
+    <value>Aktuelle Fälle</value>
+  </data>
+  <data name="Dashboard_RecentCases_Subtitle" xml:space="preserve">
+    <value>Ihre zuletzt aktiven Fälle</value>
+  </data>
+  <data name="Dashboard_RecentCases_ShowAll" xml:space="preserve">
+    <value>Alle anzeigen</value>
+  </data>
+  <data name="Dashboard_RecentCases_Empty" xml:space="preserve">
+    <value>Keine Fälle vorhanden.</value>
+  </data>
+  <data name="Dashboard_RecentActivities_Title" xml:space="preserve">
+    <value>Letzte Aktivitäten</value>
+  </data>
+  <data name="Dashboard_RecentActivities_Subtitle" xml:space="preserve">
+    <value>Neueste Ereignisse in Ihren Fällen</value>
+  </data>
+  <data name="Dashboard_RecentActivities_Empty" xml:space="preserve">
+    <value>Keine Aktivitäten vorhanden.</value>
+  </data>
+  <data name="Dashboard_Status_Cancelled" xml:space="preserve">
+    <value>Abgebrochen</value>
+  </data>
+  <data name="Dashboard_Status_Rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
   </data>
   <data name="UploadFileTooLarge" xml:space="preserve">
     <value>Die ausgewählte Datei überschreitet die Grenze von 15 MB.</value>
@@ -1413,45 +1223,6 @@
   </data>
   <data name="InvoiceDetailSectionDocuments" xml:space="preserve">
     <value>Dokumente</value>
-  </data>
-  <data name="InvoiceDetail_TabOverview" xml:space="preserve">
-    <value>Übersicht</value>
-  </data>
-  <data name="InvoiceDetail_TabDocuments" xml:space="preserve">
-    <value>Dokumente</value>
-  </data>
-  <data name="InvoiceDetail_TabCommunication" xml:space="preserve">
-    <value>Kommunikation</value>
-  </data>
-  <data name="InvoiceDetail_TabCommunicationEmpty" xml:space="preserve">
-    <value>Keine Nachrichten vorhanden.</value>
-  </data>
-  <data name="InvoiceDetail_NoteFrom" xml:space="preserve">
-    <value>Kanzlei</value>
-  </data>
-  <data name="UserInvoice_KommunikationTitle" xml:space="preserve">
-    <value>Nachrichten</value>
-  </data>
-  <data name="UserInvoice_KommunikationEmpty" xml:space="preserve">
-    <value>Noch keine Nachrichten vorhanden.</value>
-  </data>
-  <data name="UserInvoice_KommunikationLabelKanzlei" xml:space="preserve">
-    <value>Kanzlei</value>
-  </data>
-  <data name="UserInvoice_KommunikationLabelSie" xml:space="preserve">
-    <value>Sie</value>
-  </data>
-  <data name="UserInvoice_KommunikationReplyPlaceholder" xml:space="preserve">
-    <value>Ihre Antwort...</value>
-  </data>
-  <data name="UserInvoice_KommunikationSendButton" xml:space="preserve">
-    <value>Antwort senden</value>
-  </data>
-  <data name="UserInvoice_KommunikationSendSuccess" xml:space="preserve">
-    <value>Nachricht gesendet.</value>
-  </data>
-  <data name="UserInvoice_KommunikationSendError" xml:space="preserve">
-    <value>Nachricht konnte nicht gesendet werden.</value>
   </data>
   <data name="InvoiceDetailDownloadPdf" xml:space="preserve">
     <value>PDF herunterladen</value>
@@ -1756,18 +1527,6 @@
   <data name="ClaimsQuotaUnlimitedMessage" xml:space="preserve">
     <value>Ihr Tarif {0} beinhaltet unbegrenzte Forderungen pro Monat.</value>
   </data>
-  <data name="ClaimsQuotaIntervalMonthly" xml:space="preserve">
-    <value>monatlich</value>
-  </data>
-  <data name="ClaimsQuotaIntervalYearly" xml:space="preserve">
-    <value>jährlich</value>
-  </data>
-  <data name="ClaimsQuotaActivationLabel" xml:space="preserve">
-    <value>Aktiv seit {0} • Abgerechnet {1}</value>
-  </data>
-  <data name="ClaimsQuotaManageButton" xml:space="preserve">
-    <value>Plan verwalten</value>
-  </data>
   <data name="ClaimsQuotaPlanBasic" xml:space="preserve">
     <value>Basis</value>
   </data>
@@ -1992,6 +1751,21 @@
   </data>
   <data name="WizardSubscriptionExpired" xml:space="preserve">
     <value>Ihr Abonnement ist am {0} abgelaufen. Bitte verlängern Sie, um Claims einzureichen.</value>
+  </data>
+  <data name="WizardStartOptionAfterReminderPrompt" xml:space="preserve">
+    <value>Wählen Sie den Startzeitpunkt der Mahnung.</value>
+  </data>
+  <data name="WizardStartOptionAfterReminderHelper" xml:space="preserve">
+    <value>Wir beginnen, sobald Ihre Mahnung zur gewählten Zeit versendet wurde.</value>
+  </data>
+  <data name="WizardStartOptionAfterReminderSelected" xml:space="preserve">
+    <value>Geplant für {0}</value>
+  </data>
+  <data name="WizardStartOptionAfterReminderValidation" xml:space="preserve">
+    <value>Bitte wählen Sie, wann nach Ihrer Mahnung gestartet werden soll.</value>
+  </data>
+  <data name="WizardDescriptionStartScheduled" xml:space="preserve">
+    <value>Start nach Mahnung am {0}</value>
   </data>
   <data name="StatusLegendTitle" xml:space="preserve">
     <value>Statusübersicht</value>
@@ -2446,6 +2220,9 @@
   <data name="Admin_DeleteInsuranceConfirmMessage" xml:space="preserve">
     <value>Soll '{0}' wirklich entfernt werden?</value>
   </data>
+  <data name="Admin_TableActions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
   <data name="BankEditor_CreateTitle" xml:space="preserve">
     <value>Neue Partnerbank</value>
   </data>
@@ -2586,24 +2363,6 @@
   </data>
   <data name="PartnerManagement_Title" xml:space="preserve">
     <value>Partner</value>
-  </data>
-  <data name="PartnerManagement_RechtfixLink" xml:space="preserve">
-    <value>Rechtfix-Link</value>
-  </data>
-  <data name="PartnerManagement_BonixLink" xml:space="preserve">
-    <value>Bonix-Link</value>
-  </data>
-  <data name="PartnerManagement_RechtfixLinkType" xml:space="preserve">
-    <value>Rechtfix Registrierung</value>
-  </data>
-  <data name="PartnerManagement_BonixLinkType" xml:space="preserve">
-    <value>Bonix Registrierung</value>
-  </data>
-  <data name="PartnerManagement_LinkCopied" xml:space="preserve">
-    <value>Link für {0} kopiert!</value>
-  </data>
-  <data name="PartnerManagement_CopyFailed" xml:space="preserve">
-    <value>Kopieren fehlgeschlagen. Bitte versuchen Sie es erneut.</value>
   </data>
   <data name="PartnerDialog_Cancel" xml:space="preserve">
     <value>Abbrechen</value>
@@ -2881,48 +2640,6 @@
   <data name="UserPage_TableH9" xml:space="preserve">
     <value>E-Mail</value>
   </data>
-  <data name="UserPage_TableCompany" xml:space="preserve">
-    <value>Firma</value>
-  </data>
-  <data name="UserPage_TablePartner" xml:space="preserve">
-    <value>Partner</value>
-  </data>
-  <data name="UserPage_TablePartnerCode" xml:space="preserve">
-    <value>Partnercode</value>
-  </data>
-  <data name="UserPage_TablePhone" xml:space="preserve">
-    <value>Telefon</value>
-  </data>
-  <data name="UserPage_TablePlan" xml:space="preserve">
-    <value>Tarif</value>
-  </data>
-  <data name="UserPage_TableRechnungen" xml:space="preserve">
-    <value>Rechnungen</value>
-  </data>
-  <data name="UserPage_PlanStatusActive" xml:space="preserve">
-    <value>Aktiv</value>
-  </data>
-  <data name="UserPage_PlanStatusInactive" xml:space="preserve">
-    <value>Inaktiv</value>
-  </data>
-  <data name="UserPage_TableStatus" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="UserPage_TableZahlung" xml:space="preserve">
-    <value>Zahlung</value>
-  </data>
-  <data name="UserPage_TableLogin" xml:space="preserve">
-    <value>Letzter Login</value>
-  </data>
-  <data name="UserPage_LoginNever" xml:space="preserve">
-    <value>Noch nie</value>
-  </data>
-  <data name="UserPage_TablePrivacy" xml:space="preserve">
-    <value>Datenschutz akzeptiert</value>
-  </data>
-  <data name="UserPage_TablePrivacyAt" xml:space="preserve">
-    <value>Akzeptiert am</value>
-  </data>
   <data name="UserPage_TableSepaMandate" xml:space="preserve">
     <value>SEPA-Mandat</value>
   </data>
@@ -2995,22 +2712,13 @@
   <data name="UserPage_NoPartnerOption" xml:space="preserve">
     <value>Kein Partner</value>
   </data>
-  <data name="UserPage_AssignedEmployee" xml:space="preserve">
-    <value>Zugewiesener Mitarbeiter</value>
-  </data>
-  <data name="UserPage_AssignedEmployeePlaceholder" xml:space="preserve">
-    <value>Mitarbeiter auswählen (optional)</value>
-  </data>
-  <data name="UserPage_NoEmployeeOption" xml:space="preserve">
-    <value>Kein Mitarbeiter</value>
-  </data>
   <data name="UserPage_RoleLabel" xml:space="preserve">
     <value>Rolle</value>
   </data>
   <data name="UserPage_RolePlaceholder" xml:space="preserve">
     <value>Rolle auswählen</value>
   </data>
- <data name="UserPage_TableTitle" xml:space="preserve">
+  <data name="UserPage_TableTitle" xml:space="preserve">
     <value>Akademischer Titel</value>
   </data>
   <data name="UserPage_TableGender" xml:space="preserve">
@@ -3021,6 +2729,42 @@
   </data>
   <data name="UserPage_TableLastName" xml:space="preserve">
     <value>Nachname</value>
+  </data>
+  <data name="UserPage_TableCompany" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="UserPage_TablePartner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="UserPage_TablePartnerCode" xml:space="preserve">
+    <value>Partnercode</value>
+  </data>
+  <data name="UserPage_TablePhone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="UserPage_TablePlan" xml:space="preserve">
+    <value>Tarif</value>
+  </data>
+  <data name="UserPage_TableRechnungen" xml:space="preserve">
+    <value>Rechnungen</value>
+  </data>
+  <data name="UserPage_PlanStatusActive" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="UserPage_PlanStatusInactive" xml:space="preserve">
+    <value>Inaktiv</value>
+  </data>
+  <data name="UserPage_TableStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="UserPage_TableZahlung" xml:space="preserve">
+    <value>Zahlung</value>
+  </data>
+  <data name="UserPage_TableLogin" xml:space="preserve">
+    <value>Letzter Login</value>
+  </data>
+  <data name="UserPage_LoginNever" xml:space="preserve">
+    <value>Noch nie</value>
   </data>
   <data name="UserPage_Filters" xml:space="preserve">
     <value>Filter</value>
@@ -3208,12 +2952,6 @@
   <data name="UserPage_SuperAdminError" xml:space="preserve">
     <value>Sie haben keine Berechtigung, SuperAdmin-Benutzer zu verwalten.</value>
   </data>
-  <data name="UserPage_RoleUpdateSuccess" xml:space="preserve">
-    <value>Erfolgreich übermittelt!</value>
-  </data>
-  <data name="UserPage_PasswordUpdateSuccess" xml:space="preserve">
-    <value>Passwort erfolgreich aktualisiert!</value>
-  </data>
   <data name="Validation_Required" xml:space="preserve">
     <value>{0} ist erforderlich.</value>
   </data>
@@ -3319,14 +3057,14 @@
   <data name="DashboardNewsLinkLabel" xml:space="preserve">
     <value>Optionaler Link</value>
   </data>
+  <data name="DashboardNewsSaveLabel" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
   <data name="DashboardNewsSaveSuccess" xml:space="preserve">
     <value>Dashboard-Nachricht erfolgreich gespeichert.</value>
   </data>
   <data name="SystemSettingConfiguredInAppSettings" xml:space="preserve">
     <value>Die Einstellungen werden jetzt über die Konfiguration verwaltet.</value>
-  </data>
-  <data name="DashboardNewsSaveLabel" xml:space="preserve">
-    <value>Speichern</value>
   </data>
   <data name="SubscriptionPlansTitle" xml:space="preserve">
     <value>Pläne</value>
@@ -3354,6 +3092,12 @@
   </data>
   <data name="SubscriptionPlansActivated" xml:space="preserve">
     <value>Dein Abo wurde aktualisiert.</value>
+  </data>
+  <data name="ClaimsQuotaIntervalMonthly" xml:space="preserve">
+    <value>monatlich</value>
+  </data>
+  <data name="ClaimsQuotaIntervalYearly" xml:space="preserve">
+    <value>jährlich</value>
   </data>
   <data name="SubscriptionPlansNew" xml:space="preserve">
     <value>Neuer Plan</value>
@@ -3475,6 +3219,336 @@
   <data name="SubscriptionPaymentsRegistrationMissing" xml:space="preserve">
     <value>Wartet auf Registrierung</value>
   </data>
+  <data name="Register_CompanyRequired" xml:space="preserve">
+    <value>Firma ist erforderlich.</value>
+  </data>
+  <data name="Register_GenderRequired" xml:space="preserve">
+    <value>Geschlecht ist erforderlich.</value>
+  </data>
+  <data name="Register_FirstNameRequired" xml:space="preserve">
+    <value>Vorname ist erforderlich.</value>
+  </data>
+  <data name="Register_LastNameRequired" xml:space="preserve">
+    <value>Nachname ist erforderlich.</value>
+  </data>
+  <data name="Register_EmailRequired" xml:space="preserve">
+    <value>E-Mail ist erforderlich.</value>
+  </data>
+  <data name="Register_EmailInvalid" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="Register_PasswordRequired" xml:space="preserve">
+    <value>Passwort ist erforderlich.</value>
+  </data>
+  <data name="Register_PasswordMinLength" xml:space="preserve">
+    <value>Das Passwort muss mindestens 6 Zeichen lang sein.</value>
+  </data>
+  <data name="Register_ConfirmPasswordRequired" xml:space="preserve">
+    <value>Bestätigung des Passworts ist erforderlich.</value>
+  </data>
+  <data name="Register_PasswordMismatch" xml:space="preserve">
+    <value>Die Passwörter stimmen nicht überein.</value>
+  </data>
+  <data name="ForgotPassword_EmailRequired" xml:space="preserve">
+    <value>Die E-Mail-Adresse ist erforderlich.</value>
+  </data>
+  <data name="ForgotPassword_EmailInvalid" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="ResetPassword_PasswordRequired" xml:space="preserve">
+    <value>Ein Passwort ist erforderlich.</value>
+  </data>
+  <data name="ResetPassword_ConfirmPasswordRequired" xml:space="preserve">
+    <value>Die Bestätigung des Passworts ist erforderlich.</value>
+  </data>
+  <data name="ResetPassword_PasswordMismatch" xml:space="preserve">
+    <value>Die Passwörter stimmen nicht überein.</value>
+  </data>
+  <data name="Login_NewsletterEmailRequired" xml:space="preserve">
+    <value>Bitte geben Sie eine E-Mail-Adresse an.</value>
+  </data>
+  <data name="Login_NewsletterEmailInvalid" xml:space="preserve">
+    <value>Bitte geben Sie eine gültige E-Mail-Adresse ein.</value>
+  </data>
+  <data name="Register_Success" xml:space="preserve">
+    <value>Konto erfolgreich erstellt.</value>
+  </data>
+  <data name="Register_Error" xml:space="preserve">
+    <value>Fehler bei der Registrierung</value>
+  </data>
+  <data name="InvoiceDetail_StatusManagementTitle" xml:space="preserve">
+    <value>Statusverwaltung</value>
+  </data>
+  <data name="InvoiceDetail_StatusUpdateSuccess" xml:space="preserve">
+    <value>Status wurde erfolgreich aktualisiert.</value>
+  </data>
+  <data name="InvoiceDetail_StatusUpdateError" xml:space="preserve">
+    <value>Fehler beim Aktualisieren des Status.</value>
+  </data>
+  <data name="InvoiceDetail_ActionLabel" xml:space="preserve">
+    <value>Aktion / Status</value>
+  </data>
+  <data name="InvoiceDetail_SaveStatus" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Draft" xml:space="preserve">
+    <value>Entwurf</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Submitted" xml:space="preserve">
+    <value>Eingereicht</value>
+  </data>
+  <data name="InvoicePrimaryStatus_InReview" xml:space="preserve">
+    <value>In Prüfung</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Inquiry" xml:space="preserve">
+    <value>Rückfrage</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Accepted" xml:space="preserve">
+    <value>Akzeptiert</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Court" xml:space="preserve">
+    <value>Gericht</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Completed" xml:space="preserve">
+    <value>Abgeschlossen</value>
+  </data>
+  <data name="Login_EmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse oder Benutzername</value>
+  </data>
+  <data name="Login_ForgotPassword" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="Login_InvalidCredentials" xml:space="preserve">
+    <value>Benutzername oder Passwort ist falsch!</value>
+  </data>
+  <data name="Login_MembershipLink" xml:space="preserve">
+    <value>Mitglied werden</value>
+  </data>
+  <data name="Login_MembershipPrompt" xml:space="preserve">
+    <value>Noch kein Mitglied?</value>
+  </data>
+  <data name="Login_NewsletterBenefit2" xml:space="preserve">
+    <value>Einladungslink ganz einfach weiterleiten.</value>
+  </data>
+  <data name="Login_NewsletterBenefit3" xml:space="preserve">
+    <value>Erhalten Sie exklusive Rechtstipps direkt in Ihr Postfach.</value>
+  </data>
+  <data name="Login_NewsletterEmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="Login_NewsletterEmailPlaceholder" xml:space="preserve">
+    <value>name@unternehmen.de</value>
+  </data>
+  <data name="Login_NewsletterHighlight" xml:space="preserve">
+    <value>Bleiben Sie informiert</value>
+  </data>
+  <data name="Login_NewsletterHint" xml:space="preserve">
+    <value>Sie können sich jederzeit wieder abmelden.</value>
+  </data>
+  <data name="Login_NewsletterReopenPrompt" xml:space="preserve">
+    <value>Newsletter verpasst? Hier erneut öffnen.</value>
+  </data>
+  <data name="Login_NewsletterReopenButton" xml:space="preserve">
+    <value>Newsletter anzeigen</value>
+  </data>
+  <data name="Login_NewsletterTabLabel" xml:space="preserve">
+    <value>Newsletter</value>
+  </data>
+  <data name="Login_NewsletterStatus" xml:space="preserve">
+    <value>Newsletter AKTIV / inaktiv schaltbar</value>
+  </data>
+  <data name="Login_NewsletterSubscribe" xml:space="preserve">
+    <value>Jetzt abonnieren</value>
+  </data>
+  <data name="Login_NewsletterSuccess" xml:space="preserve">
+    <value>Vielen Dank! Wir haben Ihre Newsletter-Anmeldung erhalten.</value>
+  </data>
+  <data name="Login_NewsletterWelcomeSubject" xml:space="preserve">
+    <value>Willkommen im Rechtfix-Newsletter</value>
+  </data>
+  <data name="Login_NewsletterWelcomeBody" xml:space="preserve">
+    <value>Schön, dass Sie dabei sind. Ab sofort erhalten Sie Neuigkeiten, Tipps und Angebote rund um Rechtfix.</value>
+  </data>
+  <data name="Login_NewsletterTitle" xml:space="preserve">
+    <value>Rechtfix Newsletter</value>
+  </data>
+  <data name="Login_PasswordLabel" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Login_RegisterButton" xml:space="preserve">
+    <value>Jetzt registrieren</value>
+  </data>
+  <data name="Login_SubmitButton" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Login_Subtitle" xml:space="preserve">
+    <value>Melden Sie sich mit Ihren Zugangsdaten an, um das Rechtfix Portal zu nutzen.</value>
+  </data>
+  <data name="Login_Title" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Login_TooManyAttempts" xml:space="preserve">
+    <value>Zu viele Anmeldeversuche. Bitte versuchen Sie es in {0} Minuten erneut!</value>
+  </data>
+  <data name="Login_WelcomeBack" xml:space="preserve">
+    <value>Willkommen zurück, {0}!</value>
+  </data>
+  <data name="Register_CompanyLabel" xml:space="preserve">
+    <value>Firma</value>
+  </data>
+  <data name="Register_ConfirmPasswordLabel" xml:space="preserve">
+    <value>Passwort bestätigen</value>
+  </data>
+  <data name="Register_EmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="Register_GenderLabel" xml:space="preserve">
+    <value>Geschlecht</value>
+  </data>
+  <data name="Register_GenderPlaceholder" xml:space="preserve">
+    <value>Wählen Sie ein Geschlecht</value>
+  </data>
+  <data name="Register_GenderOptionFemale" xml:space="preserve">
+    <value>Weiblich</value>
+  </data>
+  <data name="Register_GenderOptionMale" xml:space="preserve">
+    <value>Männlich</value>
+  </data>
+  <data name="Register_GenderOptionDiverse" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="Register_TitleLabel" xml:space="preserve">
+    <value>Akademischer Titel</value>
+  </data>
+  <data name="Register_TitlePlaceholder" xml:space="preserve">
+    <value>Titel wählen (optional)</value>
+  </data>
+  <data name="Register_TitleOptionDr" xml:space="preserve">
+    <value>Dr.</value>
+  </data>
+  <data name="Register_TitleOptionProf" xml:space="preserve">
+    <value>Prof.</value>
+  </data>
+  <data name="Register_TitleOptionProfDr" xml:space="preserve">
+    <value>Prof. Dr.</value>
+  </data>
+  <data name="Register_NameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Register_FirstNameLabel" xml:space="preserve">
+    <value>Vorname</value>
+  </data>
+  <data name="Register_LastNameLabel" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="Register_NameRequired" xml:space="preserve">
+    <value>Name ist erforderlich.</value>
+  </data>
+  <data name="Register_PasswordLabel" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="Register_PrivacyLinkText" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="Register_PrivacyPrefix" xml:space="preserve">
+    <value>Ich habe die</value>
+  </data>
+  <data name="Register_PrivacyRequired" xml:space="preserve">
+    <value>Die Datenschutzerklärung muss akzeptiert werden.</value>
+  </data>
+  <data name="Register_PrivacySuffix" xml:space="preserve">
+    <value> gelesen.</value>
+  </data>
+  <data name="Register_SubmitButton" xml:space="preserve">
+    <value>Absenden</value>
+  </data>
+  <data name="Register_Subtitle" xml:space="preserve">
+    <value>Bereits Mitglied?</value>
+  </data>
+  <data name="Register_SubtitleLink" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="Register_Title" xml:space="preserve">
+    <value>Registrierung</value>
+  </data>
+  <data name="Register_UserExists" xml:space="preserve">
+    <value>Ein Konto mit dieser E-Mail-Adresse existiert bereits.</value>
+  </data>
+  <data name="Register_NotMemberButton" xml:space="preserve">
+    <value>Noch kein Mitglied?</value>
+  </data>
+  <data name="ForgotPassword_Title" xml:space="preserve">
+    <value>Passwort vergessen?</value>
+  </data>
+  <data name="ForgotPassword_Subtitle" xml:space="preserve">
+    <value>Geben Sie die E-Mail-Adresse Ihres Kontos ein und wir senden Ihnen einen Link zum Zurücksetzen.</value>
+  </data>
+  <data name="ForgotPassword_Success" xml:space="preserve">
+    <value>Wenn ein Konto mit dieser E-Mail-Adresse existiert, haben wir einen Link zum Zurücksetzen des Passworts gesendet.</value>
+  </data>
+  <data name="ForgotPassword_EmailLabel" xml:space="preserve">
+    <value>E-Mail-Adresse</value>
+  </data>
+  <data name="ForgotPassword_BackToLogin" xml:space="preserve">
+    <value>Zurück zum Login</value>
+  </data>
+  <data name="ForgotPassword_Submit" xml:space="preserve">
+    <value>Link senden</value>
+  </data>
+  <data name="ForgotPassword_EmailSettingsMissing" xml:space="preserve">
+    <value>Die E-Mail-Einstellungen sind nicht konfiguriert. Bitte wenden Sie sich an einen Administrator.</value>
+  </data>
+  <data name="ForgotPassword_EmailSendFailed" xml:space="preserve">
+    <value>Der Reset-Link konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.</value>
+  </data>
+  <data name="ResetPassword_Title" xml:space="preserve">
+    <value>Passwort zurücksetzen</value>
+  </data>
+  <data name="ResetPassword_Subtitle" xml:space="preserve">
+    <value>Erstellen Sie ein neues Passwort für Ihr Konto.</value>
+  </data>
+  <data name="ResetPassword_Success" xml:space="preserve">
+    <value>Ihr Passwort wurde erfolgreich aktualisiert.</value>
+  </data>
+  <data name="ResetPassword_InvalidToken" xml:space="preserve">
+    <value>Dieser Link zum Zurücksetzen ist ungültig oder abgelaufen.</value>
+  </data>
+  <data name="ResetPassword_RequestNew" xml:space="preserve">
+    <value>Neuen Link anfordern</value>
+  </data>
+  <data name="ResetPassword_NewPasswordLabel" xml:space="preserve">
+    <value>Neues Passwort</value>
+  </data>
+  <data name="ResetPassword_ConfirmPasswordLabel" xml:space="preserve">
+    <value>Neues Passwort bestätigen</value>
+  </data>
+  <data name="ResetPassword_Submit" xml:space="preserve">
+    <value>Passwort aktualisieren</value>
+  </data>
+  <data name="ResetPassword_UpdateFailed" xml:space="preserve">
+    <value>Das Passwort konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="StatusFilterLabel" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusFilterAll" xml:space="preserve">
+    <value>Alle Status</value>
+  </data>
+  <data name="ClaimsQuotaManageButton" xml:space="preserve">
+    <value>Plan verwalten</value>
+  </data>
+  <data name="UserPage_TablePrivacy" xml:space="preserve">
+    <value>Datenschutz akzeptiert</value>
+  </data>
+  <data name="UserPage_TablePrivacyAt" xml:space="preserve">
+    <value>Akzeptiert am</value>
+  </data>
+  <data name="UserPage_RoleUpdateSuccess" xml:space="preserve">
+    <value>Erfolgreich übermittelt!</value>
+  </data>
+  <data name="UserPage_PasswordUpdateSuccess" xml:space="preserve">
+    <value>Passwort erfolgreich aktualisiert!</value>
+  </data>
   <data name="NavMenu_Client" xml:space="preserve">
     <value>Mandant</value>
   </data>
@@ -3556,155 +3630,47 @@
   <data name="InvoicePrimaryStatusLabel" xml:space="preserve">
     <value>Hauptstatus</value>
   </data>
-  <data name="InvoicePrimaryStatus_Draft" xml:space="preserve">
-    <value>Entwurf</value>
+  <data name="Pagination_ItemsPerPage" xml:space="preserve">
+    <value>Einträge pro Seite</value>
   </data>
-  <data name="InvoicePrimaryStatus_Submitted" xml:space="preserve">
-    <value>Eingereicht</value>
+  <data name="Theme_LightMode" xml:space="preserve">
+    <value>Heller Modus</value>
   </data>
-  <data name="InvoicePrimaryStatus_InReview" xml:space="preserve">
-    <value>In Prüfung</value>
+  <data name="Theme_DarkMode" xml:space="preserve">
+    <value>Dunkler Modus</value>
   </data>
-  <data name="InvoicePrimaryStatus_Inquiry" xml:space="preserve">
-    <value>Rückfrage</value>
+  <data name="Error_InvalidRequestId" xml:space="preserve">
+    <value>Ungültige Anfrage-ID</value>
   </data>
-  <data name="InvoicePrimaryStatus_Accepted" xml:space="preserve">
-    <value>Akzeptiert</value>
+  <data name="Error_PaymentTimeout" xml:space="preserve">
+    <value>Zeitüberschreitung beim Warten auf Zahlungsbestätigung</value>
   </data>
-  <data name="InvoicePrimaryStatus_Court" xml:space="preserve">
-    <value>Gericht</value>
+  <data name="Error_ReportGenerationFailed" xml:space="preserve">
+    <value>Bericht konnte nicht erstellt werden</value>
   </data>
-  <data name="InvoicePrimaryStatus_Completed" xml:space="preserve">
-    <value>Abgeschlossen</value>
+  <data name="Register_ActiveSubscriptionRequired" xml:space="preserve">
+    <value>Aktives Abonnement erforderlich</value>
   </data>
-  <data name="CommonDeleteDialogConfirmButtonText" xml:space="preserve">
-    <value>OK</value>
+  <data name="Register_SubscriptionPlanNotFound" xml:space="preserve">
+    <value>Abonnementplan nicht gefunden</value>
   </data>
-  <data name="CommonDeleteDialogTitle" xml:space="preserve">
-    <value>Löschen bestätigen</value>
+  <data name="Login_UserName" xml:space="preserve">
+    <value>Benutzername</value>
   </data>
-  <data name="ConfirmInputPassword" xml:space="preserve">
-    <value>Bitte geben Sie Ihr Passwort ein.</value>
+  <data name="Login_Password" xml:space="preserve">
+    <value>Passwort</value>
   </data>
-  <data name="ConfirmInputPasswordButtonText" xml:space="preserve">
-    <value>Bestätigen</value>
+  <data name="Login_Processing" xml:space="preserve">
+    <value>Verarbeite...</value>
   </data>
-  <data name="NotFindUser" xml:space="preserve">
-    <value>Benutzerinformationen nicht gefunden!</value>
+  <data name="Login_AccountLocked" xml:space="preserve">
+    <value>Ihr Konto ist gesperrt.</value>
   </data>
-  <data name="OrganizationTreeSelect_ClearBtnText" xml:space="preserve">
-    <value>Auswahl entfernen</value>
+  <data name="Login_Error" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten.</value>
   </data>
-  <data name="OrganizationTreeSelect_Title" xml:space="preserve">
-    <value>Bitte Organisation wählen</value>
-  </data>
-  <data name="OrganizationTreeSelect_TitleText" xml:space="preserve">
-    <value>Bitte wählen</value>
-  </data>
-  <data name="PasswordHelpText" xml:space="preserve">
-    <value>Bitte Passwort eingeben</value>
-  </data>
-  <data name="PasswordValidFail" xml:space="preserve">
-    <value>Passwort-Validierung fehlgeschlagen!</value>
-  </data>
-  <data name="HomePage_RecentAudit" xml:space="preserve">
-    <value>Letzte Aktivitäten</value>
-  </data>
-  <data name="HomePage_OperationType" xml:space="preserve">
-    <value>Vorgangstyp</value>
-  </data>
-  <data name="HomePage_Entity" xml:space="preserve">
-    <value>Entität</value>
-  </data>
-  <data name="HomePage_Time" xml:space="preserve">
-    <value>Zeit</value>
-  </data>
-  <data name="HomePage_Operation_Delete" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="HomePage_Operation_Modify" xml:space="preserve">
-    <value>Bearbeiten</value>
-  </data>
-  <data name="HomePage_Operation_Add" xml:space="preserve">
-    <value>Hinzufügen</value>
-  </data>
-  <data name="AuditLogDetailDialog_TableH1" xml:space="preserve">
-    <value>Nr.</value>
-  </data>
-  <data name="AuditLogDetailDialog_TableH2" xml:space="preserve">
-    <value>Eigenschaft</value>
-  </data>
-  <data name="AuditLogDetailDialog_TableH3" xml:space="preserve">
-    <value>Alter Wert</value>
-  </data>
-  <data name="AuditLogDetailDialog_TableH4" xml:space="preserve">
-    <value>Neuer Wert</value>
-  </data>
-  <data name="AuditLogPage_OperationCreate" xml:space="preserve">
-    <value>Erstellen</value>
-  </data>
-  <data name="AuditLogPage_OperationDelete" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="AuditLogPage_OperationModify" xml:space="preserve">
-    <value>Bearbeiten</value>
-  </data>
-  <data name="AuditLogPage_TableH1" xml:space="preserve">
-    <value>Nr.</value>
-  </data>
-  <data name="AuditLogPage_TableH2" xml:space="preserve">
-    <value>Transaktions-ID</value>
-  </data>
-  <data name="AuditLogPage_TableH3" xml:space="preserve">
-    <value>Benutzer</value>
-  </data>
-  <data name="AuditLogPage_TableH4" xml:space="preserve">
-    <value>Ziel</value>
-  </data>
-  <data name="AuditLogPage_TableH5" xml:space="preserve">
-    <value>Typ</value>
-  </data>
-  <data name="AuditLogPage_TableH6" xml:space="preserve">
-    <value>Zeit</value>
-  </data>
-  <data name="AuditLogPage_TableH7" xml:space="preserve">
-    <value>Wert</value>
-  </data>
-  <data name="AuditLogPage_Title" xml:space="preserve">
-    <value>Audit-Log</value>
-  </data>
-  <data name="NoAuhtorized_ChangeUserText" xml:space="preserve">
-    <value>Benutzer wechseln</value>
-  </data>
-  <data name="NoAuhtorized_Text" xml:space="preserve">
-    <value>Keine Berechtigung...</value>
-  </data>
-  <data name="NotFound_Text" xml:space="preserve">
-    <value>Seite nicht gefunden</value>
-  </data>
-  <data name="Search_Text" xml:space="preserve">
-    <value>Suchen</value>
-  </data>
-  <data name="WizardStartOptionAfterReminderPrompt" xml:space="preserve">
-    <value>Wählen Sie den Startzeitpunkt der Mahnung.</value>
-  </data>
-  <data name="WizardStartOptionAfterReminderHelper" xml:space="preserve">
-    <value>Wir beginnen, sobald Ihre Mahnung zur gewählten Zeit versendet wurde.</value>
-  </data>
-  <data name="WizardStartOptionAfterReminderSelected" xml:space="preserve">
-    <value>Geplant für {0}</value>
-  </data>
-  <data name="WizardStartOptionAfterReminderValidation" xml:space="preserve">
-    <value>Bitte wählen Sie, wann nach Ihrer Mahnung gestartet werden soll.</value>
-  </data>
-  <data name="WizardDescriptionStartScheduled" xml:space="preserve">
-    <value>Start nach Mahnung am {0}</value>
-  </data>
-  <data name="Admin_TableActions" xml:space="preserve">
-    <value>Aktionen</value>
-  </data>
-  <data name="Register_Error" xml:space="preserve">
-    <value>Fehler bei der Registrierung</value>
+  <data name="Login_Success" xml:space="preserve">
+    <value>Erfolgreich angemeldet!</value>
   </data>
   <data name="QuickCheck_Title" xml:space="preserve">
     <value>Firmen-Schnellcheck</value>
@@ -3754,24 +3720,6 @@
   <data name="Bonix_RegisterPrompt" xml:space="preserve">
     <value>Sie haben noch kein Konto?</value>
   </data>
-  <data name="Login_UserName" xml:space="preserve">
-    <value>Benutzername</value>
-  </data>
-  <data name="Login_Password" xml:space="preserve">
-    <value>Passwort</value>
-  </data>
-  <data name="Login_Processing" xml:space="preserve">
-    <value>Verarbeite...</value>
-  </data>
-  <data name="Login_AccountLocked" xml:space="preserve">
-    <value>Ihr Konto ist gesperrt.</value>
-  </data>
-  <data name="Login_Error" xml:space="preserve">
-    <value>Ein Fehler ist aufgetreten.</value>
-  </data>
-  <data name="Login_Success" xml:space="preserve">
-    <value>Erfolgreich angemeldet!</value>
-  </data>
   <data name="Bonix_RegisterPromo" xml:space="preserve">
     <value>Registrieren Sie sich jetzt kostenlos für eine einfachere Firmensuche.</value>
   </data>
@@ -3783,31 +3731,6 @@
   </data>
   <data name="Dashboard_History_Description" xml:space="preserve">
     <value>Historie Ihrer Abfragen</value>
-  </data>
-  <data name="Pagination_ItemsPerPage" xml:space="preserve">
-    <value>Einträge pro Seite</value>
-  </data>
-  <data name="Theme_LightMode" xml:space="preserve">
-    <value>Heller Modus</value>
-  </data>
-  <data name="Theme_DarkMode" xml:space="preserve">
-    <value>Dunkler Modus</value>
-  </data>
-  <data name="Error_InvalidRequestId" xml:space="preserve">
-    <value>Ungültige Anfrage-ID</value>
-  </data>
-  <data name="Error_PaymentTimeout" xml:space="preserve">
-    <value>Zeitüberschreitung beim Warten auf Zahlungsbestätigung</value>
-  </data>
-  <data name="Error_ReportGenerationFailed" xml:space="preserve">
-    <value>Bericht konnte nicht erstellt werden</value>
-  </data>
-
-  <data name="Register_ActiveSubscriptionRequired" xml:space="preserve">
-    <value>Aktives Abonnement erforderlich</value>
-  </data>
-  <data name="Register_SubscriptionPlanNotFound" xml:space="preserve">
-    <value>Abonnementplan nicht gefunden</value>
   </data>
   <data name="AdminNavMenu_Clients" xml:space="preserve">
     <value>Mandanten</value>
@@ -3847,51 +3770,6 @@
   </data>
   <data name="UserPage_UpdatedAt" xml:space="preserve">
     <value>Aktualisiert am</value>
-  </data>
-  <data name="Login_ForgotPassword" xml:space="preserve">
-    <value>Passwort vergessen?</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsSectionTitle" xml:space="preserve">
-    <value>Ihre Dokumente</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsEmpty" xml:space="preserve">
-    <value>Noch keine Dokumente hochgeladen.</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsUploadButton" xml:space="preserve">
-    <value>Dokument hochladen</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsUploadSuccess" xml:space="preserve">
-    <value>Dokument erfolgreich hochgeladen.</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsUploadError" xml:space="preserve">
-    <value>Fehler beim Hochladen. Bitte versuchen Sie es erneut.</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsUploadSizeError" xml:space="preserve">
-    <value>Die Datei ist zu groß (max. 15 MB).</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsDownload" xml:space="preserve">
-    <value>Herunterladen</value>
-  </data>
-  <data name="AdminInvoiceDetail_ClientDocsSectionTitle" xml:space="preserve">
-    <value>Dokumente vom Mandanten</value>
-  </data>
-  <data name="AdminInvoiceDetail_ClientDocsEmpty" xml:space="preserve">
-    <value>Keine Dokumente vom Mandanten vorhanden.</value>
-  </data>
-  <data name="DeleteButton" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsDeleteConfirmTitle" xml:space="preserve">
-    <value>Dokument löschen</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsDeleteConfirmMessage" xml:space="preserve">
-    <value>Möchten Sie dieses Dokument wirklich löschen?</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsDeleteSuccess" xml:space="preserve">
-    <value>Dokument erfolgreich gelöscht.</value>
-  </data>
-  <data name="InvoiceDetail_ClientDocsDeleteError" xml:space="preserve">
-    <value>Fehler beim Löschen. Bitte versuchen Sie es erneut.</value>
   </data>
   <data name="PartnerNav_Partner" xml:space="preserve">
     <value>Partner</value>
@@ -3974,7 +3852,6 @@
   <data name="PartnerDashboard_Commission_RateValue" xml:space="preserve">
     <value>Auf Anfrage</value>
   </data>
-  <!-- Recommendations page -->
   <data name="PartnerRec_Title" xml:space="preserve">
     <value>Meine Empfehlungen</value>
   </data>
@@ -4008,7 +3885,6 @@
   <data name="PartnerRec_BillingMonthly" xml:space="preserve">
     <value>Monatlich</value>
   </data>
-  <!-- Commissions page -->
   <data name="PartnerComm_Title" xml:space="preserve">
     <value>Meine Provisionen</value>
   </data>
@@ -4045,7 +3921,6 @@
   <data name="PartnerComm_StatusPending" xml:space="preserve">
     <value>Ausstehend</value>
   </data>
-  <!-- Sub-Partners page -->
   <data name="PartnerSub_Title" xml:space="preserve">
     <value>Meine Sub-Partner</value>
   </data>
@@ -4106,7 +3981,6 @@
   <data name="PartnerSub_CreateError" xml:space="preserve">
     <value>Fehler beim Erstellen des Sub-Partners.</value>
   </data>
-  <!-- Affiliate Links page -->
   <data name="PartnerAffiliate_Title" xml:space="preserve">
     <value>Affiliate-Links</value>
   </data>
@@ -4125,8 +3999,188 @@
   <data name="PartnerAffiliate_Hint" xml:space="preserve">
     <value>Teilen Sie diesen Link mit potenziellen Kunden. Bei Registrierung werden diese automatisch Ihrer Partnerschaft zugeordnet.</value>
   </data>
+  <data name="AdminInvoiceDetail_ClientDocsSectionTitle" xml:space="preserve">
+    <value>Dokumente vom Mandanten</value>
+  </data>
+  <data name="AdminInvoiceDetail_ClientDocsEmpty" xml:space="preserve">
+    <value>Keine Dokumente vom Mandanten vorhanden.</value>
+  </data>
   <data name="AdminNavMenu_TaxOffices" xml:space="preserve">
     <value>Steuerberaterbüros</value>
+  </data>
+  <data name="AdminNavMenu_Employees" xml:space="preserve">
+    <value>Mitarbeiter</value>
+  </data>
+  <data name="InvoiceDetail_ChangeStatusButton" xml:space="preserve">
+    <value>Status ändern</value>
+  </data>
+  <data name="InvoiceDetail_RueckfrageButton" xml:space="preserve">
+    <value>Rückfrage</value>
+  </data>
+  <data name="RueckfrageDialog_Title" xml:space="preserve">
+    <value>Rückfrage senden</value>
+  </data>
+  <data name="RueckfrageDialog_Subtitle" xml:space="preserve">
+    <value>Senden Sie eine Rückfrage mit einer Nachricht an den Mandanten.</value>
+  </data>
+  <data name="RueckfrageDialog_MessageLabel" xml:space="preserve">
+    <value>Nachricht *</value>
+  </data>
+  <data name="RueckfrageDialog_MessagePlaceholder" xml:space="preserve">
+    <value>Welche Informationen oder Unterlagen fehlen?</value>
+  </data>
+  <data name="RueckfrageDialog_SendButton" xml:space="preserve">
+    <value>Rückfrage senden</value>
+  </data>
+  <data name="StatusChangeDialog_Title" xml:space="preserve">
+    <value>Status ändern</value>
+  </data>
+  <data name="StatusChangeDialog_Subtitle" xml:space="preserve">
+    <value>Wählen Sie den neuen Status für diesen Fall.</value>
+  </data>
+  <data name="StatusChangeDialog_SelectLabel" xml:space="preserve">
+    <value>Neuer Status</value>
+  </data>
+  <data name="StatusChangeDialog_SelectPlaceholder" xml:space="preserve">
+    <value>Status wählen...</value>
+  </data>
+  <data name="StatusChangeDialog_NoTransitions" xml:space="preserve">
+    <value>Keine weiteren Status-Übergänge möglich.</value>
+  </data>
+  <data name="StatusChangeDialog_NoteLabel" xml:space="preserve">
+    <value>Nachricht (optional)</value>
+  </data>
+  <data name="StatusChangeDialog_NotePlaceholder" xml:space="preserve">
+    <value>Optionale Nachricht an den Mandanten...</value>
+  </data>
+  <data name="CommonCancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="InvoicePrimaryStatus_CourtPrep" xml:space="preserve">
+    <value>Gericht vorbereiten</value>
+  </data>
+  <data name="InvoicePrimaryStatus_WaitingCourt" xml:space="preserve">
+    <value>Warten auf Gericht</value>
+  </data>
+  <data name="InvoicePrimaryStatus_DeadlineRunning" xml:space="preserve">
+    <value>Frist läuft</value>
+  </data>
+  <data name="InvoicePrimaryStatus_CourtResponse" xml:space="preserve">
+    <value>Gerichtsantwort</value>
+  </data>
+  <data name="InvoicePrimaryStatus_EnforcementReady" xml:space="preserve">
+    <value>Vollstreckung möglich</value>
+  </data>
+  <data name="InvoicePrimaryStatus_EnforcementInProgress" xml:space="preserve">
+    <value>Vollstreckung läuft</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Cancelled" xml:space="preserve">
+    <value>Storniert</value>
+  </data>
+  <data name="InvoicePrimaryStatus_Rejected" xml:space="preserve">
+    <value>Abgelehnt</value>
+  </data>
+  <data name="InvoiceDetail_TabOverview" xml:space="preserve">
+    <value>Übersicht</value>
+  </data>
+  <data name="InvoiceDetail_TabDocuments" xml:space="preserve">
+    <value>Dokumente</value>
+  </data>
+  <data name="InvoiceDetail_TabCommunication" xml:space="preserve">
+    <value>Kommunikation</value>
+  </data>
+  <data name="InvoiceDetail_TabCommunicationEmpty" xml:space="preserve">
+    <value>Keine Nachrichten vorhanden.</value>
+  </data>
+  <data name="InvoiceDetail_NoteFrom" xml:space="preserve">
+    <value>Kanzlei</value>
+  </data>
+  <data name="UserInvoice_KommunikationTitle" xml:space="preserve">
+    <value>Nachrichten</value>
+  </data>
+  <data name="UserInvoice_KommunikationEmpty" xml:space="preserve">
+    <value>Noch keine Nachrichten vorhanden.</value>
+  </data>
+  <data name="UserInvoice_KommunikationLabelKanzlei" xml:space="preserve">
+    <value>Kanzlei</value>
+  </data>
+  <data name="UserInvoice_KommunikationLabelSie" xml:space="preserve">
+    <value>Sie</value>
+  </data>
+  <data name="UserInvoice_KommunikationReplyPlaceholder" xml:space="preserve">
+    <value>Ihre Antwort...</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendButton" xml:space="preserve">
+    <value>Antwort senden</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendSuccess" xml:space="preserve">
+    <value>Nachricht gesendet.</value>
+  </data>
+  <data name="UserInvoice_KommunikationSendError" xml:space="preserve">
+    <value>Nachricht konnte nicht gesendet werden.</value>
+  </data>
+  <data name="PartnerManagement_RechtfixLink" xml:space="preserve">
+    <value>Rechtfix-Link</value>
+  </data>
+  <data name="PartnerManagement_BonixLink" xml:space="preserve">
+    <value>Bonix-Link</value>
+  </data>
+  <data name="PartnerManagement_RechtfixLinkType" xml:space="preserve">
+    <value>Rechtfix Registrierung</value>
+  </data>
+  <data name="PartnerManagement_BonixLinkType" xml:space="preserve">
+    <value>Bonix Registrierung</value>
+  </data>
+  <data name="PartnerManagement_LinkCopied" xml:space="preserve">
+    <value>Link für {0} kopiert!</value>
+  </data>
+  <data name="PartnerManagement_CopyFailed" xml:space="preserve">
+    <value>Kopieren fehlgeschlagen. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="UserPage_AssignedEmployee" xml:space="preserve">
+    <value>Zugewiesener Mitarbeiter</value>
+  </data>
+  <data name="UserPage_AssignedEmployeePlaceholder" xml:space="preserve">
+    <value>Mitarbeiter auswählen (optional)</value>
+  </data>
+  <data name="UserPage_NoEmployeeOption" xml:space="preserve">
+    <value>Kein Mitarbeiter</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsSectionTitle" xml:space="preserve">
+    <value>Ihre Dokumente</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsEmpty" xml:space="preserve">
+    <value>Noch keine Dokumente hochgeladen.</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsUploadButton" xml:space="preserve">
+    <value>Dokument hochladen</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsUploadSuccess" xml:space="preserve">
+    <value>Dokument erfolgreich hochgeladen.</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsUploadError" xml:space="preserve">
+    <value>Fehler beim Hochladen. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsUploadSizeError" xml:space="preserve">
+    <value>Die Datei ist zu groß (max. 15 MB).</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDownload" xml:space="preserve">
+    <value>Herunterladen</value>
+  </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDeleteConfirmTitle" xml:space="preserve">
+    <value>Dokument löschen</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDeleteConfirmMessage" xml:space="preserve">
+    <value>Möchten Sie dieses Dokument wirklich löschen?</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDeleteSuccess" xml:space="preserve">
+    <value>Dokument erfolgreich gelöscht.</value>
+  </data>
+  <data name="InvoiceDetail_ClientDocsDeleteError" xml:space="preserve">
+    <value>Fehler beim Löschen. Bitte versuchen Sie es erneut.</value>
   </data>
   <data name="TaxOffice_Title" xml:space="preserve">
     <value>Steuerberaterbüros</value>
@@ -4361,5 +4415,8 @@
   </data>
   <data name="Permission_admin_tax_offices" xml:space="preserve">
     <value>Steuerbüros</value>
+  </data>
+  <data name="UserPage_Title_Employees" xml:space="preserve">
+    <value>Mitarbeiter</value>
   </data>
 </root>

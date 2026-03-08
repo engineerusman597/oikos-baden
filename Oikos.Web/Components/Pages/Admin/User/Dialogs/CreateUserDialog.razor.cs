@@ -19,6 +19,7 @@ public partial class CreateUserDialog
     [Inject] private IUserRoleService UserRoleService { get; set; } = null!;
     [Inject] private IUserPermissionService UserPermissionService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
+    [Parameter] public bool IsFromEmployees { get; set; }
 
     private CreateUserModel _model = new();
     private List<Application.Services.Partner.Models.PartnerDetail> _partners = new();
@@ -27,7 +28,11 @@ public partial class CreateUserDialog
     private bool _processing;
 
     private int? _employeeRoleId;
+    private int? _adminRoleId;
+    private int? _partnerRoleId;
     private bool _isEmployeeRole => _model.RoleId.HasValue && _model.RoleId == _employeeRoleId;
+    private bool _isAdminRole => _model.RoleId.HasValue && _model.RoleId == _adminRoleId;
+    private bool _isPartnerRole => _model.RoleId.HasValue && _model.RoleId == _partnerRoleId;
     private readonly HashSet<string> _selectedPermissions = new();
 
     protected override async Task OnInitializedAsync()
@@ -37,23 +42,35 @@ public partial class CreateUserDialog
         _roles = await UserRoleService.GetAvailableRolesAsync();
 
         var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
+        var adminRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Admin.ToRoleName());
+        var partnerRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Partner.ToRoleName());
         _employeeRoleId = employeeRole?.Id;
+        _adminRoleId = adminRole?.Id;
+        _partnerRoleId = partnerRole?.Id;
 
         if (_employeeRoleId.HasValue)
         {
             var employeeCriteria = new UserSearchCriteria { RoleId = _employeeRoleId, PageSize = 1000, Page = 1 };
             var employeeResult = await UserManagementService.GetUsersAsync(employeeCriteria);
-            _employees = employeeResult.Items
+            _employees = [.. employeeResult.Items
                 .Select(u => new EmployeeItem { Id = u.Id, Name = u.RealName ?? u.Name })
-                .OrderBy(e => e.Name)
-                .ToList();
+                .OrderBy(e => e.Name)];
         }
 
         // Set default role to "User"
         var defaultRole = _roles.FirstOrDefault(r => r.Name == RoleNames.User.ToRoleName());
-        if (defaultRole != null)
+       
+
+        if (IsFromEmployees)
         {
-            _model.RoleId = defaultRole.Id;
+            _model.RoleId = _employeeRoleId;
+        }
+        else
+        {
+            if (defaultRole != null)
+            {
+                _model.RoleId = defaultRole.Id;
+            }
         }
     }
 

@@ -19,7 +19,7 @@ namespace Oikos.Common.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class SharedResource {
@@ -628,6 +628,24 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client Documents Empty.
+        /// </summary>
+        public static string AdminInvoiceDetail_ClientDocsEmpty {
+            get {
+                return ResourceManager.GetString("AdminInvoiceDetail_ClientDocsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Section Title.
+        /// </summary>
+        public static string AdminInvoiceDetail_ClientDocsSectionTitle {
+            get {
+                return ResourceManager.GetString("AdminInvoiceDetail_ClientDocsSectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invoice details.
         /// </summary>
         public static string AdminInvoiceDetailTitle {
@@ -651,6 +669,24 @@ namespace Oikos.Common.Resources {
         public static string AdminNavMenu_Claims {
             get {
                 return ResourceManager.GetString("AdminNavMenu_Claims", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clients.
+        /// </summary>
+        public static string AdminNavMenu_Clients {
+            get {
+                return ResourceManager.GetString("AdminNavMenu_Clients", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees.
+        /// </summary>
+        public static string AdminNavMenu_Employees {
+            get {
+                return ResourceManager.GetString("AdminNavMenu_Employees", resourceCulture);
             }
         }
         
@@ -759,6 +795,15 @@ namespace Oikos.Common.Resources {
         public static string AdminNavMenu_System {
             get {
                 return ResourceManager.GetString("AdminNavMenu_System", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax Offices.
+        /// </summary>
+        public static string AdminNavMenu_TaxOffices {
+            get {
+                return ResourceManager.GetString("AdminNavMenu_TaxOffices", resourceCulture);
             }
         }
         
@@ -1069,6 +1114,15 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to Bonix.
+        /// </summary>
+        public static string AuthorizedLayout_BackToBonix {
+            get {
+                return ResourceManager.GetString("AuthorizedLayout_BackToBonix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Primary Color Select.
         /// </summary>
         public static string AuthorizedLayout_ColorPickerTitle {
@@ -1263,6 +1317,24 @@ namespace Oikos.Common.Resources {
         public static string BankEditor_WebsiteLabel {
             get {
                 return ResourceManager.GetString("BankEditor_WebsiteLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register now for free for easier company searches..
+        /// </summary>
+        public static string Bonix_RegisterPromo {
+            get {
+                return ResourceManager.GetString("Bonix_RegisterPromo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t have an account yet?.
+        /// </summary>
+        public static string Bonix_RegisterPrompt {
+            get {
+                return ResourceManager.GetString("Bonix_RegisterPrompt", resourceCulture);
             }
         }
         
@@ -1866,6 +1938,141 @@ namespace Oikos.Common.Resources {
         public static string CultureLanguage {
             get {
                 return ResourceManager.GetString("CultureLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to History of your queries.
+        /// </summary>
+        public static string Dashboard_History_Description {
+            get {
+                return ResourceManager.GetString("Dashboard_History_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload invoices and check status – even on the go.
+        /// </summary>
+        public static string Dashboard_MobileApp_Description {
+            get {
+                return ResourceManager.GetString("Dashboard_MobileApp_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Now.
+        /// </summary>
+        public static string Dashboard_MobileApp_OpenButton {
+            get {
+                return ResourceManager.GetString("Dashboard_MobileApp_OpenButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mobile App.
+        /// </summary>
+        public static string Dashboard_MobileApp_Title {
+            get {
+                return ResourceManager.GetString("Dashboard_MobileApp_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No activities available..
+        /// </summary>
+        public static string Dashboard_RecentActivities_Empty {
+            get {
+                return ResourceManager.GetString("Dashboard_RecentActivities_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Latest events in your cases.
+        /// </summary>
+        public static string Dashboard_RecentActivities_Subtitle {
+            get {
+                return ResourceManager.GetString("Dashboard_RecentActivities_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Activities.
+        /// </summary>
+        public static string Dashboard_RecentActivities_Title {
+            get {
+                return ResourceManager.GetString("Dashboard_RecentActivities_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No cases available..
+        /// </summary>
+        public static string Dashboard_RecentCases_Empty {
+            get {
+                return ResourceManager.GetString("Dashboard_RecentCases_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show all.
+        /// </summary>
+        public static string Dashboard_RecentCases_ShowAll {
+            get {
+                return ResourceManager.GetString("Dashboard_RecentCases_ShowAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your recently active cases.
+        /// </summary>
+        public static string Dashboard_RecentCases_Subtitle {
+            get {
+                return ResourceManager.GetString("Dashboard_RecentCases_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recent Cases.
+        /// </summary>
+        public static string Dashboard_RecentCases_Title {
+            get {
+                return ResourceManager.GetString("Dashboard_RecentCases_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancelled.
+        /// </summary>
+        public static string Dashboard_Status_Cancelled {
+            get {
+                return ResourceManager.GetString("Dashboard_Status_Cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejected.
+        /// </summary>
+        public static string Dashboard_Status_Rejected {
+            get {
+                return ResourceManager.GetString("Dashboard_Status_Rejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overview.
+        /// </summary>
+        public static string Dashboard_Title {
+            get {
+                return ResourceManager.GetString("Dashboard_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to Bonix.
+        /// </summary>
+        public static string Dashboard_Welcome_Bonix {
+            get {
+                return ResourceManager.GetString("Dashboard_Welcome_Bonix", resourceCulture);
             }
         }
         
@@ -3193,6 +3400,15 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your account is locked..
+        /// </summary>
+        public static string Login_AccountLocked {
+            get {
+                return ResourceManager.GetString("Login_AccountLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Account.
         /// </summary>
         public static string Login_CreateAccountDialogTitle {
@@ -3216,6 +3432,15 @@ namespace Oikos.Common.Resources {
         public static string Login_EmailLabel {
             get {
                 return ResourceManager.GetString("Login_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred..
+        /// </summary>
+        public static string Login_Error {
+            get {
+                return ResourceManager.GetString("Login_Error", resourceCulture);
             }
         }
         
@@ -3477,6 +3702,15 @@ namespace Oikos.Common.Resources {
         public static string Login_Subtitle {
             get {
                 return ResourceManager.GetString("Login_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully logged in!.
+        /// </summary>
+        public static string Login_Success {
+            get {
+                return ResourceManager.GetString("Login_Success", resourceCulture);
             }
         }
         
@@ -4237,6 +4471,60 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Link kopiert!.
+        /// </summary>
+        public static string PartnerAffiliate_Copied {
+            get {
+                return ResourceManager.GetString("PartnerAffiliate_Copied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Link kopieren.
+        /// </summary>
+        public static string PartnerAffiliate_CopyLink {
+            get {
+                return ResourceManager.GetString("PartnerAffiliate_CopyLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teilen Sie diesen Link mit potenziellen Kunden. Bei Registrierung werden diese automatisch Ihrer Partnerschaft zugeordnet..
+        /// </summary>
+        public static string PartnerAffiliate_Hint {
+            get {
+                return ResourceManager.GetString("PartnerAffiliate_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ihr Empfehlungslink.
+        /// </summary>
+        public static string PartnerAffiliate_LinkTitle {
+            get {
+                return ResourceManager.GetString("PartnerAffiliate_LinkTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ihre persönlichen Affiliate-Links zur Weiterleitung.
+        /// </summary>
+        public static string PartnerAffiliate_Subtitle {
+            get {
+                return ResourceManager.GetString("PartnerAffiliate_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Affiliate-Links.
+        /// </summary>
+        public static string PartnerAffiliate_Title {
+            get {
+                return ResourceManager.GetString("PartnerAffiliate_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Visit bank page.
         /// </summary>
         public static string PartnerBanks_ButtonLabel {
@@ -4318,6 +4606,330 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Genehmigt.
+        /// </summary>
+        public static string PartnerComm_Approved {
+            get {
+                return ResourceManager.GetString("PartnerComm_Approved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Noch keine Provisionseinträge vorhanden..
+        /// </summary>
+        public static string PartnerComm_Empty {
+            get {
+                return ResourceManager.GetString("PartnerComm_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alle Provisionsabrechnungen.
+        /// </summary>
+        public static string PartnerComm_HistorySubtitle {
+            get {
+                return ResourceManager.GetString("PartnerComm_HistorySubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisionshistorie.
+        /// </summary>
+        public static string PartnerComm_HistoryTitle {
+            get {
+                return ResourceManager.GetString("PartnerComm_HistoryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} in Bearbeitung.
+        /// </summary>
+        public static string PartnerComm_InProgress {
+            get {
+                return ResourceManager.GetString("PartnerComm_InProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausgezahlt.
+        /// </summary>
+        public static string PartnerComm_PaidOut {
+            get {
+                return ResourceManager.GetString("PartnerComm_PaidOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausstehend.
+        /// </summary>
+        public static string PartnerComm_Pending {
+            get {
+                return ResourceManager.GetString("PartnerComm_Pending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Genehmigt.
+        /// </summary>
+        public static string PartnerComm_StatusApproved {
+            get {
+                return ResourceManager.GetString("PartnerComm_StatusApproved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausstehend.
+        /// </summary>
+        public static string PartnerComm_StatusPending {
+            get {
+                return ResourceManager.GetString("PartnerComm_StatusPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Übersicht aller Ihrer Provisionsabrechnungen.
+        /// </summary>
+        public static string PartnerComm_Subtitle {
+            get {
+                return ResourceManager.GetString("PartnerComm_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meine Provisionen.
+        /// </summary>
+        public static string PartnerComm_Title {
+            get {
+                return ResourceManager.GetString("PartnerComm_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Auszahlungen.
+        /// </summary>
+        public static string PartnerComm_Withdrawals {
+            get {
+                return ResourceManager.GetString("PartnerComm_Withdrawals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisionssatz.
+        /// </summary>
+        public static string PartnerDashboard_Commission_Rate {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Commission_Rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auf Anfrage.
+        /// </summary>
+        public static string PartnerDashboard_Commission_RateValue {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Commission_RateValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktuelle Provisionskonditionen.
+        /// </summary>
+        public static string PartnerDashboard_Commission_Subtitle {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Commission_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ihre Provision.
+        /// </summary>
+        public static string PartnerDashboard_Commission_Title {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Commission_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisionsart.
+        /// </summary>
+        public static string PartnerDashboard_Commission_Type {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Commission_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monatlich (Abonnement).
+        /// </summary>
+        public static string PartnerDashboard_Commission_TypeValue {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Commission_TypeValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erhaltene Provision.
+        /// </summary>
+        public static string PartnerDashboard_CommissionPaid {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_CommissionPaid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Geworbene Kunden.
+        /// </summary>
+        public static string PartnerDashboard_CustomersReferred {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_CustomersReferred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kein Partner-Konto gefunden. Bitte wenden Sie sich an den Administrator..
+        /// </summary>
+        public static string PartnerDashboard_NoPartner {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_NoPartner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offene Provision.
+        /// </summary>
+        public static string PartnerDashboard_OpenCommission {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_OpenCommission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eigene Partner.
+        /// </summary>
+        public static string PartnerDashboard_OwnPartners {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_OwnPartners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ausstehend / In Bearbeitung.
+        /// </summary>
+        public static string PartnerDashboard_PendingInProgress {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_PendingInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empfehlungen.
+        /// </summary>
+        public static string PartnerDashboard_Recommendations {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Recommendations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code kopiert!.
+        /// </summary>
+        public static string PartnerDashboard_ReferralCode_Copied {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_ReferralCode_Copied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kopieren.
+        /// </summary>
+        public static string PartnerDashboard_ReferralCode_Copy {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_ReferralCode_Copy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kunden geben diesen Code bei der Registrierung an, um Ihrer Partnerschaft zugeordnet zu werden..
+        /// </summary>
+        public static string PartnerDashboard_ReferralCode_Hint {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_ReferralCode_Hint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teilen Sie diesen Code mit potenziellen Kunden.
+        /// </summary>
+        public static string PartnerDashboard_ReferralCode_Subtitle {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_ReferralCode_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ihr Empfehlungscode.
+        /// </summary>
+        public static string PartnerDashboard_ReferralCode_Title {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_ReferralCode_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub-Partner.
+        /// </summary>
+        public static string PartnerDashboard_SubPartners {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_SubPartners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ihre Partnerübersicht auf einen Blick.
+        /// </summary>
+        public static string PartnerDashboard_Subtitle {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gesamt erhalten.
+        /// </summary>
+        public static string PartnerDashboard_TotalReceived {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_TotalReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Willkommen, {0}.
+        /// </summary>
+        public static string PartnerDashboard_Welcome {
+            get {
+                return ResourceManager.GetString("PartnerDashboard_Welcome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string PartnerDialog_AddressLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_AddressLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company name.
+        /// </summary>
+        public static string PartnerDialog_BusinessNameLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_BusinessNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string PartnerDialog_Cancel {
@@ -4345,11 +4957,92 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Monthly.
+        /// </summary>
+        public static string PartnerDialog_CommissionMonthly {
+            get {
+                return ResourceManager.GetString("PartnerDialog_CommissionMonthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One-time.
+        /// </summary>
+        public static string PartnerDialog_CommissionOneTime {
+            get {
+                return ResourceManager.GetString("PartnerDialog_CommissionOneTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Period from membership start in which commissions are paid.
+        /// </summary>
+        public static string PartnerDialog_CommissionPeriodHelper {
+            get {
+                return ResourceManager.GetString("PartnerDialog_CommissionPeriodHelper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission period.
+        /// </summary>
+        public static string PartnerDialog_CommissionPeriodLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_CommissionPeriodLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission rate (%).
+        /// </summary>
+        public static string PartnerDialog_CommissionRateLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_CommissionRateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission type.
+        /// </summary>
+        public static string PartnerDialog_CommissionTypeLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_CommissionTypeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yearly.
+        /// </summary>
+        public static string PartnerDialog_CommissionYearly {
+            get {
+                return ResourceManager.GetString("PartnerDialog_CommissionYearly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string PartnerDialog_ConfirmPasswordLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_ConfirmPasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact email.
         /// </summary>
         public static string PartnerDialog_ContactLabel {
             get {
                 return ResourceManager.GetString("PartnerDialog_ContactLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact person.
+        /// </summary>
+        public static string PartnerDialog_ContactPersonLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_ContactPersonLabel", resourceCulture);
             }
         }
         
@@ -4381,6 +5074,15 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to months.
+        /// </summary>
+        public static string PartnerDialog_Months {
+            get {
+                return ResourceManager.GetString("PartnerDialog_Months", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Partner name.
         /// </summary>
         public static string PartnerDialog_NameLabel {
@@ -4399,11 +5101,119 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string PartnerDialog_PasswordLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_PasswordLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The passwords do not match..
+        /// </summary>
+        public static string PartnerDialog_PasswordMismatch {
+            get {
+                return ResourceManager.GetString("PartnerDialog_PasswordMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string PartnerDialog_PhoneLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_PhoneLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string PartnerDialog_Save {
             get {
                 return ResourceManager.GetString("PartnerDialog_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string PartnerDialog_StatusActive {
+            get {
+                return ResourceManager.GetString("PartnerDialog_StatusActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inactive.
+        /// </summary>
+        public static string PartnerDialog_StatusInactive {
+            get {
+                return ResourceManager.GetString("PartnerDialog_StatusInactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string PartnerDialog_StatusLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_StatusLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string PartnerDialog_TypeLabel {
+            get {
+                return ResourceManager.GetString("PartnerDialog_TypeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notary.
+        /// </summary>
+        public static string PartnerDialog_TypeNotar {
+            get {
+                return ResourceManager.GetString("PartnerDialog_TypeNotar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lawyer.
+        /// </summary>
+        public static string PartnerDialog_TypeRechtsanwalt {
+            get {
+                return ResourceManager.GetString("PartnerDialog_TypeRechtsanwalt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string PartnerDialog_TypeSonstige {
+            get {
+                return ResourceManager.GetString("PartnerDialog_TypeSonstige", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax advisor.
+        /// </summary>
+        public static string PartnerDialog_TypeSteuerberater {
+            get {
+                return ResourceManager.GetString("PartnerDialog_TypeSteuerberater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Business consultant.
+        /// </summary>
+        public static string PartnerDialog_TypeUnternehmensberater {
+            get {
+                return ResourceManager.GetString("PartnerDialog_TypeUnternehmensberater", resourceCulture);
             }
         }
         
@@ -4534,6 +5344,51 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Affiliate-Links.
+        /// </summary>
+        public static string PartnerNav_AffiliateLinks {
+            get {
+                return ResourceManager.GetString("PartnerNav_AffiliateLinks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisionen.
+        /// </summary>
+        public static string PartnerNav_Commissions {
+            get {
+                return ResourceManager.GetString("PartnerNav_Commissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Partner.
+        /// </summary>
+        public static string PartnerNav_Partner {
+            get {
+                return ResourceManager.GetString("PartnerNav_Partner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meine Empfehlungen.
+        /// </summary>
+        public static string PartnerNav_Recommendations {
+            get {
+                return ResourceManager.GetString("PartnerNav_Recommendations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub-Partner.
+        /// </summary>
+        public static string PartnerNav_SubPartners {
+            get {
+                return ResourceManager.GetString("PartnerNav_SubPartners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Coming soon.
         /// </summary>
         public static string PartnerNetwork_ComingSoon {
@@ -4548,6 +5403,285 @@ namespace Oikos.Common.Resources {
         public static string Partnernetzwerk {
             get {
                 return ResourceManager.GetString("Partnernetzwerk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monatlich.
+        /// </summary>
+        public static string PartnerRec_BillingMonthly {
+            get {
+                return ResourceManager.GetString("PartnerRec_BillingMonthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jährlich.
+        /// </summary>
+        public static string PartnerRec_BillingYearly {
+            get {
+                return ResourceManager.GetString("PartnerRec_BillingYearly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kundennr..
+        /// </summary>
+        public static string PartnerRec_CustomerNo {
+            get {
+                return ResourceManager.GetString("PartnerRec_CustomerNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Noch keine Empfehlungen vorhanden..
+        /// </summary>
+        public static string PartnerRec_Empty {
+            get {
+                return ResourceManager.GetString("PartnerRec_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Empfehlungen insgesamt.
+        /// </summary>
+        public static string PartnerRec_SectionCount {
+            get {
+                return ResourceManager.GetString("PartnerRec_SectionCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Geworbene Kunden.
+        /// </summary>
+        public static string PartnerRec_SectionTitle {
+            get {
+                return ResourceManager.GetString("PartnerRec_SectionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktiv.
+        /// </summary>
+        public static string PartnerRec_StatusActive {
+            get {
+                return ResourceManager.GetString("PartnerRec_StatusActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gekündigt.
+        /// </summary>
+        public static string PartnerRec_StatusCancelled {
+            get {
+                return ResourceManager.GetString("PartnerRec_StatusCancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Abgelaufen.
+        /// </summary>
+        public static string PartnerRec_StatusExpired {
+            get {
+                return ResourceManager.GetString("PartnerRec_StatusExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alle Kunden, die Sie empfohlen haben.
+        /// </summary>
+        public static string PartnerRec_Subtitle {
+            get {
+                return ResourceManager.GetString("PartnerRec_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meine Empfehlungen.
+        /// </summary>
+        public static string PartnerRec_Title {
+            get {
+                return ResourceManager.GetString("PartnerRec_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code kopieren.
+        /// </summary>
+        public static string PartnerSub_CopyCode {
+            get {
+                return ResourceManager.GetString("PartnerSub_CopyCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} Partner erstellt.
+        /// </summary>
+        public static string PartnerSub_Count {
+            get {
+                return ResourceManager.GetString("PartnerSub_Count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Partner erstellen.
+        /// </summary>
+        public static string PartnerSub_CreateButton {
+            get {
+                return ResourceManager.GetString("PartnerSub_CreateButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fehler beim Erstellen des Sub-Partners..
+        /// </summary>
+        public static string PartnerSub_CreateError {
+            get {
+                return ResourceManager.GetString("PartnerSub_CreateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub-Partner erfolgreich erstellt..
+        /// </summary>
+        public static string PartnerSub_CreateSuccess {
+            get {
+                return ResourceManager.GetString("PartnerSub_CreateSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Erstellen Sie einen neuen Partner mit eigenem Zugang.
+        /// </summary>
+        public static string PartnerSub_DialogSubtitle {
+            get {
+                return ResourceManager.GetString("PartnerSub_DialogSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Neuen Sub-Partner erstellen.
+        /// </summary>
+        public static string PartnerSub_DialogTitle {
+            get {
+                return ResourceManager.GetString("PartnerSub_DialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Noch keine Sub-Partner vorhanden..
+        /// </summary>
+        public static string PartnerSub_Empty {
+            get {
+                return ResourceManager.GetString("PartnerSub_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unternehmen.
+        /// </summary>
+        public static string PartnerSub_FieldBusiness {
+            get {
+                return ResourceManager.GetString("PartnerSub_FieldBusiness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provision.
+        /// </summary>
+        public static string PartnerSub_FieldCommissionRate {
+            get {
+                return ResourceManager.GetString("PartnerSub_FieldCommissionRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provisionsart.
+        /// </summary>
+        public static string PartnerSub_FieldCommissionType {
+            get {
+                return ResourceManager.GetString("PartnerSub_FieldCommissionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-Mail.
+        /// </summary>
+        public static string PartnerSub_FieldEmail {
+            get {
+                return ResourceManager.GetString("PartnerSub_FieldEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string PartnerSub_FieldName {
+            get {
+                return ResourceManager.GetString("PartnerSub_FieldName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passwort.
+        /// </summary>
+        public static string PartnerSub_FieldPassword {
+            get {
+                return ResourceManager.GetString("PartnerSub_FieldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telefon.
+        /// </summary>
+        public static string PartnerSub_FieldPhone {
+            get {
+                return ResourceManager.GetString("PartnerSub_FieldPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inaktiv.
+        /// </summary>
+        public static string PartnerSub_Inactive {
+            get {
+                return ResourceManager.GetString("PartnerSub_Inactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to + Neuer Sub-Partner.
+        /// </summary>
+        public static string PartnerSub_NewButton {
+            get {
+                return ResourceManager.GetString("PartnerSub_NewButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verwalten Sie Ihre eigenen Partner und deren Provisionen.
+        /// </summary>
+        public static string PartnerSub_Subtitle {
+            get {
+                return ResourceManager.GetString("PartnerSub_Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Meine Sub-Partner.
+        /// </summary>
+        public static string PartnerSub_Title {
+            get {
+                return ResourceManager.GetString("PartnerSub_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name, E-Mail und Passwort sind erforderlich..
+        /// </summary>
+        public static string PartnerSub_ValidationRequired {
+            get {
+                return ResourceManager.GetString("PartnerSub_ValidationRequired", resourceCulture);
             }
         }
         
@@ -4692,6 +5826,141 @@ namespace Oikos.Common.Resources {
         public static string ProjectScaffoldGeneration {
             get {
                 return ResourceManager.GetString("ProjectScaffoldGeneration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Advanced Search.
+        /// </summary>
+        public static string QuickCheck_AdvancedSearch {
+            get {
+                return ResourceManager.GetString("QuickCheck_AdvancedSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string QuickCheck_Back {
+            get {
+                return ResourceManager.GetString("QuickCheck_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for your order. Your report is ready for download..
+        /// </summary>
+        public static string QuickCheck_ConfirmedMessage {
+            get {
+                return ResourceManager.GetString("QuickCheck_ConfirmedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Confirmed.
+        /// </summary>
+        public static string QuickCheck_ConfirmedTitle {
+            get {
+                return ResourceManager.GetString("QuickCheck_ConfirmedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for a company and get the credit report immediately – no registration required..
+        /// </summary>
+        public static string QuickCheck_Description {
+            get {
+                return ResourceManager.GetString("QuickCheck_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We will send the report to this address..
+        /// </summary>
+        public static string QuickCheck_EmailHelper {
+            get {
+                return ResourceManager.GetString("QuickCheck_EmailHelper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email Address.
+        /// </summary>
+        public static string QuickCheck_EmailLabel {
+            get {
+                return ResourceManager.GetString("QuickCheck_EmailLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Search.
+        /// </summary>
+        public static string QuickCheck_NewSearch {
+            get {
+                return ResourceManager.GetString("QuickCheck_NewSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Failed.
+        /// </summary>
+        public static string QuickCheck_OrderFailedTitle {
+            get {
+                return ResourceManager.GetString("QuickCheck_OrderFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay &amp; Download.
+        /// </summary>
+        public static string QuickCheck_PayButton {
+            get {
+                return ResourceManager.GetString("QuickCheck_PayButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string QuickCheck_PriceLabel {
+            get {
+                return ResourceManager.GetString("QuickCheck_PriceLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait a moment. Your report is being generated..
+        /// </summary>
+        public static string QuickCheck_ProcessingMessage {
+            get {
+                return ResourceManager.GetString("QuickCheck_ProcessingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing Payment....
+        /// </summary>
+        public static string QuickCheck_ProcessingTitle {
+            get {
+                return ResourceManager.GetString("QuickCheck_ProcessingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quick Company Check.
+        /// </summary>
+        public static string QuickCheck_Title {
+            get {
+                return ResourceManager.GetString("QuickCheck_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try Again.
+        /// </summary>
+        public static string QuickCheck_TryAgain {
+            get {
+                return ResourceManager.GetString("QuickCheck_TryAgain", resourceCulture);
             }
         }
         
@@ -8062,6 +9331,15 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activated At.
+        /// </summary>
+        public static string UserPage_ActivatedAt {
+            get {
+                return ResourceManager.GetString("UserPage_ActivatedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active.
         /// </summary>
         public static string UserPage_Active {
@@ -8080,11 +9358,38 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        public static string UserPage_Amount {
+            get {
+                return ResourceManager.GetString("UserPage_Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto Renew.
+        /// </summary>
+        public static string UserPage_AutoRenew {
+            get {
+                return ResourceManager.GetString("UserPage_AutoRenew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string UserPage_Back {
             get {
                 return ResourceManager.GetString("UserPage_Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Billing Interval.
+        /// </summary>
+        public static string UserPage_BillingInterval {
+            get {
+                return ResourceManager.GetString("UserPage_BillingInterval", resourceCulture);
             }
         }
         
@@ -8103,6 +9408,15 @@ namespace Oikos.Common.Resources {
         public static string UserPage_Company {
             get {
                 return ResourceManager.GetString("UserPage_Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created At.
+        /// </summary>
+        public static string UserPage_CreatedAt {
+            get {
+                return ResourceManager.GetString("UserPage_CreatedAt", resourceCulture);
             }
         }
         
@@ -8305,6 +9619,15 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Expires At.
+        /// </summary>
+        public static string UserPage_ExpiresAt {
+            get {
+                return ResourceManager.GetString("UserPage_ExpiresAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active package.
         /// </summary>
         public static string UserPage_FilterActivePlan {
@@ -8485,6 +9808,15 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Never.
+        /// </summary>
+        public static string UserPage_LoginNever {
+            get {
+                return ResourceManager.GetString("UserPage_LoginNever", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modify password.
         /// </summary>
         public static string UserPage_ModifyPasswordTitle {
@@ -8584,6 +9916,24 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string UserPage_PlanStatusActive {
+            get {
+                return ResourceManager.GetString("UserPage_PlanStatusActive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inactive.
+        /// </summary>
+        public static string UserPage_PlanStatusInactive {
+            get {
+                return ResourceManager.GetString("UserPage_PlanStatusInactive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Privacy accepted.
         /// </summary>
         public static string UserPage_PrivacyAccepted {
@@ -8607,6 +9957,24 @@ namespace Oikos.Common.Resources {
         public static string UserPage_Reset {
             get {
                 return ResourceManager.GetString("UserPage_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Role.
+        /// </summary>
+        public static string UserPage_RoleLabel {
+            get {
+                return ResourceManager.GetString("UserPage_RoleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select role.
+        /// </summary>
+        public static string UserPage_RolePlaceholder {
+            get {
+                return ResourceManager.GetString("UserPage_RolePlaceholder", resourceCulture);
             }
         }
         
@@ -8746,11 +10114,29 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Subscriptions.
+        /// </summary>
+        public static string UserPage_Section_Subscriptions {
+            get {
+                return ResourceManager.GetString("UserPage_Section_Subscriptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set role.
         /// </summary>
         public static string UserPage_SetUserRoleTitle {
             get {
                 return ResourceManager.GetString("UserPage_SetUserRoleTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stage.
+        /// </summary>
+        public static string UserPage_Stage {
+            get {
+                return ResourceManager.GetString("UserPage_Stage", resourceCulture);
             }
         }
         
@@ -8823,6 +10209,24 @@ namespace Oikos.Common.Resources {
         public static string UserPage_SubmitText {
             get {
                 return ResourceManager.GetString("UserPage_SubmitText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subscription Plan.
+        /// </summary>
+        public static string UserPage_SubscriptionPlan {
+            get {
+                return ResourceManager.GetString("UserPage_SubscriptionPlan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string UserPage_SubscriptionStatus {
+            get {
+                return ResourceManager.GetString("UserPage_SubscriptionStatus", resourceCulture);
             }
         }
         
@@ -8971,6 +10375,15 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Login.
+        /// </summary>
+        public static string UserPage_TableLogin {
+            get {
+                return ResourceManager.GetString("UserPage_TableLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Partner.
         /// </summary>
         public static string UserPage_TablePartner {
@@ -8985,6 +10398,24 @@ namespace Oikos.Common.Resources {
         public static string UserPage_TablePartnerCode {
             get {
                 return ResourceManager.GetString("UserPage_TablePartnerCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string UserPage_TablePhone {
+            get {
+                return ResourceManager.GetString("UserPage_TablePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan.
+        /// </summary>
+        public static string UserPage_TablePlan {
+            get {
+                return ResourceManager.GetString("UserPage_TablePlan", resourceCulture);
             }
         }
         
@@ -9007,11 +10438,29 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invoices.
+        /// </summary>
+        public static string UserPage_TableRechnungen {
+            get {
+                return ResourceManager.GetString("UserPage_TableRechnungen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SEPA mandate.
         /// </summary>
         public static string UserPage_TableSepaMandate {
             get {
                 return ResourceManager.GetString("UserPage_TableSepaMandate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string UserPage_TableStatus {
+            get {
+                return ResourceManager.GetString("UserPage_TableStatus", resourceCulture);
             }
         }
         
@@ -9025,11 +10474,38 @@ namespace Oikos.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment.
+        /// </summary>
+        public static string UserPage_TableZahlung {
+            get {
+                return ResourceManager.GetString("UserPage_TableZahlung", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User.
         /// </summary>
         public static string UserPage_Title {
             get {
                 return ResourceManager.GetString("UserPage_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clients.
+        /// </summary>
+        public static string UserPage_Title_Clients {
+            get {
+                return ResourceManager.GetString("UserPage_Title_Clients", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees.
+        /// </summary>
+        public static string UserPage_Title_Employees {
+            get {
+                return ResourceManager.GetString("UserPage_Title_Employees", resourceCulture);
             }
         }
         
@@ -9093,6 +10569,15 @@ namespace Oikos.Common.Resources {
         public static string UserPage_TitlePlaceholder {
             get {
                 return ResourceManager.GetString("UserPage_TitlePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated At.
+        /// </summary>
+        public static string UserPage_UpdatedAt {
+            get {
+                return ResourceManager.GetString("UserPage_UpdatedAt", resourceCulture);
             }
         }
         
