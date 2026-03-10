@@ -26,7 +26,7 @@
                     @* Row 2: Gender + Academic Title *@
                     <MudItem xs="6">
                         <MudSelect T="string" @bind-Value="_model.Gender" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                  Label="@Loc["UserPage_GenderLabel"]" For="@(() => _model.Gender)" Placeholder="@Loc["UserPage_GenderPlaceholder"]">
+                                   Label="@Loc["UserPage_GenderLabel"]" For="@(() => _model.Gender)" Placeholder="@Loc["UserPage_GenderPlaceholder"]">
                             <MudSelectItem Value="@NameConstants.Genders.Female">@Loc["UserPage_GenderOptionFemale"]</MudSelectItem>
                             <MudSelectItem Value="@NameConstants.Genders.Male">@Loc["UserPage_GenderOptionMale"]</MudSelectItem>
                             <MudSelectItem Value="@NameConstants.Genders.Diverse">@Loc["UserPage_GenderOptionDiverse"]</MudSelectItem>
@@ -34,7 +34,7 @@
                     </MudItem>
                     <MudItem xs="6">
                         <MudSelect T="string" @bind-Value="_model.AcademicTitle" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                  Label="@Loc["UserPage_TitleLabel"]" Clearable="true" Placeholder="@Loc["UserPage_TitlePlaceholder"]">
+                                   Label="@Loc["UserPage_TitleLabel"]" Clearable="true" Placeholder="@Loc["UserPage_TitlePlaceholder"]">
                             <MudSelectItem Value="@NameConstants.Titles.Dr">@Loc["UserPage_TitleOptionDr"]</MudSelectItem>
                             <MudSelectItem Value="@NameConstants.Titles.Prof">@Loc["UserPage_TitleOptionProf"]</MudSelectItem>
                             <MudSelectItem Value="@NameConstants.Titles.ProfDr">@Loc["UserPage_TitleOptionProfDr"]</MudSelectItem>
@@ -52,20 +52,23 @@
                     </MudItem>
 
                     @* Row 4: Partner + Role *@
-                    <MudItem xs="6">
-                        <MudSelect T="int?" @bind-Value="_model.PartnerId" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                  Label="@Loc["UserPage_PartnerLabel"]" Placeholder="@Loc["UserPage_PartnerPlaceholder"]" Clearable="true">
-                            <MudSelectItem Value="@((int?)null)">@Loc["UserPage_NoPartnerOption"]</MudSelectItem>
-                            @foreach (var partner in _partners)
-                            {
-                                <MudSelectItem Value="@((int?)partner.Id)">@($"{partner.Name} ({partner.Code})")</MudSelectItem>
-                            }
-                        </MudSelect>
-                    </MudItem>
+                    @if (!_isEmployeeRole && !_isAdminRole && !_isPartnerRole)
+                    {
+                        <MudItem xs="6">
+                            <MudSelect T="int?" @bind-Value="_model.PartnerId" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                       Label="@Loc["UserPage_PartnerLabel"]" Placeholder="@Loc["UserPage_PartnerPlaceholder"]" Clearable="true">
+                                <MudSelectItem Value="@((int?)null)">@Loc["UserPage_NoPartnerOption"]</MudSelectItem>
+                                @foreach (var partner in _partners)
+                                {
+                                    <MudSelectItem Value="@((int?)partner.Id)">@($"{partner.Name} ({partner.Code})")</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                    }
                     <MudItem xs="6">
                         <MudSelect T="int?" Value="_model.RoleId" Variant="Variant.Outlined" Margin="Margin.Dense" Disabled="_isEmployeeRole"
-                                  Label="@Loc["UserPage_RoleLabel"]" Placeholder="@Loc["UserPage_RolePlaceholder"]"
-                                  ValueChanged="OnRoleChanged">
+                                   Label="@Loc["UserPage_RoleLabel"]" Placeholder="@Loc["UserPage_RolePlaceholder"]"
+                                   ValueChanged="OnRoleChanged">
                             @foreach (var role in _roles)
                             {
                                 <MudSelectItem Value="@((int?)role.Id)">@role.Name</MudSelectItem>
@@ -74,11 +77,11 @@
                     </MudItem>
 
                     @* Employee dropdown — shown only when a non-employee role is selected *@
-                    @if (!_isEmployeeRole && _employees.Count > 0)
+                    @if (!_isEmployeeRole && _employees.Count > 0 && !_isPartnerRole && !_isAdminRole)
                     {
                         <MudItem xs="12">
                             <MudSelect T="int?" @bind-Value="_model.AssignedEmployeeId" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                      Label="@Loc["UserPage_AssignedEmployee"]" Placeholder="@Loc["UserPage_AssignedEmployeePlaceholder"]" Clearable="true">
+                                       Label="@Loc["UserPage_AssignedEmployee"]" Placeholder="@Loc["UserPage_AssignedEmployeePlaceholder"]" Clearable="true">
                                 <MudSelectItem Value="@((int?)null)">@Loc["UserPage_NoEmployeeOption"]</MudSelectItem>
                                 @foreach (var employee in _employees)
                                 {
@@ -188,7 +191,7 @@
                     {
                         <MudItem xs="12">
                             <MudTextField T="string" @bind-Value="_model.PhoneNumber" Variant="Variant.Outlined" Margin="Margin.Dense"
-                            Label="@Loc["UserPage_Phone"]" For="@(() => _model.PhoneNumber)" />
+                                          Label="@Loc["UserPage_Phone"]" For="@(() => _model.PhoneNumber)" />
                         </MudItem>
                     }
                     else
