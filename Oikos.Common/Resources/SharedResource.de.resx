@@ -3604,7 +3604,7 @@
     <value>Abonnements</value>
   </data>
   <data name="AdminNavMenu_SubscriptionPayments" xml:space="preserve">
-    <value>Abonnement-Zahlungen</value>
+    <value>Mitgliedsbeiträge</value>
   </data>
   <data name="AdminNavMenu_Partners" xml:space="preserve">
     <value>Partner</value>

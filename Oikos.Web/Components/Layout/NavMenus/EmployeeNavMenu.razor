@@ -33,7 +33,10 @@
                 }
 
                 @* --- USERS & PAYMENTS --- *@
-                @if (_permissions.Contains(EmployeePermissions.AdminUsers) || _permissions.Contains(EmployeePermissions.AdminClients) || _permissions.Contains(EmployeePermissions.AdminSubscriptionPayments))
+                @if (_permissions.Contains(EmployeePermissions.AdminUsers) || _permissions.Contains(EmployeePermissions.AdminClients) ||
+                     _permissions.Contains(EmployeePermissions.AdminSubscriptionPayments) || _permissions.Contains(EmployeePermissions.AdminPartners) ||
+                     _permissions.Contains(EmployeePermissions.AdminInsurancePartners) || _permissions.Contains(EmployeePermissions.AdminPartnerBanks) ||
+                     _permissions.Contains(EmployeePermissions.AdminTaxOffices))
                 {
                     <MudText Typo="Typo.caption" Class="mud-text-secondary px-3 py-2 d-block mt-4">@Loc["AdminNavMenu_UsersAndPayments"]</MudText>
                     @if (_permissions.Contains(EmployeePermissions.AdminUsers))
@@ -47,6 +50,22 @@
                     @if (_permissions.Contains(EmployeePermissions.AdminSubscriptionPayments))
                     {
                         <MudNavLink Href="/employee/subscription-payments" Icon="@Icons.Material.Filled.Payments" IconColor="Color.Default">@Loc["AdminNavMenu_SubscriptionPayments"]</MudNavLink>
+                    }
+                    @if (_permissions.Contains(EmployeePermissions.AdminPartners))
+                    {
+                        <MudNavLink Href="/employee/partners" Icon="@Icons.Material.Filled.Handshake" IconColor="Color.Default">@Loc["AdminNavMenu_Partners"]</MudNavLink>
+                    }
+                    @if (_permissions.Contains(EmployeePermissions.AdminInsurancePartners))
+                    {
+                        <MudNavLink Href="/employee/insurance-partners" Icon="@Icons.Material.Filled.Security" IconColor="Color.Default">@Loc["AdminNavMenu_InsurancePartners"]</MudNavLink>
+                    }
+                    @if (_permissions.Contains(EmployeePermissions.AdminPartnerBanks))
+                    {
+                        <MudNavLink Href="/employee/partner-banks" Icon="@Icons.Material.Filled.AccountBalance" IconColor="Color.Default">@Loc["AdminNavMenu_PartnerBanks"]</MudNavLink>
+                    }
+                    @if (_permissions.Contains(EmployeePermissions.AdminTaxOffices))
+                    {
+                        <MudNavLink Href="/employee/tax-offices" Icon="@Icons.Material.Filled.Business" IconColor="Color.Default">@Loc["AdminNavMenu_TaxOffices"]</MudNavLink>
                     }
                 }
 
@@ -70,9 +89,7 @@
 
                 @* --- SYSTEM --- *@
                 @if (_permissions.Contains(EmployeePermissions.AdminSubscriptions) || _permissions.Contains(EmployeePermissions.AdminInvoiceStages) ||
-                     _permissions.Contains(EmployeePermissions.AdminSettings) || _permissions.Contains(EmployeePermissions.AdminPartners) ||
-                     _permissions.Contains(EmployeePermissions.AdminInsurancePartners) || _permissions.Contains(EmployeePermissions.AdminPartnerBanks) ||
-                     _permissions.Contains(EmployeePermissions.AdminTaxOffices))
+                     _permissions.Contains(EmployeePermissions.AdminSettings))
                 {
                     <MudText Typo="Typo.caption" Class="mud-text-secondary px-3 py-2 d-block mt-4">@Loc["AdminNavMenu_System"]</MudText>
                     @if (_permissions.Contains(EmployeePermissions.AdminSubscriptions))
@@ -86,22 +103,6 @@
                     @if (_permissions.Contains(EmployeePermissions.AdminSettings))
                     {
                         <MudNavLink Href="/employee/settings" Icon="@Icons.Material.Filled.Settings" IconColor="Color.Default">@Loc["AdminNavMenu_Settings"]</MudNavLink>
-                    }
-                    @if (_permissions.Contains(EmployeePermissions.AdminPartners))
-                    {
-                        <MudNavLink Href="/employee/partners" Icon="@Icons.Material.Filled.Handshake" IconColor="Color.Default">@Loc["AdminNavMenu_Partners"]</MudNavLink>
-                    }
-                    @if (_permissions.Contains(EmployeePermissions.AdminInsurancePartners))
-                    {
-                        <MudNavLink Href="/employee/insurance-partners" Icon="@Icons.Material.Filled.Security" IconColor="Color.Default">@Loc["AdminNavMenu_InsurancePartners"]</MudNavLink>
-                    }
-                    @if (_permissions.Contains(EmployeePermissions.AdminPartnerBanks))
-                    {
-                        <MudNavLink Href="/employee/partner-banks" Icon="@Icons.Material.Filled.AccountBalance" IconColor="Color.Default">@Loc["AdminNavMenu_PartnerBanks"]</MudNavLink>
-                    }
-                    @if (_permissions.Contains(EmployeePermissions.AdminTaxOffices))
-                    {
-                        <MudNavLink Href="/employee/tax-offices" Icon="@Icons.Material.Filled.Business" IconColor="Color.Default">@Loc["AdminNavMenu_TaxOffices"]</MudNavLink>
                     }
                 }
 
