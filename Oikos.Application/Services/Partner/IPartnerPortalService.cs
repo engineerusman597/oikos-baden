@@ -13,4 +13,6 @@ public interface IPartnerPortalService
     Task<List<PartnerSubPartnerDto>> GetSubPartnersAsync(int userId);
 
     Task<(bool Success, string? Error)> CreateSubPartnerAsync(int parentUserId, CreateSubPartnerRequest request);
+
+    Task<int?> GetPartnerEntityIdAsync(int userId);
 }

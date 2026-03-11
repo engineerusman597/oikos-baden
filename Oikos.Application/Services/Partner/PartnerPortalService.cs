@@ -208,6 +208,13 @@ public class PartnerPortalService : IPartnerPortalService
 
     // ── helpers ──────────────────────────────────────────────────────────────
 
+    public async Task<int?> GetPartnerEntityIdAsync(int userId)
+    {
+        await using var context = await _dbFactory.CreateDbContextAsync();
+        var partner = await GetPartnerForUserAsync(context, userId);
+        return partner?.Id;
+    }
+
     private static async Task<PartnerEntity?> GetPartnerForUserAsync(IAppDbContext context, int userId)
     {
         var user = await context.Users

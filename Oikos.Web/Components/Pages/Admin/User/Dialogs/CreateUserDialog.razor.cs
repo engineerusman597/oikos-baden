@@ -20,6 +20,7 @@ public partial class CreateUserDialog
     [Inject] private IUserPermissionService UserPermissionService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
     [Parameter] public bool IsFromEmployees { get; set; }
+    [Parameter] public int? DefaultPartnerId { get; set; }
 
     private CreateUserModel _model = new();
     private List<Application.Services.Partner.Models.PartnerDetail> _partners = new();
@@ -71,6 +72,11 @@ public partial class CreateUserDialog
             {
                 _model.RoleId = defaultRole.Id;
             }
+        }
+
+        if (DefaultPartnerId.HasValue)
+        {
+            _model.PartnerId = DefaultPartnerId;
         }
     }
 

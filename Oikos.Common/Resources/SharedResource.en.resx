@@ -3774,6 +3774,24 @@
   <data name="PartnerNav_Partner" xml:space="preserve">
     <value>Partner</value>
   </data>
+  <data name="PartnerNav_Clients" xml:space="preserve">
+    <value>My Clients</value>
+  </data>
+  <data name="PartnerClients_Title" xml:space="preserve">
+    <value>Clients</value>
+  </data>
+  <data name="PartnerClients_Subtitle" xml:space="preserve">
+    <value>Manage clients linked to your partner account</value>
+  </data>
+  <data name="PartnerClients_CreateNew" xml:space="preserve">
+    <value>Create new client</value>
+  </data>
+  <data name="PartnerClients_Empty" xml:space="preserve">
+    <value>No clients yet</value>
+  </data>
+  <data name="PartnerClients_NoPartner" xml:space="preserve">
+    <value>No partner account found</value>
+  </data>
   <data name="PartnerNav_Recommendations" xml:space="preserve">
     <value>My recommendations</value>
   </data>

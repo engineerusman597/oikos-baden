@@ -1,0 +1,79 @@
+@page "/partner-portal/clients"
+@rendermode InteractiveServer
+@using Oikos.Common.Resources
+@using Oikos.Application.Services.User.Models
+
+<div class="partner-clients pb-10">
+
+    <div class="d-flex align-center justify-space-between mb-6">
+        <div>
+            <MudText Typo="Typo.h4" Style="font-weight:700;">@Loc["PartnerClients_Title"]</MudText>
+            <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["PartnerClients_Subtitle"]</MudText>
+        </div>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.PersonAdd"
+                   OnClick="AddClientAsync">
+            @Loc["PartnerClients_CreateNew"]
+        </MudButton>
+    </div>
+
+    @if (_isLoading)
+    {
+        <MudProgressLinear Indeterminate="true" Color="Color.Primary" Class="mb-4" />
+    }
+    else if (_partnerEntityId is null)
+    {
+        <MudAlert Severity="Severity.Warning">@Loc["PartnerClients_NoPartner"]</MudAlert>
+    }
+    else
+    {
+        <MudPaper Elevation="0" Outlined="true" Class="rounded-xl">
+            @if (_clients.Count == 0)
+            {
+                <div class="pa-8 d-flex flex-column align-center">
+                    <MudIcon Icon="@Icons.Material.Filled.PeopleOutline" Size="Size.Large" Class="mud-text-secondary mb-2" />
+                    <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerClients_Empty"]</MudText>
+                </div>
+            }
+            else
+            {
+                <MudTable Items="_clients" Hover="true" Dense="true" style="width:100%;">
+                    <HeaderContent>
+                        <MudTh>@Loc["UserPage_TableH3"]</MudTh>
+                        <MudTh>@Loc["UserPage_TableCompany"]</MudTh>
+                        <MudTh>@Loc["UserPage_Email"]</MudTh>
+                        <MudTh>@Loc["UserPage_CustomerNumberLabel"]</MudTh>
+                        <MudTh>@Loc["UserPage_TableStatus"]</MudTh>
+                    </HeaderContent>
+                    <RowTemplate>
+                        <MudTd DataLabel="@Loc["UserPage_TableH3"]">
+                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                                <MudAvatar Color="Color.Primary" Size="Size.Small">
+                                    @((context.FirstName ?? context.RealName ?? "?").FirstOrDefault())
+                                </MudAvatar>
+                                <MudStack Spacing="0">
+                                    <MudText Typo="Typo.subtitle2">@context.RealName</MudText>
+                                </MudStack>
+                            </MudStack>
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["UserPage_TableCompany"]">
+                            <MudText Typo="Typo.body2">@(context.Company ?? "-")</MudText>
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["UserPage_Email"]">
+                            <MudText Typo="Typo.body2">@context.Name</MudText>
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["UserPage_CustomerNumberLabel"]">
+                            <MudText Typo="Typo.body2">@(context.CustomerNumber ?? "-")</MudText>
+                        </MudTd>
+                        <MudTd DataLabel="@Loc["UserPage_TableStatus"]">
+                            <MudChip T="string" Size="Size.Small"
+                                     Color="@(context.IsEnabled ? Color.Success : Color.Error)"
+                                     Variant="Variant.Filled">
+                                @(context.IsEnabled ? Loc["UserPage_Active"] : Loc["UserPage_Inactive"])
+                            </MudChip>
+                        </MudTd>
+                    </RowTemplate>
+                </MudTable>
+            }
+        </MudPaper>
+    }
+</div>
