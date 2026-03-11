@@ -23,16 +23,18 @@
 
 .navmenu__container .mud-nav-link {
     padding: 4px 12px;
-    font-size: 0.73rem;
+    font-size: 0.65rem;
     color: #4a5568;
     border-radius: 6px;
     margin-bottom: 2px;
 }
 
-.navmenu__container .mud-nav-link .mud-icon-root {
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
+.navmenu__container::deep .mud-nav-link-text {
+    font-size: 0.75rem;
+}
+
+.navmenu__container::deep .mud-icon-size-medium {
+    font-size: 0.99rem;
 }
 
 .navmenu__container .mud-nav-link.active {
