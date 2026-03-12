@@ -990,6 +990,24 @@
   <data name="Dashboard_Status_Rejected" xml:space="preserve">
     <value>Abgelehnt</value>
   </data>
+  <data name="Dashboard_NoPlan" xml:space="preserve">
+    <value>Kein Plan</value>
+  </data>
+  <data name="UserPage_SubscriptionPlan" xml:space="preserve">
+    <value>Abonnement-Plan</value>
+  </data>
+  <data name="UserPage_NoPlanOption" xml:space="preserve">
+    <value>Kein Plan</value>
+  </data>
+  <data name="UserPage_BillingInterval" xml:space="preserve">
+    <value>Abrechnung</value>
+  </data>
+  <data name="UserPage_BillingMonthly" xml:space="preserve">
+    <value>Monatlich</value>
+  </data>
+  <data name="UserPage_BillingYearly" xml:space="preserve">
+    <value>Jährlich</value>
+  </data>
   <data name="UploadFileTooLarge" xml:space="preserve">
     <value>Die ausgewählte Datei überschreitet die Grenze von 15 MB.</value>
   </data>

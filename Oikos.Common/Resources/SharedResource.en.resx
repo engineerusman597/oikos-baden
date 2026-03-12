@@ -990,6 +990,24 @@
   <data name="Dashboard_Status_Rejected" xml:space="preserve">
     <value>Rejected</value>
   </data>
+  <data name="Dashboard_NoPlan" xml:space="preserve">
+    <value>No Plan</value>
+  </data>
+  <data name="UserPage_SubscriptionPlan" xml:space="preserve">
+    <value>Subscription Plan</value>
+  </data>
+  <data name="UserPage_NoPlanOption" xml:space="preserve">
+    <value>No plan</value>
+  </data>
+  <data name="UserPage_BillingInterval" xml:space="preserve">
+    <value>Billing</value>
+  </data>
+  <data name="UserPage_BillingMonthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="UserPage_BillingYearly" xml:space="preserve">
+    <value>Yearly</value>
+  </data>
   <data name="UploadFileTooLarge" xml:space="preserve">
     <value>The selected file exceeds the 15 MB limit.</value>
   </data>

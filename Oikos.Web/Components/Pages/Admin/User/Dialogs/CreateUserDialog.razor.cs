@@ -4,6 +4,8 @@ using MudBlazor;
 using Oikos.Application.Services.User;
 using Oikos.Application.Services.User.Models;
 using Oikos.Application.Services.Partner;
+using Oikos.Application.Services.Subscription;
+using Oikos.Application.Services.Subscription.Models;
 using Oikos.Application.Common;
 using Oikos.Common.Constants;
 using Oikos.Common.Helpers;
@@ -18,6 +20,7 @@ public partial class CreateUserDialog
     [Inject] private IPartnerService PartnerService { get; set; } = null!;
     [Inject] private IUserRoleService UserRoleService { get; set; } = null!;
     [Inject] private IUserPermissionService UserPermissionService { get; set; } = null!;
+    [Inject] private ISubscriptionPlanService SubscriptionPlanService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
     [Parameter] public bool IsFromEmployees { get; set; }
     [Parameter] public int? DefaultPartnerId { get; set; }
@@ -26,6 +29,7 @@ public partial class CreateUserDialog
     private List<Application.Services.Partner.Models.PartnerDetail> _partners = new();
     private List<Application.Services.Role.Models.RoleDto> _roles = new();
     private List<EmployeeItem> _employees = new();
+    private IReadOnlyList<SubscriptionPlanSummary> _plans = [];
     private bool _processing;
 
     private int? _employeeRoleId;
@@ -41,6 +45,7 @@ public partial class CreateUserDialog
         await base.OnInitializedAsync();
         _partners = (await PartnerService.GetPartnersAsync()).ToList();
         _roles = await UserRoleService.GetAvailableRolesAsync();
+        _plans = await SubscriptionPlanService.GetPlansAsync();
 
         var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
         var adminRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Admin.ToRoleName());
@@ -124,13 +129,20 @@ public partial class CreateUserDialog
 
         var success = await UserManagementService.CreateUserAsync(request);
 
-        if (success && _isEmployeeRole && _selectedPermissions.Count > 0)
+        if (success)
         {
             var criteria = new UserSearchCriteria { SearchText = _model.Email, Page = 1, PageSize = 1 };
             var users = await UserManagementService.GetUsersAsync(criteria);
             var newUser = users.Items.FirstOrDefault();
+
             if (newUser != null)
-                await UserPermissionService.SetUserPermissionsAsync(newUser.Id, _selectedPermissions.ToList());
+            {
+                if (_isEmployeeRole && _selectedPermissions.Count > 0)
+                    await UserPermissionService.SetUserPermissionsAsync(newUser.Id, _selectedPermissions.ToList());
+
+                if (_model.PlanId.HasValue)
+                    await SubscriptionPlanService.ActivatePlanAsync(newUser.Id, _model.PlanId.Value, _model.BillingInterval);
+            }
         }
 
         _processing = false;
@@ -179,6 +191,8 @@ public partial class CreateUserDialog
         public bool IsEnabled { get; set; } = true;
         public int? RoleId { get; set; }
         public int? AssignedEmployeeId { get; set; }
+        public int? PlanId { get; set; }
+        public string BillingInterval { get; set; } = "monthly";
     }
 
     private class EmployeeItem

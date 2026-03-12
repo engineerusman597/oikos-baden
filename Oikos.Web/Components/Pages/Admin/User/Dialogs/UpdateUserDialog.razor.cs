@@ -4,7 +4,8 @@ using Oikos.Application.Services.User;
 using Oikos.Application.Services.User.Models;
 using Oikos.Application.Common;
 using Oikos.Application.Services.Partner;
-using Oikos.Application.Common;
+using Oikos.Application.Services.Subscription;
+using Oikos.Application.Services.Subscription.Models;
 using Oikos.Common.Constants;
 using Oikos.Common.Helpers;
 
@@ -19,12 +20,14 @@ public partial class UpdateUserDialog
     [Inject] private IPartnerService PartnerService { get; set; } = null!;
     [Inject] private IUserRoleService UserRoleService { get; set; } = null!;
     [Inject] private IUserPermissionService UserPermissionService { get; set; } = null!;
+    [Inject] private ISubscriptionPlanService SubscriptionPlanService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
 
     private UpdateUserModel _model = new();
     private List<Application.Services.Partner.Models.PartnerDetail> _partners = new();
     private List<Application.Services.Role.Models.RoleDto> _roles = new();
     private List<EmployeeItem> _employees = new();
+    private IReadOnlyList<SubscriptionPlanSummary> _plans = [];
     private bool _processing;
     private bool _loading = true;
 
@@ -43,6 +46,7 @@ public partial class UpdateUserDialog
 
         _partners = (await PartnerService.GetPartnersAsync()).ToList();
         _roles = await UserRoleService.GetAvailableRolesAsync();
+        _plans = await SubscriptionPlanService.GetPlansAsync();
 
         var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
         var adminRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Admin.ToRoleName());
@@ -66,6 +70,8 @@ public partial class UpdateUserDialog
             var userRoles = await UserRoleService.GetUserRolesAsync(UserId);
             var currentRole = userRoles.FirstOrDefault();
 
+            var activeSubscription = await SubscriptionPlanService.GetActiveSubscriptionAsync(UserId);
+
             _model = new UpdateUserModel
             {
                 Email = userDetail.Email,
@@ -77,7 +83,9 @@ public partial class UpdateUserDialog
                 CustomerNumber = userDetail.CustomerNumber,
                 PartnerId = userDetail.PartnerId,
                 RoleId = currentRole?.Id,
-                AssignedEmployeeId = userDetail.AssignedEmployeeId
+                AssignedEmployeeId = userDetail.AssignedEmployeeId,
+                PlanId = activeSubscription?.UserSubscriptionId.HasValue == true ? activeSubscription.PlanId : (int?)null,
+                BillingInterval = activeSubscription?.BillingInterval ?? "monthly"
             };
 
             if (_isEmployeeRole)
@@ -142,6 +150,9 @@ public partial class UpdateUserDialog
         {
             await UserPermissionService.SetUserPermissionsAsync(UserId,
                 _isEmployeeRole ? _selectedPermissions.ToList() : new List<string>());
+
+            if (_model.PlanId.HasValue)
+                await SubscriptionPlanService.ActivatePlanAsync(UserId, _model.PlanId.Value, _model.BillingInterval);
         }
 
         _processing = false;
@@ -174,6 +185,8 @@ public partial class UpdateUserDialog
         public int? PartnerId { get; set; }
         public int? RoleId { get; set; }
         public int? AssignedEmployeeId { get; set; }
+        public int? PlanId { get; set; }
+        public string BillingInterval { get; set; } = "monthly";
     }
 
     private class EmployeeItem

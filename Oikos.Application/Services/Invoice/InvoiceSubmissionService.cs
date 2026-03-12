@@ -209,6 +209,7 @@ public class InvoiceSubmissionService : IInvoiceSubmissionService
                 Currency = draft.Details.Currency,
                 Description = draft.Details.Description,
                 StageId = initialStage.Id,
+                PrimaryStatus = initialStage.PrimaryStatus,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
             };

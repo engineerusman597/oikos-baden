@@ -56,6 +56,7 @@ public partial class NewInvoiceWizard
     private MudFileUpload<IBrowserFile>? _fileUpload;
     private string _currentUserName = string.Empty;
     private int? _currentUserId;
+    private bool _redirectToDashboard;
 
     protected override async Task OnInitializedAsync()
     {
@@ -66,6 +67,15 @@ public partial class NewInvoiceWizard
         }
 
         await LoadUserAsync();
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && _redirectToDashboard)
+        {
+            NavigationManager.NavigateTo(DashboardUrl);
+        }
+        return base.OnAfterRenderAsync(firstRender);
     }
 
     private async Task LoadUserAsync()
@@ -87,7 +97,7 @@ public partial class NewInvoiceWizard
         if (!accessResult.HasUser || !accessResult.HasActiveSubscription)
         {
             _snackbarService.Add(Loc["SubscriptionRequiredMessage"], Severity.Warning);
-            NavigationManager.NavigateTo(DashboardUrl, true);
+            _redirectToDashboard = true;
             return false;
         }
 

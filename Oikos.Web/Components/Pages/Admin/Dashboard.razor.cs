@@ -360,29 +360,29 @@ public partial class Dashboard
     private int _tabTotalCount;
     private const int TabPageSize = 20;
 
-    private static readonly IReadOnlyList<QueueDefinition> Queues = new List<QueueDefinition>
-    {
+    private static readonly IReadOnlyList<QueueDefinition> Queues =
+    [
         new("AdminDashboard_Status_Neu",          Icons.Material.Filled.Description,
-            new[] { InvoicePrimaryStatus.Submitted }),
+            [InvoicePrimaryStatus.Submitted]),
 
         new("AdminDashboard_Status_InPruefung",   Icons.Material.Filled.AccessTime,
-            new[] { InvoicePrimaryStatus.InReview }),
+            [InvoicePrimaryStatus.InReview]),
 
         new("AdminDashboard_Status_Rueckfragen",  Icons.Material.Filled.ErrorOutline,
-            new[] { InvoicePrimaryStatus.Inquiry }),
+            [InvoicePrimaryStatus.Inquiry]),
 
         new("AdminDashboard_Status_Akzeptiert",   Icons.Material.Filled.CheckCircleOutline,
-            new[] { InvoicePrimaryStatus.Accepted, InvoicePrimaryStatus.CourtPrep }),
+            [InvoicePrimaryStatus.Accepted, InvoicePrimaryStatus.CourtPrep]),
 
         new("AdminDashboard_Status_Gericht",      Icons.Material.Filled.Gavel,
-            new[] { InvoicePrimaryStatus.Court, InvoicePrimaryStatus.WaitingCourt, InvoicePrimaryStatus.CourtResponse }),
+            [InvoicePrimaryStatus.Court, InvoicePrimaryStatus.WaitingCourt, InvoicePrimaryStatus.CourtResponse]),
 
         new("AdminDashboard_Status_Fristen",      Icons.Material.Filled.Timer,
-            new[] { InvoicePrimaryStatus.DeadlineRunning }),
+            [InvoicePrimaryStatus.DeadlineRunning]),
 
         new("AdminDashboard_Status_Vollstreckung",Icons.Material.Filled.Scale,
-            new[] { InvoicePrimaryStatus.EnforcementReady, InvoicePrimaryStatus.EnforcementInProgress }),
-    };
+            [InvoicePrimaryStatus.EnforcementReady, InvoicePrimaryStatus.EnforcementInProgress]),
+    ];
 
     private void SelectTab(int index) => _tabs?.ActivatePanel(index);
 

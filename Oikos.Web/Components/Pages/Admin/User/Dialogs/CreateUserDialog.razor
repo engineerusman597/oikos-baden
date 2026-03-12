@@ -171,6 +171,28 @@
                     </MudItem>
                 }
 
+                @* Plan selection — shown only for User/Client role *@
+                @if (!_isEmployeeRole && !_isAdminRole && !_isPartnerRole && _plans.Count > 0)
+                {
+                    <MudItem xs="8">
+                        <MudSelect T="int?" @bind-Value="_model.PlanId" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                   Label="@Loc["UserPage_SubscriptionPlan"]" Placeholder="@Loc["UserPage_NoPlanOption"]" Clearable="true">
+                            <MudSelectItem Value="@((int?)null)">@Loc["UserPage_NoPlanOption"]</MudSelectItem>
+                            @foreach (var plan in _plans)
+                            {
+                                <MudSelectItem Value="@((int?)plan.Id)">@plan.Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudSelect T="string" @bind-Value="_model.BillingInterval" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                   Label="@Loc["UserPage_BillingInterval"]" Disabled="@(!_model.PlanId.HasValue)">
+                            <MudSelectItem Value="@("monthly")">@Loc["UserPage_BillingMonthly"]</MudSelectItem>
+                            <MudSelectItem Value="@("yearly")">@Loc["UserPage_BillingYearly"]</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+                }
+
                 @* Row: Customer Number + Phone *@
                 @if (!(_isEmployeeRole || _isAdminRole || _isPartnerRole))
                 {
