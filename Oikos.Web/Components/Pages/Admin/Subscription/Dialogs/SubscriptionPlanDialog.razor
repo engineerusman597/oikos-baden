@@ -1,7 +1,7 @@
-@using MudBlazor
+﻿@using MudBlazor
 @using Oikos.Common.Resources
 
-<MudDialog>
+<MudDialog CloseButton="true">
     <DialogContent>
         <MudForm @ref="_form">
             <MudTextField T="string" Label='@Loc["SubscriptionPlansFieldName"]' @bind-Value="_model.Name" Required="true" For="() => _model.Name" />

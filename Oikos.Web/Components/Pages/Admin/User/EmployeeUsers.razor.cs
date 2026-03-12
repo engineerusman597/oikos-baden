@@ -102,7 +102,7 @@ public partial class EmployeeUsers
             { "IsFromEmployees", true }
         };
         var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
-        var dialog = await DialogService.ShowAsync<CreateUserDialog>(Loc["UserPage_CreateNewTitle"], parameters, options);
+        var dialog = await DialogService.ShowAsync<CreateUserDialog>(Loc["UserPage_CreateNewEmployeeTitle"], parameters, options);
 
         var result = await dialog.Result;
         if (!result.Canceled)

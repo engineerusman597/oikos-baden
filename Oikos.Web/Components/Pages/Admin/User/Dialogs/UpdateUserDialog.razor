@@ -1,4 +1,4 @@
-@using Oikos.Application.Common
+﻿@using Oikos.Application.Common
 @using Oikos.Application.Constants
 @using Oikos.Application.Services.User.Models
 @using Oikos.Common.Constants
@@ -6,7 +6,7 @@
 @using Oikos.Application.Services.Subscription.Models
 @using Oikos.Common.Resources
 
-<MudDialog>
+<MudDialog CloseButton="true">
     <DialogContent>
         @if (_loading)
         {
@@ -72,7 +72,7 @@
                                    ValueChanged="OnRoleChanged">
                             @foreach (var role in _roles)
                             {
-                                <MudSelectItem Value="@((int?)role.Id)">@role.Name</MudSelectItem>
+                                <MudSelectItem Value="@((int?)role.Id)">@GetRoleDisplayName(role.Name)</MudSelectItem>
                             }
                         </MudSelect>
                     </MudItem>

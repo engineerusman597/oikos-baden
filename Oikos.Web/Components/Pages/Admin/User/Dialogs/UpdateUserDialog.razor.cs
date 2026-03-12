@@ -173,6 +173,12 @@ public partial class UpdateUserDialog
         MudDialog.Cancel();
     }
 
+    private string GetRoleDisplayName(string roleName)
+    {
+        var localized = Loc[$"Role_{roleName}"];
+        return localized.ResourceNotFound ? roleName : localized.Value;
+    }
+
     private class UpdateUserModel
     {
         public string? Email { get; set; }

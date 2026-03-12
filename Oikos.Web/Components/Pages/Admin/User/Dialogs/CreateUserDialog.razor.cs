@@ -23,6 +23,8 @@ public partial class CreateUserDialog
     [Inject] private ISubscriptionPlanService SubscriptionPlanService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
     [Parameter] public bool IsFromEmployees { get; set; }
+    [Parameter] public bool IsFromUsers { get; set; }
+    [Parameter] public bool IsFromClients { get; set; }
     [Parameter] public int? DefaultPartnerId { get; set; }
 
     private CreateUserModel _model = new();
@@ -47,6 +49,20 @@ public partial class CreateUserDialog
         _roles = await UserRoleService.GetAvailableRolesAsync();
         _plans = await SubscriptionPlanService.GetPlansAsync();
 
+        if (IsFromUsers)
+        {
+            _roles = _roles.Where(r =>
+                r.Name == RoleNames.Admin.ToRoleName() ||
+                r.Name == RoleNames.Employee.ToRoleName()).ToList();
+        }
+
+        if (IsFromClients)
+        {
+            _roles = _roles.Where(r =>
+                r.Name == RoleNames.User.ToRoleName() ||
+                r.Name == RoleNames.User_Bonix.ToRoleName()).ToList();
+        }
+
         var employeeRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Employee.ToRoleName());
         var adminRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Admin.ToRoleName());
         var partnerRole = _roles.FirstOrDefault(r => r.Name == RoleNames.Partner.ToRoleName());
@@ -70,6 +86,10 @@ public partial class CreateUserDialog
         if (IsFromEmployees)
         {
             _model.RoleId = _employeeRoleId;
+        }
+        else if (IsFromClients)
+        {
+            _model.RoleId = defaultRole?.Id;
         }
         else
         {
@@ -161,6 +181,12 @@ public partial class CreateUserDialog
     private void Cancel()
     {
         MudDialog.Cancel();
+    }
+
+    private string GetRoleDisplayName(string roleName)
+    {
+        var localized = Loc[$"Role_{roleName}"];
+        return localized.ResourceNotFound ? roleName : localized.Value;
     }
 
     public class CreateUserModel

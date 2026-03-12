@@ -1,9 +1,9 @@
-@using Oikos.Application.Services.Invoice.Models
+﻿@using Oikos.Application.Services.Invoice.Models
 @using Oikos.Common.Resources
 @using Oikos.Domain.Enums
 @inject IStringLocalizer<SharedResource> Loc
 
-<MudDialog MaxWidth="MaxWidth.Small" FullWidth="true">
+<MudDialog CloseButton="true" MaxWidth="MaxWidth.Small" FullWidth="true">
     <TitleContent>
         <MudText Typo="Typo.h6">@Loc["StatusChangeDialog_Title"]</MudText>
     </TitleContent>

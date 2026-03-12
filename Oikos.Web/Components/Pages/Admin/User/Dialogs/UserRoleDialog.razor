@@ -1,7 +1,7 @@
-@using Oikos.Application.Common
+﻿@using Oikos.Application.Common
 @using Oikos.Common.Resources
 
-<MudDialog>
+<MudDialog CloseButton="true">
     <DialogContent>
         <div style="width:300px;">
             @if (_loading)
@@ -14,7 +14,7 @@
                     @foreach (var role in _roleList)
                     {
                         @if (_checkedRoles.ContainsKey(role.Id)) {
-                             <MudCheckBox T="bool" @bind-Value="_checkedRoles[role.Id]" Color="Color.Primary">@role.Name</MudCheckBox>
+                             <MudCheckBox T="bool" @bind-Value="_checkedRoles[role.Id]" Color="Color.Primary">@Loc[$"Role_{role.Name}"]</MudCheckBox>
                         }
                     }
                 </div>

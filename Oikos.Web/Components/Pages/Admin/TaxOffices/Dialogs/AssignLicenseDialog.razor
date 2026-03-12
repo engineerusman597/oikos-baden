@@ -1,10 +1,10 @@
-@using System.ComponentModel.DataAnnotations
+﻿@using System.ComponentModel.DataAnnotations
 @using Oikos.Application.Services.TaxOffice
 @using Oikos.Application.Services.Subscription
 @using Oikos.Application.Services.Subscription.Models
 @namespace Oikos.Web.Components.Pages.Admin.TaxOffices.Dialogs
 
-<MudDialog>
+<MudDialog CloseButton="true">
     <DialogContent>
         <EditForm Model="_model" OnValidSubmit="SaveAsync">
             <DataAnnotationsValidator />

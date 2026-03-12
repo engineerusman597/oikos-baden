@@ -1,11 +1,11 @@
-@using Oikos.Application.Common
+﻿@using Oikos.Application.Common
 @using Oikos.Application.Constants
 @using Oikos.Application.Services.User.Models
 @using Oikos.Common.Constants
 @using Oikos.Application.Services.Partner.Models
 @using Oikos.Common.Resources
 
-<MudDialog>
+<MudDialog CloseButton="true">
     <DialogContent>
         <EditForm Model="_model" OnValidSubmit="Submit" style="width:100%;">
             <DataAnnotationsValidator />
@@ -59,16 +59,19 @@
                         </MudSelect>
                     </MudItem>
                 }
-                <MudItem xs="6">
-                    <MudSelect T="int?" Value="_model.RoleId" Variant="Variant.Outlined" Margin="Margin.Dense"
-                               Label="@Loc["UserPage_RoleLabel"]" Placeholder="@Loc["UserPage_RolePlaceholder"]"
-                               ValueChanged="OnRoleChanged">
-                        @foreach (var role in _roles)
-                        {
-                            <MudSelectItem Value="@((int?)role.Id)">@role.Name</MudSelectItem>
-                        }
-                    </MudSelect>
-                </MudItem>
+                @if (!IsFromEmployees)
+                {
+                    <MudItem xs="6">
+                        <MudSelect T="int?" Value="_model.RoleId" Variant="Variant.Outlined" Margin="Margin.Dense"
+                                   Label="@Loc["UserPage_RoleLabel"]" Placeholder="@Loc["UserPage_RolePlaceholder"]"
+                                   ValueChanged="OnRoleChanged">
+                            @foreach (var role in _roles)
+                            {
+                                <MudSelectItem Value="@((int?)role.Id)">@GetRoleDisplayName(role.Name)</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                }
 
                 @* Employee dropdown — shown only when a non-employee role is selected *@
                 @if (!_isEmployeeRole && _employees.Count > 0 && !_isPartnerRole && !_isAdminRole)

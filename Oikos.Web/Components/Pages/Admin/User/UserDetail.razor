@@ -70,7 +70,7 @@
                             }
                             @foreach (var role in _user.Roles)
                             {
-                                <MudChip T="string" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small">@role</MudChip>
+                                <MudChip T="string" Variant="Variant.Outlined" Color="Color.Primary" Size="Size.Small">@Loc[$"Role_{role}"]</MudChip>
                             }
                         </MudStack>
                     </MudStack>

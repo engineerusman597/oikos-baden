@@ -1,4 +1,4 @@
-@using System.Net.Http
+﻿@using System.Net.Http
 @using Oikos
 @using Oikos.Web.Auth;
 @using Oikos.Infrastructure.Data;
@@ -30,7 +30,7 @@
 @inject NavigationManager _navManager;
 @inject IStringLocalizer<SharedResource> Loc;
 
-<MudDialog Gutters="false">
+<MudDialog CloseButton="true" Gutters="false">
 	<DialogContent>
 		<div style="width:400px;" class="px-6 py-2">
 			<div class="d-flex align-center">

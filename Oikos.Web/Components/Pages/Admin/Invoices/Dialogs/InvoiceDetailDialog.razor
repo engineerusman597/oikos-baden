@@ -1,9 +1,9 @@
-@using System.Globalization
+﻿@using System.Globalization
 @using Oikos.Application.Services.Invoice
 @using Oikos.Application.Services.Invoice.Models
 @inject IInvoiceManagementService InvoiceService
 
-<MudDialog MaxWidth="MaxWidth.Medium" FullWidth="true">
+<MudDialog CloseButton="true" MaxWidth="MaxWidth.Medium" FullWidth="true">
     <TitleContent>
         @if (_invoice is null)
         {

@@ -97,9 +97,9 @@ public partial class ClientUsers
 
     private async Task AddUserClick()
     {
-        var parameters = new DialogParameters { };
+        var parameters = new DialogParameters { { "IsFromClients", true } };
         var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
-        var dialog = await DialogService.ShowAsync<CreateUserDialog>(Loc["UserPage_CreateNewTitle"], parameters, options);
+        var dialog = await DialogService.ShowAsync<CreateUserDialog>(Loc["UserPage_CreateNewClientTitle"], parameters, options);
 
         var result = await dialog.Result;
         if (!result.Canceled)

@@ -100,7 +100,7 @@ public partial class User
 
     private async Task AddUserClick()
     {
-        var parameters = new DialogParameters { };
+        var parameters = new DialogParameters { { "IsFromUsers", true } };
         var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<CreateUserDialog>(Loc["UserPage_CreateNewTitle"], parameters, options);
 

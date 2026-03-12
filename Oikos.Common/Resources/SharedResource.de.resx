@@ -2592,6 +2592,27 @@
   <data name="UserPage_CreateNewTitle" xml:space="preserve">
     <value>Neuen Benutzer erstellen</value>
   </data>
+  <data name="UserPage_CreateNewClientTitle" xml:space="preserve">
+    <value>Neuen Client erstellen</value>
+  </data>
+  <data name="UserPage_CreateNewEmployeeTitle" xml:space="preserve">
+    <value>Neuen Mitarbeiter erstellen</value>
+  </data>
+  <data name="Role_Admin" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="Role_Employee" xml:space="preserve">
+    <value>Mitarbeiter</value>
+  </data>
+  <data name="Role_Partner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="Role_User" xml:space="preserve">
+    <value>Mandant</value>
+  </data>
+  <data name="Role_User_Bonix" xml:space="preserve">
+    <value>Mandant (Bonix)</value>
+  </data>
   <data name="UserPage_DeleteTitle" xml:space="preserve">
     <value>Löschen bestätigen</value>
   </data>

@@ -1,5 +1,5 @@
-@using Oikos.Application.Services.Partner.Models
-<MudDialog MaxWidth="MaxWidth.Medium" FullWidth="true">
+﻿@using Oikos.Application.Services.Partner.Models
+<MudDialog CloseButton="true" MaxWidth="MaxWidth.Medium" FullWidth="true">
     <DialogContent>
         <MudForm @ref="_form">
             <MudText Typo="Typo.h5" Class="mb-2">@(_isEdit ? Loc["InsuranceEditor_EditTitle"] : Loc["InsuranceEditor_CreateTitle"])</MudText>

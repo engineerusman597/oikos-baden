@@ -1,4 +1,4 @@
-@using System.Text
+﻿@using System.Text
 @using Oikos.Application.Services.Invoice
 @using Oikos.Application.Services.Invoice.Models
 @using MudBlazor
@@ -11,7 +11,7 @@
 @inject ISnackbar _snackbarService
 
 
-<MudDialog MaxWidth="MaxWidth.Medium" FullWidth="true">
+<MudDialog CloseButton="true" MaxWidth="MaxWidth.Medium" FullWidth="true">
     <TitleContent>
         @(_isEdit? Loc["StageManagerEditDialogTitle"] : Loc["StageManagerAddDialogTitle"])
     </TitleContent>
