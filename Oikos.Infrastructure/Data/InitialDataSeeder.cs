@@ -179,12 +179,10 @@ public static class InitialDataSeeder
 
         var newSlugs = definitions.Select(d => d.Slug).ToHashSet();
 
-        // Push any old/unknown stages out of the way (DisplayOrder 100+)
-        foreach (var old in context.InvoiceStages.Where(s => !newSlugs.Contains(s.Slug)))
-        {
-            if (old.DisplayOrder < 100)
-                old.DisplayOrder += 100;
-        }
+        // Remove old/unknown stages that are no longer part of the workflow
+        var oldStages = context.InvoiceStages.Where(s => !newSlugs.Contains(s.Slug)).ToList();
+        if (oldStages.Count > 0)
+            context.InvoiceStages.RemoveRange(oldStages);
 
         foreach (var def in definitions)
         {
