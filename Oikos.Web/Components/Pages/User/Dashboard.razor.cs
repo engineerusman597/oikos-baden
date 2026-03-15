@@ -1,5 +1,6 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Oikos.Application.Services.Subscription;
 using Oikos.Application.Services.Subscription.Models;
 using Oikos.Application.Services.Dashboard;
@@ -17,8 +18,11 @@ namespace Oikos.Web.Components.Pages.User;
 
 public partial class Dashboard
 {
+    [Inject] private IJSRuntime JsRuntime { get; set; } = null!;
+
     private static string PricingUrl => ExternalUrlConstants.PricingUrl;
     private string _greetingText = string.Empty;
+    private string? _cachedRealName;
 
     private readonly List<StatusSummary> _statusSummaries = new();
 
@@ -89,6 +93,7 @@ public partial class Dashboard
 
         if (userInfo != null)
         {
+            _cachedRealName = userInfo.RealName;
             await LoadDashboardDataAsync(userInfo.Id, false);
             await LoadNewsAsync();
             await LoadRecentDataAsync(userInfo.Id);
@@ -101,6 +106,25 @@ public partial class Dashboard
             await LoadDashboardDataAsync(0, false);
             await LoadNewsAsync();
             _greetingText = GreetingHelper.BuildGreeting(null, Loc);
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        try
+        {
+            var clientHour = await JsRuntime.InvokeAsync<int>("eval", "new Date().getHours()");
+            var updated = GreetingHelper.BuildGreeting(_cachedRealName, Loc, clientHour);
+            if (updated != _greetingText)
+            {
+                _greetingText = updated;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex) when (ex is JSDisconnectedException or TaskCanceledException or ObjectDisposedException)
+        {
+            // Circuit disconnected — keep server-time greeting
         }
     }
 

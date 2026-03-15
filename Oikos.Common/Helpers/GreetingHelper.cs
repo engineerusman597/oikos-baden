@@ -5,10 +5,10 @@ namespace Oikos.Common.Helpers;
 
 public static class GreetingHelper
 {
-    public static string BuildGreeting(string? userName, IStringLocalizer<SharedResource> localizer)
+    public static string BuildGreeting(string? userName, IStringLocalizer<SharedResource> localizer, int? clientHour = null)
     {
-        var now = DateTime.Now;
-        var periodKey = now.Hour switch
+        var hour = clientHour ?? DateTime.Now.Hour;
+        var periodKey = hour switch
         {
             >= 5 and < 12 => "Morning",
             >= 12 and < 18 => "Day",

@@ -6,6 +6,7 @@ public sealed record InvoiceStageEditDto(
     int? Id,
     string Name,
     string? NameDe,
+    string? ClientNameDe,
     string Slug,
     string? Summary,
     string? SummaryDe,
@@ -15,7 +16,8 @@ public sealed record InvoiceStageEditDto(
     string? NextStepsDe,
     string? Icon,
     string? Color,
-    InvoicePrimaryStatus PrimaryStatus);
+    InvoicePrimaryStatus PrimaryStatus,
+    bool RequiresClientAction);
 
 public sealed record SaveStageResult(
     bool Success,

@@ -3,7 +3,9 @@
 @using Microsoft.AspNetCore.Authorization
 @using Oikos.Common.Helpers
 @using Oikos.Application.Services.Authentication
+@using Microsoft.JSInterop
 @inject IAuthenticationService AuthenticationService
+@inject IJSRuntime JsRuntime
 @attribute [Authorize]
 @rendermode InteractiveServer
 
@@ -54,13 +56,34 @@
 
 @code {
     [Inject] NavigationManager NavigationManager { get; set; } = null!;
-    
+
     private string _greetingText = string.Empty;
+    private string? _cachedRealName;
 
     protected override async Task OnInitializedAsync()
     {
         var userInfo = await AuthenticationService.GetUserInfoAsync();
-        _greetingText = GreetingHelper.BuildGreeting(userInfo?.RealName, Loc);
+        _cachedRealName = userInfo?.RealName;
+        _greetingText = GreetingHelper.BuildGreeting(_cachedRealName, Loc);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender) return;
+        try
+        {
+            var clientHour = await JsRuntime.InvokeAsync<int>("eval", "new Date().getHours()");
+            var updated = GreetingHelper.BuildGreeting(_cachedRealName, Loc, clientHour);
+            if (updated != _greetingText)
+            {
+                _greetingText = updated;
+                StateHasChanged();
+            }
+        }
+        catch (Exception ex) when (ex is JSDisconnectedException or TaskCanceledException or ObjectDisposedException)
+        {
+            // Circuit disconnected — keep server-time greeting
+        }
     }
 
     private void NavigateTo(string uri)

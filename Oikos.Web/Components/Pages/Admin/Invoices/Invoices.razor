@@ -64,7 +64,7 @@
     </HeaderContent>
     <ChildContent>
         <MudPaper Class="rounded-lg">
-            <MudTable Items="_invoices" Hover="true" Dense="true">
+            <MudTable T="Oikos.Application.Services.Invoice.Models.InvoiceListItemDto" Items="_invoices" Hover="true" Dense="true" OnRowClick="@(e => NavigateToDetails(e.Item.Id))" RowClass="cursor-pointer">
                 <HeaderContent>
                     <MudTh>#</MudTh>
                     <MudTh>@Loc["TableHeaderTicketNumber"]</MudTh>
@@ -114,7 +114,7 @@
                     <MudTd DataLabel='@Loc["TableHeaderStatus"]'>
                         <MudText Typo="Typo.body2">@context.StageName</MudText>
                     </MudTd>
-                    <MudTd Class="text-right" DataLabel='@Loc["AdminTableHeaderActions"]'>
+                    <MudTd Class="text-right" DataLabel='@Loc["AdminTableHeaderActions"]' @onclick:stopPropagation="true">
                         @if (_canViewDetails)
                         {
                             <MudTooltip Text="@Loc["AdminViewDetails"]">

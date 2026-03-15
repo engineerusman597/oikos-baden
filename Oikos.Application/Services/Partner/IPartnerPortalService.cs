@@ -15,4 +15,6 @@ public interface IPartnerPortalService
     Task<(bool Success, string? Error)> CreateSubPartnerAsync(int parentUserId, CreateSubPartnerRequest request);
 
     Task<int?> GetPartnerEntityIdAsync(int userId);
+
+    Task<bool> IsSubPartnerAsync(int userId);
 }

@@ -376,3 +376,7 @@ h1:focus {
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}

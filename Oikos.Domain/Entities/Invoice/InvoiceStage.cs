@@ -55,6 +55,17 @@ public class InvoiceStage
     [Comment("Display order")]
     public int DisplayOrder { get; set; }
 
+    [MaxLength(150)]
+    [Comment("Client-facing stage name (English)")]
+    public string? ClientName { get; set; }
+
+    [MaxLength(150)]
+    [Comment("Client-facing stage name (German)")]
+    public string? ClientNameDe { get; set; }
+
+    [Comment("When true, the client must take an action (e.g. commission enforcement) to advance the case")]
+    public bool RequiresClientAction { get; set; }
+
     [Comment("Primary status classification")]
     public InvoicePrimaryStatus PrimaryStatus { get; set; } = InvoicePrimaryStatus.InReview;
 

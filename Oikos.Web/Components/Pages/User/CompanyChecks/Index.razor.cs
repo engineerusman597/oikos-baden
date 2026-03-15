@@ -13,8 +13,9 @@ namespace Oikos.Web.Components.Pages.User.CompanyChecks;
 using Oikos.Web.Components.Pages.User.CompanyChecks.Dialogs;
 using Oikos.Web.Components.Shared.Dialogs;
 
-public partial class Index
+public partial class Index : IAsyncDisposable
 {
+    private CancellationTokenSource _cts = new();
     [Inject] private ILogger<Index> Logger { get; set; } = null!;
     [Inject] private ISubscriptionPlanService SubscriptionPlanService { get; set; } = null!;
 
@@ -612,7 +613,14 @@ public partial class Index
         {
             _automaticDownloadTriggered = true;
             _shouldTriggerAutomaticDownload = false;
-            await _jsRuntime.InvokeVoidAsync("open", _reportDownloadUrl, "_blank");
+            try
+            {
+                await _jsRuntime.InvokeVoidAsync("open", _reportDownloadUrl, "_blank", _cts.Token);
+            }
+            catch (Exception ex) when (ex is JSDisconnectedException or TaskCanceledException or ObjectDisposedException)
+            {
+                // Circuit disconnected or component disposed — safe to ignore
+            }
         }
     }
 
@@ -726,4 +734,14 @@ public partial class Index
     }
 
     private sealed record WizardStep(string TitleKey, string Icon);
+
+    public async ValueTask DisposeAsync()
+    {
+        await _cts.CancelAsync();
+        _cts.Dispose();
+        if (_commonJsModule is not null)
+        {
+            try { await _commonJsModule.DisposeAsync(); } catch { /* ignore */ }
+        }
+    }
 }

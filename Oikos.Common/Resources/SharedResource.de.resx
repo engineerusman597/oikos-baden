@@ -1740,6 +1740,21 @@
   <data name="StageManagerNameLabel" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="StageManagerInternNameLabel" xml:space="preserve">
+    <value>Interner Name (Admin-Ansicht)</value>
+  </data>
+  <data name="StageManagerInternNameHelper" xml:space="preserve">
+    <value>Wird Admins und Mitarbeitern angezeigt</value>
+  </data>
+  <data name="StageManagerClientNameLabel" xml:space="preserve">
+    <value>Mandantenname (Mandant-Ansicht)</value>
+  </data>
+  <data name="StageManagerClientNameHelper" xml:space="preserve">
+    <value>Wird dem Mandanten angezeigt. Leer lassen, um den internen Namen zu verwenden.</value>
+  </data>
+  <data name="StageManagerRequiresClientAction" xml:space="preserve">
+    <value>Mandantenaktion erforderlich (Vollstreckung beantragen)</value>
+  </data>
   <data name="StageManagerSlugLabel" xml:space="preserve">
     <value>Kurzname</value>
   </data>
@@ -4238,6 +4253,27 @@
   </data>
   <data name="InvoiceDetail_ClientDocsDeleteError" xml:space="preserve">
     <value>Fehler beim Löschen. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="InvoiceDetail_ActionRequired" xml:space="preserve">
+    <value>Aktion erforderlich</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementActionText" xml:space="preserve">
+    <value>Es wurde kein Widerspruch eingelegt. Bitte beauftragen Sie jetzt die Vollstreckung.</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementButton" xml:space="preserve">
+    <value>Vollstreckung beauftragen</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementConfirmTitle" xml:space="preserve">
+    <value>Vollstreckung beauftragen</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementConfirmMessage" xml:space="preserve">
+    <value>Möchten Sie die Vollstreckung jetzt beauftragen?</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementSuccess" xml:space="preserve">
+    <value>Vollstreckung erfolgreich beauftragt.</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementError" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.</value>
   </data>
   <data name="TaxOffice_Title" xml:space="preserve">
     <value>Steuerberaterbüros</value>

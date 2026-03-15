@@ -26,10 +26,7 @@ public static class InitialDataSeeder
             SeedAdminUser(dbContext);
         }
 
-        if (!dbContext.InvoiceStages.Any())
-        {
-            SeedInvoiceStages(dbContext);
-        }
+        UpsertInvoiceStages(dbContext);
 
         if (!dbContext.SubscriptionPlans.Any())
         {
@@ -116,26 +113,115 @@ public static class InitialDataSeeder
         dbContext.SaveChanges();
     }
 
-    private static void SeedInvoiceStages(OikosDbContext context)
+    private static void UpsertInvoiceStages(OikosDbContext context)
     {
         var now = DateTime.Now;
-        var defaultStages = new List<InvoiceStage>
+
+        // Admin Name = internal/detailed name shown to staff
+        // ClientName = simpler client-facing name shown to clients
+        var definitions = new[]
         {
-            new() { Name = "Eingang", NameDe = "Eingang", Slug = "eingang", SummaryDe = "Datum, an dem Ihr Antrag oder Ihre Rechnung bei uns eingegangen ist.", PrimaryStatus = InvoicePrimaryStatus.Submitted, DisplayOrder = 1, CreatedAt = now, UpdatedAt = now, Color = "Info" },
-            new() { Name = "Status Meldung", NameDe = "Status Meldung", Slug = "status-meldung", SummaryDe = "Allgemeine Statusmeldung zum aktuellen Bearbeitungsstand.", PrimaryStatus = InvoicePrimaryStatus.InReview, DisplayOrder = 2, CreatedAt = now, UpdatedAt = now, Color = "Warning" },
-            new() { Name = "Final geprüft", NameDe = "Final geprüft", Slug = "final-geprueft", SummaryDe = "Ihre Unterlagen wurden abschließend geprüft.", PrimaryStatus = InvoicePrimaryStatus.Accepted, DisplayOrder = 3, CreatedAt = now, UpdatedAt = now, Color = "Success" },
-            new() { Name = "Angenommene Rechnungen", NameDe = "Angenommene Rechnungen", Slug = "angenommene-rechnungen", SummaryDe = "Rechnungen, die vollständig geprüft und akzeptiert wurden.", PrimaryStatus = InvoicePrimaryStatus.Accepted, DisplayOrder = 4, CreatedAt = now, UpdatedAt = now, Color = "Success" },
-            new() { Name = "Mahnantrag", NameDe = "Mahnantrag", Slug = "mahnantrag", SummaryDe = "Antrag auf Erlass eines Mahnbescheids beim zuständigen Gericht.", PrimaryStatus = InvoicePrimaryStatus.Court, DisplayOrder = 5, CreatedAt = now, UpdatedAt = now, Color = "Secondary" },
-            new() { Name = "Mahnantrag versendet", NameDe = "Mahnantrag an das zuständige Gericht versendet", Slug = "mahnantrag-versendet", SummaryDe = "Der Mahnantrag wurde an das zuständige Gericht übermittelt.", PrimaryStatus = InvoicePrimaryStatus.Court, DisplayOrder = 6, CreatedAt = now, UpdatedAt = now, Color = "Secondary" },
-            new() { Name = "Mahnantrag erhalten", NameDe = "Mahnantrag erfolgreich erhalten", Slug = "mahnantrag-erhalten", SummaryDe = "Das Gericht hat den Mahnantrag erfolgreich erhalten.", PrimaryStatus = InvoicePrimaryStatus.Court, DisplayOrder = 7, CreatedAt = now, UpdatedAt = now, Color = "Secondary" },
-            new() { Name = "Frist", NameDe = "Frist", Slug = "frist", SummaryDe = "Frist, innerhalb derer der Schuldner reagieren kann.", PrimaryStatus = InvoicePrimaryStatus.Court, DisplayOrder = 8, CreatedAt = now, UpdatedAt = now, Color = "Error" },
-            new() { Name = "Widerspruch eingelegt", NameDe = "Widerspruch eingelegt", Slug = "widerspruch", SummaryDe = "Der Schuldner hat Widerspruch gegen den Mahnbescheid eingelegt.", PrimaryStatus = InvoicePrimaryStatus.Inquiry, DisplayOrder = 9, CreatedAt = now, UpdatedAt = now, Color = "Error" },
-            new() { Name = "Vollstreckungsantrag", NameDe = "Vollstreckungsantrag", Slug = "vollstreckungsantrag", SummaryDe = "Antrag auf Zwangsvollstreckung aus dem Titel.", PrimaryStatus = InvoicePrimaryStatus.Court, DisplayOrder = 10, CreatedAt = now, UpdatedAt = now, Color = "Secondary" },
-            new() { Name = "Vollstreckungstitel erhalten", NameDe = "Vollstreckungstitel erhalten", Slug = "vollstreckungstitel", SummaryDe = "Der Vollstreckungstitel wurde erteilt und liegt vor.", PrimaryStatus = InvoicePrimaryStatus.Completed, DisplayOrder = 11, CreatedAt = now, UpdatedAt = now, Color = "Dark" },
-            new() { Name = "Fallnummer", NameDe = "Fallnummer", Slug = "fallnummer", SummaryDe = "Eindeutige Referenz- bzw. Aktennummer Ihres Falls.", PrimaryStatus = InvoicePrimaryStatus.InReview, DisplayOrder = 12, CreatedAt = now, UpdatedAt = now, Color = "Info" }
+            (Slug: "neu",                    Order: 1,  Color: "Info",      Status: InvoicePrimaryStatus.Submitted,          ClientAction: false,
+             Name: "New",                           NameDe: "Neu",
+             ClientName: "Submitted",               ClientNameDe: "Eingereicht",
+             SummaryDe: "Ihr Fall ist bei uns eingegangen und wird bearbeitet."),
+
+            (Slug: "in-pruefung",            Order: 2,  Color: "Warning",   Status: InvoicePrimaryStatus.InReview,           ClientAction: false,
+             Name: "In Review",                     NameDe: "In Prüfung",
+             ClientName: "Under Review",            ClientNameDe: "In Prüfung",
+             SummaryDe: "Ihr Fall wird derzeit von unserem Team geprüft."),
+
+            (Slug: "akzeptiert",             Order: 3,  Color: "Success",   Status: InvoicePrimaryStatus.Accepted,           ClientAction: false,
+             Name: "Accepted – Court Preparation",  NameDe: "Akzeptiert – Vorbereitung Gericht",
+             ClientName: "Accepted",                ClientNameDe: "Akzeptiert",
+             SummaryDe: "Ihr Fall wurde akzeptiert. Wir bereiten den Mahnantrag vor."),
+
+            (Slug: "mahnantrag-erstellt",    Order: 4,  Color: "Secondary", Status: InvoicePrimaryStatus.Court,              ClientAction: false,
+             Name: "Dunning Request Created",        NameDe: "Mahnantrag erstellt",
+             ClientName: "Dunning Request Created",  ClientNameDe: "Mahnantrag erstellt",
+             SummaryDe: "Der Mahnantrag wurde erstellt und wird vorbereitet."),
+
+            (Slug: "mahnantrag-gesendet",    Order: 5,  Color: "Secondary", Status: InvoicePrimaryStatus.Court,              ClientAction: false,
+             Name: "Dunning Request Sent to Court",  NameDe: "Mahnantrag an Gericht gesendet",
+             ClientName: "Dunning Request Sent",     ClientNameDe: "Mahnantrag an Gericht gesendet",
+             SummaryDe: "Der Mahnantrag wurde an das zuständige Gericht übermittelt."),
+
+            (Slug: "mahnbescheid-erhalten",  Order: 6,  Color: "Secondary", Status: InvoicePrimaryStatus.Court,              ClientAction: false,
+             Name: "Dunning Notice Received",        NameDe: "Mahnbescheid erhalten",
+             ClientName: "Dunning Notice Received",  ClientNameDe: "Mahnbescheid erhalten",
+             SummaryDe: "Das Gericht hat den Mahnbescheid erlassen."),
+
+            (Slug: "frist-gesetzt",          Order: 7,  Color: "Error",     Status: InvoicePrimaryStatus.DeadlineRunning,    ClientAction: false,
+             Name: "Deadline Set",                   NameDe: "Frist gesetzt",
+             ClientName: "Objection Period Running", ClientNameDe: "Widerspruchsfrist läuft",
+             SummaryDe: "Die Widerspruchsfrist für den Schuldner läuft."),
+
+            (Slug: "akte-an-anwalt",         Order: 8,  Color: "Error",     Status: InvoicePrimaryStatus.Inquiry,            ClientAction: false,
+             Name: "File Forwarded to Lawyer",       NameDe: "Akte an Anwalt",
+             ClientName: "File Forwarded to Lawyer", ClientNameDe: "Akte an Anwalt",
+             SummaryDe: "Der Schuldner hat Widerspruch eingelegt. Die Akte wurde an einen Anwalt übergeben."),
+
+            (Slug: "vollstreckung-beantragen", Order: 9, Color: "Warning",  Status: InvoicePrimaryStatus.EnforcementReady,   ClientAction: true,
+             Name: "Waiting for Enforcement Application", NameDe: "Warten auf Vollstreckungsantrag",
+             ClientName: "Commission Enforcement",  ClientNameDe: "Vollstreckung beantragen",
+             SummaryDe: "Bitte beauftragen Sie jetzt die Vollstreckung."),
+
+            (Slug: "vollstreckung-beantragt", Order: 10, Color: "Secondary", Status: InvoicePrimaryStatus.EnforcementReady,  ClientAction: false,
+             Name: "Enforcement Application Filed",  NameDe: "Vollstreckung beantragt",
+             ClientName: "Enforcement Filed",        ClientNameDe: "Vollstreckung beantragt",
+             SummaryDe: "Der Vollstreckungsantrag wurde gestellt."),
+
+            (Slug: "vollstreckung-laeuft",   Order: 11, Color: "Dark",      Status: InvoicePrimaryStatus.EnforcementInProgress, ClientAction: false,
+             Name: "Enforcement in Progress",        NameDe: "Vollstreckung läuft",
+             ClientName: "Enforcement in Progress",  ClientNameDe: "Vollstreckung läuft",
+             SummaryDe: "Die Zwangsvollstreckung ist eingeleitet.")
         };
 
-        context.InvoiceStages.AddRange(defaultStages);
+        var newSlugs = definitions.Select(d => d.Slug).ToHashSet();
+
+        // Push any old/unknown stages out of the way (DisplayOrder 100+)
+        foreach (var old in context.InvoiceStages.Where(s => !newSlugs.Contains(s.Slug)))
+        {
+            if (old.DisplayOrder < 100)
+                old.DisplayOrder += 100;
+        }
+
+        foreach (var def in definitions)
+        {
+            var existing = context.InvoiceStages.FirstOrDefault(s => s.Slug == def.Slug);
+            if (existing != null)
+            {
+                existing.Name = def.Name;
+                existing.NameDe = def.NameDe;
+                existing.ClientName = def.ClientName;
+                existing.ClientNameDe = def.ClientNameDe;
+                existing.SummaryDe = def.SummaryDe;
+                existing.PrimaryStatus = def.Status;
+                existing.DisplayOrder = def.Order;
+                existing.Color = def.Color;
+                existing.RequiresClientAction = def.ClientAction;
+                existing.UpdatedAt = now;
+            }
+            else
+            {
+                context.InvoiceStages.Add(new InvoiceStage
+                {
+                    Name = def.Name,
+                    NameDe = def.NameDe,
+                    ClientName = def.ClientName,
+                    ClientNameDe = def.ClientNameDe,
+                    Slug = def.Slug,
+                    SummaryDe = def.SummaryDe,
+                    PrimaryStatus = def.Status,
+                    DisplayOrder = def.Order,
+                    Color = def.Color,
+                    RequiresClientAction = def.ClientAction,
+                    CreatedAt = now,
+                    UpdatedAt = now
+                });
+            }
+        }
+
         context.SaveChanges();
     }
 

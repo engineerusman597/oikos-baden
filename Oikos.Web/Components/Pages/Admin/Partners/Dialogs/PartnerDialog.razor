@@ -3,9 +3,15 @@
 @using Oikos.Application.Services.Partner.Models
 @namespace Oikos.Web.Components.Pages.Partners.Partners.Dialogs
 
-<MudDialog CloseButton="true">
+<MudDialog>
+    <TitleContent>
+        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Style="width:100%;">
+            <MudText Typo="Typo.h6">@(Partner == null ? Loc["PartnerDialog_CreateTitle"] : Loc["PartnerDialog_EditTitle"])</MudText>
+            <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="Cancel" />
+        </MudStack>
+    </TitleContent>
     <DialogContent>
-        <EditForm Model="_model" OnValidSubmit="SaveAsync">
+        <EditForm id="partner-dialog-form" Model="_model" OnValidSubmit="SaveAsync">
             <DataAnnotationsValidator />
             <MudStack Spacing="2">
 
@@ -56,22 +62,10 @@
                 <MudTextField @bind-Value="_model.Notes" Label="@Loc["PartnerDialog_NotesLabel"]"
                               For="@(() => _model.Notes)" Variant="Variant.Outlined" Disabled="_isSaving" Lines="3" />
 
-                @* Row 7: Provisionsart + Provisionssatz *@
-                <MudGrid Spacing="2">
-                    <MudItem xs="6">
-                        <MudSelect @bind-Value="_model.CommissionType" Label="@Loc["PartnerDialog_CommissionTypeLabel"]"
-                                   Variant="Variant.Outlined" Disabled="_isSaving" Clearable="true">
-                            <MudSelectItem Value="@("Monthly")">@Loc["PartnerDialog_CommissionMonthly"]</MudSelectItem>
-                            <MudSelectItem Value="@("Yearly")">@Loc["PartnerDialog_CommissionYearly"]</MudSelectItem>
-                            <MudSelectItem Value="@("OneTime")">@Loc["PartnerDialog_CommissionOneTime"]</MudSelectItem>
-                        </MudSelect>
-                    </MudItem>
-                    <MudItem xs="6">
-                        <MudNumericField @bind-Value="_model.CommissionRate" Label="@Loc["PartnerDialog_CommissionRateLabel"]"
-                                         Variant="Variant.Outlined" Min="0" Max="100" Format="N2"
-                                         Adornment="Adornment.End" AdornmentText="%" Disabled="_isSaving" />
-                    </MudItem>
-                </MudGrid>
+                @* Row 7: Provisionssatz *@
+                <MudNumericField @bind-Value="_model.CommissionRate" Label="@Loc["PartnerDialog_CommissionRateLabel"]"
+                                 Variant="Variant.Outlined" Min="0" Max="100" Format="N2"
+                                 Adornment="Adornment.End" AdornmentText="%" Disabled="_isSaving" />
 
                 @* Row 8: Provisionszeitraum *@
                 <MudSelect @bind-Value="_model.CommissionPeriodMonths" Label="@Loc["PartnerDialog_CommissionPeriodLabel"]"
@@ -108,16 +102,16 @@
                 }
 
             </MudStack>
-            <DialogActions>
-                <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="Cancel" ButtonType="ButtonType.Button" Disabled="_isSaving">
-                    @Loc["PartnerDialog_Cancel"]
-                </MudButton>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" Disabled="_isSaving">
-                    @Loc["PartnerDialog_Save"]
-                </MudButton>
-            </DialogActions>
         </EditForm>
     </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="Cancel" ButtonType="ButtonType.Button" Disabled="_isSaving">
+            @Loc["PartnerDialog_Cancel"]
+        </MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" form="partner-dialog-form" Disabled="_isSaving">
+            @Loc["PartnerDialog_Save"]
+        </MudButton>
+    </DialogActions>
 </MudDialog>
 
 @code {

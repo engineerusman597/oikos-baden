@@ -10,12 +10,15 @@
             <MudText Typo="Typo.h4" Class="sp-page-title">@Loc["PartnerSub_Title"]</MudText>
             <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["PartnerSub_Subtitle"]</MudText>
         </div>
-        <MudButton Variant="Variant.Filled"
-                   Color="Color.Primary"
-                   OnClick="@OpenCreateDialog"
-                   Class="sp-add-btn">
-            @Loc["PartnerSub_NewButton"]
-        </MudButton>
+        @if (!_isSubPartner)
+        {
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       OnClick="@OpenCreateDialog"
+                       Class="sp-add-btn">
+                @Loc["PartnerSub_NewButton"]
+            </MudButton>
+        }
     </div>
 
     @if (_isLoading)
@@ -86,8 +89,13 @@
 @* Create Sub-Partner Dialog *@
 <MudDialog @bind-Visible="_showDialog" Options="_dialogOptions">
     <TitleContent>
-        <MudText Typo="Typo.h6">@Loc["PartnerSub_DialogTitle"]</MudText>
-        <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerSub_DialogSubtitle"]</MudText>
+        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Style="width:100%;">
+            <div>
+                <MudText Typo="Typo.h6">@Loc["PartnerSub_DialogTitle"]</MudText>
+                <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerSub_DialogSubtitle"]</MudText>
+            </div>
+            <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="CloseDialog" />
+        </MudStack>
     </TitleContent>
     <DialogContent>
         <MudStack Spacing="3" Class="pt-1">
@@ -114,27 +122,14 @@
                           Placeholder="+49 123 456789"
                           Variant="Variant.Outlined" />
 
-            <MudGrid Spacing="2">
-                <MudItem xs="6">
-                    <MudSelect @bind-Value="_form.CommissionType"
-                               Label="@Loc["PartnerSub_FieldCommissionType"]"
-                               Variant="Variant.Outlined">
-                        <MudSelectItem Value="@("Monthly")">@Loc["PartnerDialog_CommissionMonthly"]</MudSelectItem>
-                        <MudSelectItem Value="@("Yearly")">@Loc["PartnerDialog_CommissionYearly"]</MudSelectItem>
-                        <MudSelectItem Value="@("OneTime")">@Loc["PartnerDialog_CommissionOneTime"]</MudSelectItem>
-                    </MudSelect>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudNumericField @bind-Value="_form.CommissionRate"
-                                     Label="@Loc["PartnerSub_FieldCommissionRate"]"
-                                     Variant="Variant.Outlined"
-                                     Min="0"
-                                     Max="100"
-                                     Format="N2"
-                                     Adornment="Adornment.End"
-                                     AdornmentText="%" />
-                </MudItem>
-            </MudGrid>
+            <MudNumericField @bind-Value="_form.CommissionRate"
+                             Label="@Loc["PartnerSub_FieldCommissionRate"]"
+                             Variant="Variant.Outlined"
+                             Min="0"
+                             Max="100"
+                             Format="N2"
+                             Adornment="Adornment.End"
+                             AdornmentText="%" />
 
             <MudTextField @bind-Value="_form.Password"
                           Label="@Loc["PartnerSub_FieldPassword"]"

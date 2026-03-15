@@ -282,6 +282,52 @@ public class InvoiceManagementService : IInvoiceManagementService
         return true;
     }
 
+    public async Task<bool> CommissionEnforcementAsync(int invoiceId, int userId, string userName)
+    {
+        using var context = await _dbFactory.CreateDbContextAsync();
+
+        var invoice = await context.Invoices.FirstOrDefaultAsync(x => x.Id == invoiceId);
+        if (invoice is null) return false;
+
+        var currentStage = await context.InvoiceStages.FirstOrDefaultAsync(x => x.Id == invoice.StageId);
+        if (currentStage is null || !currentStage.RequiresClientAction) return false;
+
+        // Find the next stage in display order
+        var nextStage = await context.InvoiceStages
+            .Where(s => s.DisplayOrder > currentStage.DisplayOrder && !s.RequiresClientAction)
+            .OrderBy(s => s.DisplayOrder)
+            .FirstOrDefaultAsync();
+
+        if (nextStage is null) return false;
+
+        invoice.StageId = nextStage.Id;
+        invoice.PrimaryStatus = nextStage.PrimaryStatus;
+        invoice.UpdatedAt = DateTime.Now;
+
+        context.InvoiceStageHistories.Add(new InvoiceStageHistory
+        {
+            InvoiceId = invoice.Id,
+            StageId = nextStage.Id,
+            ChangedAt = DateTime.Now,
+            ChangedByUserId = userId,
+            ChangedByUserName = userName,
+            Note = null
+        });
+
+        await context.SaveChangesAsync();
+        return true;
+    }
+
+    private static string? LocalizeClientStageValue(string? clientEn, string? clientDe, string? fallbackEn, string? fallbackDe, string culture)
+    {
+        var twoLetterCode = culture.Length >= 2 ? culture.Substring(0, 2).ToLowerInvariant() : culture.ToLowerInvariant();
+        return twoLetterCode switch
+        {
+            "de" => FirstNonEmpty(clientDe, clientEn, fallbackDe, fallbackEn),
+            _ => FirstNonEmpty(clientEn, clientDe, fallbackEn, fallbackDe)
+        };
+    }
+
     private static string? LocalizeStageValue(string? english, string? german, string culture)
     {
         var twoLetterCode = culture.Length >= 2 ? culture.Substring(0, 2).ToLowerInvariant() : culture.ToLowerInvariant();
@@ -430,6 +476,9 @@ public class InvoiceManagementService : IInvoiceManagementService
         var filePath = invoice.Invoice.FilePath;
         var powerOfAttorneyPath = invoice.Invoice.PowerOfAttorneyPath;
 
+        var adminStageName = LocalizeStageValue(stage.Name, stage.NameDe, culture) ?? stage.Name;
+        var clientStageName = LocalizeClientStageValue(stage.ClientName, stage.ClientNameDe, stage.Name, stage.NameDe, culture) ?? adminStageName;
+
         return new InvoiceDetailDto(
             Id: invoice.Invoice.Id,
             Company: invoice.Invoice.Company,
@@ -440,7 +489,9 @@ public class InvoiceManagementService : IInvoiceManagementService
             StageId: invoice.Invoice.StageId,
             PrimaryStatus: invoice.Invoice.PrimaryStatus,
             StageSlug: stage.Slug,
-            StageName: LocalizeStageValue(stage.Name, stage.NameDe, culture) ?? stage.Name,
+            StageName: adminStageName,
+            ClientStageName: clientStageName,
+            RequiresClientAction: stage.RequiresClientAction,
             StageSummary: LocalizeStageValue(stage.Summary, stage.SummaryDe, culture),
             StageDescription: LocalizeStageValue(stage.Description, stage.DescriptionDe, culture),
             StageNextSteps: LocalizeStageValue(stage.NextSteps, stage.NextStepsDe, culture),
@@ -525,6 +576,7 @@ public class InvoiceManagementService : IInvoiceManagementService
             Id: stage.Id,
             Name: stage.Name,
             NameDe: stage.NameDe,
+            ClientNameDe: stage.ClientNameDe,
             Slug: stage.Slug,
             Summary: stage.Summary,
             SummaryDe: stage.SummaryDe,
@@ -534,7 +586,8 @@ public class InvoiceManagementService : IInvoiceManagementService
             NextStepsDe: stage.NextStepsDe,
             Icon: stage.Icon,
             Color: stage.Color,
-            PrimaryStatus: stage.PrimaryStatus);
+            PrimaryStatus: stage.PrimaryStatus,
+            RequiresClientAction: stage.RequiresClientAction);
     }
 
     public async Task<SaveStageResult> SaveStageAsync(InvoiceStageEditDto dto)
@@ -582,6 +635,9 @@ public class InvoiceManagementService : IInvoiceManagementService
         entity.NextSteps = string.IsNullOrWhiteSpace(dto.NextSteps) ? null : dto.NextSteps.Trim();
         entity.NextStepsDe = string.IsNullOrWhiteSpace(dto.NextStepsDe) ? null : dto.NextStepsDe.Trim();
         entity.Icon = string.IsNullOrWhiteSpace(dto.Icon) ? "flag" : dto.Icon.Trim();
+        entity.ClientName = string.IsNullOrWhiteSpace(dto.ClientNameDe) ? null : dto.ClientNameDe.Trim();
+        entity.ClientNameDe = string.IsNullOrWhiteSpace(dto.ClientNameDe) ? null : dto.ClientNameDe.Trim();
+        entity.RequiresClientAction = dto.RequiresClientAction;
         entity.Color = string.IsNullOrWhiteSpace(dto.Color) ? null : dto.Color;
         entity.PrimaryStatus = dto.PrimaryStatus;
         entity.UpdatedAt = DateTime.Now;

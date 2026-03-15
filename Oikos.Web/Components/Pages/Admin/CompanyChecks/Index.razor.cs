@@ -9,8 +9,9 @@ using Oikos.Web.Components.Shared.Dialogs;
 
 namespace Oikos.Web.Components.Pages.Admin.CompanyChecks;
 
-public partial class Index
+public partial class Index : IAsyncDisposable
 {
+    private CancellationTokenSource _cts = new();
     [Inject] private ILogger<Index> Logger { get; set; } = null!;
 
     private readonly WizardStep[] _steps =
@@ -312,7 +313,8 @@ public partial class Index
 
         if (!forceRegeneration && TryUseExistingReport(request))
         {
-            await InvokeAsync(StateHasChanged);
+            if (!_cts.IsCancellationRequested)
+                await InvokeAsync(StateHasChanged);
             await TriggerAutomaticDownloadIfReadyAsync();
             return;
         }
@@ -325,11 +327,14 @@ public partial class Index
 
         _isGeneratingPdf = true;
         _reportDownloadUrl = null;
-        await InvokeAsync(StateHasChanged);
+        if (!_cts.IsCancellationRequested)
+            await InvokeAsync(StateHasChanged);
 
         try
         {
             var result = await _wizardService.GenerateReportPdfAsync(request.Id);
+
+            if (_cts.IsCancellationRequested) return;
 
             if (!result.Success || result.UpdatedRequest == null)
             {
@@ -346,14 +351,15 @@ public partial class Index
                 _snackbarService.Add(Loc["PdfDownloadSuccess"], Severity.Success);
             }
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is not TaskCanceledException)
         {
             _snackbarService.Add($"{Loc["PdfDownloadError"]}: {ex.Message}", Severity.Error);
         }
         finally
         {
             _isGeneratingPdf = false;
-            await InvokeAsync(StateHasChanged);
+            if (!_cts.IsCancellationRequested)
+                await InvokeAsync(StateHasChanged);
         }
     }
 
@@ -380,7 +386,14 @@ public partial class Index
         {
             _automaticDownloadTriggered = true;
             _shouldTriggerAutomaticDownload = false;
-            await _jsRuntime.InvokeVoidAsync("open", _reportDownloadUrl, "_blank");
+            try
+            {
+                await _jsRuntime.InvokeVoidAsync("open", _reportDownloadUrl, "_blank", _cts.Token);
+            }
+            catch (Exception ex) when (ex is JSDisconnectedException or TaskCanceledException or ObjectDisposedException)
+            {
+                // Circuit disconnected or component disposed — safe to ignore
+            }
         }
     }
 
@@ -474,4 +487,10 @@ public partial class Index
     }
 
     private sealed record WizardStep(string TitleKey, string Icon);
+
+    public async ValueTask DisposeAsync()
+    {
+        await _cts.CancelAsync();
+        _cts.Dispose();
+    }
 }

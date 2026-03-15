@@ -14,7 +14,7 @@
 		@* --- HEADER: Logo --- *@
 		<div class="navmenu__logo pa-4 pb-3">
 			<MudLink Href="/partner-portal/dashboard" Match="NavLinkMatch.All" Class="navmenu__logo-link">
-				<MudText Typo="Typo.h6" Style="font-weight:700; color:#1e293b;">Partner-Portal</MudText>
+				<MudText Typo="Typo.h6" Style="font-weight:700; color:#1e293b;">@(_isSubPartner ? "Sub-Partner Portal" : "Partner-Portal")</MudText>
 			</MudLink>
 		</div>
 

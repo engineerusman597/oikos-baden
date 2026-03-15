@@ -71,7 +71,9 @@
         }
         else
         {
-            <MudTable Items="_users" Hover="true" Dense="true"  style="width:100%;" HorizontalScrollbar="true">
+            <MudTable T="Oikos.Application.Services.User.Models.UserDto" Items="_users" Hover="true" Dense="true" style="width:100%;" HorizontalScrollbar="true"
+                      OnRowClick="@(e => _navManager.NavigateTo($"/admin/clients/{e.Item.Id}"))"
+                      RowClass="cursor-pointer">
                 <HeaderContent>
                     <MudTh >@Loc["UserPage_TableH3"]</MudTh>
                     <MudTh >@Loc["UserPage_TableH7"]</MudTh>
@@ -217,12 +219,12 @@
                             <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["UserPage_LoginNever"]</MudText>
                         }
                     </MudTd>
-                    <MudTd DataLabel='@Loc["UserPage_TableH4"]'>
+                    <MudTd DataLabel='@Loc["UserPage_TableH4"]' @onclick:stopPropagation="true">
                         <MudSwitch Value="@context.IsEnabled" T="bool"
                                    ValueChanged="@(async v => await ChangeUserActive(context.Id, v))" Color="Color.Primary">
                         </MudSwitch>
                     </MudTd>
-                    <MudTd Class="text-right" DataLabel='@Loc["UserPage_TableH5"]'>
+                    <MudTd Class="text-right" DataLabel='@Loc["UserPage_TableH5"]' @onclick:stopPropagation="true">
                         <MudStack Row="true" Spacing="0" Justify="Justify.FlexEnd" AlignItems="AlignItems.Center">
                             <MudTooltip Text='@Loc["UserPage_Details"]'>
                                 <MudIconButton Icon="@Icons.Material.Outlined.RemoveRedEye" Color="Color.Default" Size="Size.Small"

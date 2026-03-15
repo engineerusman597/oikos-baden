@@ -13,6 +13,8 @@ public sealed record InvoiceDetailDto(
     InvoicePrimaryStatus PrimaryStatus,
     string StageSlug,
     string StageName,
+    string ClientStageName,
+    bool RequiresClientAction,
     string? StageSummary,
     string? StageDescription,
     string? StageNextSteps,

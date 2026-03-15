@@ -28,4 +28,7 @@ public interface IInvoiceManagementService
     // Stage CRUD
     Task<InvoiceStageEditDto?> GetStageForEditAsync(int stageId);
     Task<SaveStageResult> SaveStageAsync(InvoiceStageEditDto dto);
+
+    // Client Actions
+    Task<bool> CommissionEnforcementAsync(int invoiceId, int userId, string userName);
 }

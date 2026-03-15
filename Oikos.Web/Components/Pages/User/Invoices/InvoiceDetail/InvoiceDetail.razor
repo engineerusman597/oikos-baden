@@ -51,7 +51,7 @@
                         <MudStack Row="true" Spacing="1" Class="invoice-detail-chips">
                             <MudChip T="string" Color="@ResolveColor(_invoice.StageColor, Color.Info)" Variant="Variant.Filled">
                                 <MudIcon Icon="@_invoice.StageIcon" Class="mr-1" />
-                                @_invoice.StageName
+                                @_invoice.ClientStageName
                             </MudChip>
                             <MudChip T="string" Color="@GetPrimaryStatusColor(_invoice.PrimaryStatus)" Variant="Variant.Text">
                                 @Loc[$"InvoicePrimaryStatus_{_invoice.PrimaryStatus}"]
@@ -93,10 +93,33 @@
                                             <MudItem xs="12">
                                                 <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoicePrimaryStatusLabel"]</MudText>
                                                 <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
-                                                    <MudText Typo="Typo.body1" Color="@GetPrimaryStatusColor(_invoice.PrimaryStatus)">@Loc[$"InvoicePrimaryStatus_{_invoice.PrimaryStatus}"]</MudText>
-                                                    <MudText Typo="Typo.caption" Class="mud-text-secondary">(@_invoice.StageName)</MudText>
+                                                    <MudText Typo="Typo.body1" Color="@GetPrimaryStatusColor(_invoice.PrimaryStatus)">@_invoice.ClientStageName</MudText>
                                                 </MudStack>
                                             </MudItem>
+                                            @if (_invoice.RequiresClientAction)
+                                            {
+                                                <MudItem xs="12">
+                                                    <MudPaper Elevation="0" Class="pa-3 rounded-lg" Style="border: 2px solid var(--mud-palette-warning); background: var(--mud-palette-warning-lighten);">
+                                                        <MudStack Spacing="2">
+                                                            <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="1">
+                                                                <MudIcon Icon="@Icons.Material.Filled.NotificationImportant" Color="Color.Warning" Size="Size.Small" />
+                                                                <MudText Typo="Typo.subtitle2" Color="Color.Warning">@Loc["InvoiceDetail_ActionRequired"]</MudText>
+                                                            </MudStack>
+                                                            <MudText Typo="Typo.body2">@Loc["InvoiceDetail_EnforcementActionText"]</MudText>
+                                                            <MudButton Variant="Variant.Filled" Color="Color.Warning" Size="Size.Small"
+                                                                       StartIcon="@Icons.Material.Filled.Gavel"
+                                                                       Disabled="@_isCommissioning"
+                                                                       OnClick="CommissionEnforcementAsync">
+                                                                @if (_isCommissioning)
+                                                                {
+                                                                    <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                                                                }
+                                                                @Loc["InvoiceDetail_EnforcementButton"]
+                                                            </MudButton>
+                                                        </MudStack>
+                                                    </MudPaper>
+                                                </MudItem>
+                                            }
                                             <MudItem xs="6">
                                                 <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["InvoiceDetailCreatedLabel"]</MudText>
                                                 <MudText Typo="Typo.body1">@FormatDateTime(_invoice.CreatedAt)</MudText>

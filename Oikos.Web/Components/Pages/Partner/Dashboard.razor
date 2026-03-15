@@ -27,7 +27,7 @@
         <MudGrid Spacing="4" Class="mb-6">
 
             @* Recommendations *@
-            <MudItem xs="12" sm="6" md="3">
+            <MudItem xs="12" sm="6" md="4">
                 <MudPaper Elevation="0" Outlined="true" Class="partner-stat-card rounded-xl pa-5">
                     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                         <MudStack Spacing="1">
@@ -43,7 +43,7 @@
             </MudItem>
 
             @* Commission paid *@
-            <MudItem xs="12" sm="6" md="3">
+            <MudItem xs="12" sm="6" md="4">
                 <MudPaper Elevation="0" Outlined="true" Class="partner-stat-card rounded-xl pa-5">
                     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                         <MudStack Spacing="1">
@@ -58,24 +58,9 @@
                 </MudPaper>
             </MudItem>
 
-            @* Open commission *@
-            <MudItem xs="12" sm="6" md="3">
-                <MudPaper Elevation="0" Outlined="true" Class="partner-stat-card rounded-xl pa-5">
-                    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
-                        <MudStack Spacing="1">
-                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_OpenCommission"]</MudText>
-                            <MudText Typo="Typo.h4" Class="fw-bold">@_dashboard.OpenCommission.ToString("N2") €</MudText>
-                            <MudText Typo="Typo.caption" Class="mud-text-secondary">@Loc["PartnerDashboard_PendingInProgress"]</MudText>
-                        </MudStack>
-                        <div class="partner-stat-icon partner-stat-icon--warning">
-                            <MudIcon Icon="@Icons.Material.Filled.AccessTime" />
-                        </div>
-                    </MudStack>
-                </MudPaper>
-            </MudItem>
 
             @* Sub-partners *@
-            <MudItem xs="12" sm="6" md="3">
+            <MudItem xs="12" sm="6" md="4">
                 <MudPaper Elevation="0" Outlined="true" Class="partner-stat-card rounded-xl pa-5">
                     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween">
                         <MudStack Spacing="1">
@@ -132,11 +117,6 @@
                         <div class="partner-info-row">
                             <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_Commission_Type"]</MudText>
                             <MudText Typo="Typo.body2" Style="font-weight:600;">@Loc["PartnerDashboard_Commission_TypeValue"]</MudText>
-                        </div>
-                        <MudDivider />
-                        <div class="partner-info-row">
-                            <MudText Typo="Typo.body2" Class="mud-text-secondary">@Loc["PartnerDashboard_Commission_Rate"]</MudText>
-                            <MudText Typo="Typo.body2" Style="font-weight:600;">@Loc["PartnerDashboard_Commission_RateValue"]</MudText>
                         </div>
                     </MudStack>
                 </MudPaper>

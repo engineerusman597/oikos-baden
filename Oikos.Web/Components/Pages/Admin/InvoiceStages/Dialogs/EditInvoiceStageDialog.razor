@@ -28,7 +28,10 @@
                 <MudDivider />
 
                 <MudText Typo="Typo.subtitle2">@($"{Loc["StageManagerNameLabel"]} (DE)")</MudText>
-                <MudTextField T="string" @bind-Value="Model.NameDe" Label="@Loc["StageManagerNameLabel"]" Required="true" For="() => Model.NameDe" Immediate="true" />
+                <MudTextField T="string" @bind-Value="Model.NameDe" Label="@Loc["StageManagerInternNameLabel"]" Required="true" For="() => Model.NameDe" Immediate="true"
+                              HelperText="@Loc["StageManagerInternNameHelper"]" />
+                <MudTextField T="string" @bind-Value="Model.ClientNameDe" Label="@Loc["StageManagerClientNameLabel"]"
+                              HelperText="@Loc["StageManagerClientNameHelper"]" />
                 <MudTextField T="string" @bind-Value="Model.SummaryDe" Label="@Loc["StageManagerSummaryLabel"]" />
                 <MudTextField T="string" @bind-Value="Model.DescriptionDe" Label="@Loc["StageManagerDescriptionLabel"]" Lines="3" Textarea="true" />
                 <MudTextField T="string" @bind-Value="Model.NextStepsDe" Label="@Loc["StageManagerNextStepsLabel"]" Lines="3" Textarea="true" />
@@ -50,6 +53,8 @@
                         <MudSelectItem Value="@status">@status.ToString()</MudSelectItem>
                     }
                 </MudSelect>
+                <MudSwitch T="bool" @bind-Value="Model.RequiresClientAction" Color="Color.Warning"
+                           Label="@Loc["StageManagerRequiresClientAction"]" />
             </MudStack>
         </MudForm>
     </DialogContent>
@@ -98,6 +103,8 @@
             Model.Icon = stage.Icon;
             Model.Color = stage.Color;
             Model.PrimaryStatus = stage.PrimaryStatus;
+            Model.ClientNameDe = stage.ClientNameDe;
+            Model.RequiresClientAction = stage.RequiresClientAction;
         }
     }
 
@@ -129,6 +136,7 @@
                 Id: StageId,
                 Name: Model.Name!,
                 NameDe: Model.NameDe,
+                ClientNameDe: Model.ClientNameDe,
                 Slug: slug,
                 Summary: Model.Summary,
                 SummaryDe: Model.SummaryDe,
@@ -138,7 +146,8 @@
                 NextStepsDe: Model.NextStepsDe,
                 Icon: Model.Icon,
                 Color: Model.Color,
-                PrimaryStatus: Model.PrimaryStatus);
+                PrimaryStatus: Model.PrimaryStatus,
+                RequiresClientAction: Model.RequiresClientAction);
 
             var result = await InvoiceService.SaveStageAsync(dto);
             
@@ -220,5 +229,7 @@
         public string? Icon { get; set; }
         public string? Color { get; set; }
         public InvoicePrimaryStatus PrimaryStatus { get; set; } = InvoicePrimaryStatus.InReview;
+        public string? ClientNameDe { get; set; }
+        public bool RequiresClientAction { get; set; }
     }
 }

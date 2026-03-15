@@ -1740,6 +1740,42 @@
   <data name="StageManagerNameLabel" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="StageManagerInternNameLabel" xml:space="preserve">
+    <value>Internal name (Admin view)</value>
+  </data>
+  <data name="StageManagerInternNameHelper" xml:space="preserve">
+    <value>Shown to admins and employees</value>
+  </data>
+  <data name="StageManagerClientNameLabel" xml:space="preserve">
+    <value>Client name (Mandant view)</value>
+  </data>
+  <data name="StageManagerClientNameHelper" xml:space="preserve">
+    <value>Shown to clients. Leave empty to use the internal name.</value>
+  </data>
+  <data name="StageManagerRequiresClientAction" xml:space="preserve">
+    <value>Requires client action (Vollstreckung beantragen)</value>
+  </data>
+  <data name="InvoiceDetail_ActionRequired" xml:space="preserve">
+    <value>Action required</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementActionText" xml:space="preserve">
+    <value>No objection was filed. Please commission the enforcement to proceed.</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementButton" xml:space="preserve">
+    <value>Commission Enforcement</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementConfirmTitle" xml:space="preserve">
+    <value>Commission Enforcement</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementConfirmMessage" xml:space="preserve">
+    <value>Do you want to commission the enforcement now?</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementSuccess" xml:space="preserve">
+    <value>Enforcement commissioned successfully.</value>
+  </data>
+  <data name="InvoiceDetail_EnforcementError" xml:space="preserve">
+    <value>An error occurred. Please try again.</value>
+  </data>
   <data name="StageManagerSlugLabel" xml:space="preserve">
     <value>Slug</value>
   </data>

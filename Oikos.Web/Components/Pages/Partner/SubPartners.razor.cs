@@ -25,10 +25,12 @@ public partial class SubPartners
 
     private CreateSubPartnerFormModel _form = new();
     private int _currentUserId;
+    private bool _isSubPartner;
 
     protected override async Task OnInitializedAsync()
     {
         _currentUserId = await _authenticationService.GetUserIdAsync();
+        _isSubPartner = await PartnerPortalService.IsSubPartnerAsync(_currentUserId);
         await LoadAsync();
     }
 

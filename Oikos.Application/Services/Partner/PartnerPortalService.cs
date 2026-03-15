@@ -215,17 +215,33 @@ public class PartnerPortalService : IPartnerPortalService
         return partner?.Id;
     }
 
+    public async Task<bool> IsSubPartnerAsync(int userId)
+    {
+        await using var context = await _dbFactory.CreateDbContextAsync();
+        var partner = await GetPartnerForUserAsync(context, userId);
+        return partner?.ParentPartnerId is not null;
+    }
+
     private static async Task<PartnerEntity?> GetPartnerForUserAsync(IAppDbContext context, int userId)
     {
         var user = await context.Users
             .AsNoTracking()
             .FirstOrDefaultAsync(u => u.Id == userId);
 
-        if (user?.PartnerId is null) return null;
+        if (user is null) return null;
 
-        return await context.Partners
-            .AsNoTracking()
-            .FirstOrDefaultAsync(p => p.Id == user.PartnerId.Value);
+        if (user.PartnerId is not null)
+            return await context.Partners
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Id == user.PartnerId.Value);
+
+        // Fallback: match by contact email for partners created before PartnerId was linked
+        if (!string.IsNullOrWhiteSpace(user.Email))
+            return await context.Partners
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.ContactEmail == user.Email);
+
+        return null;
     }
 
     private static async Task<(decimal CommissionPaid, int PaidCount, decimal OpenCommission, int OpenCount, List<PartnerCommissionDto> Statements)>

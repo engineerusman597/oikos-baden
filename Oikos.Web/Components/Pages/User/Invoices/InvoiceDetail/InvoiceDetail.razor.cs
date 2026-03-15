@@ -27,6 +27,7 @@ public partial class InvoiceDetail
     private bool _isLoading = true;
     private int? _currentUserId;
     private bool _isUploading = false;
+    private bool _isCommissioning = false;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -80,6 +81,43 @@ public partial class InvoiceDetail
         finally
         {
             _isUploading = false;
+        }
+    }
+
+    private async Task CommissionEnforcementAsync()
+    {
+        if (_currentUserId is null || _invoice is null) return;
+
+        var confirmed = await DialogService.ShowMessageBox(
+            Loc["InvoiceDetail_EnforcementConfirmTitle"].Value,
+            Loc["InvoiceDetail_EnforcementConfirmMessage"].Value,
+            yesText: Loc["InvoiceDetail_EnforcementButton"].Value,
+            cancelText: Loc["Cancel"].Value);
+
+        if (confirmed != true) return;
+
+        _isCommissioning = true;
+        StateHasChanged();
+
+        try
+        {
+            var userName = _invoice.UserName ?? string.Empty;
+            var success = await InvoiceService.CommissionEnforcementAsync(
+                InvoiceId, _currentUserId.Value, userName);
+
+            if (success)
+            {
+                SnackbarService.Add(Loc["InvoiceDetail_EnforcementSuccess"], Severity.Success);
+                await LoadInvoiceAsync();
+            }
+            else
+            {
+                SnackbarService.Add(Loc["InvoiceDetail_EnforcementError"], Severity.Error);
+            }
+        }
+        finally
+        {
+            _isCommissioning = false;
         }
     }
 
