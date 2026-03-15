@@ -73,7 +73,8 @@
         }
         else
         {
-            <MudTable Items="_tabInvoices" Hover="true" Dense="true" Elevation="0">
+            <MudTable Items="_tabInvoices" Hover="true" Dense="true" Elevation="0"
+                      OnRowClick="@((TableRowClickEventArgs<InvoiceListItemDto> args) => NavigateToInvoiceDetail(args.Item))">
                 <HeaderContent>
                     <MudTh>Fall-ID</MudTh>
                     <MudTh>Mandant</MudTh>
@@ -139,14 +140,16 @@
         background-color: #ffffff;
         border: 1px solid #e0e0e0 !important;
     }
-    .stat-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
-        border-color: #bdbdbd !important;
-        background-color: #fafafa !important;
-    }
-    .stat-card:active {
-        transform: translateY(-1px);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-    }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            border-color: #bdbdbd !important;
+            background-color: #fafafa !important;
+        }
+
+        .stat-card:active {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
 </style>

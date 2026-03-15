@@ -1,17 +1,18 @@
-using System.Globalization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.JSInterop;
-using Oikos.Application.Services.Subscription;
-using Oikos.Application.Services.Subscription.Models;
-using Oikos.Application.Services.Dashboard;
-using Oikos.Application.Services.Setting;
 using MudBlazor;
-using Oikos.Domain.Enums;
+using Oikos.Application.Services.Dashboard;
 using Oikos.Application.Services.Dashboard.Models;
-using Oikos.Web.Constants;
-using Oikos.Common.Helpers;
 using Oikos.Application.Services.Invoice;
 using Oikos.Application.Services.Invoice.Models;
+using Oikos.Application.Services.Setting;
+using Oikos.Application.Services.Subscription;
+using Oikos.Application.Services.Subscription.Models;
+using Oikos.Common.Helpers;
+using Oikos.Domain.Enums;
+using Oikos.Web.Constants;
+using System.Globalization;
 
 namespace Oikos.Web.Components.Pages.Admin;
 
@@ -456,6 +457,9 @@ public partial class Dashboard
 
     private string FormatCreatedAt(InvoiceListItemDto invoice)
         => invoice.CreatedAt.ToLocalTime().ToString("d", CultureInfo.CurrentUICulture);
+
+    private void NavigateToInvoiceDetail(InvoiceListItemDto invoice)
+    => NavigateTo($"/admin/invoices/{invoice.Id}");
 
     private static Color GetPrimaryStatusColor(InvoicePrimaryStatus status) =>
         status switch
