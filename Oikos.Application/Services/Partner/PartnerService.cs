@@ -178,17 +178,29 @@ public class PartnerService : IPartnerService
     {
         await using var context = await _dbFactory.CreateDbContextAsync(cancellationToken);
 
-        var hasLinkedUsers = await context.Users.AnyAsync(u => u.PartnerId == partnerId, cancellationToken);
-        if (hasLinkedUsers)
-        {
-            throw new InvalidOperationException("Cannot delete a partner while customers are linked to it.");
-        }
-
-        var partner = await context.Partners.FirstOrDefaultAsync(p => p.Id == partnerId, cancellationToken);
+        var partner = await context.Partners
+            .Include(p => p.SubPartners)
+            .FirstOrDefaultAsync(p => p.Id == partnerId, cancellationToken);
         if (partner == null)
         {
             return;
         }
+
+        // Collect all partner IDs to delete (parent + sub-partners)
+        var allPartnerIds = new List<int> { partnerId };
+        if (partner.SubPartners != null)
+            allPartnerIds.AddRange(partner.SubPartners.Select(sp => sp.Id));
+
+        // Unlink any users associated with these partners
+        var linkedUsers = await context.Users
+            .Where(u => u.PartnerId != null && allPartnerIds.Contains(u.PartnerId.Value))
+            .ToListAsync(cancellationToken);
+        foreach (var user in linkedUsers)
+            user.PartnerId = null;
+
+        // Delete sub-partners first, then the parent
+        if (partner.SubPartners != null && partner.SubPartners.Count > 0)
+            context.Partners.RemoveRange(partner.SubPartners);
 
         context.Partners.Remove(partner);
         await context.SaveChangesAsync(cancellationToken);

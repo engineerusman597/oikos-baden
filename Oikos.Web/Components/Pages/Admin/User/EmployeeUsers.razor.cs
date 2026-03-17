@@ -101,7 +101,7 @@ public partial class EmployeeUsers
         {
             { "IsFromEmployees", true }
         };
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<CreateUserDialog>(Loc["UserPage_CreateNewEmployeeTitle"], parameters, options);
 
         var result = await dialog.Result;
@@ -146,7 +146,7 @@ public partial class EmployeeUsers
             {"UserId", userId },
             { "IsFromEmployees", true }
         };
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<UpdateUserDialog>(Loc["UserPage_EditTitle"], parameters, options);
         var result = await dialog.Result;
         if (!result.Canceled)
@@ -161,7 +161,7 @@ public partial class EmployeeUsers
         {
             {"UserId", userId }
         };
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.Medium };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Medium };
         var dialog = await DialogService.ShowAsync<ChangePasswordDialog>(Loc["UserPage_ModifyPasswordTitle"], parameters, options);
         await dialog.Result;
     }
