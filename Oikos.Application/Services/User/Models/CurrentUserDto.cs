@@ -10,7 +10,8 @@ public class CurrentUserDto
     public string? Avatar { get; set; }
     public string? Email { get; set; }
     public bool IsEnabled { get; set; }
-    
+    public bool IsSelfRegistered { get; set; }
+
     public string DisplayName => !string.IsNullOrWhiteSpace(RealName) 
         ? (!string.IsNullOrWhiteSpace(AcademicTitle) ? $"{AcademicTitle} {RealName}" : RealName)
         : Name;

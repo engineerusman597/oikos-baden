@@ -27,6 +27,9 @@ public partial class UserMenuAvatar
     private string? _avatar = string.Empty;
     private bool _isBonixUser = false;
     private bool _isAdmin = false;
+    private bool _isPartner = false;
+    private bool _isEmployee = false;
+    private bool _isSelfRegistered = false;
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,6 +45,7 @@ public partial class UserMenuAvatar
             _userName = currentUser.DisplayName;
             _avatar = currentUser.Avatar;
             _customerNumber = currentUser.CustomerNumber;
+            _isSelfRegistered = currentUser.IsSelfRegistered;
         }
 
         // Check if user is a Bonix user
@@ -49,12 +53,14 @@ public partial class UserMenuAvatar
         var user = authState.User;
         _isBonixUser = user.IsInRole(RoleNames.User_Bonix.ToRoleName());
         _isAdmin = user.IsInRole(RoleNames.Admin.ToRoleName());
+        _isPartner = user.IsInRole(RoleNames.Partner.ToRoleName());
+        _isEmployee = user.IsInRole(RoleNames.Employee.ToRoleName());
     }
 
     private async Task ShowUserSettings()
     {
         var parameters = new DialogParameters { };
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge, NoHeader = true };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.ExtraLarge };
         var dialog = await DialogService.ShowAsync<ProfileSetting>(string.Empty, parameters, options);
         var result = await dialog.Result;
 

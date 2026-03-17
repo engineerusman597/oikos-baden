@@ -43,7 +43,7 @@ public partial class BasicInfoConfig
     private async Task ChangePwd()
     {
         var parameters = new DialogParameters { };
-        var options = new DialogOptions() { CloseButton = true, MaxWidth = MaxWidth.ExtraLarge, NoHeader = true };
+        var options = new DialogOptions() { MaxWidth = MaxWidth.Small };
         var dialog = await _dialogService.ShowAsync<ChangePasswordDialog>(string.Empty, parameters, options);
         await dialog.Result;
     }

@@ -2124,6 +2124,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
@@ -4090,5 +4093,11 @@
   <data name="UserPage_Title_Employees" xml:space="preserve">
     <value>Employees</value>
     <comment>Employees</comment>
+  </data>
+  <data name="TaxOffice_CreateTitle" xml:space="preserve">
+    <value>New Tax Office</value>
+  </data>
+  <data name="TaxOffice_EditTitle" xml:space="preserve">
+    <value>Edit Tax Office</value>
   </data>
 </root>

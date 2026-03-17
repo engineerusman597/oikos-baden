@@ -2103,6 +2103,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Abbrechen</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
   <data name="Send" xml:space="preserve">
     <value>Senden</value>
   </data>
@@ -2608,7 +2611,7 @@
     <value>Neuen Benutzer erstellen</value>
   </data>
   <data name="UserPage_CreateNewClientTitle" xml:space="preserve">
-    <value>Neuen Client erstellen</value>
+    <value>Neuen Mandant erstellen</value>
   </data>
   <data name="UserPage_CreateNewEmployeeTitle" xml:space="preserve">
     <value>Neuen Mitarbeiter erstellen</value>
@@ -4274,6 +4277,12 @@
   </data>
   <data name="InvoiceDetail_EnforcementError" xml:space="preserve">
     <value>Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.</value>
+  </data>
+  <data name="TaxOffice_CreateTitle" xml:space="preserve">
+    <value>Neues Steuerberaterbüro</value>
+  </data>
+  <data name="TaxOffice_EditTitle" xml:space="preserve">
+    <value>Steuerberaterbüro bearbeiten</value>
   </data>
   <data name="TaxOffice_Title" xml:space="preserve">
     <value>Steuerberaterbüros</value>

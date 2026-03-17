@@ -31,5 +31,6 @@ public class UserDto
     public int InvoiceCount { get; set; }
     public string? SubscriptionPaymentMethod { get; set; }
     public DateTime? LastLoginAt { get; set; }
+    public bool IsSelfRegistered { get; set; }
 
 }

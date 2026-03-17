@@ -63,7 +63,7 @@
                     @Loc["AuthorizedLayout_BackToBonix"]
                 </MudMenuItem>
             }
-            else if (!_isAdmin)
+            else if (_isSelfRegistered)
             {
                 <MudMenuItem Icon="@Icons.Material.Filled.AutoAwesome" OnClick="NavigateToUpgrade" Class="user-menu-item">
                     @Loc["AuthorizedLayout_UpgradeAccount"]

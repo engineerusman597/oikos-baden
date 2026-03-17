@@ -538,7 +538,8 @@ public class UserManagementService : IUserManagementService
             CustomerNumber = user.CustomerNumber,
             Avatar = user.Avatar,
             Email = user.Email,
-            IsEnabled = user.IsEnabled
+            IsEnabled = user.IsEnabled,
+            IsSelfRegistered = user.IsSelfRegistered
         };
     }
 }

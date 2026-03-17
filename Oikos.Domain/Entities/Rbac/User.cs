@@ -77,6 +77,9 @@ public class User
     [Comment("Assigned employee user id")]
     public int? AssignedEmployeeId { get; set; }
 
+    [Comment("True when the user registered themselves via the public registration page")]
+    public bool IsSelfRegistered { get; set; }
+
     public ICollection<Subscription.UserSubscription>? Subscriptions { get; set; }
 
     public ICollection<UserPermission>? Permissions { get; set; }

@@ -5,7 +5,17 @@
 @using Oikos.Application.Services.Partner.Models
 @using Oikos.Common.Resources
 
-<MudDialog CloseButton="true">
+<MudDialog>
+    <TitleContent>
+        <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.SpaceBetween" Style="width:100%;">
+            <MudText Typo="Typo.h6">
+                @if (IsFromEmployees)      { @Loc["UserPage_CreateNewEmployeeTitle"] }
+                else if (IsFromClients)    { @Loc["UserPage_CreateNewClientTitle"] }
+                else                       { @Loc["UserPage_CreateNewTitle"] }
+            </MudText>
+            <MudIconButton Icon="@Icons.Material.Filled.Close" Size="Size.Small" OnClick="Cancel" />
+        </MudStack>
+    </TitleContent>
     <DialogContent>
         <EditForm Model="_model" OnValidSubmit="Submit" style="width:100%;">
             <DataAnnotationsValidator />
@@ -46,7 +56,7 @@
                 </MudItem>
 
                 @* Row 4: Partner + Role *@
-                @if (!_isEmployeeRole && !_isAdminRole && !_isPartnerRole)
+                @if (!_isEmployeeRole && !_isAdminRole && !_isPartnerRole && !DefaultPartnerId.HasValue)
                 {
                     <MudItem xs="6">
                         <MudSelect T="int?" @bind-Value="_model.PartnerId" Variant="Variant.Outlined" Margin="Margin.Dense"

@@ -159,7 +159,8 @@ public class RegistrationService : IRegistrationService
                 CustomerNumber = customerNumber,
                 PartnerId = partner?.Id,
                 AcceptedPrivacyPolicy = request.AcceptedPrivacy,
-                PrivacyAcceptedAt = request.AcceptedPrivacy ? DateTime.UtcNow : null
+                PrivacyAcceptedAt = request.AcceptedPrivacy ? DateTime.UtcNow : null,
+                IsSelfRegistered = true
             };
 
             context.Users.Add(user);

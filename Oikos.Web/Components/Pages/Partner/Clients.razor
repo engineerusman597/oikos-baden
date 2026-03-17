@@ -11,7 +11,7 @@
             <MudText Typo="Typo.body1" Class="mud-text-secondary">@Loc["PartnerClients_Subtitle"]</MudText>
         </div>
         <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.PersonAdd"
-                   OnClick="AddClientAsync">
+                   OnClick="AddClientAsync" Disabled="@(_partnerEntityId is null || _isLoading)">
             @Loc["PartnerClients_CreateNew"]
         </MudButton>
     </div>

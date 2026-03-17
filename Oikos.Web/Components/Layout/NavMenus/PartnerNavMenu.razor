@@ -39,6 +39,10 @@
 				<MudNavLink Href="/partner-portal/affiliate-links" Icon="@Icons.Material.Filled.Link" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["PartnerNav_AffiliateLinks"]</MudNavLink>
 				<MudNavLink Href="/partner-portal/commissions" Icon="@Icons.Material.Filled.Euro" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["PartnerNav_Commissions"]</MudNavLink>
 				<MudNavLink Href="/partner-portal/sub-partners" Icon="@Icons.Material.Filled.FolderShared" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["PartnerNav_SubPartners"]</MudNavLink>
+			@if (!_isSubPartner)
+			{
+				<MudNavLink Href="/partner-portal/clients" Icon="@Icons.Material.Filled.People" Match="NavLinkMatch.Prefix" IconColor="Color.Default">@Loc["PartnerNav_Clients"]</MudNavLink>
+			}
 			</MudNavMenu>
 
 		</div>
