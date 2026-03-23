@@ -2976,6 +2976,9 @@
   <data name="UserPage_Password" xml:space="preserve">
     <value>Passwort</value>
   </data>
+  <data name="UserPage_PasswordOptionalHelper" xml:space="preserve">
+    <value>Optional – leer lassen für automatische Generierung. Zugangsdaten werden per E-Mail gesendet.</value>
+  </data>
   <data name="UserPage_DeleteSuccess" xml:space="preserve">
     <value>Erfolgreich gelöscht!</value>
   </data>

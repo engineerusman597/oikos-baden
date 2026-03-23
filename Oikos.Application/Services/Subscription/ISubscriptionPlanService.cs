@@ -16,7 +16,7 @@ public interface ISubscriptionPlanService
 
     Task<UserSubscriptionSnapshot?> GetActiveSubscriptionAsync(int userId, CancellationToken cancellationToken = default);
 
-    Task<UserSubscriptionSnapshot> ActivatePlanAsync(int userId, int planId, string billingInterval, CancellationToken cancellationToken = default);
+    Task<UserSubscriptionSnapshot> ActivatePlanAsync(int userId, int planId, string billingInterval, string paymentMethod = "SEPA", CancellationToken cancellationToken = default);
 
     Task<ClaimSubmissionCheckResult> CheckClaimSubmissionAsync(int userId, int submissionCount, CancellationToken cancellationToken = default);
 }

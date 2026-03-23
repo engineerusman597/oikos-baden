@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using MudBlazor;
 using Oikos.Application.Services.User;
 using Oikos.Application.Services.User.Models;
@@ -22,6 +23,7 @@ public partial class CreateUserDialog
     [Inject] private IUserPermissionService UserPermissionService { get; set; } = null!;
     [Inject] private ISubscriptionPlanService SubscriptionPlanService { get; set; } = null!;
     [Inject] private ISnackbar SnackbarService { get; set; } = null!;
+    [Inject] private NavigationManager NavigationManager { get; set; } = null!;
     [Parameter] public bool IsFromEmployees { get; set; }
     [Parameter] public bool IsFromUsers { get; set; }
     [Parameter] public bool IsFromClients { get; set; }
@@ -133,7 +135,7 @@ public partial class CreateUserDialog
         var request = new CreateUserRequest
         {
             Email = _model.Email!,
-            Password = _model.Password!,
+            Password = string.IsNullOrWhiteSpace(_model.Password) ? null : _model.Password,
             RealName = _model.RealName?.Trim(),
             AcademicTitle = _model.AcademicTitle,
             Gender = _model.Gender,
@@ -144,7 +146,8 @@ public partial class CreateUserDialog
             IsEnabled = _model.IsEnabled,
             Name = _model.Email!,
             RoleId = _model.RoleId,
-            AssignedEmployeeId = _isEmployeeRole ? null : _model.AssignedEmployeeId
+            AssignedEmployeeId = _isEmployeeRole ? null : _model.AssignedEmployeeId,
+            ApplicationBaseUrl = NavigationManager.BaseUri.TrimEnd('/')
         };
 
         var success = await UserManagementService.CreateUserAsync(request);
@@ -195,7 +198,6 @@ public partial class CreateUserDialog
         [EmailAddress(ErrorMessageResourceName = "Validation_Email", ErrorMessageResourceType = typeof(SharedResource))]
         public string? Email { get; set; }
 
-        [Required(ErrorMessageResourceName = "Validation_Required", ErrorMessageResourceType = typeof(SharedResource))]
         [MinLength(4, ErrorMessageResourceName = "Validation_MinLength", ErrorMessageResourceType = typeof(SharedResource))]
         public string? Password { get; set; }
 

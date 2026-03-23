@@ -224,7 +224,8 @@
                 {
                     <MudItem xs="12">
                         <MudTextField T="string" @bind-Value="_model.Password" Variant="Variant.Outlined" Margin="Margin.Dense"
-                                      Label="@Loc["UserPage_Password"]" For="@(() => _model.Password)" InputType="InputType.Password" />
+                                      Label="@Loc["UserPage_Password"]" HelperText="@Loc["UserPage_PasswordOptionalHelper"]"
+                                      For="@(() => _model.Password)" InputType="InputType.Password" />
                     </MudItem>
                 }
                 else

@@ -21,6 +21,8 @@ public partial class Login
 
     private bool IsLoading = false;
 
+    private bool _redirectToDashboard;
+
     private bool ShowNewsletterCard = true;
 
     private LoginModel _loginModel = new();
@@ -40,7 +42,7 @@ public partial class Login
         var state = await _stateProvider.GetAuthenticationStateAsync();
         if (state.User.Identity != null && state.User.Identity.IsAuthenticated)
         {
-            _navManager.NavigateTo("/");
+            _redirectToDashboard = true;
         }
         else
         {
@@ -54,6 +56,13 @@ public partial class Login
                 _navManager.NavigateTo("/register");
             }
         }
+    }
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && _redirectToDashboard)
+            _navManager.NavigateTo("/");
+        return Task.CompletedTask;
     }
 
     private async Task LoginSubmit()

@@ -38,7 +38,7 @@ public partial class RegisterSuccess
 
         try
         {
-            await SubscriptionPlanService.ActivatePlanAsync(userId, planId, billingInterval);
+            await SubscriptionPlanService.ActivatePlanAsync(userId, planId, billingInterval, "Stripe");
             _success = true;
         }
         catch (Exception ex)

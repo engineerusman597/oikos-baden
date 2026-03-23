@@ -189,7 +189,7 @@ public class RegistrationService : IRegistrationService
             // Activate subscription (Only if plan identified)
             if (planToActivate?.Id != null && billingInterval != null)
             {
-                await _subscriptionPlanService.ActivatePlanAsync(user.Id, planToActivate.Id.Value, billingInterval);
+                await _subscriptionPlanService.ActivatePlanAsync(user.Id, planToActivate.Id.Value, billingInterval, "Stripe");
             }
 
             // Send notification email to support for Bonix registrations

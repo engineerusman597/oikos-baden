@@ -1,10 +1,16 @@
+using System.Security.Cryptography;
+using System.Linq;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using Oikos.Application.Data;
+using Oikos.Application.Services.Email;
+using Oikos.Application.Services.Email.Templates;
 using Oikos.Application.Services.Security;
 using Oikos.Application.Services.User.Models;
 using Oikos.Application.Common;
 using Oikos.Common.Helpers;
 using Oikos.Domain.Constants;
+using Oikos.Domain.Entities.Rbac;
 using Oikos.Common.Constants;
 
 namespace Oikos.Application.Services.User;
@@ -13,11 +19,13 @@ public class UserManagementService : IUserManagementService
 {
     private readonly IAppDbContextFactory _dbFactory;
     private readonly IPasswordHasher _passwordHasher;
+    private readonly IEmailSender _emailSender;
 
-    public UserManagementService(IAppDbContextFactory dbFactory, IPasswordHasher passwordHasher)
+    public UserManagementService(IAppDbContextFactory dbFactory, IPasswordHasher passwordHasher, IEmailSender emailSender)
     {
         _dbFactory = dbFactory;
         _passwordHasher = passwordHasher;
+        _emailSender = emailSender;
     }
 
     public async Task<PaginatedResult<UserDto>> GetUsersAsync(UserSearchCriteria criteria)
@@ -336,12 +344,18 @@ public class UserManagementService : IUserManagementService
         var gender = NameHelper.NormalizeGender(request.Gender);
         var title = string.IsNullOrWhiteSpace(request.AcademicTitle) ? null : request.AcademicTitle.Trim();
 
+        // Auto-generate password if not provided
+        var plainPassword = string.IsNullOrWhiteSpace(request.Password)
+            ? GenerateTemporaryPassword()
+            : request.Password;
+        var providedPassword = string.IsNullOrWhiteSpace(request.Password) ? null : request.Password;
+
         var user = new Domain.Entities.Rbac.User
         {
             IsEnabled = request.IsEnabled,
             Name = normalizedEmail!,
             RealName = request.RealName?.Trim(),
-            PasswordHash = _passwordHasher.HashPassword(request.Password),
+            PasswordHash = _passwordHasher.HashPassword(plainPassword),
             Email = normalizedEmail,
             Gender = gender,
             AcademicTitle = title,
@@ -380,7 +394,55 @@ public class UserManagementService : IUserManagementService
             }
         }
 
+        // Send welcome email with credentials and password reset link (if base URL is provided)
+        if (!string.IsNullOrWhiteSpace(request.ApplicationBaseUrl) && !string.IsNullOrWhiteSpace(normalizedEmail))
+        {
+            try
+            {
+                var now = DateTime.UtcNow;
+                var expiresAt = now.AddHours(72);
+                var tokenBytes = RandomNumberGenerator.GetBytes(48);
+                var rawToken = WebEncoders.Base64UrlEncode(tokenBytes);
+                var tokenHash = _passwordHasher.HashPassword(rawToken);
+
+                context.PasswordResetTokens.Add(new PasswordResetToken
+                {
+                    UserId = user.Id,
+                    TokenHash = tokenHash,
+                    CreatedAt = now,
+                    ExpiresAt = expiresAt
+                });
+                await context.SaveChangesAsync();
+
+                var baseUri = request.ApplicationBaseUrl.TrimEnd('/');
+                var resetLink = $"{baseUri}/reset-password/{rawToken}";
+                var emailBody = ClientWelcomeEmailTemplate.Render(
+                    user.RealName ?? normalizedEmail,
+                    normalizedEmail,
+                    providedPassword,
+                    resetLink,
+                    expiresAt);
+
+                await _emailSender.SendEmailAsync(
+                    normalizedEmail,
+                    ClientWelcomeEmailTemplate.Subject,
+                    emailBody,
+                    user.RealName);
+            }
+            catch
+            {
+                // Email failure must not block user creation
+            }
+        }
+
         return true;
+    }
+
+    private static string GenerateTemporaryPassword()
+    {
+        const string chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$";
+        var bytes = RandomNumberGenerator.GetBytes(12);
+        return new string(bytes.Select(b => chars[b % chars.Length]).ToArray());
     }
 
     public async Task<bool> UpdateUserAsync(int userId, UpdateUserRequest request)

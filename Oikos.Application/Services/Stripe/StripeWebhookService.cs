@@ -193,6 +193,7 @@ public class StripeWebhookService : IStripeWebhookService
                 existingUser.Id,
                 plan.Id,
                 NormalizeBillingInterval(billingInterval) ?? "monthly",
+                "Stripe",
                 cancellationToken);
         }
 

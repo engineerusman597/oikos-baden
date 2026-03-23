@@ -177,7 +177,7 @@ public class SubscriptionPlanService : ISubscriptionPlanService
         return null;
     }
 
-    public async Task<UserSubscriptionSnapshot> ActivatePlanAsync(int userId, int planId, string billingInterval, CancellationToken cancellationToken = default)
+    public async Task<UserSubscriptionSnapshot> ActivatePlanAsync(int userId, int planId, string billingInterval, string paymentMethod = "SEPA", CancellationToken cancellationToken = default)
     {
         await EnsureSeedPlansAsync(cancellationToken);
         await using var context = await _dbFactory.CreateDbContextAsync(cancellationToken);
@@ -207,6 +207,7 @@ public class SubscriptionPlanService : ISubscriptionPlanService
             BillingInterval = billingInterval,
             Status = "active",
             AutoRenew = true,
+            PaymentMethod = paymentMethod,
             CreatedAt = now,
             UpdatedAt = now
         };

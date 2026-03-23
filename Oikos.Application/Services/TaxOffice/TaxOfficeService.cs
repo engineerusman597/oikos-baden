@@ -205,7 +205,7 @@ public class TaxOfficeService : ITaxOfficeService
             await context.SaveChangesAsync(cancellationToken);
         }
 
-        await _subscriptionPlanService.ActivatePlanAsync(user.Id, planId, billingInterval, cancellationToken);
+        await _subscriptionPlanService.ActivatePlanAsync(user.Id, planId, billingInterval, "Stripe", cancellationToken);
 
         if (!string.IsNullOrWhiteSpace(paymentMethod))
         {
