@@ -192,14 +192,19 @@ public partial class CreateUserDialog
         return localized.ResourceNotFound ? roleName : localized.Value;
     }
 
-    public class CreateUserModel
+    public class CreateUserModel : System.ComponentModel.DataAnnotations.IValidatableObject
     {
         [Required(ErrorMessageResourceName = "Validation_Required", ErrorMessageResourceType = typeof(SharedResource))]
         [EmailAddress(ErrorMessageResourceName = "Validation_Email", ErrorMessageResourceType = typeof(SharedResource))]
         public string? Email { get; set; }
 
-        [MinLength(4, ErrorMessageResourceName = "Validation_MinLength", ErrorMessageResourceType = typeof(SharedResource))]
         public string? Password { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!string.IsNullOrEmpty(Password) && Password.Length < 4)
+                yield return new ValidationResult("Password must be at least 4 characters.", new[] { nameof(Password) });
+        }
 
         [Required(ErrorMessageResourceName = "Validation_Required", ErrorMessageResourceType = typeof(SharedResource))]
         public string? RealName { get; set; }
