@@ -25,8 +25,8 @@ public class CompanyCheckManager : ICompanyCheckManager
     {
         _dbFactory = dbFactory;
         _reportFormatter = reportFormatter;
-        _storageRootPath = ResolveStorageRoot(environment);
         _options = options.Value;
+        _storageRootPath = ResolveStorageRoot(environment, _options);
     }
 
     public string StorageRootPath => _storageRootPath;
@@ -416,15 +416,37 @@ public class CompanyCheckManager : ICompanyCheckManager
         return results;
     }
 
-    private static string ResolveStorageRoot(IWebHostEnvironment environment)
+    private static string ResolveStorageRoot(IWebHostEnvironment environment, BonixOptions options)
     {
+        // If an explicit storage path is configured, use it directly (no uploads/ sub-folder).
+        if (!string.IsNullOrWhiteSpace(options.StoragePath))
+        {
+            try
+            {
+                Directory.CreateDirectory(options.StoragePath);
+                var probePath = Path.Combine(options.StoragePath, ".write-test");
+                File.WriteAllText(probePath, "ok");
+                File.Delete(probePath);
+                return options.StoragePath;
+            }
+            catch
+            {
+                // Fall through to auto-detection if the configured path is not writable.
+            }
+        }
+
         var candidates = new[]
         {
             environment.WebRootPath,
             string.IsNullOrWhiteSpace(environment.ContentRootPath)
                 ? null
                 : Path.Combine(environment.ContentRootPath, "wwwroot"),
-            Path.Combine(AppContext.BaseDirectory, "wwwroot")
+            Path.Combine(AppContext.BaseDirectory, "wwwroot"),
+            // Fallback: store directly under ContentRootPath when wwwroot is read-only.
+            // Company check PDFs are served via the /company-checks/report/{token} endpoint
+            // and do not require the files to live inside wwwroot.
+            environment.ContentRootPath,
+            AppContext.BaseDirectory
         };
 
         foreach (var candidate in candidates)
@@ -439,6 +461,12 @@ public class CompanyCheckManager : ICompanyCheckManager
             try
             {
                 Directory.CreateDirectory(uploadsDirectory);
+
+                // Probe a realistic nested path (uploads/users/.probe-test) to catch
+                // permission issues where top-level is writable but sub-directories are not.
+                var nestedProbe = Path.Combine(uploadsDirectory, "users", ".probe-test");
+                Directory.CreateDirectory(nestedProbe);
+                Directory.Delete(nestedProbe);
 
                 var probePath = Path.Combine(uploadsDirectory, ".write-test");
                 File.WriteAllText(probePath, "ok");
